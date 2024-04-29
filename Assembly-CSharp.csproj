@@ -62,13 +62,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\MainMenu\Settings.cs" />
     <Compile Include="Assets\Scripts\CamSwitcher.cs" />
-    <Compile Include="Assets\Scripts\Depricated\Interactable.cs" />
-    <Compile Include="Assets\Scripts\Depricated\Sound.cs" />
+    <Compile Include="Assets\Scripts\Unused\FirstPersonController.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
-    <Compile Include="Assets\Scripts\Depricated\SoundManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu\UnityGUIUtilityWindow.cs" />
-    <Compile Include="Assets\Scripts\Depricated\FirstPersonController.cs" />
+    <Compile Include="Assets\Scripts\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\Interactable.cs" />
+    <Compile Include="Assets\Scripts\Sound.cs" />
     <Compile Include="Assets\Scripts\MainMenu\SoundSetting.cs" />
     <Compile Include="Assets\Scripts\MainMenu\LoadingManager.cs" />
   </ItemGroup>
