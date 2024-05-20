@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class PopupTrigger : MonoBehaviour
 {
-
     public GameObject triggerObj;
+    public GameObject pressKey;
+    public GameObject plantInventory;
     public Transform Player;
 
+    public static bool isPlayerInTriggerZone = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             triggerObj.SetActive(true);
+            pressKey.SetActive(true);
+            isPlayerInTriggerZone = true;
         }
     }
 
@@ -22,6 +26,9 @@ public class PopupTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             triggerObj.SetActive(false);
+            pressKey.SetActive(false);
+            plantInventory.SetActive(false);
+            isPlayerInTriggerZone = false;
         }
     }
 }
