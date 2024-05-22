@@ -6,6 +6,13 @@ public class SelectPot : MonoBehaviour
 {
     public GameObject plantInventory;
 
+    PlantGrowth plantGrowth;
+
+    private void Start()
+    {
+        plantGrowth = GameObject.FindObjectOfType<PlantGrowth>();
+    }
+
     void Update()
     {
         if (PopupTrigger.isPlayerInTriggerZone && Input.GetMouseButtonDown(0))
@@ -20,6 +27,7 @@ public class SelectPot : MonoBehaviour
             {
                 Debug.Log("Hit: " + hit.collider.name);
                 plantInventory.SetActive(true);
+                plantGrowth.StartGrowth();
             }
             else
             {
