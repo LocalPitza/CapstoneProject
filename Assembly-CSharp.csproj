@@ -63,12 +63,16 @@
     <Compile Include="Assets\Scripts\MainMenu\Settings.cs" />
     <Compile Include="Assets\Scripts\Planting\Soil.cs" />
     <Compile Include="Assets\Scripts\CamSwitcher.cs" />
+    <Compile Include="Assets\Scripts\Planting\Item Data\EquipmentData.cs" />
     <Compile Include="Assets\Scripts\Unused\FirstPersonController.cs" />
+    <Compile Include="Assets\Scripts\Planting\Item Data\ItemData.cs" />
     <Compile Include="Assets\Scripts\Planting\SelectPot.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Planting\PlantGrowth.cs" />
     <Compile Include="Assets\Scripts\Planting\ListOfSoil.cs" />
+    <Compile Include="Assets\Scripts\Planting\Item Data\SeedData.cs" />
+    <Compile Include="Assets\Scripts\Planting\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu\UnityGUIUtilityWindow.cs" />
     <Compile Include="Assets\Scripts\Planting\CloseInventory.cs" />
     <Compile Include="Assets\Scripts\PopupTrigger.cs" />

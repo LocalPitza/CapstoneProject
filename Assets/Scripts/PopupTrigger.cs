@@ -6,7 +6,6 @@ public class PopupTrigger : MonoBehaviour
 {
     public GameObject triggerObj;
     public GameObject pressKey;
-    public GameObject plantInventory;
     public Transform Player;
 
     public static bool isPlayerInTriggerZone = false;
@@ -27,7 +26,6 @@ public class PopupTrigger : MonoBehaviour
         {
             triggerObj.SetActive(false);
             pressKey.SetActive(false);
-            plantInventory.SetActive(false);
             isPlayerInTriggerZone = false;
         }
     }
