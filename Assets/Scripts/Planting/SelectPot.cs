@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SelectPot : MonoBehaviour
 {
-    public GameObject plantInventory;
-
     void Update()
     {
         if (PopupTrigger.isPlayerInTriggerZone && Input.GetMouseButtonDown(0))
@@ -19,12 +19,22 @@ public class SelectPot : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 Debug.Log("Hit: " + hit.collider.name);
-                plantInventory.SetActive(true);
+                ListOfSoil hitSoil = hit.collider.GetComponent<ListOfSoil>();
+
+                if (hitSoil != null)
+                {
+                    ListOfSoil.DeselectAll(); // Deselect all pots first
+                    hitSoil.Select(true); // Select the clicked pot
+
+                    Debug.Log("Open Item");
+                }
             }
             else
             {
+                ListOfSoil.DeselectAll();
                 Debug.Log("No Hit");
             }
         }
+
     }
 }
