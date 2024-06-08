@@ -71,10 +71,12 @@
     <Compile Include="Assets\Scripts\Planting\Item Data\SeedData.cs" />
     <Compile Include="Assets\Scripts\Planting\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu\UnityGUIUtilityWindow.cs" />
+    <Compile Include="Assets\Scripts\Planting\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\PopupTrigger.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\Sound.cs" />
+    <Compile Include="Assets\Scripts\Planting\UI\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\MainMenu\SoundSetting.cs" />
     <Compile Include="Assets\Scripts\MainMenu\LoadingManager.cs" />
   </ItemGroup>
