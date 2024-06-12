@@ -6,13 +6,13 @@ public class Soil : MonoBehaviour
 {
     public enum SoilStatus
     {
-        Dry, Watered
+        Dry, Digged, Watered
     }
     public SoilStatus soilStatus;
 
     public Material soilMat, wateredMat;
+    public GameObject digged;
     new Renderer renderer;
-
 
     private void Start()
     {
@@ -30,6 +30,10 @@ public class Soil : MonoBehaviour
 
         switch (statusSwicth)
         {
+            case SoilStatus.Digged:
+                digged.SetActive(true);
+                break;
+
             case SoilStatus.Dry:
                 materialSwitch = soilMat;
                 break;
@@ -40,5 +44,28 @@ public class Soil : MonoBehaviour
         }
 
         renderer.material = materialSwitch;
+    }
+
+    public void Interact()
+    {
+        ItemData toolSlot = InventoryManager.Instance.equipedTool;
+
+        EquipmentData equipmentTool = toolSlot as EquipmentData;
+
+        if(equipmentTool != null)
+        {
+            EquipmentData.ToolType toolType = equipmentTool.toolType;
+
+            switch (toolType)
+            {
+                case EquipmentData.ToolType.HandTrowel:
+                    SwitchLandStatus(SoilStatus.Digged);
+                    break;
+
+                case EquipmentData.ToolType.WateringCan:
+                    SwitchLandStatus(SoilStatus.Watered);
+                    break;
+            }
+        }
     }
 }

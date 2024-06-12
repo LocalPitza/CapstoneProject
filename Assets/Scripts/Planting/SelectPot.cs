@@ -25,14 +25,12 @@ public class SelectPot : MonoBehaviour
                 {
                     ListOfSoil.DeselectAll(); // Deselect all pots first
                     hitSoil.Select(true); // Select the clicked pot
-
-                    Debug.Log("Open Item");
+                    hitSoil.InteractWithSelected();
                 }
             }
             else
             {
                 ListOfSoil.DeselectAll();
-                Debug.Log("No Hit");
             }
         }
 

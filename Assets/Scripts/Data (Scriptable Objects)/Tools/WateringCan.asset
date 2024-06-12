@@ -15,4 +15,4 @@ MonoBehaviour:
   description: Waters the Plants
   thumbnail: {fileID: 21300000, guid: 686937191dec4e64fa1ea7fe10e4c13d, type: 3}
   model: {fileID: 0}
-  toolType: 0
+  toolType: 2

@@ -6,6 +6,7 @@ public class ListOfSoil : MonoBehaviour
 {
     public static List<ListOfSoil> allSoils = new List<ListOfSoil>();
     public GameObject indicator;
+    public Soil soil;
 
     private void Awake()
     {
@@ -28,5 +29,10 @@ public class ListOfSoil : MonoBehaviour
         {
             soil.Select(false);
         }
+    }
+
+    public void InteractWithSelected()
+    {
+        soil.Interact();
     }
 }
