@@ -8,11 +8,14 @@ public class Soil : MonoBehaviour
     {
         Dry, Digged, Watered
     }
-    public SoilStatus soilStatus;
 
+    public SoilStatus soilStatus;
     public Material soilMat, wateredMat;
     public GameObject digged;
     new Renderer renderer;
+
+    private int lastWateredDay;
+    public int daysUntilDry;
 
     private void Start()
     {
@@ -20,6 +23,13 @@ public class Soil : MonoBehaviour
 
         //Default Status
         SwitchLandStatus(SoilStatus.Dry);
+
+        DayCounter.Instance.OnDayAdvanced += CheckIfSoilShouldDry; // Subscribe to the day advanced event
+    }
+
+    private void OnDestroy()
+    {
+        DayCounter.Instance.OnDayAdvanced -= CheckIfSoilShouldDry; // Unsubscribe from the event
     }
 
     //Change Materials on Soil
@@ -40,6 +50,7 @@ public class Soil : MonoBehaviour
 
             case SoilStatus.Watered:
                 materialSwitch = wateredMat;
+                lastWateredDay = DayCounter.Instance.GetCurrentDay();
                 break;
         }
 
@@ -65,6 +76,18 @@ public class Soil : MonoBehaviour
                 case EquipmentData.ToolType.WateringCan:
                     SwitchLandStatus(SoilStatus.Watered);
                     break;
+            }
+        }
+    }
+
+    private void CheckIfSoilShouldDry()
+    {
+        if (soilStatus == SoilStatus.Watered)
+        {
+            int currentDay = DayCounter.Instance.GetCurrentDay();
+            if (currentDay - lastWateredDay >= daysUntilDry)
+            {
+                SwitchLandStatus(SoilStatus.Dry);
             }
         }
     }

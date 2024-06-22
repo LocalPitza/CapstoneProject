@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class DayCounter : MonoBehaviour
 {
     public static DayCounter Instance { get; private set; }
+    public event Action OnDayAdvanced;
 
     public TextMeshProUGUI dayText;
     private int currentDay = 1;
@@ -33,6 +35,7 @@ public class DayCounter : MonoBehaviour
     {
         currentDay++;
         UpdateDayText();
+        OnDayAdvanced?.Invoke();
     }
 
     private void UpdateDayText()
