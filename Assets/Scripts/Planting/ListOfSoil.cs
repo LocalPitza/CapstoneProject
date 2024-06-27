@@ -7,6 +7,7 @@ public class ListOfSoil : MonoBehaviour
     public static List<ListOfSoil> allSoils = new List<ListOfSoil>();
     public GameObject indicator;
     public Soil soil;
+    public PopupTrigger associatedTrigger;
 
     private void Awake()
     {

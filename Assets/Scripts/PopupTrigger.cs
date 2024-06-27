@@ -18,9 +18,9 @@ public class PopupTrigger : MonoBehaviour
     public Transform Player;
 
     private bool playerInRange = false;
-    public static bool isPlayerInTriggerZone = false;
+    //public static bool isPlayerInTriggerZone = false;
 
-    private static PopupTrigger currentActiveTrigger = null;
+    private static List<PopupTrigger> activeTriggers = new List<PopupTrigger>();
 
     private void Update()
     {
@@ -28,20 +28,20 @@ public class PopupTrigger : MonoBehaviour
 
         if (playerInRange)
         {
-            if (currentActiveTrigger != null && currentActiveTrigger != this)
+            if (!activeTriggers.Contains(this))
             {
-                currentActiveTrigger.DeactivateUI();
+                activeTriggers.Add(this);
+                ActivateUI();
             }
-            currentActiveTrigger = this;
-            isPlayerInTriggerZone = true;
-            ActivateUI();
         }
-        else if (currentActiveTrigger == this)
+        else
         {
-            DeactivateUI();
-            currentActiveTrigger = null;
-            ListOfSoil.DeselectAll();
-            isPlayerInTriggerZone = false;
+            if (activeTriggers.Contains(this))
+            {
+                activeTriggers.Remove(this);
+                DeactivateUI();
+                ListOfSoil.DeselectAll();
+            }
         }
     }
 
@@ -70,6 +70,16 @@ public class PopupTrigger : MonoBehaviour
     {
         nameHeader.SetActive(false);
         UIGuide.SetActive(false);
+    }
+
+    public bool IsPlayerInRange()
+    {
+        return playerInRange;
+    }
+
+    public static List<PopupTrigger> GetActiveTriggers()
+    {
+        return activeTriggers;
     }
 
     private void OnDrawGizmosSelected()
