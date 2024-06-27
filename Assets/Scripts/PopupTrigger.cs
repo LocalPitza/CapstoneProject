@@ -20,16 +20,27 @@ public class PopupTrigger : MonoBehaviour
     private bool playerInRange = false;
     public static bool isPlayerInTriggerZone = false;
 
+    private static PopupTrigger currentActiveTrigger = null;
+
     private void Update()
     {
         CheckPlayerInRange();
+
         if (playerInRange)
         {
+            if (currentActiveTrigger != null && currentActiveTrigger != this)
+            {
+                currentActiveTrigger.DeactivateUI();
+            }
+            currentActiveTrigger = this;
             isPlayerInTriggerZone = true;
+            ActivateUI();
         }
-        else
+        else if (currentActiveTrigger == this)
         {
-            //ListOfSoil.DeselectAll();
+            DeactivateUI();
+            currentActiveTrigger = null;
+            ListOfSoil.DeselectAll();
             isPlayerInTriggerZone = false;
         }
     }
@@ -43,17 +54,22 @@ public class PopupTrigger : MonoBehaviour
         {
             if (hitCollider.CompareTag("Player"))
             {
-                nameHeader.SetActive(true);
-                UIGuide.SetActive(true);
                 playerInRange = true;
                 break;
             }
-            else
-            {
-                nameHeader.SetActive(false);
-                UIGuide.SetActive(false);
-            }
         }
+    }
+
+    private void ActivateUI()
+    {
+        nameHeader.SetActive(true);
+        UIGuide.SetActive(true);
+    }
+
+    private void DeactivateUI()
+    {
+        nameHeader.SetActive(false);
+        UIGuide.SetActive(false);
     }
 
     private void OnDrawGizmosSelected()
