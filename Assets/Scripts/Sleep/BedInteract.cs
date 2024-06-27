@@ -20,7 +20,7 @@ public class BedInteract : MonoBehaviour
     {
         CheckPlayerInRange();
 
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        if (playerInRange && Input.GetKeyDown(KeyCode.F))
         {
             DayCounter.Instance.AdvanceDay();
         }

@@ -209,6 +209,7 @@ MonoBehaviour:
   soilMat: {fileID: 2100000, guid: 372bfc922a7202b44bbb8ad0d4395f49, type: 2}
   wateredMat: {fileID: 2100000, guid: 9f1423c2f48e95f429046afa4eafe9be, type: 2}
   digged: {fileID: 2710375745718275908}
+  daysUntilDry: 4
 --- !u!114 &3134648773995148088
 MonoBehaviour:
   m_ObjectHideFlags: 0

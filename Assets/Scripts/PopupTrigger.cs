@@ -9,8 +9,10 @@ public class PopupTrigger : MonoBehaviour
     public Vector3 boxSize = new Vector3(2f, 2f, 2f);
 
     [Header("UI Elements")]
-    public GameObject nameOfLoc;
-    public GameObject selectPot;
+    [Tooltip("Canvas of the GameObject")]
+    public GameObject UIGuide;
+    [Tooltip("World Space Text of the GameObject")]
+    public GameObject nameHeader;
 
     [Header("Player Reference")]
     public Transform Player;
@@ -27,7 +29,7 @@ public class PopupTrigger : MonoBehaviour
         }
         else
         {
-            ListOfSoil.DeselectAll();
+            //ListOfSoil.DeselectAll();
             isPlayerInTriggerZone = false;
         }
     }
@@ -41,15 +43,15 @@ public class PopupTrigger : MonoBehaviour
         {
             if (hitCollider.CompareTag("Player"))
             {
-                nameOfLoc.SetActive(true);
-                selectPot.SetActive(true);
+                nameHeader.SetActive(true);
+                UIGuide.SetActive(true);
                 playerInRange = true;
                 break;
             }
             else
             {
-                nameOfLoc.SetActive(false);
-                selectPot.SetActive(false);
+                nameHeader.SetActive(false);
+                UIGuide.SetActive(false);
             }
         }
     }

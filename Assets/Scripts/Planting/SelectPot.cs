@@ -19,18 +19,18 @@ public class SelectPot : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 Debug.Log("Hit: " + hit.collider.name);
-                ListOfSoil hitSoil = hit.collider.GetComponent<ListOfSoil>();
+                /*ListOfSoil hitSoil = hit.collider.GetComponent<ListOfSoil>();
 
                 if (hitSoil != null)
                 {
                     ListOfSoil.DeselectAll(); // Deselect all pots first
                     hitSoil.Select(true); // Select the clicked pot
                     hitSoil.InteractWithSelected();
-                }
+                }*/
             }
             else
             {
-                ListOfSoil.DeselectAll();
+                //ListOfSoil.DeselectAll();
             }
         }
 
