@@ -18,7 +18,6 @@ public class PopupTrigger : MonoBehaviour
     public Transform Player;
 
     private bool playerInRange = false;
-    //public static bool isPlayerInTriggerZone = false;
 
     private static List<PopupTrigger> activeTriggers = new List<PopupTrigger>();
 
