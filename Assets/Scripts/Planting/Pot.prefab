@@ -210,6 +210,8 @@ MonoBehaviour:
   wateredMat: {fileID: 2100000, guid: 9f1423c2f48e95f429046afa4eafe9be, type: 2}
   digged: {fileID: 2710375745718275908}
   daysUntilDry: 4
+  cropPrefab: {fileID: 5815484052069803772, guid: 5d0e4fdfb7c3d1642baadc0f9dbbd646,
+    type: 3}
 --- !u!114 &3134648773995148088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 2183611805930068317}
   soil: {fileID: 5629410654932597296}
+  associatedTrigger: {fileID: 0}
 --- !u!1001 &2710812796506349736
 PrefabInstance:
   m_ObjectHideFlags: 0

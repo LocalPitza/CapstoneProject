@@ -8,5 +8,6 @@ public class ItemData : ScriptableObject
 {
     public string description;
     public Sprite thumbnail;
-    public GameObject model;
+    public GameObject fruitModel;
+    public GameObject harvestableModel;
 }

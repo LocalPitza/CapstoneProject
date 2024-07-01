@@ -17,6 +17,10 @@ public class Soil : MonoBehaviour
     private int lastWateredDay;
     public int daysUntilDry;
 
+    [Header("Crops")]
+    public GameObject cropPrefab;
+    CropBehaviour cropPlanted = null;
+
     private void Start()
     {
         renderer = GetComponent<Renderer>();
@@ -77,6 +81,21 @@ public class Soil : MonoBehaviour
                     SwitchLandStatus(SoilStatus.Watered);
                     break;
             }
+
+            return;
+        }
+
+        SeedData seedTool = toolSlot as SeedData;
+
+        if(seedTool != null && soilStatus != SoilStatus.Dry && cropPlanted == null)
+        {
+            GameObject cropObject = Instantiate(cropPrefab, transform);
+
+            //Moving the Crop Object to the Top of the Soil
+            cropObject.transform.localPosition = new Vector3(0, 0.5f, 0);
+
+            cropPlanted = cropObject.GetComponent<CropBehaviour>();
+            cropPlanted.Plant(seedTool);
         }
     }
 
@@ -88,6 +107,11 @@ public class Soil : MonoBehaviour
             if (currentDay - lastWateredDay >= daysUntilDry)
             {
                 SwitchLandStatus(SoilStatus.Dry);
+            }
+
+            if(cropPlanted != null)
+            {
+                cropPlanted.Grow();
             }
         }
     }
