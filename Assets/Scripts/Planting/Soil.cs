@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Soil : MonoBehaviour
 {
+    [Header("Energy Bar")]
+    [SerializeField] EnergyBar energyBar;
+    private int plantingEnergyCost;
+
     public enum SoilStatus
     {
         Dry, Digged, Watered
@@ -25,18 +29,25 @@ public class Soil : MonoBehaviour
     {
         renderer = GetComponent<Renderer>();
 
-        //Default Status
+        if (EnergyBar.Instance != null)
+        {
+            plantingEnergyCost = EnergyBar.Instance.ammountPlantEnergy;
+        }
+        else
+        {
+            Debug.LogError("Energy Bar Instance is Null");
+        }
+
         SwitchLandStatus(SoilStatus.Dry);
 
-        DayCounter.Instance.OnDayAdvanced += CheckIfSoilShouldDry; // Subscribe to the day advanced event
+        DayCounter.Instance.OnDayAdvanced += CheckIfSoilShouldDry;
     }
 
     private void OnDestroy()
     {
-        DayCounter.Instance.OnDayAdvanced -= CheckIfSoilShouldDry; // Unsubscribe from the event
+        DayCounter.Instance.OnDayAdvanced -= CheckIfSoilShouldDry;
     }
 
-    //Change Materials on Soil
     public void SwitchLandStatus(SoilStatus statusSwicth)
     {
         soilStatus = statusSwicth;
@@ -46,6 +57,7 @@ public class Soil : MonoBehaviour
         {
             case SoilStatus.Digged:
                 digged.SetActive(true);
+                Debug.Log("Digged");
                 break;
 
             case SoilStatus.Dry:
@@ -64,16 +76,21 @@ public class Soil : MonoBehaviour
     public void Interact()
     {
         ItemData toolSlot = InventoryManager.Instance.equipedTool;
-
         EquipmentData equipmentTool = toolSlot as EquipmentData;
 
-        if(equipmentTool != null)
+        if (equipmentTool != null)
         {
             EquipmentData.ToolType toolType = equipmentTool.toolType;
+            Debug.Log("Tool Type: " + toolType);
 
             switch (toolType)
             {
                 case EquipmentData.ToolType.HandTrowel:
+
+                    int totalSoilCount = ListOfSoil.allSoils.Count; // Get the total number of soils
+                    int adjustedEnergyCost = plantingEnergyCost - totalSoilCount; // Adjust the energy cost
+
+                    EnergyBar.Instance.DeductEnergy(adjustedEnergyCost); // Deduct the adjusted energy cost
                     SwitchLandStatus(SoilStatus.Digged);
                     break;
 
@@ -82,16 +99,47 @@ public class Soil : MonoBehaviour
                     break;
             }
 
+            Debug.Log("Interaction successful with tool: " + toolType);
             return;
         }
 
+        /*Debug.Log("Selected Soil: " + (ListOfSoil.selectedSoil != null ? ListOfSoil.selectedSoil.GetInstanceID().ToString() : "null") + " | Current Soil: " + this.GetInstanceID());
+
+        /if (ListOfSoil.selectedSoil != null && ListOfSoil.selectedSoil == this) // Check if this is the selected soil
+        {
+            if (equipmentTool != null)
+            {
+                EquipmentData.ToolType toolType = equipmentTool.toolType;
+                Debug.Log("Tool Type: " + toolType);
+
+                switch (toolType)
+                {
+                    case EquipmentData.ToolType.HandTrowel:
+                        EnergyBar.Instance.DeductEnergy(plantingEnergyCost); // Deduct energy from EnergyBar
+                        SwitchLandStatus(SoilStatus.Digged);
+                        break;
+
+                    case EquipmentData.ToolType.WateringCan:
+                        SwitchLandStatus(SoilStatus.Watered);
+                        break;
+                }
+
+                Debug.Log("Interaction successful with tool: " + toolType);
+                return;
+            }
+        }
+        else
+        {
+            Debug.Log("Not selected soil. Interaction skipped.");
+        }*/
+
         SeedData seedTool = toolSlot as SeedData;
 
-        if(seedTool != null && soilStatus != SoilStatus.Dry && cropPlanted == null)
+        if (seedTool != null && soilStatus != SoilStatus.Dry && cropPlanted == null)
         {
             GameObject cropObject = Instantiate(cropPrefab, transform);
 
-            //Moving the Crop Object to the Top of the Soil
+            // Moving the Crop Object to the Top of the Soil
             cropObject.transform.localPosition = new Vector3(0, 0.5f, 0);
 
             cropPlanted = cropObject.GetComponent<CropBehaviour>();
@@ -109,7 +157,7 @@ public class Soil : MonoBehaviour
                 SwitchLandStatus(SoilStatus.Dry);
             }
 
-            if(cropPlanted != null)
+            if (cropPlanted != null)
             {
                 cropPlanted.Grow();
             }

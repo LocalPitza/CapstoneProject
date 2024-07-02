@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7850645296586356504}
   - component: {fileID: 8311990262224155997}
   - component: {fileID: 4045690335378287559}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -205,6 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf2cd083ce328a4ea87514680cda836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  energyBar: {fileID: 0}
   soilStatus: 0
   soilMat: {fileID: 2100000, guid: 372bfc922a7202b44bbb8ad0d4395f49, type: 2}
   wateredMat: {fileID: 2100000, guid: 9f1423c2f48e95f429046afa4eafe9be, type: 2}

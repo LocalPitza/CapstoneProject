@@ -11,6 +11,7 @@ public class DayCounter : MonoBehaviour
 
     public TextMeshProUGUI dayText;
     private int currentDay = 1;
+    private int currentWeek = 1;
 
     void Awake()
     {
@@ -34,6 +35,11 @@ public class DayCounter : MonoBehaviour
     public void AdvanceDay()
     {
         currentDay++;
+        if (currentDay > 7)
+        {
+            currentDay = 1;
+            currentWeek++;
+        }
         UpdateDayText();
         OnDayAdvanced?.Invoke();
     }
@@ -42,12 +48,17 @@ public class DayCounter : MonoBehaviour
     {
         if (dayText != null)
         {
-            dayText.text = "Day: " + currentDay;
+            dayText.text = "Week: " + currentWeek + "| Day: " + currentDay;
         }
     }
 
     public int GetCurrentDay()
     {
         return currentDay;
+    }
+
+    public int GetCurrentWeek()
+    {
+        return currentWeek;
     }
 }

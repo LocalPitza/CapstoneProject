@@ -39,6 +39,7 @@ public class PopupTrigger : MonoBehaviour
             {
                 activeTriggers.Remove(this);
                 DeactivateUI();
+                
                 ListOfSoil.DeselectAll();
             }
         }
