@@ -3,11 +3,15 @@ using UnityEngine.EventSystems;
 
 public class SelectPot : MonoBehaviour
 {
+    //private bool isInteracting = false;
 
     void Update()
     {
         if (PopupTrigger.GetActiveTriggers().Count > 0 && Input.GetMouseButtonDown(0))
         {
+            //if (isInteracting) return;
+            //isInteracting = true;
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -24,7 +28,7 @@ public class SelectPot : MonoBehaviour
                     hitSoil.Select(true); // Select the clicked pot
                     ListOfSoil.selectedSoil = hitSoil.soil; // Set the selected soil
 
-                    hitSoil.InteractWithSelected();
+                    hitSoil.soil.Interact();
                     //Debug.Log("Soil selected in SelectPot: " + ListOfSoil.selectedSoil.GetInstanceID());
                 }
             }
@@ -32,6 +36,13 @@ public class SelectPot : MonoBehaviour
             {
                 ListOfSoil.DeselectAll();
             }
+
+            //isInteracting = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            EnergyBar.Instance.DeductEnergy(10);
         }
     }
 }

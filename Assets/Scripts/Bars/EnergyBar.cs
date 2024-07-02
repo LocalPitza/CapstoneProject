@@ -23,13 +23,13 @@ public class EnergyBar : BarsUnit
 
     private void Awake()
     {
-        if (Instance != null & Instance != this)
+        if (Instance == null)
         {
-            Destroy(this);
+            Instance = this;
         }
         else
         {
-            Instance = this;
+            Destroy(gameObject);
         }
     }
 
@@ -49,6 +49,7 @@ public class EnergyBar : BarsUnit
         {
             currentEnergy -= amount; // Deduct energy by the given amount
             barSlider.value = currentEnergy; // Update the Slider value
+            Debug.Log("Energy deducted: " + amount + ", Current energy: " + currentEnergy);
         }
     }
 

@@ -25,11 +25,13 @@ public class Soil : MonoBehaviour
     public GameObject cropPrefab;
     CropBehaviour cropPlanted = null;
 
+    //private bool isInteracting = false;
+
     private void Start()
     {
         renderer = GetComponent<Renderer>();
 
-        if(EnergyBar.Instance != null )
+        if(EnergyBar.Instance != null)
         {
             plantingEnergyCost = EnergyBar.Instance.ammountPlantEnergy;
         }
@@ -57,7 +59,7 @@ public class Soil : MonoBehaviour
         {
             case SoilStatus.Digged:
                 digged.SetActive(true);
-                Debug.Log("Digged");
+                //Debug.Log("Digged");
                 break;
 
             case SoilStatus.Dry:
@@ -75,18 +77,21 @@ public class Soil : MonoBehaviour
 
     public void Interact()
     {
+        //if (isInteracting) return;
+        //isInteracting = true;
+
         ItemData toolSlot = InventoryManager.Instance.equipedTool;
         EquipmentData equipmentTool = toolSlot as EquipmentData;
 
         if (equipmentTool != null)
         {
             EquipmentData.ToolType toolType = equipmentTool.toolType;
-            Debug.Log("Tool Type: " + toolType);
 
             switch (toolType)
             {
                 case EquipmentData.ToolType.HandTrowel:
-                    energyBar.DeductEnergy(plantingEnergyCost); // Deduct energy from EnergyBar
+
+                    EnergyBar.Instance.DeductEnergy(plantingEnergyCost);
                     SwitchLandStatus(SoilStatus.Digged);
                     break;
 
@@ -94,12 +99,44 @@ public class Soil : MonoBehaviour
                     SwitchLandStatus(SoilStatus.Watered);
                     break;
             }
-
-            Debug.Log("Interaction successful with tool: " + toolType);
-            return;
         }
 
-        /*if (equipmentTool != null)
+        SeedData seedTool = toolSlot as SeedData;
+
+        if (seedTool != null && soilStatus != SoilStatus.Dry && cropPlanted == null)
+        {
+            GameObject cropObject = Instantiate(cropPrefab, transform);
+
+            // Moving the Crop Object to the Top of the Soil
+            cropObject.transform.localPosition = new Vector3(0, 0.5f, 0);
+
+            cropPlanted = cropObject.GetComponent<CropBehaviour>();
+            cropPlanted.Plant(seedTool);
+        }
+
+        //isInteracting = false;
+    }
+
+    private void CheckIfSoilShouldDry()
+    {
+        if (soilStatus == SoilStatus.Watered)
+        {
+            int currentDay = DayCounter.Instance.GetCurrentDay();
+            if (currentDay - lastWateredDay >= daysUntilDry)
+            {
+                SwitchLandStatus(SoilStatus.Dry);
+            }
+
+            if (cropPlanted != null)
+            {
+                cropPlanted.Grow();
+            }
+        }
+    }
+}
+
+
+/*if (equipmentTool != null)
         {
             EquipmentData.ToolType toolType = equipmentTool.toolType;
             //Debug.Log("Tool Type: " + toolType);
@@ -156,35 +193,3 @@ public class Soil : MonoBehaviour
         {
             Debug.Log("Not selected soil. Interaction skipped.");
         }*/
-
-        SeedData seedTool = toolSlot as SeedData;
-
-        if (seedTool != null && soilStatus != SoilStatus.Dry && cropPlanted == null)
-        {
-            GameObject cropObject = Instantiate(cropPrefab, transform);
-
-            // Moving the Crop Object to the Top of the Soil
-            cropObject.transform.localPosition = new Vector3(0, 0.5f, 0);
-
-            cropPlanted = cropObject.GetComponent<CropBehaviour>();
-            cropPlanted.Plant(seedTool);
-        }
-    }
-
-    private void CheckIfSoilShouldDry()
-    {
-        if (soilStatus == SoilStatus.Watered)
-        {
-            int currentDay = DayCounter.Instance.GetCurrentDay();
-            if (currentDay - lastWateredDay >= daysUntilDry)
-            {
-                SwitchLandStatus(SoilStatus.Dry);
-            }
-
-            if (cropPlanted != null)
-            {
-                cropPlanted.Grow();
-            }
-        }
-    }
-}
