@@ -65,8 +65,8 @@
     <Compile Include="Assets\Scripts\DoorMechanic.cs" />
     <Compile Include="Assets\Scripts\CamSwitcher.cs" />
     <Compile Include="Assets\Scripts\Bars\BarsUnit.cs" />
-    <Compile Include="Assets\Scripts\HomeDoor.cs" />
     <Compile Include="Assets\Scripts\Bars\EnergyBar.cs" />
+    <Compile Include="Assets\Scripts\HomeDoor.cs" />
     <Compile Include="Assets\Scripts\Planting\Item Data\EquipmentData.cs" />
     <Compile Include="Assets\Scripts\Sleep\DayCounter.cs" />
     <Compile Include="Assets\Scripts\Bars\HungerBar.cs" />

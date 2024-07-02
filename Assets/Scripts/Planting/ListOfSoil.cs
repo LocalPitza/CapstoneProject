@@ -27,7 +27,7 @@ public class ListOfSoil : MonoBehaviour
         if (toggle)
         {
             selectedSoil = soil;
-            Debug.Log("Soil selected: " + selectedSoil.GetInstanceID());
+            //Debug.Log("Soil selected: " + selectedSoil.GetInstanceID());
         }
     }
 
@@ -37,7 +37,6 @@ public class ListOfSoil : MonoBehaviour
         {
             soil.Select(false);
         }
-        Debug.Log("Deselecting all soils.");
         selectedSoil = null;
     }
 
@@ -45,12 +44,12 @@ public class ListOfSoil : MonoBehaviour
     {
         if (selectedSoil == soil) // Use soil instead of this
         {
-            Debug.Log("Interacting with selected soil: " + soil.GetInstanceID());
+            //Debug.Log("Interacting with selected soil: " + soil.GetInstanceID());
             soil.Interact();
         }
         else
         {
-            Debug.Log("Selected soil mismatch: " + (selectedSoil != null ? selectedSoil.GetInstanceID().ToString() : "null") + " != " + soil.GetInstanceID());
+            //Debug.Log("Selected soil mismatch: " + (selectedSoil != null ? selectedSoil.GetInstanceID().ToString() : "null") + " != " + soil.GetInstanceID());
         }
     }
 }

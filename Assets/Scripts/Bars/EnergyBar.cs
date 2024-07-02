@@ -43,8 +43,32 @@ public class EnergyBar : BarsUnit
         barSlider.value = currentEnergy;
     }
 
-    public void DeductEnergy(int ammount)
+    public void DeductEnergy(int amount)
     {
-        Debug.Log("Current Energy" + ammount);
+        if (currentEnergy > 0)
+        {
+            currentEnergy -= amount; // Deduct energy by the given amount
+            barSlider.value = currentEnergy; // Update the Slider value
+        }
     }
+
+    /*public int maxEnergy = 100;
+
+    private int currentEnergy;
+
+    void Start()
+    {
+        currentEnergy = maxEnergy;
+        barSlider.maxValue = maxEnergy;
+        barSlider.value = maxEnergy;
+    }
+
+    public void DeductEnergy(int amount)
+    {
+        if (currentEnergy > 0)
+        {
+            currentEnergy -= amount;
+            barSlider.value = currentEnergy;
+        }
+    }*/
 }

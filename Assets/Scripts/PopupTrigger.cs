@@ -72,11 +72,6 @@ public class PopupTrigger : MonoBehaviour
         UIGuide.SetActive(false);
     }
 
-    public bool IsPlayerInRange()
-    {
-        return playerInRange;
-    }
-
     public static List<PopupTrigger> GetActiveTriggers()
     {
         return activeTriggers;

@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 5439828960138147089}
   m_Layer: 6
   m_Name: Pot
-  m_TagString: Selectable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5ccdda6b58a344b96088979461a61b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  energyBar: {fileID: 0}
 --- !u!114 &5439828960138147089
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class Soil : MonoBehaviour
 {
     [Header("Energy Bar")]
     [SerializeField] EnergyBar energyBar;
-    private int plantingEnergyCost;
+    int plantingEnergyCost;
 
     public enum SoilStatus
     {
@@ -29,13 +29,13 @@ public class Soil : MonoBehaviour
     {
         renderer = GetComponent<Renderer>();
 
-        if (EnergyBar.Instance != null)
+        if(EnergyBar.Instance != null )
         {
             plantingEnergyCost = EnergyBar.Instance.ammountPlantEnergy;
         }
         else
         {
-            Debug.LogError("Energy Bar Instance is Null");
+            Debug.LogError("Energy Instance is Missing");
         }
 
         SwitchLandStatus(SoilStatus.Dry);
@@ -86,11 +86,7 @@ public class Soil : MonoBehaviour
             switch (toolType)
             {
                 case EquipmentData.ToolType.HandTrowel:
-
-                    int totalSoilCount = ListOfSoil.allSoils.Count; // Get the total number of soils
-                    int adjustedEnergyCost = plantingEnergyCost - totalSoilCount; // Adjust the energy cost
-
-                    EnergyBar.Instance.DeductEnergy(adjustedEnergyCost); // Deduct the adjusted energy cost
+                    energyBar.DeductEnergy(plantingEnergyCost); // Deduct energy from EnergyBar
                     SwitchLandStatus(SoilStatus.Digged);
                     break;
 
@@ -100,6 +96,34 @@ public class Soil : MonoBehaviour
             }
 
             Debug.Log("Interaction successful with tool: " + toolType);
+            return;
+        }
+
+        /*if (equipmentTool != null)
+        {
+            EquipmentData.ToolType toolType = equipmentTool.toolType;
+            //Debug.Log("Tool Type: " + toolType);
+
+            switch (toolType)
+            {
+                case EquipmentData.ToolType.HandTrowel:
+
+                    //int totalSoilCount = ListOfSoil.allSoils.Count; // Get the total number of soils
+                    //int adjustedEnergyCost = plantingEnergyCost - totalSoilCount; // Adjust the energy cost
+
+                    //EnergyBar.Instance.DeductEnergy(adjustedEnergyCost); // Deduct the adjusted energy cost
+                    //Debug.Log(adjustedEnergyCost);
+
+                    SwitchLandStatus(SoilStatus.Digged);
+                    energyBar.DeductEnergy(10);
+                    break;
+
+                case EquipmentData.ToolType.WateringCan:
+                    SwitchLandStatus(SoilStatus.Watered);
+                    break;
+            }
+
+            //Debug.Log("Interaction successful with tool: " + toolType);
             return;
         }
 
