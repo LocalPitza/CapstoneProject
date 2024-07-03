@@ -6,20 +6,25 @@ using UnityEngine.Playables;
 public class PopupTrigger : MonoBehaviour
 {
     [Header("Trigger Size")]
-    public Vector3 boxSize = new Vector3(2f, 2f, 2f);
+    [SerializeField] Vector3 boxSize = new Vector3(2f, 2f, 2f);
 
     [Header("UI Elements")]
     [Tooltip("Canvas of the GameObject")]
-    public GameObject UIGuide;
+    [SerializeField] GameObject UIGuide;
     [Tooltip("World Space Text of the GameObject")]
-    public GameObject nameHeader;
-
-    [Header("Player Reference")]
-    public Transform Player;
+    [SerializeField] GameObject nameHeader;
 
     private bool playerInRange = false;
 
     private static List<PopupTrigger> activeTriggers = new List<PopupTrigger>();
+
+    private void Start()
+    {
+        if (!nameHeader)
+        {
+            nameHeader = null; //Can be Null
+        }
+    }
 
     private void Update()
     {
@@ -57,18 +62,28 @@ public class PopupTrigger : MonoBehaviour
                 playerInRange = true;
                 break;
             }
+            else
+            {
+                playerInRange = false;
+            }
         }
     }
 
     private void ActivateUI()
     {
-        nameHeader.SetActive(true);
+        if (nameHeader != null)
+        {
+            nameHeader.SetActive(true);
+        }
         UIGuide.SetActive(true);
     }
 
     private void DeactivateUI()
     {
-        nameHeader.SetActive(false);
+        if (nameHeader != null)
+        {
+            nameHeader.SetActive(false);
+        }
         UIGuide.SetActive(false);
     }
 

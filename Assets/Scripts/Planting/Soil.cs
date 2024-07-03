@@ -25,7 +25,6 @@ public class Soil : MonoBehaviour
     public GameObject cropPrefab;
     CropBehaviour cropPlanted = null;
 
-    //private bool isInteracting = false;
 
     private void Start()
     {
@@ -59,7 +58,7 @@ public class Soil : MonoBehaviour
         {
             case SoilStatus.Digged:
                 digged.SetActive(true);
-                //Debug.Log("Digged");
+
                 break;
 
             case SoilStatus.Dry:
@@ -77,9 +76,6 @@ public class Soil : MonoBehaviour
 
     public void Interact()
     {
-        //if (isInteracting) return;
-        //isInteracting = true;
-
         ItemData toolSlot = InventoryManager.Instance.equipedTool;
         EquipmentData equipmentTool = toolSlot as EquipmentData;
 
@@ -113,8 +109,6 @@ public class Soil : MonoBehaviour
             cropPlanted = cropObject.GetComponent<CropBehaviour>();
             cropPlanted.Plant(seedTool);
         }
-
-        //isInteracting = false;
     }
 
     private void CheckIfSoilShouldDry()
@@ -134,62 +128,3 @@ public class Soil : MonoBehaviour
         }
     }
 }
-
-
-/*if (equipmentTool != null)
-        {
-            EquipmentData.ToolType toolType = equipmentTool.toolType;
-            //Debug.Log("Tool Type: " + toolType);
-
-            switch (toolType)
-            {
-                case EquipmentData.ToolType.HandTrowel:
-
-                    //int totalSoilCount = ListOfSoil.allSoils.Count; // Get the total number of soils
-                    //int adjustedEnergyCost = plantingEnergyCost - totalSoilCount; // Adjust the energy cost
-
-                    //EnergyBar.Instance.DeductEnergy(adjustedEnergyCost); // Deduct the adjusted energy cost
-                    //Debug.Log(adjustedEnergyCost);
-
-                    SwitchLandStatus(SoilStatus.Digged);
-                    energyBar.DeductEnergy(10);
-                    break;
-
-                case EquipmentData.ToolType.WateringCan:
-                    SwitchLandStatus(SoilStatus.Watered);
-                    break;
-            }
-
-            //Debug.Log("Interaction successful with tool: " + toolType);
-            return;
-        }
-
-        /*Debug.Log("Selected Soil: " + (ListOfSoil.selectedSoil != null ? ListOfSoil.selectedSoil.GetInstanceID().ToString() : "null") + " | Current Soil: " + this.GetInstanceID());
-
-        /if (ListOfSoil.selectedSoil != null && ListOfSoil.selectedSoil == this) // Check if this is the selected soil
-        {
-            if (equipmentTool != null)
-            {
-                EquipmentData.ToolType toolType = equipmentTool.toolType;
-                Debug.Log("Tool Type: " + toolType);
-
-                switch (toolType)
-                {
-                    case EquipmentData.ToolType.HandTrowel:
-                        EnergyBar.Instance.DeductEnergy(plantingEnergyCost); // Deduct energy from EnergyBar
-                        SwitchLandStatus(SoilStatus.Digged);
-                        break;
-
-                    case EquipmentData.ToolType.WateringCan:
-                        SwitchLandStatus(SoilStatus.Watered);
-                        break;
-                }
-
-                Debug.Log("Interaction successful with tool: " + toolType);
-                return;
-            }
-        }
-        else
-        {
-            Debug.Log("Not selected soil. Interaction skipped.");
-        }*/
