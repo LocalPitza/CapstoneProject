@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CropBehaviour : MonoBehaviour
 {
+
     SeedData seedToGrow;
 
     [Header("Life Stage")]
@@ -52,7 +53,7 @@ public class CropBehaviour : MonoBehaviour
         }
     }
 
-    void SwitchState(CropState stateToSwitch)
+    public void SwitchState(CropState stateToSwitch)
     {
         //Resets everything and set all Gameojects to fales
         seed.SetActive(false);

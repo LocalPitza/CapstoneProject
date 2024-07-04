@@ -76,6 +76,7 @@ public class Soil : MonoBehaviour
 
     public void Interact()
     {
+        //Equiping Tools
         ItemData toolSlot = InventoryManager.Instance.equipedTool;
         EquipmentData equipmentTool = toolSlot as EquipmentData;
 
@@ -94,9 +95,16 @@ public class Soil : MonoBehaviour
                 case EquipmentData.ToolType.WateringCan:
                     SwitchLandStatus(SoilStatus.Watered);
                     break;
+
+                case EquipmentData.ToolType.PruningShears:
+                    cropPlanted.SwitchState(CropBehaviour.CropState.Seedling);
+                    //Harvesting Status
+                    break;
             }
         }
 
+
+        //Planting
         SeedData seedTool = toolSlot as SeedData;
 
         if (seedTool != null && soilStatus != SoilStatus.Dry && cropPlanted == null)
