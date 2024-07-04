@@ -9,10 +9,12 @@ public class BedInteract : MonoBehaviour
     public Vector3 boxSize = new Vector3(2f, 2f, 2f);
     public GameObject notification;
     private bool playerInRange = false;
+    private EnergyBar energyBar;
 
     void Start()
     {
         dayCounter = FindObjectOfType<DayCounter>();
+        energyBar = EnergyBar.Instance;
         notification.SetActive(false);
     }
 
@@ -23,6 +25,7 @@ public class BedInteract : MonoBehaviour
         if (playerInRange && Input.GetKeyDown(KeyCode.F))
         {
             DayCounter.Instance.AdvanceDay();
+            energyBar.SetFullEnergy();
         }
     }
 

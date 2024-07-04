@@ -52,4 +52,11 @@ public class EnergyBar : BarsUnit
             Debug.Log("Energy deducted: " + amount + ", Current energy: " + currentEnergy);
         }
     }
+
+    public void SetFullEnergy()
+    {
+        currentEnergy = (int)barSlider.maxValue;
+        barSlider.value = currentEnergy;
+        Debug.Log("Energy set to full: " + currentEnergy);
+    }
 }
