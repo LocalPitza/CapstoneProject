@@ -80,11 +80,11 @@ public class UIManager : MonoBehaviour
         RenderInventoryPanel(inventoryItemSlots, storageSlots);
 
         // Render the Equipped slots
-        toolHandSlot.Display(InventoryManager.Instance.equipedTool);
-        itemHandSlot.Display(InventoryManager.Instance.equipedItem);
+        toolHandSlot.Display(InventoryManager.Instance.equippedTool);
+        itemHandSlot.Display(InventoryManager.Instance.equippedItem);
 
-        ItemData equippedTool = InventoryManager.Instance.equipedTool;
-        ItemData equippedItem = InventoryManager.Instance.equipedItem;
+        ItemData equippedTool = InventoryManager.Instance.equippedTool;
+        ItemData equippedItem = InventoryManager.Instance.equippedItem;
 
         // Checking if there is a Tool
         if (equippedTool != null)

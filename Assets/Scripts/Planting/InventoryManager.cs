@@ -23,13 +23,13 @@ public class InventoryManager : MonoBehaviour
     // Tool Slots
     public ItemData[] tools = new ItemData[8];
     // Tool on Hand
-    public ItemData equipedTool = null;
+    public ItemData equippedTool = null;
 
     [Header("Storage")]
     // Item Slots
     public ItemData[] items = new ItemData[32];
     // Item on Hand
-    public ItemData equipedItem = null;
+    public ItemData equippedItem = null;
 
 
     //Equiping
@@ -42,10 +42,10 @@ public class InventoryManager : MonoBehaviour
             ItemData itemToEquip = items[slotIndex];
 
             // Change the Inventory Slot to the Hand
-            items[slotIndex] = equipedItem;
+            items[slotIndex] = equippedItem;
 
             // Change the Hand's Slot to the Inventory Slot's
-            equipedItem = itemToEquip;
+            equippedItem = itemToEquip;
         }
         else
         {
@@ -53,10 +53,10 @@ public class InventoryManager : MonoBehaviour
             ItemData toolToEquip = tools[slotIndex];
 
             // Change the Inventory Slot to the Hand
-            tools[slotIndex] = equipedTool;
+            tools[slotIndex] = equippedTool;
 
             // Change the Hand's Slot to the Inventory Slot's
-            equipedTool = toolToEquip;
+            equippedTool = toolToEquip;
         }
 
         // Updates the Changes
@@ -72,8 +72,8 @@ public class InventoryManager : MonoBehaviour
             {
                 if (items[i] == null)
                 {
-                    items[i] = equipedItem;
-                    equipedItem = null;
+                    items[i] = equippedItem;
+                    equippedItem = null;
                     break;
                 }
             }
@@ -84,13 +84,27 @@ public class InventoryManager : MonoBehaviour
             {
                 if (tools[i] == null)
                 {
-                    tools[i] = equipedTool;
-                    equipedTool = null;
+                    tools[i] = equippedTool;
+                    equippedTool = null;
                     break;
                 }
             }
         }
 
         UIManager.Instance.RenderInventory();
+    }
+
+    public bool AddItemToInventory(ItemData newItem)
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] == null)
+            {
+                items[i] = newItem;
+                UIManager.Instance.RenderInventory();
+                return true;
+            }
+        }
+        return false; // Inventory is full
     }
 }

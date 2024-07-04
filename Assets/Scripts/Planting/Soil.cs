@@ -77,7 +77,7 @@ public class Soil : MonoBehaviour
     public void Interact()
     {
         //Equiping Tools
-        ItemData toolSlot = InventoryManager.Instance.equipedTool;
+        ItemData toolSlot = InventoryManager.Instance.equippedTool;
         EquipmentData equipmentTool = toolSlot as EquipmentData;
 
         if (equipmentTool != null)
@@ -97,8 +97,20 @@ public class Soil : MonoBehaviour
                     break;
 
                 case EquipmentData.ToolType.PruningShears:
-                    cropPlanted.SwitchState(CropBehaviour.CropState.Seedling);
-                    //Harvesting Status
+                    Debug.Log("Pruning Shears Used");
+
+                    //Harvest
+                    SelectPot harvestable = FindObjectOfType<SelectPot>();
+
+                    if (harvestable != null)
+                    {
+                        Debug.Log("Select Harvestable");
+                        harvestable.HarvestableInteract();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("No Select Pot Script");
+                    }
                     break;
             }
         }

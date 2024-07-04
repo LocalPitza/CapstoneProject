@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CropBehaviour : MonoBehaviour
 {
-
     SeedData seedToGrow;
 
     [Header("Life Stage")]
@@ -15,25 +14,66 @@ public class CropBehaviour : MonoBehaviour
     int growth;
     int maxGrowth;
 
+    private int daysSinceLastHarvest;
+    private bool isHarvested;
+
     public enum CropState
     {
         Seed, Seedling, Harvestable
     }
     public CropState cropState;
 
-    //Called when the Player plants a Seed
-    public void Plant(SeedData seedToGorw)
+    void Start()
     {
-        this.seedToGrow = seedToGorw;
+        DayCounter.Instance.OnDayAdvanced += OnDayAdvanced;
+        daysSinceLastHarvest = 0;
+        isHarvested = false;
+    }
 
-        //Harvestable
-        seedling = Instantiate(seedToGorw.seedling, transform);
+    void OnDestroy()
+    {
+        DayCounter.Instance.OnDayAdvanced -= OnDayAdvanced;
+    }
 
-        ItemData croptToYield = seedToGorw.cropToYield;
+    private void OnDayAdvanced()
+    {
+        if (isHarvested && seedToGrow.regrowable)
+        {
+            daysSinceLastHarvest++;
+            if (daysSinceLastHarvest >= seedToGrow.daysToRegrow)
+            {
+                Regrow();
+            }
+        }
+        else if (!isHarvested)
+        {
+            Grow();
+        }
+    }
 
-        harvestable = Instantiate(croptToYield.harvestableModel, transform);
+    //Called when the Player plants a Seed
+    public void Plant(SeedData seedToGrow)
+    {
+        this.seedToGrow = seedToGrow;
+
+        // Seedling
+        seedling = Instantiate(seedToGrow.seedling, transform);
+        seedling.SetActive(false);
+
+        // Harvestable
+        ItemData cropToYield = seedToGrow.cropToYield;
+        harvestable = Instantiate(cropToYield.fruitModel, transform);
+        harvestable.SetActive(false);
 
         maxGrowth = DayCounter.Instance.GetCurrentDay() + seedToGrow.daysToGrow;
+
+        //Check if Regrowable
+        if (seedToGrow.regrowable)
+        {
+            RegrowablePlant regrowablePlant = harvestable.GetComponent<RegrowablePlant>();
+
+            regrowablePlant.SetParent(this);
+        }
 
         SwitchState(CropState.Seed);
     }
@@ -65,16 +105,29 @@ public class CropBehaviour : MonoBehaviour
             case CropState.Seed:
                 seed.SetActive(true);
                 break;
+
             case CropState.Seedling:
                 seedling.SetActive(true);
                 break;
+
             case CropState.Harvestable:
                 harvestable.SetActive(true);
 
-                harvestable.transform.parent = null;
+                if (!seedToGrow.regrowable)
+                {
+                    harvestable.transform.parent = null;
+                    Destroy(gameObject);
+                }
                 break;
         }
 
         cropState = stateToSwitch;
+    }
+
+    public void Regrow()
+    {
+        daysSinceLastHarvest = 0;
+        isHarvested = false;
+        SwitchState(CropState.Seedling);
     }
 }
