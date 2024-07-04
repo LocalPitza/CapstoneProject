@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    //To avoid having multiple Instance of this Script
     public static InventoryManager Instance { get; private set; }
 
     private void Awake()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(this);
         }
@@ -18,18 +17,18 @@ public class InventoryManager : MonoBehaviour
             Instance = this;
         }
     }
-    // // // //
 
-    [Header ("Tools")]
-    //Tool Slots
-    public ItemData[] tools = new ItemData[4];
-    //Tool on Hand
+
+    [Header("Tools")]
+    // Tool Slots
+    public ItemData[] tools = new ItemData[8];
+    // Tool on Hand
     public ItemData equipedTool = null;
 
-    [Header ("Items")]
-    //Item Slots
-    public ItemData[] items = new ItemData[4];
-    //Item on Hand
+    [Header("Storage")]
+    // Item Slots
+    public ItemData[] items = new ItemData[32];
+    // Item on Hand
     public ItemData equipedItem = null;
 
 
@@ -37,31 +36,30 @@ public class InventoryManager : MonoBehaviour
     //Handles Movments of Items from Inventory to Hand
     public void InventoryToHand(int slotIndex, InventorySlot.InventoryType inventoryType)
     {
-        if(inventoryType == InventorySlot.InventoryType.Item)
+        if (inventoryType == InventorySlot.InventoryType.Item)
         {
-            //Cache the Inventory slot ItemData from InventoryManager
+            // Cache the Inventory slot ItemData from InventoryManager
             ItemData itemToEquip = items[slotIndex];
 
-            //Change the Inventory Slot to the Hand
+            // Change the Inventory Slot to the Hand
             items[slotIndex] = equipedItem;
 
-            //Chame the Hand's Slot to the Inventory Slot's
+            // Change the Hand's Slot to the Inventory Slot's
             equipedItem = itemToEquip;
-
         }
         else
         {
-            //Cache the Inventory slot ItemData from InventoryManager
+            // Cache the Inventory slot ItemData from InventoryManager
             ItemData toolToEquip = tools[slotIndex];
 
-            //Change the Inventory Slot to the Hand
+            // Change the Inventory Slot to the Hand
             tools[slotIndex] = equipedTool;
 
-            //Chame the Hand's Slot to the Inventory Slot's
+            // Change the Hand's Slot to the Inventory Slot's
             equipedTool = toolToEquip;
         }
 
-        //Updates the Changes
+        // Updates the Changes
         UIManager.Instance.RenderInventory();
     }
 
@@ -70,7 +68,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (inventoryType == InventorySlot.InventoryType.Item)
         {
-            for(int i = 0; i < items.Length; i++)
+            for (int i = 0; i < items.Length; i++)
             {
                 if (items[i] == null)
                 {

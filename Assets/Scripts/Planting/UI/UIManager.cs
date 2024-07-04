@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     public InventorySlot[] toolSlots;
 
     public HandInventorySlot itemHandSlot;
-    public InventorySlot[] itemSlots;
+    public InventorySlot[] storageSlots;
 
     //Info Box
     [Header("Item Name Box")]
@@ -57,10 +57,14 @@ public class UIManager : MonoBehaviour
 
     public void AssignSlotIndexes()
     {
-        for(int i = 0; i < toolSlots.Length; i++)
+        for (int i = 0; i < toolSlots.Length; i++)
         {
             toolSlots[i].AssignIndex(i);
-            itemSlots[i].AssignIndex(i);
+        }
+
+        for (int i = 0; i < storageSlots.Length; i++)
+        {
+            storageSlots[i].AssignIndex(i);
         }
     }
 
@@ -69,48 +73,53 @@ public class UIManager : MonoBehaviour
         ItemData[] inventoryToolSlots = InventoryManager.Instance.tools;
         ItemData[] inventoryItemSlots = InventoryManager.Instance.items;
 
-        //Render Tool Section
+        // Render Tool Section
         RenderInventoryPanel(inventoryToolSlots, toolSlots);
 
-        //Render Item Section
-        RenderInventoryPanel(inventoryItemSlots, itemSlots);
+        // Render Item Section
+        RenderInventoryPanel(inventoryItemSlots, storageSlots);
 
-        //Renders the Equiped slots
+        // Render the Equipped slots
         toolHandSlot.Display(InventoryManager.Instance.equipedTool);
         itemHandSlot.Display(InventoryManager.Instance.equipedItem);
 
-
-        //Get Tool Equip from the Inventory Manager
         ItemData equippedTool = InventoryManager.Instance.equipedTool;
         ItemData equippedItem = InventoryManager.Instance.equipedItem;
-        
-        //Checking if there is a Tool
+
+        // Checking if there is a Tool
         if (equippedTool != null)
         {
             toolEquipSlot.sprite = equippedTool.thumbnail;
             toolEquipSlot.gameObject.SetActive(true);
-
-            return;
+        }
+        else
+        {
+            toolEquipSlot.gameObject.SetActive(false);
         }
 
-        toolEquipSlot.gameObject.SetActive(false);
-
-        if(equippedItem != null)
+        if (equippedItem != null)
         {
             itemEquipSlot.sprite = equippedItem.thumbnail;
             itemEquipSlot.gameObject.SetActive(true);
-
-            return;
         }
-
-        itemEquipSlot.gameObject.SetActive(false);
+        else
+        {
+            itemEquipSlot.gameObject.SetActive(false);
+        }
     }
 
     void RenderInventoryPanel(ItemData[] slots, InventorySlot[] uiSlots)
     {
         for (int i = 0; i < uiSlots.Length; i++)
         {
-            uiSlots[i].Display(slots[i]);
+            if (i < slots.Length)
+            {
+                uiSlots[i].Display(slots[i]);
+            }
+            else
+            {
+                uiSlots[i].Display(null); // or handle the case where there is no item
+            }
         }
     }
 
