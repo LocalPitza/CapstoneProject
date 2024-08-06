@@ -62,8 +62,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\MainMenu\Settings.cs" />
     <Compile Include="Assets\Scripts\Planting\Soil.cs" />
-    <Compile Include="Assets\Scripts\DoorMechanic.cs" />
     <Compile Include="Assets\Scripts\RegrowablePlant.cs" />
+    <Compile Include="Assets\Scripts\DoorMechanic.cs" />
     <Compile Include="Assets\Scripts\CamSwitcher.cs" />
     <Compile Include="Assets\Scripts\Planting\Harvestable.cs" />
     <Compile Include="Assets\Scripts\Bars\BarsUnit.cs" />
@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\HomeDoor.cs" />
     <Compile Include="Assets\Scripts\Planting\Item Data\EquipmentData.cs" />
     <Compile Include="Assets\Scripts\Sleep\DayCounter.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerInteraction.cs" />
     <Compile Include="Assets\Scripts\Bars\HungerBar.cs" />
     <Compile Include="Assets\Scripts\Planting\UI\HandInventorySlot.cs" />
     <Compile Include="Assets\Scripts\Planting\Item Data\ItemData.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets\Scripts\Planting\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu\UnityGUIUtilityWindow.cs" />
     <Compile Include="Assets\Scripts\PopupTrigger.cs" />
+    <Compile Include="Assets\Scripts\Planting\SoilIndicator.cs" />
     <Compile Include="Assets\Scripts\Planting\CropBehaviour.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
