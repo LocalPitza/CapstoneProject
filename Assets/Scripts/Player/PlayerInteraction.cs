@@ -6,7 +6,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     PlayerMove playerMove;
 
-    SoilIndicator selectedSoil = null;
+    Soil selectedSoil = null;
 
     void Start()
     {
@@ -28,7 +28,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if(other.CompareTag("Pot"))
         {
-            SoilIndicator soilIndicator = other.GetComponent<SoilIndicator>();
+            Soil soilIndicator = other.GetComponent<Soil>();
             SelectPot(soilIndicator);
             return;
         }
@@ -40,7 +40,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    void SelectPot(SoilIndicator soilIndicator)
+    void SelectPot(Soil soilIndicator)
     {
         if(selectedSoil != null)
         {
@@ -49,5 +49,15 @@ public class PlayerInteraction : MonoBehaviour
 
         selectedSoil = soilIndicator;
         soilIndicator.Select(true);
+    }
+
+    public void Interact()
+    {
+        if(selectedSoil != null)
+        {
+            selectedSoil.Interact();
+            return;
+        }
+        Debug.Log("No Soil");
     }
 }

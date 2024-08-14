@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 590736011074080116}
   - component: {fileID: 5167975630025437825}
   - component: {fileID: 5629410654932597296}
-  - component: {fileID: 5547818279682753320}
   m_Layer: 6
   m_Name: Pot
   m_TagString: Pot
@@ -212,18 +211,6 @@ MonoBehaviour:
   daysUntilDry: 4
   cropPrefab: {fileID: 5815484052069803772, guid: 5d0e4fdfb7c3d1642baadc0f9dbbd646,
     type: 3}
---- !u!114 &5547818279682753320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4893317954609220948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19bb080e69519964ca7d96e02952b981, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   indicator: {fileID: 2183611805930068317}
 --- !u!1001 &2710812796506349736
 PrefabInstance:

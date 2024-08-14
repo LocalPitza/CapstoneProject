@@ -41,6 +41,6 @@ public class ListOfSoil : MonoBehaviour
 
     public void InteractWithSelected()
     {
-        soil.Interact();
+        //soil.Interact();
     }
 }

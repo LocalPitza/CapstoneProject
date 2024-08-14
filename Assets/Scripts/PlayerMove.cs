@@ -9,9 +9,12 @@ public class PlayerMove : MonoBehaviour
     public float speed = 5f;
     public float turnSpeed = 180f;
 
+    PlayerInteraction playerInteraction;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        playerInteraction = GetComponentInChildren<PlayerInteraction>();
     }
 
     private void Update()
@@ -22,5 +25,15 @@ public class PlayerMove : MonoBehaviour
         movDir = transform.forward * Input.GetAxis("Vertical") * speed;
 
         controller.Move(movDir * Time.deltaTime - Vector3.up * 0.1f);
+
+        Interact();
+    }
+
+    public void Interact()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            playerInteraction.Interact();
+        }
     }
 }

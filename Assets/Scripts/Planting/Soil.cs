@@ -25,6 +25,8 @@ public class Soil : MonoBehaviour
     public GameObject cropPrefab;
     CropBehaviour cropPlanted = null;
 
+    public GameObject indicator;
+
 
     private void Start()
     {
@@ -76,6 +78,7 @@ public class Soil : MonoBehaviour
 
     public void Interact()
     {
+        Debug.Log("Interacted");
         //Equiping Tools
         ItemData toolSlot = InventoryManager.Instance.equippedTool;
         EquipmentData equipmentTool = toolSlot as EquipmentData;
@@ -146,5 +149,10 @@ public class Soil : MonoBehaviour
                 cropPlanted.Grow();
             }
         }
+    }
+
+    public void Select(bool toggle)
+    {
+        indicator.SetActive(toggle);
     }
 }
