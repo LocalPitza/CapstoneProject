@@ -60,4 +60,25 @@ public class PlayerInteraction : MonoBehaviour
         }
         Debug.Log("No Soil");
     }
+
+    public void HarvestableInteract()
+    {
+        Debug.Log("Selected");
+
+        GameObject[] harvestableObjects = GameObject.FindGameObjectsWithTag("Harvestable");
+
+        // Loop through all found objects
+        foreach (GameObject harvestableObject in harvestableObjects)
+        {
+            Debug.Log("Harvesting");
+            // Check if the object has a Harvestable component
+            Harvestable harvest = harvestableObject.GetComponent<Harvestable>();
+            if (harvest != null)
+            {
+                Debug.Log("Harv");
+                harvest.Harvest();
+                break; // Stop after the first harvestable object is harvested
+            }
+        }
+    }
 }

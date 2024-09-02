@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 8228374194846996353}
   - component: {fileID: 5467460580645472449}
   - component: {fileID: 3134807592614687253}
+  - component: {fileID: 5079387642261714125}
   - component: {fileID: 3028610320145131767}
-  m_Layer: 0
-  m_Name: Harvestable
-  m_TagString: Harvestable
+  m_Layer: 8
+  m_Name: Tomato Harvestable
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,6 +88,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5079387642261714125
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213073925503038385}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300010, guid: b69b26c8b73b8bd49bf243bbe541a2e0, type: 3}
 --- !u!114 &3028610320145131767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +178,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1000010004241426, guid: ad3b2f45225bb0c4f8f80eacd5111af1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5248614051988146430}
   m_SourcePrefab: {fileID: 100100000, guid: ad3b2f45225bb0c4f8f80eacd5111af1, type: 3}
 --- !u!4 &5701845247828495804 stripped
 Transform:
@@ -163,6 +190,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5705836385106516554}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5705144245641725528 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000010004241426, guid: ad3b2f45225bb0c4f8f80eacd5111af1,
+    type: 3}
+  m_PrefabInstance: {fileID: 5705836385106516554}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5248614051988146430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5705144245641725528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b0eb7451949204fa477136fef100a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 3ef2fe6f706c4d242b5f23f562338ff6, type: 2}
 --- !u!1001 &7183713529628208338
 PrefabInstance:
   m_ObjectHideFlags: 0
