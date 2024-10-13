@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\Planting\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu\UnityGUIUtilityWindow.cs" />
     <Compile Include="Assets\Scripts\PopupTrigger.cs" />
+    <Compile Include="Assets\Scripts\_New Scripts\Planting\PottingSoil.cs" />
     <Compile Include="Assets\Scripts\_New Scripts\Interact\BedInteract.cs" />
     <Compile Include="Assets\Scripts\Planting\CropBehaviour.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
