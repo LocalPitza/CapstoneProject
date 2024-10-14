@@ -62,7 +62,7 @@ public class CropBehaviour : MonoBehaviour
 
         // Harvestable
         ItemData cropToYield = seedToGrow.cropToYield;
-        harvestable = Instantiate(cropToYield.fruitModel, transform);
+        harvestable = Instantiate(cropToYield.gameModel, transform);
         harvestable.SetActive(false);
 
         maxGrowth = DayCounter.Instance.GetCurrentDay() + seedToGrow.daysToGrow;
