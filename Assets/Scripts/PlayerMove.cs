@@ -10,21 +10,31 @@ public class PlayerMove : MonoBehaviour
     public float turnSpeed = 180f;
 
     PlayerInteraction playerInteraction;
+    private ShowUISeeds showUISeeds;
+    private StorageInteract storageInteract;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         playerInteraction = GetComponentInChildren<PlayerInteraction>();
+
+        storageInteract = FindObjectOfType<StorageInteract>();
     }
 
     private void Update()
     {
-        Vector3 movDir;
+        if ((showUISeeds == null || !showUISeeds.IsUIActive()) &&
+            (storageInteract == null || !storageInteract.IsUIActive()))
+        {
+            Vector3 movDir;
 
-        transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
-        movDir = transform.forward * Input.GetAxis("Vertical") * speed;
+            transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
+            movDir = transform.forward * Input.GetAxis("Vertical") * speed;
 
-        controller.Move(movDir * Time.deltaTime - Vector3.up * 0.1f);
+            controller.Move(movDir * Time.deltaTime - Vector3.up * 0.1f);
+        }
+
+        
 
         Interact();
     }
@@ -34,6 +44,11 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             playerInteraction.Interact();
+
+            if (playerInteraction.selectedSoil != null)
+            {
+                showUISeeds = playerInteraction.selectedSoil.GetComponent<ShowUISeeds>();
+            }
         }
     }
 }

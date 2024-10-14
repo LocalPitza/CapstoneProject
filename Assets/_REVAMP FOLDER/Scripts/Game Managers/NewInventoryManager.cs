@@ -18,9 +18,15 @@ public class NewInventoryManager : MonoBehaviour
         }
     }
 
-    [Header("Tools")]
-    // Tool Slots
-    public ItemData[] tools = new ItemData[8];
-    // Tool on Hand
+    [Header("Player Tools")]
+    public ItemData[] playerTools = new ItemData[5];
     public ItemData equippedTool = null;
+
+    [Header("Seeds UI")]
+    public ItemData[] seedsSlots = new ItemData[5];
+    public ItemData selectedSeed = null;
+
+    [Header("Storage UI")]
+    public ItemData[] storageSlots = new ItemData[15];
+    public ItemData selectedStorage = null;
 }

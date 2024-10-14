@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4619950131351235654}
   - component: {fileID: 1069669032768018346}
   - component: {fileID: 6551027676277345685}
+  - component: {fileID: 6544734673317620806}
   m_Layer: 0
   m_Name: Pot
   m_TagString: Pot
@@ -124,6 +125,19 @@ MonoBehaviour:
   diggedMat: {fileID: 2100000, guid: 3ba2cb04604fbe144afee6ff93e7aa2c, type: 2}
   wateredMat: {fileID: 2100000, guid: 6a1e5bd32ac59b24096e57dfdba40485, type: 2}
   select: {fileID: 7306041671166603693}
+--- !u!114 &6544734673317620806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3522741451323619410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c6596b5c37bd454cb823424a015a598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantingSeedsUI: {fileID: 0}
 --- !u!1 &7306041671166603693
 GameObject:
   m_ObjectHideFlags: 0
