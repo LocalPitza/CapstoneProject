@@ -18,6 +18,7 @@ public class StorageInteract : MonoBehaviour
         if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKeyDown(KeyCode.F))
         {
             storageUI.SetActive(!storageUI.activeSelf);
+            NewUIManager.Instance.RenderInventory();
         }
     }
 

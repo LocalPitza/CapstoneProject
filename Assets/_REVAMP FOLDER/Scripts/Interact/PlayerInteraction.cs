@@ -65,9 +65,10 @@ public class PlayerInteraction : MonoBehaviour
         {
             selectedSoil.Interact();
 
-            if (showUISeeds != null && selectedSoil.soilStatus == PottingSoil.SoilStatus.Digged)
+            if (showUISeeds != null)
             {
                 showUISeeds.ToggleUI();
+                NewUIManager.Instance.RenderInventory();
             }
 
             return;

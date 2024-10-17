@@ -11,7 +11,7 @@ public class ShowUISeeds : MonoBehaviour
     void Start()
     {
         plantingSeedsUI.SetActive(false);
-        pottingSoil = GetComponentInParent<PottingSoil>();
+        pottingSoil = GetComponent<PottingSoil>();
     }
 
     public void ToggleUI()

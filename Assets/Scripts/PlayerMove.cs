@@ -34,8 +34,6 @@ public class PlayerMove : MonoBehaviour
             controller.Move(movDir * Time.deltaTime - Vector3.up * 0.1f);
         }
 
-        
-
         Interact();
     }
 
