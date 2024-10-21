@@ -8,6 +8,14 @@ public class NewUIManager : MonoBehaviour
 {
     public static NewUIManager Instance { get; private set; }
 
+    [Header("Player Equipped Slot")]
+    public Image toolEquippedSlot;
+
+    [Header("Equip Slots")]
+    public NewHandInventorySlot playerToolEquippedSlot;
+    public NewHandInventorySlot seedEquippedSlot;
+    public NewHandInventorySlot storageEquippedSlot;
+
     [Header("Inventory System")]
     public NewInventorySlot[] playerToolsSlot;
     public NewInventorySlot[] seedSlot;
@@ -35,31 +43,64 @@ public class NewUIManager : MonoBehaviour
 
     private void Start()
     {
-        RenderPlayerInventory();
+        RenderInventory();
+        AssignSlotIndexes();
     }
 
-    void RenderPlayerInventory()
+    public void AssignSlotIndexes()
     {
-        //Get the Inventory PlayerTools from NewInventoryManager
-        ItemData[] inventoryPlayerTools = NewInventoryManager.Instance.playerTools;
+        for(int i = 0; i < playerToolsSlot.Length; i++)
+        {
+            playerToolsSlot[i].AssignIndex(i);
+        }
 
-        //Render the Player Tools section
-        RenderInventoryPanel(inventoryPlayerTools, playerToolsSlot);
+        for(int j = 0; j < seedSlot.Length; j++)
+        {
+            seedSlot[j].AssignIndex(j);
+        }
+
+        for(int k = 0; k < storageSlots.Length; k++)
+        {
+            storageSlots[k].AssignIndex(k);
+        }
     }
 
     public void RenderInventory()
     {
+        //Get the Inventory PlayerTools from NewInventoryManager
+        ItemData[] inventoryPlayerTools = NewInventoryManager.Instance.playerTools;
+
         //Get the Inventory SeedSlot from NewInventoryManager
         ItemData[] inventorySeedSlot = NewInventoryManager.Instance.seedsSlots;
 
         //Get the Inventory StorageSlot from NewInventoryManager
         ItemData[] inventoryStorageSlot = NewInventoryManager.Instance.storageSlots;
 
+        //Render the Player Tools section
+        RenderInventoryPanel(inventoryPlayerTools, playerToolsSlot);
+
         //Render the Seeds section
         RenderInventoryPanel(inventorySeedSlot, seedSlot);
 
         //Render the Storage section
         RenderInventoryPanel(inventoryStorageSlot, storageSlots);
+
+        playerToolEquippedSlot.Display(NewInventoryManager.Instance.selectedTool);
+        seedEquippedSlot.Display(NewInventoryManager.Instance.selectedSeed);
+        storageEquippedSlot.Display(NewInventoryManager.Instance.selectedStorage);
+
+        //Get ToolEquip from NewInventoryManager
+        ItemData selectedTool = NewInventoryManager.Instance.selectedTool;
+
+        if (selectedTool != null)
+        {
+            toolEquippedSlot.sprite = selectedTool.thumbnail;
+            toolEquippedSlot.gameObject.SetActive(true);
+
+            return;
+        }
+
+        toolEquippedSlot.gameObject.SetActive(false);
     }
 
     void RenderInventoryPanel(ItemData[] slots, NewInventorySlot[] uiSlots)
@@ -73,21 +114,34 @@ public class NewUIManager : MonoBehaviour
 
     public void DisplayItemInfo(ItemData data)
     {
-        if(data == null)
+        seedNameText.text = "";
+        seedDescriptionText.text = "";
+        storageNameText.text = "";
+        storageDescriptionText.text = "";
+
+        if (data == null)
         {
-            seedNameText.text = "";
-            seedDescriptionText.text = "";
-
-            storageNameText.text = "";
-            storageDescriptionText.text = "";
-
             return;
         }
 
-        seedNameText.text = data.name;
-        seedDescriptionText.text = data.description;
+        switch (data.itemType)
+        {
+            case ItemType.Seed:
+                // Show in Seed UI only
+                seedNameText.text = data.name;
+                seedDescriptionText.text = data.description;
+                break;
 
-        storageNameText.text = data.name;
-        storageDescriptionText.text = data.description;
+            case ItemType.StorageItem:
+                // Show in Storage UI only
+                storageNameText.text = data.name;
+                storageDescriptionText.text = data.description;
+                break;
+
+            // Optionally, handle other types like tools or other items
+            case ItemType.Tool:
+                // Add tool UI handling if needed
+                break;
+        }
     }
 }

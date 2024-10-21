@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\HomeDoor.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\SeedData.cs" />
     <Compile Include="Assets\Scripts\Sleep\DayCounter.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\NewHandInventorySlot.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\EnergyBar.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\BarsUnit.cs" />
     <Compile Include="Assets\Scripts\Bars\HungerBar.cs" />

@@ -7,6 +7,7 @@ public class ShowUISeeds : MonoBehaviour
     [SerializeField] GameObject plantingSeedsUI;
 
     private PottingSoil pottingSoil;
+    private bool hasDug = false;
 
     void Start()
     {
@@ -18,7 +19,14 @@ public class ShowUISeeds : MonoBehaviour
     {
         if (pottingSoil != null && pottingSoil.soilStatus == PottingSoil.SoilStatus.Digged)
         {
-            plantingSeedsUI.SetActive(!plantingSeedsUI.activeSelf);
+            if (!hasDug)
+            {
+                hasDug = true;
+            }
+            else
+            {
+                plantingSeedsUI.SetActive(!plantingSeedsUI.activeSelf);
+            }
         }
     }
 

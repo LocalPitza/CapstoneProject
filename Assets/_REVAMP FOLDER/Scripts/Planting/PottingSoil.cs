@@ -51,7 +51,29 @@ public class PottingSoil : MonoBehaviour
 
     public void Interact()
     {
-        Debug.Log("Interacting");
-        SwitchSoilStatus(SoilStatus.Digged);
+        ItemData playerToolSlot = NewInventoryManager.Instance.selectedTool;
+        EquipmentData equipmentTool = playerToolSlot as EquipmentData;
+
+        if (equipmentTool != null)
+        {
+            EquipmentData.ToolType toolType = equipmentTool.toolType;
+
+            switch (toolType)
+            {
+                case EquipmentData.ToolType.HandTrowel:
+                    if (soilStatus != SoilStatus.Digged)
+                    {
+                        SwitchSoilStatus(SoilStatus.Digged);
+                    }
+                    break;
+
+                case EquipmentData.ToolType.WateringCan:
+                    if (soilStatus != SoilStatus.Watered)
+                    {
+                        SwitchSoilStatus(SoilStatus.Watered);
+                    }
+                    break;
+            }
+        }
     }
 }

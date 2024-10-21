@@ -103,7 +103,7 @@ public class Soil : MonoBehaviour
                     Debug.Log("Pruning Shears Used");
 
                     //Harvest
-                    PlayerInteraction harvestable = FindObjectOfType<PlayerInteraction>();
+                    /*PlayerInteraction harvestable = FindObjectOfType<PlayerInteraction>();
 
                     if (harvestable != null)
                     {
@@ -113,7 +113,7 @@ public class Soil : MonoBehaviour
                     else
                     {
                         Debug.LogWarning("No Select Pot Script");
-                    }
+                    }*/
                     break;
             }
         }
