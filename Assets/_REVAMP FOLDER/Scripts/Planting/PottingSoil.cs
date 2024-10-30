@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PottingSoil : MonoBehaviour
+public class PottingSoil : MonoBehaviour, ITimeTracker
 {
     public enum SoilStatus
     {
@@ -10,11 +10,14 @@ public class PottingSoil : MonoBehaviour
     }
 
     public SoilStatus soilStatus;
+    private SoilStatus previousStatus;
 
     public Material soilMat, diggedMat, wateredMat;
     new Renderer renderer;
 
     public GameObject select;
+
+    GameTimeStamp timeWatered;
 
     void Start()
     {
@@ -22,10 +25,18 @@ public class PottingSoil : MonoBehaviour
 
         //Default Material
         SwitchSoilStatus(SoilStatus.Soil);
+
+        TimeManager.Instance.RegisterTracker(this);
     }
 
     public void SwitchSoilStatus(SoilStatus statusToSwitch)
     {
+        if (statusToSwitch == SoilStatus.Watered)
+        {
+            previousStatus = soilStatus;
+            timeWatered = TimeManager.Instance.GetGameTimeStamp();
+        }
+
         soilStatus = statusToSwitch;
 
         Material materialToSwitch = soilMat;
@@ -39,6 +50,7 @@ public class PottingSoil : MonoBehaviour
                 break;
             case SoilStatus.Watered:
                 materialToSwitch = wateredMat;
+                timeWatered = TimeManager.Instance.GetGameTimeStamp();
                 break;
         }
         renderer.material = materialToSwitch;
@@ -73,6 +85,20 @@ public class PottingSoil : MonoBehaviour
                         SwitchSoilStatus(SoilStatus.Watered);
                     }
                     break;
+            }
+        }
+    }
+
+    public void ClockUpdate(GameTimeStamp timestamp)
+    {
+        if(soilStatus == SoilStatus.Watered)
+        {
+            int hoursElapsed = GameTimeStamp.CompareTimestamp(timeWatered, timestamp);
+            Debug.Log(hoursElapsed + "since watered");
+
+            if(hoursElapsed > 24)
+            {
+                SwitchSoilStatus(previousStatus);
             }
         }
     }

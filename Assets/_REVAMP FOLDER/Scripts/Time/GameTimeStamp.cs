@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class GameTimeStamp
 {
-    public int year;
     public enum Season
     {
         Rainy,
@@ -25,6 +24,7 @@ public class GameTimeStamp
         FRI
     }
 
+    public int year;
     public int day;
     public int hour;
     public int minute;
@@ -36,6 +36,15 @@ public class GameTimeStamp
         this.day = day;
         this.hour = hour;
         this.minute = minute;
+    }
+
+    public GameTimeStamp(GameTimeStamp timeStamp)
+    {
+        this.year = timeStamp.year;
+        this.season = timeStamp.season;
+        this.day = timeStamp.day;
+        this.hour = timeStamp.hour;
+        this.minute = timeStamp.minute;
     }
 
     public void UpdateClock()
@@ -108,5 +117,23 @@ public class GameTimeStamp
     public static int YearsToDays(int years)
     {
         return years * 4 * 30;
+    }
+
+    //Calculate the different between 2 timestamps in hours
+    public static int CompareTimestamp(GameTimeStamp timeStamp1, GameTimeStamp timeStamp2)
+    {
+        //Convert timestamps to hours
+        int timestamp1Hours = DaysToHours(YearsToDays(timeStamp1.year))
+            + DaysToHours(SeasonToDays(timeStamp1.season))
+            + DaysToHours(timeStamp1.day)
+            + timeStamp1.hour;
+
+        int timestamp2Hours = DaysToHours(YearsToDays(timeStamp2.year))
+            + DaysToHours(SeasonToDays(timeStamp2.season))
+            + DaysToHours(timeStamp2.day)
+            + timeStamp2.hour;
+
+        int difference = timestamp2Hours - timestamp1Hours;
+        return Mathf.Abs(difference);
     }
 }
