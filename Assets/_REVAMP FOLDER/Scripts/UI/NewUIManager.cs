@@ -4,9 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class NewUIManager : MonoBehaviour
+public class NewUIManager : MonoBehaviour, ITimeTracker
 {
     public static NewUIManager Instance { get; private set; }
+
+    [Header("In-Game Time")]
+    public TextMeshProUGUI dateText;
+    public TextMeshProUGUI timeText;
 
     [Header("Player Equipped Slot")]
     public Image toolEquippedSlot;
@@ -45,6 +49,8 @@ public class NewUIManager : MonoBehaviour
     {
         RenderInventory();
         AssignSlotIndexes();
+
+        TimeManager.Instance.RegisterTracker(this);
     }
 
     public void AssignSlotIndexes()
@@ -143,5 +149,27 @@ public class NewUIManager : MonoBehaviour
                 // Add tool UI handling if needed
                 break;
         }
+    }
+
+    public void ClockUpdate(GameTimeStamp timestamp)
+    {
+        int hours = timestamp.hour;
+        int minutes = timestamp.minute;
+
+        string prefix = " AM";
+
+        if(hours > 12)
+        {
+            prefix = " PM";
+            hours -= 12;
+        }
+
+        timeText.text = hours.ToString("00") + ":" + minutes.ToString("00") + prefix;
+
+        int day = timestamp.day;
+        string season = timestamp.season.ToString();
+        string dayOfTheWeek = timestamp.GetDayOfTheWeek().ToString();
+
+        dateText.text = season +" "+ day + " (" + dayOfTheWeek + ")";
     }
 }

@@ -71,6 +71,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\SeedData.cs" />
     <Compile Include="Assets\Scripts\Sleep\DayCounter.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\NewHandInventorySlot.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Time\ITimeTracker.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\EnergyBar.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\BarsUnit.cs" />
     <Compile Include="Assets\Scripts\Bars\HungerBar.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Assets\Scripts\DoorInteract.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\NewUIManager.cs" />
     <Compile Include="Assets\Scripts\Planting\ListOfSoil.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Time\TimeManager.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Planting\PottingSoil.cs" />
     <Compile Include="Assets\Scripts\Planting\InventoryManager.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\MessageManager.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Assets\Scripts\Planting\CropBehaviour.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Time\GameTimeStamp.cs" />
     <Compile Include="Assets\Scripts\Sound.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\NewInventoryManager.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\ShowUISeeds.cs" />
