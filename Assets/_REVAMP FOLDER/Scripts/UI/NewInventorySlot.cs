@@ -12,7 +12,7 @@ public class NewInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public enum InventoryType
     {
-        PlayerTool, Seed, Storage
+        PlayerTool, PlayerPocket, Seed, Storage
     }
 
     public InventoryType inventoryType;

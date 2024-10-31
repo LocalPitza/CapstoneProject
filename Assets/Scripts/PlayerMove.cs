@@ -41,7 +41,12 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
+            if (playerInteraction.harvestableHit)
+            {
+                playerInteraction.HarvestInteract();
+            }
             playerInteraction.Interact();
+
 
             if (playerInteraction.selectedSoil != null)
             {

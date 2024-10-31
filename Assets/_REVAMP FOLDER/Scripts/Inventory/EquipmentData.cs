@@ -7,7 +7,10 @@ public class EquipmentData : ItemData //Inherits the Fields of the Class
 {
     public enum ToolType
     {
-        HandTrowel, PruningShears, WateringCan
+        HandTrowel, 
+        PruningShears,
+        WateringCan,
+        HandGloves
     }
 
     public ToolType toolType;

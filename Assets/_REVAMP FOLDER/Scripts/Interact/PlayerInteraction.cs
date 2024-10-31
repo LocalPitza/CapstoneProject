@@ -8,8 +8,10 @@ public class PlayerInteraction : MonoBehaviour
 
     [HideInInspector]
     public PottingSoil selectedSoil = null;
+    InteractableObject selectedInteractableObject = null;
 
     ShowUISeeds showUISeeds;
+    public bool harvestableHit = false;
 
     void Start()
     {
@@ -37,6 +39,19 @@ public class PlayerInteraction : MonoBehaviour
             showUISeeds = other.GetComponent<ShowUISeeds>();
 
             return;
+        }
+
+        if (other.CompareTag("Harvestable"))
+        {
+            Debug.Log("Turnip Found");
+            selectedInteractableObject = other.GetComponent<InteractableObject>();
+            harvestableHit = true;
+            return;
+        }
+
+        if(selectedInteractableObject != null)
+        {
+            selectedInteractableObject = null;
         }
 
         if(selectedSoil != null)
@@ -75,24 +90,26 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    public void HarvestableInteract()
+    public void HarvestInteract()
     {
-        Debug.Log("Selected");
+        ItemData playerToolSlot = NewInventoryManager.Instance.selectedTool;
+        EquipmentData equipmentTool = playerToolSlot as EquipmentData;
 
-        GameObject[] harvestableObjects = GameObject.FindGameObjectsWithTag("Harvestable");
-
-        // Loop through all found objects
-        foreach (GameObject harvestableObject in harvestableObjects)
+        if (equipmentTool == null || equipmentTool.toolType != EquipmentData.ToolType.HandGloves)
         {
-            Debug.Log("Harvesting");
-            // Check if the object has a Harvestable component
-            Harvestable harvest = harvestableObject.GetComponent<Harvestable>();
-            if (harvest != null)
-            {
-                Debug.Log("Harv");
-                harvest.Harvest();
-                break; // Stop after the first harvestable object is harvested
-            }
+            Debug.Log("You need to equip Hand Gloves to harvest.");
+            return;
+        }
+
+        if (NewInventoryManager.Instance.selectedPocket != null)
+        {
+            NewInventoryManager.Instance.EquipToInventory(NewInventorySlot.InventoryType.PlayerPocket);
+            return;
+        }
+
+        if(selectedInteractableObject != null)
+        {
+            selectedInteractableObject.PickUp();
         }
     }
 }

@@ -107,6 +107,15 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         }
     }
 
+    public NewCropBehaviour.CropState GetCropStatus()
+    {
+        if (cropPlanted != null)
+        {
+            return cropPlanted.cropState;
+        }
+        return NewCropBehaviour.CropState.Harvestable;
+    }
+
     public void PlantSeed()
     {
         ItemData selectSeed = NewInventoryManager.Instance.selectedSeed;
@@ -133,6 +142,12 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         {
             int hoursElapsed = GameTimeStamp.CompareTimestamp(timeWatered, timestamp);
             Debug.Log(hoursElapsed + "since watered");
+
+            //Plant grow if being watered
+            if(cropPlanted != null)
+            {
+                cropPlanted.Grow();
+            }
 
             if(hoursElapsed > 24)
             {

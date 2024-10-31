@@ -22,6 +22,11 @@ public class NewInventoryManager : MonoBehaviour
     public ItemData[] playerTools = new ItemData[5];
     public ItemData selectedTool = null;
 
+    [Header("Player Pocket")]
+    public ItemData[] playerPocket = new ItemData[5];
+    public ItemData selectedPocket = null;
+    public Transform handPoint;
+
     [Header("Seeds UI")]
     public ItemData[] seedsSlots = new ItemData[5];
     public ItemData selectedSeed = null;
@@ -42,6 +47,16 @@ public class NewInventoryManager : MonoBehaviour
             selectedTool = playerToolToEquip;
 
         }
+        else if(inventoryType == NewInventorySlot.InventoryType.PlayerPocket)
+        {
+            ItemData playerPocketToEquip = playerPocket[slotIndex];
+
+            playerPocket[slotIndex] = selectedPocket;
+
+            selectedPocket = playerPocketToEquip;
+
+            RenderHand();
+        }
         else if(inventoryType == NewInventorySlot.InventoryType.Seed)
         {
             ItemData seedToSelect = seedsSlots[slotIndex];
@@ -50,7 +65,7 @@ public class NewInventoryManager : MonoBehaviour
 
             selectedSeed = seedToSelect;
         }
-        else
+        else //Storage Box
         {
             ItemData storageToSelect = storageSlots[slotIndex];
 
@@ -76,6 +91,21 @@ public class NewInventoryManager : MonoBehaviour
                     break;
                 }
             }
+        }
+        else if (inventoryType == NewInventorySlot.InventoryType.PlayerPocket)
+        {
+            for (int i = 0; i < playerPocket.Length; i++)
+            {
+                if (playerPocket[i] == null)
+                {
+                    playerPocket[i] = selectedPocket;
+
+                    selectedPocket = null;
+                    break;
+                }
+            }
+
+            RenderHand();
         }
         else if (inventoryType == NewInventorySlot.InventoryType.Seed)
         {
@@ -105,5 +135,17 @@ public class NewInventoryManager : MonoBehaviour
         }
 
         NewUIManager.Instance.RenderInventory();
+    }
+
+    public void RenderHand()
+    {
+        if(handPoint.childCount > 0)
+        {
+            Destroy(handPoint.GetChild(0).gameObject);
+        }
+        if(selectedPocket != null)
+        {
+            Instantiate(selectedPocket.harvestableModel, handPoint);
+        }
     }
 }

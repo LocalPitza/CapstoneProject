@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seed: {fileID: 1430022252696672583}
+  cropState: 0
 --- !u!1001 &1431010161058969259
 PrefabInstance:
   m_ObjectHideFlags: 0

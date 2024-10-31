@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca19749f5d200a149b74340ceca3a87b, type: 3}
   m_Name: Pruning Shears
   m_EditorClassIdentifier: 
-  description: Harvest
+  description: Harvest Fruits
   thumbnail: {fileID: 21300000, guid: d8b4f273eb9ee6a42b7e1cd943448ef8, type: 3}
   gameModel: {fileID: 0}
   itemType: 2
