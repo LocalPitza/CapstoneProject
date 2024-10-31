@@ -19,6 +19,11 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
     GameTimeStamp timeWatered;
 
+    [Header("Crop")]
+    public GameObject cropPrefab;
+    public Transform plantPosition;
+    NewCropBehaviour cropPlanted = null;
+
     void Start()
     {
         renderer = GetComponent<Renderer>();
@@ -47,6 +52,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                 break;
             case SoilStatus.Digged:
                 materialToSwitch = diggedMat;
+
                 break;
             case SoilStatus.Watered:
                 materialToSwitch = wateredMat;
@@ -59,12 +65,22 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
     public void Select(bool toggle)
     {
         select.SetActive(toggle);
+
+        if (toggle)
+        {
+            SoilManager.Instance.SetSelectedSoil(this);
+        }
     }
 
     public void Interact()
     {
         ItemData playerToolSlot = NewInventoryManager.Instance.selectedTool;
         EquipmentData equipmentTool = playerToolSlot as EquipmentData;
+
+        if (playerToolSlot == null) 
+        {
+            return;
+        }
 
         if (equipmentTool != null)
         {
@@ -86,6 +102,28 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                     }
                     break;
             }
+
+            return;
+        }
+    }
+
+    public void PlantSeed()
+    {
+        ItemData selectSeed = NewInventoryManager.Instance.selectedSeed;
+        SeedData seed = selectSeed as SeedData;
+
+        if (selectSeed == null)
+        {
+            return;
+        }
+
+        if (seed != null && soilStatus != SoilStatus.Soil && cropPlanted == null)
+        {
+            GameObject cropObject = Instantiate(cropPrefab, transform);
+            cropObject.transform.position = plantPosition.position;
+
+            cropPlanted = cropObject.GetComponent<NewCropBehaviour>();
+            cropPlanted.Plant(seed);
         }
     }
 

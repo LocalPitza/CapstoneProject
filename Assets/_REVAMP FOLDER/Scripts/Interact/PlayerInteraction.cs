@@ -65,7 +65,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             selectedSoil.Interact();
 
-            if (showUISeeds != null)
+            if (showUISeeds != null && selectedSoil.soilStatus == PottingSoil.SoilStatus.Digged)
             {
                 showUISeeds.ToggleUI();
                 NewUIManager.Instance.RenderInventory();
@@ -73,7 +73,6 @@ public class PlayerInteraction : MonoBehaviour
 
             return;
         }
-        Debug.Log("No Soil");
     }
 
     public void HarvestableInteract()

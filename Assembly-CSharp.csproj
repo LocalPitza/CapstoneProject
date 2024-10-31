@@ -76,6 +76,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\BarsUnit.cs" />
     <Compile Include="Assets\Scripts\Bars\HungerBar.cs" />
     <Compile Include="Assets\Scripts\Planting\UI\HandInventorySlot.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Planting\NewCropBehaviour.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\ItemData.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\EquipmentData.cs" />
     <Compile Include="Assets\Scripts\Planting\SelectPot.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\DoorInteract.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\NewUIManager.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Planting\PlantSeed.cs" />
     <Compile Include="Assets\Scripts\Planting\ListOfSoil.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Time\TimeManager.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Planting\PottingSoil.cs" />
@@ -93,6 +95,7 @@
     <Compile Include="Assets\Scripts\Planting\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu\UnityGUIUtilityWindow.cs" />
     <Compile Include="Assets\Scripts\PopupTrigger.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\SoilManager.cs" />
     <Compile Include="Assets\Scripts\Planting\CropBehaviour.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
@@ -109,7 +112,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\Prefabs\Cartoon_Farm_Crops\README.txt" />
+    <None Include="Assets\_REVAMP FOLDER\Prefab\Cartoon_Farm_Crops\README.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
