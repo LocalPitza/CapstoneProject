@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 33000011208878360}
   - component: {fileID: 23000013679225328}
   - component: {fileID: 2967553313531333630}
-  - component: {fileID: 3407429604261448647}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TurnipFruit
   m_TagString: Harvestable
   m_Icon: {fileID: 0}
@@ -107,16 +106,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300018, guid: b69b26c8b73b8bd49bf243bbe541a2e0, type: 3}
---- !u!114 &3407429604261448647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000013984154124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7138800d4e6dd704ea6b175670eaba70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 0cad9ee927204de45aac3698ea0fc5ef, type: 2}

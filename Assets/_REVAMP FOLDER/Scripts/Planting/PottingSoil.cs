@@ -141,7 +141,6 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         if(soilStatus == SoilStatus.Watered)
         {
             int hoursElapsed = GameTimeStamp.CompareTimestamp(timeWatered, timestamp);
-            Debug.Log(hoursElapsed + "since watered");
 
             //Plant grow if being watered
             if(cropPlanted != null)

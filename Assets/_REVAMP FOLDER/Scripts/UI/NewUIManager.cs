@@ -132,6 +132,7 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         }
     }
 
+
     public void DisplayItemInfo(ItemData data)
     {
         seedNameText.text = "";

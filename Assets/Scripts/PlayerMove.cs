@@ -43,10 +43,13 @@ public class PlayerMove : MonoBehaviour
         {
             if (playerInteraction.harvestableHit)
             {
+                Debug.Log("Harvesting");
                 playerInteraction.HarvestInteract();
             }
-            playerInteraction.Interact();
-
+            else
+            {
+                playerInteraction.Interact();
+            }
 
             if (playerInteraction.selectedSoil != null)
             {

@@ -7,7 +7,7 @@ public class InteractableObject : MonoBehaviour
 {
     public ItemData item;
 
-    public void PickUp()
+    public virtual void PickUp()
     {
         //Move Item from Equipped to Inventory
         NewInventoryManager.Instance.selectedPocket = item;

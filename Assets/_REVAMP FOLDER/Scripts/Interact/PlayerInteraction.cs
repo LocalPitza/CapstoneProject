@@ -1,17 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
     PlayerMove playerMove;
 
-    [HideInInspector]
+    //[HideInInspector]
     public PottingSoil selectedSoil = null;
     InteractableObject selectedInteractableObject = null;
 
     ShowUISeeds showUISeeds;
+    //[HideInInspector]
     public bool harvestableHit = false;
+
+    [Header("Messages to Player")]
+    [Header("Harvesting Vegestable")]
+    [SerializeField] private string equipGlove;
+
+    [Header("Harvesting Fruits")]
+
+    public static TextMeshProUGUI message;
 
     void Start()
     {
@@ -21,7 +31,10 @@ public class PlayerInteraction : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, Vector3.down, out hit, 2)) 
+
+        Debug.DrawRay(transform.position, Vector3.down * 2, Color.red);
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 2)) 
         { 
             OnInteractableHit(hit);
         }
@@ -43,7 +56,6 @@ public class PlayerInteraction : MonoBehaviour
 
         if (other.CompareTag("Harvestable"))
         {
-            Debug.Log("Turnip Found");
             selectedInteractableObject = other.GetComponent<InteractableObject>();
             harvestableHit = true;
             return;
@@ -76,6 +88,12 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Interact()
     {
+        //The Player shouldn't be ablle to use his Tool when hands is full with an Item
+        /*if(NewInventoryManager.Instance.selectedTool != null)
+        {
+            return;
+        }*/
+
         if(selectedSoil != null)
         {
             selectedSoil.Interact();
@@ -95,10 +113,16 @@ public class PlayerInteraction : MonoBehaviour
         ItemData playerToolSlot = NewInventoryManager.Instance.selectedTool;
         EquipmentData equipmentTool = playerToolSlot as EquipmentData;
 
+        //If Plalyer is not using the right tool for Harvesting
         if (equipmentTool == null || equipmentTool.toolType != EquipmentData.ToolType.HandGloves)
         {
-            Debug.Log("You need to equip Hand Gloves to harvest.");
+            message.text = equipGlove;
+            StartCoroutine(ClearMessageAfterDelay(2f));
             return;
+        }
+        else
+        {
+            message.text = "";
         }
 
         if (NewInventoryManager.Instance.selectedPocket != null)
@@ -111,5 +135,11 @@ public class PlayerInteraction : MonoBehaviour
         {
             selectedInteractableObject.PickUp();
         }
+    }
+
+    private IEnumerator ClearMessageAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        message.text = "";
     }
 }

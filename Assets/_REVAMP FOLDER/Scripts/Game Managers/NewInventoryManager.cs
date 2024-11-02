@@ -145,7 +145,7 @@ public class NewInventoryManager : MonoBehaviour
         }
         if(selectedPocket != null)
         {
-            Instantiate(selectedPocket.harvestableModel, handPoint);
+            Instantiate(selectedPocket.gameModel, handPoint);
         }
     }
 }

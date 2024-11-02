@@ -94,6 +94,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\MessageManager.cs" />
     <Compile Include="Assets\Scripts\Planting\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu\UnityGUIUtilityWindow.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Planting\RegrowableHarvestBehaviour.cs" />
     <Compile Include="Assets\Scripts\PopupTrigger.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\SoilManager.cs" />
     <Compile Include="Assets\Scripts\Planting\CropBehaviour.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\NewInventoryManager.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\ShowUISeeds.cs" />
     <Compile Include="Assets\Scripts\Planting\UI\InventorySlot.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\OpenPocket.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\InteractMessage.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\PlayerInteraction.cs" />
     <Compile Include="Assets\Scripts\MainMenu\SoundSetting.cs" />

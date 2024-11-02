@@ -16,6 +16,5 @@ public class ItemData : ScriptableObject
     public string description;
     public Sprite thumbnail;
     public GameObject gameModel;
-    public GameObject harvestableModel;
     public ItemType itemType;
 }
