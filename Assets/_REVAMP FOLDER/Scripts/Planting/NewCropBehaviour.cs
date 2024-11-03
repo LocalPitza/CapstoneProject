@@ -8,15 +8,19 @@ public class NewCropBehaviour : MonoBehaviour
 
     [Header("Plant Stages")]
     public GameObject seed;
+    public GameObject wilted;
     private GameObject seedling;
     private GameObject harvestable;
 
     int growth;
     int maxGrowth;
 
+    int maxHealth = GameTimeStamp.HoursToMinutes(48);
+    int health;
+
     public enum CropState
     {
-        Seed, Seedling, Harvestable
+        Seed, Seedling, Harvestable, Wilted
     }
     public CropState cropState;
 
@@ -49,6 +53,11 @@ public class NewCropBehaviour : MonoBehaviour
     {
         growth++;
 
+        if(health < maxHealth)
+        {
+            health++;
+        }
+
         //The seed will sprout into a seedling when growth is at 50%
         if(growth >= maxGrowth / 2 && cropState == CropState.Seed)
         {
@@ -62,11 +71,22 @@ public class NewCropBehaviour : MonoBehaviour
         }
     }
 
+    public void Wither()
+    {
+        health--;
+
+        if(health <= 0 && cropState != CropState.Seed)
+        {
+            SwitchState(CropState.Wilted);
+        }
+    }
+
     void SwitchState(CropState stateToSwitch)
     {
         seed.SetActive(true);
         seedling.SetActive(false);
         harvestable.SetActive(false);
+        wilted.SetActive(false);
 
         switch (stateToSwitch)
         {
@@ -75,6 +95,9 @@ public class NewCropBehaviour : MonoBehaviour
                 break;
             case CropState.Seedling:
                 seedling.SetActive(true);
+
+                health = maxHealth;
+
                 break;
             case CropState.Harvestable:
                 harvestable.SetActive(true);
@@ -87,6 +110,9 @@ public class NewCropBehaviour : MonoBehaviour
                     Destroy(gameObject);
                 }
                 
+                break;
+            case CropState.Wilted:
+                wilted.SetActive(true);
                 break;
         }
         cropState = stateToSwitch;

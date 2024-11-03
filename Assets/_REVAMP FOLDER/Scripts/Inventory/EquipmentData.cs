@@ -10,7 +10,8 @@ public class EquipmentData : ItemData //Inherits the Fields of the Class
         HandTrowel, 
         PruningShears,
         WateringCan,
-        HandGloves
+        HandGloves,
+        Hoe
     }
 
     public ToolType toolType;

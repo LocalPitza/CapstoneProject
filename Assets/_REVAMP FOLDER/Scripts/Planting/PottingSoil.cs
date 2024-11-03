@@ -101,6 +101,16 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                         SwitchSoilStatus(SoilStatus.Watered);
                     }
                     break;
+
+                case EquipmentData.ToolType.Hoe:
+                    //Remove the Plant from the Soil
+                    if(cropPlanted != null)
+                    {
+                        Destroy(cropPlanted.gameObject);
+                        SwitchSoilStatus(SoilStatus.Soil);
+                    }
+
+                    break;
             }
 
             return;
@@ -151,6 +161,16 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
             if(hoursElapsed > 24)
             {
                 SwitchSoilStatus(previousStatus);
+            }
+        }
+
+        //Handle the wilting when the land is dry
+        if(soilStatus != SoilStatus.Watered && cropPlanted != null)
+        {
+            //If the Crop has already germinated, start the withering
+            if (cropPlanted.cropState != NewCropBehaviour.CropState.Seed)
+            {
+                cropPlanted.Wither();
             }
         }
     }
