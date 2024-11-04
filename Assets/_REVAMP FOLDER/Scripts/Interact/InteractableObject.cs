@@ -10,7 +10,8 @@ public class InteractableObject : MonoBehaviour
     public virtual void PickUp()
     {
         //Move Item from Equipped to Inventory
-        NewInventoryManager.Instance.selectedPocket = item;
+        NewInventoryManager.Instance.EquipEmptySlot(item);
+
         NewInventoryManager.Instance.RenderHand();
 
         Destroy(gameObject);

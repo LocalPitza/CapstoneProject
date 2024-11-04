@@ -74,7 +74,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
     public void Interact()
     {
-        ItemData playerToolSlot = NewInventoryManager.Instance.selectedTool;
+        ItemData playerToolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.PlayerTool);
         EquipmentData equipmentTool = playerToolSlot as EquipmentData;
 
         if (playerToolSlot == null) 
@@ -128,7 +128,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
     public void PlantSeed()
     {
-        ItemData selectSeed = NewInventoryManager.Instance.selectedSeed;
+        ItemData selectSeed = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Seed);
         SeedData seed = selectSeed as SeedData;
 
         if (selectSeed == null)

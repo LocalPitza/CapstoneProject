@@ -110,7 +110,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void HarvestInteract()
     {
-        ItemData playerToolSlot = NewInventoryManager.Instance.selectedTool;
+        ItemData playerToolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.PlayerTool);
         EquipmentData equipmentTool = playerToolSlot as EquipmentData;
 
         //If Plalyer is not using the right tool for Harvesting
@@ -125,7 +125,7 @@ public class PlayerInteraction : MonoBehaviour
             message.text = "";
         }
 
-        if (NewInventoryManager.Instance.selectedPocket != null)
+        if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.PlayerPocket))
         {
             NewInventoryManager.Instance.EquipToInventory(NewInventorySlot.InventoryType.PlayerPocket);
             return;
