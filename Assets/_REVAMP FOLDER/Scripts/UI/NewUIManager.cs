@@ -80,31 +80,37 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
     public void RenderInventory()
     {
-        //Get the respective slots to process
-        ItemSlotData[] inventoryPlayerToolSlots = NewInventoryManager.Instance.GetInventorySlots(NewInventorySlot.InventoryType.PlayerTool);
-        ItemSlotData[] inventoryPocketSlots = NewInventoryManager.Instance.GetInventorySlots(NewInventorySlot.InventoryType.PlayerPocket);
-        ItemSlotData[] inventorySeedSlots = NewInventoryManager.Instance.GetInventorySlots(NewInventorySlot.InventoryType.Seed);
-        ItemSlotData[] inventoryStorageSlots = NewInventoryManager.Instance.GetInventorySlots(NewInventorySlot.InventoryType.Storage);
+        //Get the Inventory PlayerTools from NewInventoryManager
+        ItemData[] inventoryPlayerTools = NewInventoryManager.Instance.playerTools;
+
+        //Get the Inventory PlayerPocket from NewInventoryManager
+        ItemData[] inventoryPocketTools = NewInventoryManager.Instance.playerPocket;
+
+        //Get the Inventory SeedSlot from NewInventoryManager
+        ItemData[] inventorySeedSlot = NewInventoryManager.Instance.seedsSlots;
+
+        //Get the Inventory StorageSlot from NewInventoryManager
+        ItemData[] inventoryStorageSlot = NewInventoryManager.Instance.storageSlots;
 
         //Render the Player Tools section
-        RenderInventoryPanel(inventoryPlayerToolSlots, playerToolsSlot);
+        RenderInventoryPanel(inventoryPlayerTools, playerToolsSlot);
 
         //Render the Player Pocket section
-        RenderInventoryPanel(inventoryPocketSlots, playerPocketSlot);
+        RenderInventoryPanel(inventoryPocketTools, playerPocketSlot);
 
         //Render the Seeds section
-        RenderInventoryPanel(inventorySeedSlots, seedSlot);
+        RenderInventoryPanel(inventorySeedSlot, seedSlot);
 
         //Render the Storage section
-        RenderInventoryPanel(inventoryStorageSlots, storageSlots);
+        RenderInventoryPanel(inventoryStorageSlot, storageSlots);
 
-        playerToolEquippedSlot.Display(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.PlayerTool));
-        playerPocketEquippedSlot.Display(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.PlayerPocket));
-        seedEquippedSlot.Display(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Seed));
-        storageEquippedSlot.Display(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Storage));
+        playerToolEquippedSlot.Display(NewInventoryManager.Instance.selectedTool);
+        playerPocketEquippedSlot.Display(NewInventoryManager.Instance.selectedPocket);
+        seedEquippedSlot.Display(NewInventoryManager.Instance.selectedSeed);
+        storageEquippedSlot.Display(NewInventoryManager.Instance.selectedStorage);
 
         //Get ToolEquip from NewInventoryManager
-        ItemData selectedTool = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.PlayerTool);
+        ItemData selectedTool = NewInventoryManager.Instance.selectedTool;
 
         if (selectedTool != null)
         {
@@ -117,7 +123,7 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         toolEquippedSlot.gameObject.SetActive(false);
     }
 
-    void RenderInventoryPanel(ItemSlotData[] slots, NewInventorySlot[] uiSlots)
+    void RenderInventoryPanel(ItemData[] slots, NewInventorySlot[] uiSlots)
     {
         for (int i = 0; i < uiSlots.Length; i++)
         {

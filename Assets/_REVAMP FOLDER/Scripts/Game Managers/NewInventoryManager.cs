@@ -19,99 +19,88 @@ public class NewInventoryManager : MonoBehaviour
     }
 
     [Header("Player Tools")]
-    [SerializeField] 
-    private ItemSlotData[] playerToolsSlots = new ItemSlotData[5];
-    [SerializeField] 
-    private ItemSlotData selectedToolSlot = null;
+    public ItemData[] playerTools = new ItemData[5];
+    public ItemData selectedTool = null;
 
     [Header("Player Pocket")]
-    [SerializeField] 
-    private ItemSlotData[] playerPocketSlots = new ItemSlotData[5];
-    [SerializeField] 
-    private ItemSlotData selectedPocketSlot = null;
+    public ItemData[] playerPocket = new ItemData[5];
+    public ItemData selectedPocket = null;
     public Transform handPoint;
 
     [Header("Seeds UI")]
-    [SerializeField] 
-    private ItemSlotData[] seedsStorageSlots = new ItemSlotData[5];
-    [SerializeField] 
-    private ItemSlotData selectedSeedSlot = null;
+    public ItemData[] seedsSlots = new ItemData[5];
+    public ItemData selectedSeed = null;
 
     [Header("Storage UI")]
-    [SerializeField] 
-    private ItemSlotData[] inventoryStorageSlots = new ItemSlotData[15];
-    [SerializeField] 
-    private ItemSlotData selectedInventoryStorageSlot = null;
+    public ItemData[] storageSlots = new ItemData[15];
+    public ItemData selectedStorage = null;
 
     //Equipping
     public void InventoryToEquip(int slotIndex, NewInventorySlot.InventoryType inventoryType)
     {
-        /*
         if(inventoryType == NewInventorySlot.InventoryType.PlayerTool)
         {
-            ItemData playerToolToEquip = playerToolsSlots[slotIndex];
+            ItemData playerToolToEquip = playerTools[slotIndex];
 
-            playerToolsSlots[slotIndex] = selectedToolSlot;
+            playerTools[slotIndex] = selectedTool;
 
-            selectedToolSlot = playerToolToEquip;
+            selectedTool = playerToolToEquip;
 
         }
         else if(inventoryType == NewInventorySlot.InventoryType.PlayerPocket)
         {
-            ItemData playerPocketToEquip = playerPocketSlots[slotIndex];
+            ItemData playerPocketToEquip = playerPocket[slotIndex];
 
-            playerPocketSlots[slotIndex] = selectedPocketSlot;
+            playerPocket[slotIndex] = selectedPocket;
 
-            selectedPocketSlot = playerPocketToEquip;
+            selectedPocket = playerPocketToEquip;
 
             RenderHand();
         }
         else if(inventoryType == NewInventorySlot.InventoryType.Seed)
         {
-            ItemData seedToSelect = seedsStorageSlots[slotIndex];
+            ItemData seedToSelect = seedsSlots[slotIndex];
 
-            seedsStorageSlots[slotIndex] = selectedSeedSlot;
+            seedsSlots[slotIndex] = selectedSeed;
 
-            selectedSeedSlot = seedToSelect;
+            selectedSeed = seedToSelect;
         }
         else //Storage Box
         {
-            ItemData storageToSelect = inventoryStorageSlots[slotIndex];
+            ItemData storageToSelect = storageSlots[slotIndex];
 
-            inventoryStorageSlots[slotIndex] = selectedStorageSlot;
+            storageSlots[slotIndex] = selectedStorage;
 
-            selectedStorageSlot = storageToSelect;
+            selectedStorage = storageToSelect;
         }
 
         NewUIManager.Instance.RenderInventory();
-        */
     }
 
     public void EquipToInventory(NewInventorySlot.InventoryType inventoryType)
     {
-        /*
         if(inventoryType == NewInventorySlot.InventoryType.PlayerTool)
         {
-            for(int i = 0; i < playerToolsSlots.Length; i++)
+            for(int i = 0; i < playerTools.Length; i++)
             {
-                if(playerToolsSlots[i] == null)
+                if(playerTools[i] == null)
                 {
-                    playerToolsSlots[i] = selectedToolSlot;
+                    playerTools[i] = selectedTool;
 
-                    selectedToolSlot = null;
+                    selectedTool = null;
                     break;
                 }
             }
         }
         else if (inventoryType == NewInventorySlot.InventoryType.PlayerPocket)
         {
-            for (int i = 0; i < playerPocketSlots.Length; i++)
+            for (int i = 0; i < playerPocket.Length; i++)
             {
-                if (playerPocketSlots[i] == null)
+                if (playerPocket[i] == null)
                 {
-                    playerPocketSlots[i] = selectedPocketSlot;
+                    playerPocket[i] = selectedPocket;
 
-                    selectedPocketSlot = null;
+                    selectedPocket = null;
                     break;
                 }
             }
@@ -120,33 +109,32 @@ public class NewInventoryManager : MonoBehaviour
         }
         else if (inventoryType == NewInventorySlot.InventoryType.Seed)
         {
-            for(int i = 0; i < seedsStorageSlots.Length; i++)
+            for(int i = 0; i < seedsSlots.Length; i++)
             {
-                if (seedsStorageSlots[i] == null)
+                if (seedsSlots[i] == null)
                 {
-                    seedsStorageSlots[i] = selectedSeedSlot;
+                    seedsSlots[i] = selectedSeed;
 
-                    selectedSeedSlot = null;
+                    selectedSeed = null;
                     break;
                 }
             }
         }
         else
         {
-            for (int i = 0; i < inventoryStorageSlots.Length; i++)
+            for (int i = 0; i < storageSlots.Length; i++)
             {
-                if (inventoryStorageSlots[i] == null)
+                if (storageSlots[i] == null)
                 {
-                    inventoryStorageSlots[i] = selectedStorageSlot;
+                    storageSlots[i] = selectedStorage;
 
-                    selectedStorageSlot = null;
+                    selectedStorage = null;
                     break;
                 }
             }
         }
 
         NewUIManager.Instance.RenderInventory();
-        */
     }
 
     public void RenderHand()
@@ -155,145 +143,9 @@ public class NewInventoryManager : MonoBehaviour
         {
             Destroy(handPoint.GetChild(0).gameObject);
         }
-        if(selectedPocketSlot != null)
+        if(selectedPocket != null)
         {
-            Instantiate(GetEquippedSlotItem(NewInventorySlot.InventoryType.PlayerPocket).gameModel, handPoint);
-        }
-    }
-
-    #region Gets and Checks
-    //Get the Slot Item
-    public ItemData GetEquippedSlotItem(NewInventorySlot.InventoryType inventoryType)
-    {
-        if (inventoryType == NewInventorySlot.InventoryType.PlayerTool)
-        {
-            return selectedToolSlot.itemData;
-        } 
-        else if(inventoryType == NewInventorySlot.InventoryType.PlayerPocket)
-        {
-            return selectedPocketSlot.itemData;
-        }
-        else if(inventoryType == NewInventorySlot.InventoryType.Seed)
-        {
-            return selectedInventoryStorageSlot.itemData;
-        }
-        return selectedInventoryStorageSlot.itemData;
-    }
-
-    //Get function for the Slots
-    public ItemSlotData GetEquippedSlot(NewInventorySlot.InventoryType inventoryType)
-    {
-        if (inventoryType == NewInventorySlot.InventoryType.PlayerTool)
-        {
-            return selectedToolSlot;
-        }
-        else if (inventoryType == NewInventorySlot.InventoryType.PlayerPocket)
-        {
-            return selectedPocketSlot;
-        }
-        else if (inventoryType == NewInventorySlot.InventoryType.Seed)
-        {
-            return selectedSeedSlot;
-        }
-        return selectedInventoryStorageSlot;
-    }
-
-    public ItemSlotData[] GetInventorySlots(NewInventorySlot.InventoryType inventoryType)
-    {
-        if (inventoryType == NewInventorySlot.InventoryType.PlayerTool)
-        {
-            return playerToolsSlots;
-        }
-        else if (inventoryType == NewInventorySlot.InventoryType.PlayerPocket)
-        {
-            return playerPocketSlots;
-        }
-        else if (inventoryType == NewInventorySlot.InventoryType.Seed)
-        {
-            return seedsStorageSlots;
-        }
-        return inventoryStorageSlots;
-    }
-
-    public bool SlotEquipped(NewInventorySlot.InventoryType inventoryType)
-    {
-        if (inventoryType == NewInventorySlot.InventoryType.PlayerTool)
-        {
-            return selectedToolSlot != null;
-        }
-        else if (inventoryType == NewInventorySlot.InventoryType.PlayerPocket)
-        {
-            return selectedPocketSlot != null;
-        }
-        else if (inventoryType == NewInventorySlot.InventoryType.Seed)
-        {
-            return selectedSeedSlot != null;
-        }
-        return selectedInventoryStorageSlot != null;
-    }
-
-    public bool IsEquipment(ItemData item)
-    {
-        return item is EquipmentData;
-    }
-
-    public bool IsPocketItem(ItemData item)
-    {
-        return item is EquipmentData;
-    }
-
-    public bool IsSeed(ItemData item)
-    {
-        return item is SeedData;
-    }
-    #endregion
-
-    public void EquipEmptySlot(ItemData item)
-    {
-        if (IsEquipment(item))
-        {
-            selectedToolSlot = new ItemSlotData(item);
-        }
-        else if (IsSeed(item))
-        {
-            selectedSeedSlot = new ItemSlotData(item);
-        }
-        else if (IsPocketItem(item))
-        {
-            selectedPocketSlot = new ItemSlotData(item);
-        }
-        else
-        {
-            selectedInventoryStorageSlot = new ItemSlotData(item);
-        }
-    }
-
-    private void OnValidate()
-    {
-        ValidateInventorySlot(selectedToolSlot);
-        ValidateInventorySlot(selectedPocketSlot);
-        ValidateInventorySlot(selectedSeedSlot);
-        ValidateInventorySlot(selectedInventoryStorageSlot);
-
-        ValidateInventorySlots(playerToolsSlots);
-        ValidateInventorySlots(playerPocketSlots);
-        ValidateInventorySlots(seedsStorageSlots);
-        ValidateInventorySlots(inventoryStorageSlots);
-    }
-
-    void ValidateInventorySlot(ItemSlotData slot)
-    {
-        if(slot.itemData != null && slot.quantity == 0)
-        {
-            slot.quantity = 1;
-        }
-    }
-
-    void ValidateInventorySlots(ItemSlotData[] array)
-    {
-        foreach(ItemSlotData slot in array)
-        {
-            ValidateInventorySlot(slot);
+            Instantiate(selectedPocket.gameModel, handPoint);
         }
     }
 }

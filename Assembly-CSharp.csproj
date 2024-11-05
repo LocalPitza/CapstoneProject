@@ -61,7 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\MainMenu\Settings.cs" />
-    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\ItemSlotData.cs" />
     <Compile Include="Assets\Scripts\Planting\Soil.cs" />
     <Compile Include="Assets\Scripts\RegrowablePlant.cs" />
     <Compile Include="Assets\Scripts\DoorMechanic.cs" />
