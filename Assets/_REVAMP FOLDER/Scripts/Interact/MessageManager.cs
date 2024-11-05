@@ -10,5 +10,6 @@ public class MessageManager : MonoBehaviour
     private void Start()
     {
         InteractMessage.message = interactionText;
+        PlayerInteraction.message = interactionText;
     }
 }

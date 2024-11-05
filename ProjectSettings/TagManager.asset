@@ -7,6 +7,7 @@ TagManager:
   - Selectable
   - Harvestable
   - Pot
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - UI
   - Pot
   - Harvestable
-  - 
+  - Player
   - 
   - 
   - 

@@ -1,12 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
     PlayerMove playerMove;
 
-    PottingSoil selectedSoil = null;
+    //[HideInInspector]
+    public PottingSoil selectedSoil = null;
+    InteractableObject selectedInteractableObject = null;
+
+    ShowUISeeds showUISeeds;
+    //[HideInInspector]
+    public bool harvestableHit = false;
+
+    [Header("Messages to Player")]
+    [Header("Harvesting Vegestable")]
+    [SerializeField] private string equipGlove;
+
+    [Header("Harvesting Fruits")]
+
+    public static TextMeshProUGUI message;
 
     void Start()
     {
@@ -16,7 +31,10 @@ public class PlayerInteraction : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, Vector3.down, out hit, 2)) 
+
+        Debug.DrawRay(transform.position, Vector3.down * 2, Color.red);
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 2)) 
         { 
             OnInteractableHit(hit);
         }
@@ -30,7 +48,22 @@ public class PlayerInteraction : MonoBehaviour
         {
             PottingSoil soilIndicator = other.GetComponent<PottingSoil>();
             SelectPot(soilIndicator);
+
+            showUISeeds = other.GetComponent<ShowUISeeds>();
+
             return;
+        }
+
+        if (other.CompareTag("Harvestable"))
+        {
+            selectedInteractableObject = other.GetComponent<InteractableObject>();
+            harvestableHit = true;
+            return;
+        }
+
+        if(selectedInteractableObject != null)
+        {
+            selectedInteractableObject = null;
         }
 
         if(selectedSoil != null)
@@ -38,6 +71,8 @@ public class PlayerInteraction : MonoBehaviour
             selectedSoil.Select(false);
             selectedSoil = null;
         }
+
+        showUISeeds = null;
     }
 
     void SelectPot(PottingSoil soilIndicator)
@@ -53,32 +88,58 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Interact()
     {
+        //The Player shouldn't be ablle to use his Tool when hands is full with an Item
+        /*if(NewInventoryManager.Instance.selectedTool != null)
+        {
+            return;
+        }*/
+
         if(selectedSoil != null)
         {
             selectedSoil.Interact();
+
+            if (showUISeeds != null && selectedSoil.soilStatus == PottingSoil.SoilStatus.Digged)
+            {
+                showUISeeds.ToggleUI();
+                NewUIManager.Instance.RenderInventory();
+            }
+
             return;
         }
-        Debug.Log("No Soil");
     }
 
-    public void HarvestableInteract()
+    public void HarvestInteract()
     {
-        Debug.Log("Selected");
+        ItemData playerToolSlot = NewInventoryManager.Instance.selectedTool;
+        EquipmentData equipmentTool = playerToolSlot as EquipmentData;
 
-        GameObject[] harvestableObjects = GameObject.FindGameObjectsWithTag("Harvestable");
-
-        // Loop through all found objects
-        foreach (GameObject harvestableObject in harvestableObjects)
+        //If Plalyer is not using the right tool for Harvesting
+        if (equipmentTool == null || equipmentTool.toolType != EquipmentData.ToolType.HandGloves)
         {
-            Debug.Log("Harvesting");
-            // Check if the object has a Harvestable component
-            Harvestable harvest = harvestableObject.GetComponent<Harvestable>();
-            if (harvest != null)
-            {
-                Debug.Log("Harv");
-                harvest.Harvest();
-                break; // Stop after the first harvestable object is harvested
-            }
+            message.text = equipGlove;
+            StartCoroutine(ClearMessageAfterDelay(2f));
+            return;
         }
+        else
+        {
+            message.text = "";
+        }
+
+        if (NewInventoryManager.Instance.selectedPocket != null)
+        {
+            NewInventoryManager.Instance.EquipToInventory(NewInventorySlot.InventoryType.PlayerPocket);
+            return;
+        }
+
+        if(selectedInteractableObject != null)
+        {
+            selectedInteractableObject.PickUp();
+        }
+    }
+
+    private IEnumerator ClearMessageAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        message.text = "";
     }
 }

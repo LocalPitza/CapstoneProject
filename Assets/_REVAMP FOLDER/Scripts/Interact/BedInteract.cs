@@ -5,21 +5,20 @@ using UnityEngine;
 
 public class BedInteract : MonoBehaviour
 {
-    private EnergyBar energyBar;
     private InteractMessage interactMessage;
 
     void Start()
     {
-        energyBar = EnergyBar.Instance;
         interactMessage = GetComponent<InteractMessage>();
     }
 
     void Update()
     {
-        if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKeyDown(KeyCode.F))
+        //For Debugging Purposes, GetKeyDown will be GetKey as of the moment
+        if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKey(KeyCode.F))
         {
-            Debug.Log("Advance Day");
-            energyBar.SetFullEnergy();
+            //EnergyBar.Instance.SetFullEnergy();
+            TimeManager.Instance.Tick();
         }
     }
 }
