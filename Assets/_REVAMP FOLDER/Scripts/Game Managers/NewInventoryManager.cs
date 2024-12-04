@@ -18,46 +18,35 @@ public class NewInventoryManager : MonoBehaviour
         }
     }
 
-    [Header("Player Tools")]
-    public ItemData[] playerTools = new ItemData[5];
-    public ItemData selectedTool = null;
-
-    [Header("Player Pocket")]
-    public ItemData[] playerPocket = new ItemData[5];
-    public ItemData selectedPocket = null;
-    public Transform handPoint;
-
     [Header("Seeds UI")]
     public ItemData[] seedsSlots = new ItemData[5];
     public ItemData selectedSeed = null;
 
     [Header("Storage UI")]
-    public ItemData[] storageSlots = new ItemData[15];
+    public ItemData[] storageSlots = new ItemData[35];
     public ItemData selectedStorage = null;
+    public ItemData harvestProduct = null;
+    public Transform handPoint;
+
+    public enum ActiveItemType
+    {
+        None,
+        SelectedSeed,
+        SelectedStorage,
+        HarvestProduct
+    }
+
+    public ActiveItemType activeItemType = ActiveItemType.None;
+
+    public void SetActiveItemType(ActiveItemType type)
+    {
+        activeItemType = type;
+    }
 
     //Equipping
     public void InventoryToEquip(int slotIndex, NewInventorySlot.InventoryType inventoryType)
     {
-        if(inventoryType == NewInventorySlot.InventoryType.PlayerTool)
-        {
-            ItemData playerToolToEquip = playerTools[slotIndex];
-
-            playerTools[slotIndex] = selectedTool;
-
-            selectedTool = playerToolToEquip;
-
-        }
-        else if(inventoryType == NewInventorySlot.InventoryType.PlayerPocket)
-        {
-            ItemData playerPocketToEquip = playerPocket[slotIndex];
-
-            playerPocket[slotIndex] = selectedPocket;
-
-            selectedPocket = playerPocketToEquip;
-
-            RenderHand();
-        }
-        else if(inventoryType == NewInventorySlot.InventoryType.Seed)
+        if(inventoryType == NewInventorySlot.InventoryType.Seed)
         {
             ItemData seedToSelect = seedsSlots[slotIndex];
 
@@ -72,6 +61,8 @@ public class NewInventoryManager : MonoBehaviour
             storageSlots[slotIndex] = selectedStorage;
 
             selectedStorage = storageToSelect;
+
+            //RenderHand();
         }
 
         NewUIManager.Instance.RenderInventory();
@@ -79,35 +70,54 @@ public class NewInventoryManager : MonoBehaviour
 
     public void EquipToInventory(NewInventorySlot.InventoryType inventoryType)
     {
-        if(inventoryType == NewInventorySlot.InventoryType.PlayerTool)
-        {
-            for(int i = 0; i < playerTools.Length; i++)
-            {
-                if(playerTools[i] == null)
-                {
-                    playerTools[i] = selectedTool;
+        int startIndex = 15; // Start filling storage slots from index 15
 
-                    selectedTool = null;
+        if (activeItemType == ActiveItemType.SelectedSeed && inventoryType == NewInventorySlot.InventoryType.Seed)
+        {
+            for (int i = 0; i < seedsSlots.Length; i++)
+            {
+                if (seedsSlots[i] == null)
+                {
+                    seedsSlots[i] = selectedSeed;
+                    selectedSeed = null;
+                    activeItemType = ActiveItemType.None;
                     break;
                 }
             }
         }
-        else if (inventoryType == NewInventorySlot.InventoryType.PlayerPocket)
+        else // Storage
         {
-            for (int i = 0; i < playerPocket.Length; i++)
-            {
-                if (playerPocket[i] == null)
-                {
-                    playerPocket[i] = selectedPocket;
+            ItemData itemToPlace = (harvestProduct != null) ? harvestProduct : selectedStorage;
 
-                    selectedPocket = null;
-                    break;
+            if (itemToPlace != null)
+            {
+                for (int i = startIndex; i < storageSlots.Length; i++)
+                {
+                    if (storageSlots[i] == null)
+                    {
+                        storageSlots[i] = itemToPlace;
+
+                        // Clear the corresponding item reference
+                        if (harvestProduct != null)
+                        {
+                            harvestProduct = null;
+                        }
+                        else if (selectedStorage != null)
+                        {
+                            selectedStorage = null;
+                        }
+                        break;
+                    }
                 }
             }
-
-            RenderHand();
+            else
+            {
+                Debug.LogWarning("No item available to place in the storage.");
+            }
         }
-        else if (inventoryType == NewInventorySlot.InventoryType.Seed)
+
+        #region Old Code
+        /*if (inventoryType == NewInventorySlot.InventoryType.Seed)
         {
             for(int i = 0; i < seedsSlots.Length; i++)
             {
@@ -122,17 +132,35 @@ public class NewInventoryManager : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < storageSlots.Length; i++)
+            if (harvestProduct != null)
             {
-                if (storageSlots[i] == null)
+                for (int i = 0; i < storageSlots.Length; i++)
                 {
-                    storageSlots[i] = selectedStorage;
-
-                    selectedStorage = null;
-                    break;
+                    if (storageSlots[i] == null)
+                    {
+                        storageSlots[i] = harvestProduct;
+                        harvestProduct = null;
+                        break;
+                    }
                 }
             }
-        }
+
+            if (selectedStorage != null)
+            {
+                for (int i = 0; i < storageSlots.Length; i++)
+                {
+                    if (storageSlots[i] == null)
+                    {
+                        storageSlots[i] = selectedStorage;
+                        selectedStorage = null;
+                        break;
+                    }
+                }
+            }
+
+            //RenderHand();
+        }*/
+        #endregion
 
         NewUIManager.Instance.RenderInventory();
     }
@@ -143,9 +171,9 @@ public class NewInventoryManager : MonoBehaviour
         {
             Destroy(handPoint.GetChild(0).gameObject);
         }
-        if(selectedPocket != null)
+        if(selectedStorage != null)
         {
-            Instantiate(selectedPocket.gameModel, handPoint);
+            Instantiate(selectedStorage.gameModel, handPoint);
         }
     }
 }

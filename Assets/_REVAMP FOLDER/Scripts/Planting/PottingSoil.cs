@@ -74,7 +74,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
     public void Interact()
     {
-        ItemData playerToolSlot = NewInventoryManager.Instance.selectedTool;
+        ItemData playerToolSlot = NewInventoryManager.Instance.selectedStorage;
         EquipmentData equipmentTool = playerToolSlot as EquipmentData;
 
         if (playerToolSlot == null) 

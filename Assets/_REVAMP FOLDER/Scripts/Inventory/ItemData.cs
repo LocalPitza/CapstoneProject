@@ -5,8 +5,7 @@ using UnityEngine;
 public enum ItemType
 {
     Seed,
-    StorageItem,
-    Tool,
+    StorageItem
 }
 
 [CreateAssetMenu(menuName = "Items/Item")]

@@ -12,7 +12,7 @@ public class NewInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public enum InventoryType
     {
-        PlayerTool, PlayerPocket, Seed, Storage
+        Seed, Storage
     }
 
     public InventoryType inventoryType;
@@ -36,6 +36,12 @@ public class NewInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public virtual void OnPointerClick(PointerEventData eventData)
     {
+        NewInventoryManager.Instance.SetActiveItemType(
+            inventoryType == InventoryType.Seed
+                ? NewInventoryManager.ActiveItemType.SelectedSeed
+                : NewInventoryManager.ActiveItemType.SelectedStorage
+        );
+
         NewInventoryManager.Instance.InventoryToEquip(slotIndex, inventoryType);
     }
 

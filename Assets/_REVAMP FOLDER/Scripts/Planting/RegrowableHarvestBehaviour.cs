@@ -13,9 +13,10 @@ public class RegrowableHarvestBehaviour : InteractableObject
 
     public override void PickUp()
     {
+        Debug.Log("Harvest Regrowable");
         //Move Item from Equipped to Inventory
-        NewInventoryManager.Instance.selectedPocket = item;
-        NewInventoryManager.Instance.RenderHand();
+        NewInventoryManager.Instance.harvestProduct = item;
+        //NewInventoryManager.Instance.RenderHand();
 
         parentCrop.Regrow();
     }

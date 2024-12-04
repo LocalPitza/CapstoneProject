@@ -16,14 +16,11 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     public Image toolEquippedSlot;
 
     [Header("Equip Slots")]
-    public NewHandInventorySlot playerToolEquippedSlot;
-    public NewHandInventorySlot playerPocketEquippedSlot;
     public NewHandInventorySlot seedEquippedSlot;
     public NewHandInventorySlot storageEquippedSlot;
+    public NewHandInventorySlot harvestedEquippedSlot;
 
     [Header("Inventory System")]
-    public NewInventorySlot[] playerToolsSlot;
-    public NewInventorySlot[] playerPocketSlot;
     public NewInventorySlot[] seedSlot;
     public NewInventorySlot[] storageSlots;
 
@@ -57,16 +54,6 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
     public void AssignSlotIndexes()
     {
-        for(int i = 0; i < playerToolsSlot.Length; i++)
-        {
-            playerToolsSlot[i].AssignIndex(i);
-        }
-
-        for (int i = 0; i < playerPocketSlot.Length; i++)
-        {
-            playerPocketSlot[i].AssignIndex(i);
-        }
-
         for (int j = 0; j < seedSlot.Length; j++)
         {
             seedSlot[j].AssignIndex(j);
@@ -80,23 +67,11 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
     public void RenderInventory()
     {
-        //Get the Inventory PlayerTools from NewInventoryManager
-        ItemData[] inventoryPlayerTools = NewInventoryManager.Instance.playerTools;
-
-        //Get the Inventory PlayerPocket from NewInventoryManager
-        ItemData[] inventoryPocketTools = NewInventoryManager.Instance.playerPocket;
-
         //Get the Inventory SeedSlot from NewInventoryManager
         ItemData[] inventorySeedSlot = NewInventoryManager.Instance.seedsSlots;
 
         //Get the Inventory StorageSlot from NewInventoryManager
         ItemData[] inventoryStorageSlot = NewInventoryManager.Instance.storageSlots;
-
-        //Render the Player Tools section
-        RenderInventoryPanel(inventoryPlayerTools, playerToolsSlot);
-
-        //Render the Player Pocket section
-        RenderInventoryPanel(inventoryPocketTools, playerPocketSlot);
 
         //Render the Seeds section
         RenderInventoryPanel(inventorySeedSlot, seedSlot);
@@ -104,17 +79,16 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         //Render the Storage section
         RenderInventoryPanel(inventoryStorageSlot, storageSlots);
 
-        playerToolEquippedSlot.Display(NewInventoryManager.Instance.selectedTool);
-        playerPocketEquippedSlot.Display(NewInventoryManager.Instance.selectedPocket);
         seedEquippedSlot.Display(NewInventoryManager.Instance.selectedSeed);
         storageEquippedSlot.Display(NewInventoryManager.Instance.selectedStorage);
+        harvestedEquippedSlot.Display(NewInventoryManager.Instance.harvestProduct);
 
         //Get ToolEquip from NewInventoryManager
-        ItemData selectedTool = NewInventoryManager.Instance.selectedTool;
+        ItemData selectedStorage = NewInventoryManager.Instance.selectedStorage;
 
-        if (selectedTool != null)
+        if (selectedStorage != null)
         {
-            toolEquippedSlot.sprite = selectedTool.thumbnail;
+            toolEquippedSlot.sprite = selectedStorage.thumbnail;
             toolEquippedSlot.gameObject.SetActive(true);
 
             return;
@@ -131,7 +105,6 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
             uiSlots[i].Display(slots[i]);
         }
     }
-
 
     public void DisplayItemInfo(ItemData data)
     {
@@ -157,11 +130,6 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
                 // Show in Storage UI only
                 storageNameText.text = data.name;
                 storageDescriptionText.text = data.description;
-                break;
-
-            // Optionally, handle other types like tools or other items
-            case ItemType.Tool:
-                // Add tool UI handling if needed
                 break;
         }
     }

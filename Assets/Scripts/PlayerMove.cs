@@ -43,7 +43,6 @@ public class PlayerMove : MonoBehaviour
         {
             if (playerInteraction.harvestableHit)
             {
-                Debug.Log("Harvesting");
                 playerInteraction.HarvestInteract();
             }
             else
