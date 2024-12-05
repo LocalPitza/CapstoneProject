@@ -13,24 +13,20 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     public TextMeshProUGUI timeText;
 
     [Header("Player Equipped Slot")]
-    public Image toolEquippedSlot;
+    public Image toolEquippedIcon;
+    public Image harvestEquippedIcon;
 
     [Header("Equip Slots")]
-    public NewHandInventorySlot seedEquippedSlot;
     public NewHandInventorySlot storageEquippedSlot;
-    public NewHandInventorySlot harvestedEquippedSlot;
+    public NewHandInventorySlot harvestEquippedSlot;
 
     [Header("Inventory System")]
-    public NewInventorySlot[] seedSlot;
     public NewInventorySlot[] storageSlots;
+    public NewInventorySlot[] harvestSlot;
 
-    [Header("Seeds Info Box")]
-    public TextMeshProUGUI seedNameText;
-    public TextMeshProUGUI seedDescriptionText;
-
-    [Header("Storage Info Box")]
-    public TextMeshProUGUI storageNameText;
-    public TextMeshProUGUI storageDescriptionText;
+    [Header("Info Box")]
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI descriptionText;
 
     private void Awake()
     {
@@ -54,9 +50,9 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
     public void AssignSlotIndexes()
     {
-        for (int j = 0; j < seedSlot.Length; j++)
+        for (int j = 0; j < harvestSlot.Length; j++)
         {
-            seedSlot[j].AssignIndex(j);
+            harvestSlot[j].AssignIndex(j);
         }
 
         for(int k = 0; k < storageSlots.Length; k++)
@@ -67,40 +63,45 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
     public void RenderInventory()
     {
-        ItemSlotData[] inventorySeedSlot = NewInventoryManager.Instance.GetInventorySlot(NewInventorySlot.InventoryType.Seed);
-        ItemSlotData[] inventoryStorageSlot = NewInventoryManager.Instance.GetInventorySlot(NewInventorySlot.InventoryType.Storage);
-
-        /*//Get the Inventory SeedSlot from NewInventoryManager
-        ItemData[] inventorySeedSlot = NewInventoryManager.Instance.seedSlots;
+        //Get the Inventory SeedSlot from NewInventoryManager
+        ItemData[] inventorySeedSlot = NewInventoryManager.Instance.harvestedSlots;
 
         //Get the Inventory StorageSlot from NewInventoryManager
-        ItemData[] inventoryStorageSlot = NewInventoryManager.Instance.storageSlots;*/
+        ItemData[] inventoryStorageSlot = NewInventoryManager.Instance.storageSlots;
 
         //Render the Seeds section
-        RenderInventoryPanel(inventorySeedSlot, seedSlot);
+        RenderInventoryPanel(inventorySeedSlot, harvestSlot);
 
         //Render the Storage section
         RenderInventoryPanel(inventoryStorageSlot, storageSlots);
 
-        seedEquippedSlot.Display(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Seed));
-        storageEquippedSlot.Display(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Storage));
-        harvestedEquippedSlot.Display(NewInventoryManager.Instance.equippedHarvestedSlot);
+        harvestEquippedSlot.Display(NewInventoryManager.Instance.selectedHarvest);
+        storageEquippedSlot.Display(NewInventoryManager.Instance.selectedStorage);
 
         //Get ToolEquip from NewInventoryManager
-        ItemData selectedStorage = NewInventoryManager.Instance.GetEquippedSlotStorage(NewInventorySlot.InventoryType.Storage);
+        ItemData selectedStorage = NewInventoryManager.Instance.selectedStorage;
+        ItemData selectedHarvest = NewInventoryManager.Instance.selectedHarvest;
 
         if (selectedStorage != null)
         {
-            toolEquippedSlot.sprite = selectedStorage.thumbnail;
-            toolEquippedSlot.gameObject.SetActive(true);
+            toolEquippedIcon.sprite = selectedStorage.thumbnail;
+            toolEquippedIcon.gameObject.SetActive(true);
 
             return;
         }
 
-        toolEquippedSlot.gameObject.SetActive(false);
+        if(selectedHarvest != null)
+        {
+            harvestEquippedIcon.sprite = selectedHarvest.thumbnail;
+            harvestEquippedIcon.gameObject.SetActive(true);
+
+            return;
+        }
+
+        toolEquippedIcon.gameObject.SetActive(false);
     }
 
-    void RenderInventoryPanel(ItemSlotData[] slots, NewInventorySlot[] uiSlots)
+    void RenderInventoryPanel(ItemData[] slots, NewInventorySlot[] uiSlots)
     {
         for (int i = 0; i < uiSlots.Length; i++)
         {
@@ -111,10 +112,8 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
     public void DisplayItemInfo(ItemData data)
     {
-        seedNameText.text = "";
-        seedDescriptionText.text = "";
-        storageNameText.text = "";
-        storageDescriptionText.text = "";
+        nameText.text = "";
+        descriptionText.text = "";
 
         if (data == null)
         {
@@ -123,16 +122,16 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
         switch (data.itemType)
         {
-            case ItemType.Seed:
+            case ItemType.HarvestItem:
                 // Show in Seed UI only
-                seedNameText.text = data.name;
-                seedDescriptionText.text = data.description;
+                nameText.text = data.name;
+                descriptionText.text = data.description;
                 break;
 
             case ItemType.StorageItem:
                 // Show in Storage UI only
-                storageNameText.text = data.name;
-                storageDescriptionText.text = data.description;
+                nameText.text = data.name;
+                descriptionText.text = data.description;
                 break;
         }
     }
