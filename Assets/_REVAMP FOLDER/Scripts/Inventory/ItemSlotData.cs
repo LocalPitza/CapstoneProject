@@ -22,7 +22,7 @@ public class ItemSlotData
         ValidateQuantity();
     }
 
-    public ItemSlotData (ItemSlotData slotToClone)
+    public ItemSlotData(ItemSlotData slotToClone)
     {
         itemData = slotToClone.itemData;
         quantity = slotToClone.quantity;
@@ -51,7 +51,7 @@ public class ItemSlotData
 
     private void ValidateQuantity()
     {
-        if(quantity <= 0 || itemData == null)
+        if (quantity <= 0 || itemData == null)
         {
             Empty();
         }

@@ -16,17 +16,17 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     public Image toolEquippedIcon;
     public Image harvestEquippedIcon;
 
-    [Header("Equip Slots")]
+    [Header("Storage")]
     public NewHandInventorySlot storageEquippedSlot;
-    public NewHandInventorySlot harvestEquippedSlot;
-
-    [Header("Inventory System")]
     public NewInventorySlot[] storageSlots;
+
+    [Header("Harvest")]
+    public NewHandInventorySlot harvestEquippedSlot;
     public NewInventorySlot[] harvestSlot;
 
     [Header("Info Box")]
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI descriptionText;
+    public TextMeshProUGUI itemNameText;
+    public TextMeshProUGUI itemDescriptionText;
 
     private void Awake()
     {
@@ -50,37 +50,30 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
     public void AssignSlotIndexes()
     {
-        for (int j = 0; j < harvestSlot.Length; j++)
-        {
-            harvestSlot[j].AssignIndex(j);
-        }
-
         for(int k = 0; k < storageSlots.Length; k++)
         {
             storageSlots[k].AssignIndex(k);
+            harvestSlot[k].AssignIndex(k);
         }
     }
 
     public void RenderInventory()
     {
-        //Get the Inventory SeedSlot from NewInventoryManager
-        ItemData[] inventorySeedSlot = NewInventoryManager.Instance.harvestedSlots;
-
-        //Get the Inventory StorageSlot from NewInventoryManager
-        ItemData[] inventoryStorageSlot = NewInventoryManager.Instance.storageSlots;
-
-        //Render the Seeds section
-        RenderInventoryPanel(inventorySeedSlot, harvestSlot);
+        ItemSlotData[] inventoryStorageSlots = NewInventoryManager.Instance.GetInventorySlots(NewInventorySlot.InventoryType.Storage);
+        ItemSlotData[] inventoryHarvestSlots = NewInventoryManager.Instance.GetInventorySlots(NewInventorySlot.InventoryType.Harvest);
 
         //Render the Storage section
-        RenderInventoryPanel(inventoryStorageSlot, storageSlots);
+        RenderInventoryPanel(inventoryStorageSlots, storageSlots);
 
-        harvestEquippedSlot.Display(NewInventoryManager.Instance.selectedHarvest);
-        storageEquippedSlot.Display(NewInventoryManager.Instance.selectedStorage);
+        //Render the Seeds section
+        RenderInventoryPanel(inventoryHarvestSlots, harvestSlot);
+
+        storageEquippedSlot.Display(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Storage));
+        harvestEquippedSlot.Display(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Harvest));
 
         //Get ToolEquip from NewInventoryManager
-        ItemData selectedStorage = NewInventoryManager.Instance.selectedStorage;
-        ItemData selectedHarvest = NewInventoryManager.Instance.selectedHarvest;
+        ItemData selectedStorage = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
+        ItemData selectedHarvest = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Harvest);
 
         if (selectedStorage != null)
         {
@@ -89,19 +82,20 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
             return;
         }
+        toolEquippedIcon.gameObject.SetActive(false);
 
-        if(selectedHarvest != null)
+        if (selectedHarvest != null)
         {
             harvestEquippedIcon.sprite = selectedHarvest.thumbnail;
             harvestEquippedIcon.gameObject.SetActive(true);
 
             return;
         }
+        harvestEquippedIcon.gameObject.SetActive(false);
 
-        toolEquippedIcon.gameObject.SetActive(false);
     }
 
-    void RenderInventoryPanel(ItemData[] slots, NewInventorySlot[] uiSlots)
+    void RenderInventoryPanel(ItemSlotData[] slots, NewInventorySlot[] uiSlots)
     {
         for (int i = 0; i < uiSlots.Length; i++)
         {
@@ -112,7 +106,19 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
     public void DisplayItemInfo(ItemData data)
     {
-        nameText.text = "";
+        //If data is null, reset
+        if (data == null)
+        {
+            itemNameText.text = "";
+            itemDescriptionText.text = "";
+
+            return;
+        }
+
+        itemNameText.text = data.name;
+        itemDescriptionText.text = data.description;
+
+        /*nameText.text = "";
         descriptionText.text = "";
 
         if (data == null)
@@ -133,7 +139,7 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
                 nameText.text = data.name;
                 descriptionText.text = data.description;
                 break;
-        }
+        }*/
     }
 
     public void ClockUpdate(GameTimeStamp timestamp)

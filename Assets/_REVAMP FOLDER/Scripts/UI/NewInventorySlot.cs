@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,8 +8,10 @@ using UnityEngine.UI;
 public class NewInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     ItemData itemToDisplay;
+    int quantity;
 
     public Image itemDisplayImage;
+    public TextMeshProUGUI quantityText;
 
     public enum InventoryType
     {
@@ -19,12 +22,22 @@ public class NewInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     int slotIndex;
 
-    public void Display(ItemData itemToDisplay)
+    public void Display(ItemSlotData itemSlot)
     {
+        itemToDisplay = itemSlot.itemData;
+        quantity = itemSlot.quantity;
+
+        //By Default, the quantity text will not show
+        quantityText.text = "";
+
         if(itemToDisplay != null)
         {
             itemDisplayImage.sprite = itemToDisplay.thumbnail;
-            this.itemToDisplay = itemToDisplay;
+
+            if(quantity > 1)
+            {
+                quantityText.text = quantity.ToString();
+            }
 
             itemDisplayImage.gameObject.SetActive(true);
 
