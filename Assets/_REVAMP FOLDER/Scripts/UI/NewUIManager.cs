@@ -67,11 +67,14 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
     public void RenderInventory()
     {
-        //Get the Inventory SeedSlot from NewInventoryManager
-        ItemData[] inventorySeedSlot = NewInventoryManager.Instance.seedsSlots;
+        ItemSlotData[] inventorySeedSlot = NewInventoryManager.Instance.GetInventorySlot(NewInventorySlot.InventoryType.Seed);
+        ItemSlotData[] inventoryStorageSlot = NewInventoryManager.Instance.GetInventorySlot(NewInventorySlot.InventoryType.Storage);
+
+        /*//Get the Inventory SeedSlot from NewInventoryManager
+        ItemData[] inventorySeedSlot = NewInventoryManager.Instance.seedSlots;
 
         //Get the Inventory StorageSlot from NewInventoryManager
-        ItemData[] inventoryStorageSlot = NewInventoryManager.Instance.storageSlots;
+        ItemData[] inventoryStorageSlot = NewInventoryManager.Instance.storageSlots;*/
 
         //Render the Seeds section
         RenderInventoryPanel(inventorySeedSlot, seedSlot);
@@ -79,12 +82,12 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         //Render the Storage section
         RenderInventoryPanel(inventoryStorageSlot, storageSlots);
 
-        seedEquippedSlot.Display(NewInventoryManager.Instance.selectedSeed);
-        storageEquippedSlot.Display(NewInventoryManager.Instance.selectedStorage);
-        harvestedEquippedSlot.Display(NewInventoryManager.Instance.harvestProduct);
+        seedEquippedSlot.Display(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Seed));
+        storageEquippedSlot.Display(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Storage));
+        harvestedEquippedSlot.Display(NewInventoryManager.Instance.equippedHarvestedSlot);
 
         //Get ToolEquip from NewInventoryManager
-        ItemData selectedStorage = NewInventoryManager.Instance.selectedStorage;
+        ItemData selectedStorage = NewInventoryManager.Instance.GetEquippedSlotStorage(NewInventorySlot.InventoryType.Storage);
 
         if (selectedStorage != null)
         {
@@ -97,7 +100,7 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         toolEquippedSlot.gameObject.SetActive(false);
     }
 
-    void RenderInventoryPanel(ItemData[] slots, NewInventorySlot[] uiSlots)
+    void RenderInventoryPanel(ItemSlotData[] slots, NewInventorySlot[] uiSlots)
     {
         for (int i = 0; i < uiSlots.Length; i++)
         {

@@ -7,19 +7,19 @@ public class NewHandInventorySlot : NewInventorySlot
 {
     public override void OnPointerClick(PointerEventData eventData)
     {
-        // Set active item type based on inventory type
+        /*/ Set active item type based on inventory type
         if (inventoryType == InventoryType.Seed)
         {
             NewInventoryManager.Instance.SetActiveItemType(NewInventoryManager.ActiveItemType.SelectedSeed);
         }
-        else if (inventoryType == InventoryType.Storage && NewInventoryManager.Instance.harvestProduct != null)
+        else if (inventoryType == InventoryType.Storage && NewInventoryManager.Instance.equippedHarvestedSlot != null)
         {
             NewInventoryManager.Instance.SetActiveItemType(NewInventoryManager.ActiveItemType.HarvestProduct);
         }
         else if (inventoryType == InventoryType.Storage)
         {
             NewInventoryManager.Instance.SetActiveItemType(NewInventoryManager.ActiveItemType.SelectedStorage);
-        }
+        }*/
 
         //Move Item from Equipped to Inventory
         NewInventoryManager.Instance.EquipToInventory(inventoryType);

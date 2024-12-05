@@ -15,7 +15,7 @@ public class RegrowableHarvestBehaviour : InteractableObject
     {
         Debug.Log("Harvest Regrowable");
         //Move Item from Equipped to Inventory
-        NewInventoryManager.Instance.harvestProduct = item;
+        NewInventoryManager.Instance.EquipHandSlot(item);
         //NewInventoryManager.Instance.RenderHand();
 
         parentCrop.Regrow();
