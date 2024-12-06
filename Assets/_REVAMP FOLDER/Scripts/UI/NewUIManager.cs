@@ -13,27 +13,20 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     public TextMeshProUGUI timeText;
 
     [Header("Player Equipped Slot")]
-    public Image toolEquippedSlot;
+    public Image toolEquippedIcon;
+    public Image harvestEquippedIcon;
 
-    [Header("Equip Slots")]
-    public NewHandInventorySlot playerToolEquippedSlot;
-    public NewHandInventorySlot playerPocketEquippedSlot;
-    public NewHandInventorySlot seedEquippedSlot;
+    [Header("Storage")]
     public NewHandInventorySlot storageEquippedSlot;
-
-    [Header("Inventory System")]
-    public NewInventorySlot[] playerToolsSlot;
-    public NewInventorySlot[] playerPocketSlot;
-    public NewInventorySlot[] seedSlot;
     public NewInventorySlot[] storageSlots;
 
-    [Header("Seeds Info Box")]
-    public TextMeshProUGUI seedNameText;
-    public TextMeshProUGUI seedDescriptionText;
+    [Header("Harvest")]
+    public NewHandInventorySlot harvestEquippedSlot;
+    public NewInventorySlot[] harvestSlot;
 
-    [Header("Storage Info Box")]
-    public TextMeshProUGUI storageNameText;
-    public TextMeshProUGUI storageDescriptionText;
+    [Header("Info Box")]
+    public TextMeshProUGUI itemNameText;
+    public TextMeshProUGUI itemDescriptionText;
 
     private void Awake()
     {
@@ -57,73 +50,56 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
     public void AssignSlotIndexes()
     {
-        for(int i = 0; i < playerToolsSlot.Length; i++)
-        {
-            playerToolsSlot[i].AssignIndex(i);
-        }
-
-        for (int i = 0; i < playerPocketSlot.Length; i++)
-        {
-            playerPocketSlot[i].AssignIndex(i);
-        }
-
-        for (int j = 0; j < seedSlot.Length; j++)
-        {
-            seedSlot[j].AssignIndex(j);
-        }
-
         for(int k = 0; k < storageSlots.Length; k++)
         {
             storageSlots[k].AssignIndex(k);
+            harvestSlot[k].AssignIndex(k);
         }
     }
 
     public void RenderInventory()
     {
-        //Get the Inventory PlayerTools from NewInventoryManager
-        ItemData[] inventoryPlayerTools = NewInventoryManager.Instance.playerTools;
-
-        //Get the Inventory PlayerPocket from NewInventoryManager
-        ItemData[] inventoryPocketTools = NewInventoryManager.Instance.playerPocket;
-
-        //Get the Inventory SeedSlot from NewInventoryManager
-        ItemData[] inventorySeedSlot = NewInventoryManager.Instance.seedsSlots;
-
-        //Get the Inventory StorageSlot from NewInventoryManager
-        ItemData[] inventoryStorageSlot = NewInventoryManager.Instance.storageSlots;
-
-        //Render the Player Tools section
-        RenderInventoryPanel(inventoryPlayerTools, playerToolsSlot);
-
-        //Render the Player Pocket section
-        RenderInventoryPanel(inventoryPocketTools, playerPocketSlot);
-
-        //Render the Seeds section
-        RenderInventoryPanel(inventorySeedSlot, seedSlot);
+        ItemSlotData[] inventoryStorageSlots = NewInventoryManager.Instance.GetInventorySlots(NewInventorySlot.InventoryType.Storage);
+        ItemSlotData[] inventoryHarvestSlots = NewInventoryManager.Instance.GetInventorySlots(NewInventorySlot.InventoryType.Harvest);
 
         //Render the Storage section
-        RenderInventoryPanel(inventoryStorageSlot, storageSlots);
+        RenderInventoryPanel(inventoryStorageSlots, storageSlots);
 
-        playerToolEquippedSlot.Display(NewInventoryManager.Instance.selectedTool);
-        playerPocketEquippedSlot.Display(NewInventoryManager.Instance.selectedPocket);
-        seedEquippedSlot.Display(NewInventoryManager.Instance.selectedSeed);
-        storageEquippedSlot.Display(NewInventoryManager.Instance.selectedStorage);
+        //Render the Seeds section
+        RenderInventoryPanel(inventoryHarvestSlots, harvestSlot);
+
+        storageEquippedSlot.Display(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Storage));
+        harvestEquippedSlot.Display(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Harvest));
 
         //Get ToolEquip from NewInventoryManager
-        ItemData selectedTool = NewInventoryManager.Instance.selectedTool;
+        ItemData selectedStorage = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
+        ItemData selectedHarvest = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Harvest);
 
-        if (selectedTool != null)
+        // Update the tool equipped icon
+        if (selectedStorage != null)
         {
-            toolEquippedSlot.sprite = selectedTool.thumbnail;
-            toolEquippedSlot.gameObject.SetActive(true);
-
-            return;
+            toolEquippedIcon.sprite = selectedStorage.thumbnail;
+            toolEquippedIcon.gameObject.SetActive(true);
+        }
+        else
+        {
+            toolEquippedIcon.gameObject.SetActive(false);
         }
 
-        toolEquippedSlot.gameObject.SetActive(false);
+        // Update the harvest equipped icon
+        if (selectedHarvest != null)
+        {
+            harvestEquippedIcon.sprite = selectedHarvest.thumbnail;
+            harvestEquippedIcon.gameObject.SetActive(true);
+        }
+        else
+        {
+            harvestEquippedIcon.gameObject.SetActive(false);
+        }
+
     }
 
-    void RenderInventoryPanel(ItemData[] slots, NewInventorySlot[] uiSlots)
+    void RenderInventoryPanel(ItemSlotData[] slots, NewInventorySlot[] uiSlots)
     {
         for (int i = 0; i < uiSlots.Length; i++)
         {
@@ -132,38 +108,19 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         }
     }
 
-
     public void DisplayItemInfo(ItemData data)
     {
-        seedNameText.text = "";
-        seedDescriptionText.text = "";
-        storageNameText.text = "";
-        storageDescriptionText.text = "";
-
+        //If data is null, reset
         if (data == null)
         {
+            itemNameText.text = "";
+            itemDescriptionText.text = "";
+
             return;
         }
 
-        switch (data.itemType)
-        {
-            case ItemType.Seed:
-                // Show in Seed UI only
-                seedNameText.text = data.name;
-                seedDescriptionText.text = data.description;
-                break;
-
-            case ItemType.StorageItem:
-                // Show in Storage UI only
-                storageNameText.text = data.name;
-                storageDescriptionText.text = data.description;
-                break;
-
-            // Optionally, handle other types like tools or other items
-            case ItemType.Tool:
-                // Add tool UI handling if needed
-                break;
-        }
+        itemNameText.text = data.name;
+        itemDescriptionText.text = data.description;
     }
 
     public void ClockUpdate(GameTimeStamp timestamp)

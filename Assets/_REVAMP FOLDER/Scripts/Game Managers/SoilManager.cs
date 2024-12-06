@@ -28,7 +28,7 @@ public class SoilManager : MonoBehaviour
     {
         if (selectedSoil != null)
         {
-            selectedSoil.PlantSeed();
+            //selectedSoil.PlantSeed();
         }
     }
 }

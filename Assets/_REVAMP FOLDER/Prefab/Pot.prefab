@@ -129,7 +129,6 @@ GameObject:
   - component: {fileID: 4226131335877578534}
   - component: {fileID: 3512919837329430513}
   - component: {fileID: 6862517389137261450}
-  - component: {fileID: 9163682072395329088}
   m_Layer: 0
   m_Name: Pot
   m_TagString: Pot
@@ -490,16 +489,3 @@ MonoBehaviour:
   cropPrefab: {fileID: 7368866481497804893, guid: 0cebd69bf44ebff448d84d71c8ba5107,
     type: 3}
   plantPosition: {fileID: 5607059693807710145}
---- !u!114 &9163682072395329088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9222528886798265567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c6596b5c37bd454cb823424a015a598, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  plantingSeedsUI: {fileID: 0}

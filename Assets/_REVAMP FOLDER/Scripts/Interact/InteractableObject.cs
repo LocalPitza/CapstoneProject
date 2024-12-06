@@ -9,9 +9,10 @@ public class InteractableObject : MonoBehaviour
 
     public virtual void PickUp()
     {
+        Debug.Log("Harvest Plant");
         //Move Item from Equipped to Inventory
-        NewInventoryManager.Instance.selectedPocket = item;
-        NewInventoryManager.Instance.RenderHand();
+        NewInventoryManager.Instance.EquipHandSlot(item);
+        //NewInventoryManager.Instance.RenderHand();
 
         Destroy(gameObject);
     }

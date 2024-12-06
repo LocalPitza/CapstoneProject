@@ -88,21 +88,15 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Interact()
     {
-        //The Player shouldn't be ablle to use his Tool when hands is full with an Item
-        /*if(NewInventoryManager.Instance.selectedTool != null)
-        {
-            return;
-        }*/
-
         if(selectedSoil != null)
         {
             selectedSoil.Interact();
 
-            if (showUISeeds != null && selectedSoil.soilStatus == PottingSoil.SoilStatus.Digged)
+            /*if (showUISeeds != null && selectedSoil.soilStatus == PottingSoil.SoilStatus.Digged)
             {
                 showUISeeds.ToggleUI();
                 NewUIManager.Instance.RenderInventory();
-            }
+            }*/
 
             return;
         }
@@ -110,7 +104,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void HarvestInteract()
     {
-        ItemData playerToolSlot = NewInventoryManager.Instance.selectedTool;
+        ItemData playerToolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
         EquipmentData equipmentTool = playerToolSlot as EquipmentData;
 
         //If Plalyer is not using the right tool for Harvesting
@@ -125,9 +119,9 @@ public class PlayerInteraction : MonoBehaviour
             message.text = "";
         }
 
-        if (NewInventoryManager.Instance.selectedPocket != null)
+        if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
         {
-            NewInventoryManager.Instance.EquipToInventory(NewInventorySlot.InventoryType.PlayerPocket);
+            NewInventoryManager.Instance.EquipToInventory(NewInventorySlot.InventoryType.Harvest);
             return;
         }
 
