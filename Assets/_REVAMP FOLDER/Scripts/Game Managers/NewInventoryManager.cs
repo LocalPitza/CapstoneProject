@@ -205,6 +205,22 @@ public class NewInventoryManager : MonoBehaviour
         }
     }
 
+    public void ConsumeItem(ItemSlotData itemSlot)
+    {
+        if (itemSlot.IsEmpty())
+        {
+            Debug.LogError("No more to consume");
+            return;
+        }
+
+        itemSlot.Remove();
+
+        //Refreshes the Inventory
+        NewUIManager.Instance.RenderInventory();
+    }
+
+    #region Inventory Slot Validation
+
     private void OnValidate()
     {
         ValidateInventorySlot(equippedStorageSlot);
@@ -229,5 +245,6 @@ public class NewInventoryManager : MonoBehaviour
             ValidateInventorySlot(slot);
         }
     }
+    #endregion
 
 }

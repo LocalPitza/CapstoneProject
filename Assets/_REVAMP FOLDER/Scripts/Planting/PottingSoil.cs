@@ -77,7 +77,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         ItemData playerToolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
         EquipmentData equipmentTool = playerToolSlot as EquipmentData;
 
-        if (playerToolSlot == null) 
+        if (!NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Storage)) 
         {
             return;
         }
@@ -126,6 +126,11 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
             cropPlanted = cropObject.GetComponent<NewCropBehaviour>();
             cropPlanted.Plant(seed);
+
+            //Consumes the Item for planting
+            NewInventoryManager.Instance.ConsumeItem
+                (NewInventoryManager.Instance.GetEquippedSlot
+                (NewInventorySlot.InventoryType.Storage));
         }
     }
 
@@ -137,27 +142,6 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         }
         return NewCropBehaviour.CropState.Harvestable;
     }
-
-    /*public void PlantSeed()
-    {
-        Debug.Log("Planting");
-        ItemData selectSeed = NewInventoryManager.Instance.selectedHarvest;
-        SeedData seed = selectSeed as SeedData;
-
-        if (selectSeed == null)
-        {
-            return;
-        }
-
-        if (seed != null && soilStatus != SoilStatus.Soil && cropPlanted == null)
-        {
-            GameObject cropObject = Instantiate(cropPrefab, transform);
-            cropObject.transform.position = plantPosition.position;
-
-            cropPlanted = cropObject.GetComponent<NewCropBehaviour>();
-            cropPlanted.Plant(seed);
-        }
-    }*/
 
     public void ClockUpdate(GameTimeStamp timestamp)
     {
