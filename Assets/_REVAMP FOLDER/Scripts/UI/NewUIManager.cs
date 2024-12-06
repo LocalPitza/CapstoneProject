@@ -75,23 +75,27 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         ItemData selectedStorage = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
         ItemData selectedHarvest = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Harvest);
 
+        // Update the tool equipped icon
         if (selectedStorage != null)
         {
             toolEquippedIcon.sprite = selectedStorage.thumbnail;
             toolEquippedIcon.gameObject.SetActive(true);
-
-            return;
         }
-        toolEquippedIcon.gameObject.SetActive(false);
+        else
+        {
+            toolEquippedIcon.gameObject.SetActive(false);
+        }
 
+        // Update the harvest equipped icon
         if (selectedHarvest != null)
         {
             harvestEquippedIcon.sprite = selectedHarvest.thumbnail;
             harvestEquippedIcon.gameObject.SetActive(true);
-
-            return;
         }
-        harvestEquippedIcon.gameObject.SetActive(false);
+        else
+        {
+            harvestEquippedIcon.gameObject.SetActive(false);
+        }
 
     }
 
@@ -117,29 +121,6 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
         itemNameText.text = data.name;
         itemDescriptionText.text = data.description;
-
-        /*nameText.text = "";
-        descriptionText.text = "";
-
-        if (data == null)
-        {
-            return;
-        }
-
-        switch (data.itemType)
-        {
-            case ItemType.HarvestItem:
-                // Show in Seed UI only
-                nameText.text = data.name;
-                descriptionText.text = data.description;
-                break;
-
-            case ItemType.StorageItem:
-                // Show in Storage UI only
-                nameText.text = data.name;
-                descriptionText.text = data.description;
-                break;
-        }*/
     }
 
     public void ClockUpdate(GameTimeStamp timestamp)

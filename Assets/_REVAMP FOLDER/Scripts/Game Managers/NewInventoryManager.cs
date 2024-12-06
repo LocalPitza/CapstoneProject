@@ -19,18 +19,18 @@ public class NewInventoryManager : MonoBehaviour
     }
 
     [Header("Storage UI")]
+    [SerializeField]
+    private ItemSlotData equippedStorageSlot = null;
+
     [SerializeField] 
     private ItemSlotData[] storageSlots = new ItemSlotData[17];
 
-    [SerializeField] 
-    private ItemSlotData equippedStorageSlot = null;
-
     [Header("Harvested UI")]
+    [SerializeField]
+    private ItemSlotData equippedHarvestSlot = null;
+
     [SerializeField] 
     private ItemSlotData[] harvestedSlots = new ItemSlotData[17];
-
-    [SerializeField] 
-    private ItemSlotData equippedHarvestSlot = null;
 
     public Transform handPoint;
 
@@ -60,32 +60,17 @@ public class NewInventoryManager : MonoBehaviour
 
             inventoryToAlter[slotIndex] = new ItemSlotData(handToEquip);
 
-            EquipHandSlot(slotToEquip);
+            if (slotToEquip.IsEmpty())
+            {
+                handToEquip.Empty();
+            }
+            else
+            {
+                EquipHandSlot(slotToEquip);
+            }
         }
 
         NewUIManager.Instance.RenderInventory();
-
-
-        /*if(inventoryType == NewInventorySlot.InventoryType.Harvest)
-        {
-            ItemData seedToSelect = harvestedSlots[slotIndex];
-
-            harvestedSlots[slotIndex] = selectedHarvestSlot;
-
-            selectedHarvestSlot = seedToSelect;
-        }
-        else //Storage Box
-        {
-            ItemData storageToSelect = storageSlots[slotIndex];
-
-            storageSlots[slotIndex] = selectedStorageSlot;
-
-            selectedStorageSlot = storageToSelect;
-
-            //RenderHand();
-        }
-
-        NewUIManager.Instance.RenderInventory();*/
     }
 
     public void EquipToInventory(NewInventorySlot.InventoryType inventoryType)
@@ -98,7 +83,6 @@ public class NewInventoryManager : MonoBehaviour
             handSlot = equippedHarvestSlot;
             inventoryToAlter = harvestedSlots;
         }
-
 
         if(!StackItemToInventory(handSlot, inventoryToAlter))
         {
@@ -117,37 +101,6 @@ public class NewInventoryManager : MonoBehaviour
         }
 
         NewUIManager.Instance.RenderInventory();
-
-        /*if (inventoryType == NewInventorySlot.InventoryType.Harvest)
-        {
-            for (int i = 0; i < harvestedSlots.Length; i++)
-            {
-                if (harvestedSlots[i] == null)
-                {
-                    harvestedSlots[i] = selectedHarvestSlot;
-
-                    selectedHarvestSlot = null;
-                    break;
-                }
-            }
-        }
-        else
-        {
-            if (selectedStorageSlot != null)
-            {
-                for (int i = 0; i < storageSlots.Length; i++)
-                {
-                    if (storageSlots[i] == null)
-                    {
-                        storageSlots[i] = selectedStorageSlot;
-                        selectedStorageSlot = null;
-                        break;
-                    }
-                }
-            }
-        }
-        
-        NewUIManager.Instance.RenderInventory();*/
     }
 
     public bool StackItemToInventory(ItemSlotData itemSlot, ItemSlotData[] inventoryArray)
