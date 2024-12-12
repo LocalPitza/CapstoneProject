@@ -10,7 +10,6 @@ public class PlayerMove : MonoBehaviour
     public float turnSpeed = 180f;
 
     PlayerInteraction playerInteraction;
-    private ShowUISeeds showUISeeds;
     private StorageInteract storageInteract;
 
     private void Start()
@@ -23,8 +22,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        if ((showUISeeds == null || !showUISeeds.IsUIActive()) &&
-            (storageInteract == null || !storageInteract.IsUIActive()))
+        if ((storageInteract == null || !storageInteract.IsUIActive()))
         {
             Vector3 movDir;
 
@@ -48,11 +46,6 @@ public class PlayerMove : MonoBehaviour
             else
             {
                 playerInteraction.Interact();
-            }
-
-            if (playerInteraction.selectedSoil != null)
-            {
-                showUISeeds = playerInteraction.selectedSoil.GetComponent<ShowUISeeds>();
             }
         }
     }

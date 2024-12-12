@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PottingSoil : MonoBehaviour, ITimeTracker
 {
+    public int id;
+
     public enum SoilStatus
     {
         Soil, Digged, Watered
@@ -32,6 +34,31 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         SwitchSoilStatus(SoilStatus.Soil);
 
         TimeManager.Instance.RegisterTracker(this);
+
+        Select(false);
+    }
+
+    public void LoadSoilData(SoilStatus statusToSwitch, GameTimeStamp lastwatered)
+    {
+        soilStatus = statusToSwitch;
+        timeWatered = lastwatered;
+
+        Material materialToSwitch = soilMat;
+        switch (statusToSwitch)
+        {
+            case SoilStatus.Soil:
+                materialToSwitch = soilMat;
+                break;
+            case SoilStatus.Digged:
+                materialToSwitch = diggedMat;
+
+                break;
+            case SoilStatus.Watered:
+                materialToSwitch = wateredMat;
+                timeWatered = TimeManager.Instance.GetGameTimeStamp();
+                break;
+        }
+        renderer.material = materialToSwitch;
     }
 
     public void SwitchSoilStatus(SoilStatus statusToSwitch)
@@ -60,16 +87,13 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                 break;
         }
         renderer.material = materialToSwitch;
+
+        SoilManager.Instance.OnSoilStateChange(id, soilStatus, timeWatered);
     }
 
     public void Select(bool toggle)
     {
         select.SetActive(toggle);
-
-        if (toggle)
-        {
-            SoilManager.Instance.SetSelectedSoil(this);
-        }
     }
 
     public void Interact()
@@ -106,6 +130,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                     //Remove the Plant from the Soil
                     if(cropPlanted != null)
                     {
+                        Debug.Log("Remove Deadplant");
                         Destroy(cropPlanted.gameObject);
                         SwitchSoilStatus(SoilStatus.Soil);
                     }
@@ -125,13 +150,23 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
             cropObject.transform.position = plantPosition.position;
 
             cropPlanted = cropObject.GetComponent<NewCropBehaviour>();
-            cropPlanted.Plant(seed);
+            cropPlanted.Plant(id, seed);
 
             //Consumes the Item for planting
             NewInventoryManager.Instance.ConsumeItem
                 (NewInventoryManager.Instance.GetEquippedSlot
                 (NewInventorySlot.InventoryType.Storage));
         }
+    }
+
+    public NewCropBehaviour SpawnCrop()
+    {
+        GameObject cropObject = Instantiate(cropPrefab, transform);
+        cropObject.transform.position = plantPosition.position;
+
+        cropPlanted = cropObject.GetComponent<NewCropBehaviour>();
+
+        return cropPlanted;
     }
 
     public NewCropBehaviour.CropState GetCropStatus()

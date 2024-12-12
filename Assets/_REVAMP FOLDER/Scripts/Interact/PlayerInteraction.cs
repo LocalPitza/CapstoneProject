@@ -7,11 +7,9 @@ public class PlayerInteraction : MonoBehaviour
 {
     PlayerMove playerMove;
 
-    //[HideInInspector]
     public PottingSoil selectedSoil = null;
     InteractableObject selectedInteractableObject = null;
 
-    ShowUISeeds showUISeeds;
     //[HideInInspector]
     public bool harvestableHit = false;
 
@@ -49,8 +47,6 @@ public class PlayerInteraction : MonoBehaviour
             PottingSoil soilIndicator = other.GetComponent<PottingSoil>();
             SelectPot(soilIndicator);
 
-            showUISeeds = other.GetComponent<ShowUISeeds>();
-
             return;
         }
 
@@ -71,8 +67,6 @@ public class PlayerInteraction : MonoBehaviour
             selectedSoil.Select(false);
             selectedSoil = null;
         }
-
-        showUISeeds = null;
     }
 
     void SelectPot(PottingSoil soilIndicator)
@@ -91,12 +85,6 @@ public class PlayerInteraction : MonoBehaviour
         if(selectedSoil != null)
         {
             selectedSoil.Interact();
-
-            /*if (showUISeeds != null && selectedSoil.soilStatus == PottingSoil.SoilStatus.Digged)
-            {
-                showUISeeds.ToggleUI();
-                NewUIManager.Instance.RenderInventory();
-            }*/
 
             return;
         }

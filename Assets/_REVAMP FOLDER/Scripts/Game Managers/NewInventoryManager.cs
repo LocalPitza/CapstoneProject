@@ -18,6 +18,9 @@ public class NewInventoryManager : MonoBehaviour
         }
     }
 
+    //The Full list of Items
+    public ItemIndex itemIndex;
+
     [Header("Storage UI")]
     [SerializeField]
     private ItemSlotData equippedStorageSlot = null;

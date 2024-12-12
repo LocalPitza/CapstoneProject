@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\CamSwitcher.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\StorageInteract.cs" />
     <Compile Include="Assets\Scripts\Planting\Harvestable.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Saving\CropSaveState.cs" />
     <Compile Include="Assets\Scripts\HomeDoor.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\InteractableObject.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\SeedData.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\ItemData.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\EquipmentData.cs" />
     <Compile Include="Assets\Scripts\Planting\SelectPot.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Saving\SoilSaveState.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\NewInventorySlot.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\BedInteract.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\SoilManager.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\YesNoPrompt.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\BarsUnit.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\ItemIndex.cs" />
     <Compile Include="Assets\Scripts\Planting\CropBehaviour.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\GameStateManager.cs" />
