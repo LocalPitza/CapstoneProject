@@ -31,6 +31,9 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemDescriptionText;
 
+    [Header("Yes No Prompt")]
+    public YesNoPrompt yesNoPrompt;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -51,6 +54,7 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         TimeManager.Instance.RegisterTracker(this);
     }
 
+    #region SlotIndexes
     public void AssignSlotIndexes()
     {
         for(int k = 0; k < storageSlots.Length; k++)
@@ -59,7 +63,9 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
             harvestSlot[k].AssignIndex(k);
         }
     }
+    #endregion
 
+    #region RenderInventory
     public void RenderInventory()
     {
         ItemSlotData[] inventoryStorageSlots = NewInventoryManager.Instance.GetInventorySlots(NewInventorySlot.InventoryType.Storage);
@@ -126,7 +132,9 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
             uiSlots[i].Display(slots[i]);
         }
     }
+    #endregion
 
+    #region Display Item Info
     public void DisplayItemInfo(ItemData data)
     {
         //If data is null, reset
@@ -141,7 +149,16 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         itemNameText.text = data.name;
         itemDescriptionText.text = data.description;
     }
+    #endregion
 
+    public void TriggerYesNoPrompt(string message, System.Action onYesCallBack)
+    {
+        yesNoPrompt.gameObject.SetActive(true);
+
+        yesNoPrompt.CreatePrompt(message, onYesCallBack);
+    }
+
+    #region Time
     public void ClockUpdate(GameTimeStamp timestamp)
     {
         int hours = timestamp.hour;
@@ -163,4 +180,5 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
         dateText.text = season +" "+ day + " (" + dayOfTheWeek + ")";
     }
+    #endregion
 }
