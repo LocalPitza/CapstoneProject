@@ -32,6 +32,8 @@ public class GameStateManager : MonoBehaviour
 
         TimeManager.Instance.SkipTime(timestampOfNextDay);
 
+        SaveManager.Save(ExportSaveState());
+
         StartCoroutine(FadeInOut());
     }
 
@@ -63,5 +65,24 @@ public class GameStateManager : MonoBehaviour
         }
 
         fadeImage.color = new Color(color.r, color.g, color.b, endAlpha);
+    }
+
+    public GameSaveState ExportSaveState()
+    {
+        //Retrieving the Farm Data
+        //List<SoilSaveState> soilData = SoilManager.urbanFarmData.Item1;
+        //List<CropSaveState> cropData = SoilManager.urbanFarmData.Item2;
+
+        //Retrieving the Inventory Data
+        ItemSlotData[] storageSlots = NewInventoryManager.Instance.GetInventorySlots(NewInventorySlot.InventoryType.Storage);
+        ItemSlotData[] harvestlots = NewInventoryManager.Instance.GetInventorySlots(NewInventorySlot.InventoryType.Harvest);
+
+        ItemSlotData equippedStorageSlot = NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Storage);
+        ItemSlotData equippedHarvestSlot = NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Harvest);
+
+        //Time
+        GameTimeStamp timestamp = TimeManager.Instance.GetGameTimeStamp();
+
+        return new GameSaveState(storageSlots, harvestlots, equippedStorageSlot, equippedHarvestSlot, timestamp);
     }
 }
