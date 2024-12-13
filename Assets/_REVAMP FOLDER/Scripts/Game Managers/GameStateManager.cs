@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -84,5 +85,33 @@ public class GameStateManager : MonoBehaviour
         GameTimeStamp timestamp = TimeManager.Instance.GetGameTimeStamp();
 
         return new GameSaveState(storageSlots, harvestlots, equippedStorageSlot, equippedHarvestSlot, timestamp);
+    }
+
+    public void LoadGame()
+    {
+        // Load the saved game state
+        GameSaveState save = SaveManager.Load();
+
+        if (save == null)
+        {
+            Debug.LogError("No save data found.");
+            return;
+        }
+
+        SceneManager.LoadScene("RevampScene");
+
+        // Restore the time from the save
+        TimeManager.Instance.LoadTime(save.timestamp);
+
+        // Restore the inventory
+        ItemSlotData[] storageSlots = save.storageSlot;
+        ItemSlotData equippedStorageSlot = save.equippedStorageSlot;
+
+        ItemSlotData[] harvestSlots = save.harvestSlot;
+        ItemSlotData equippedHarvestSlot = save.equippedHarvestSlot;
+
+        NewInventoryManager.Instance.LoadInventory(storageSlots, equippedStorageSlot, harvestSlots, equippedHarvestSlot);
+
+        Debug.Log("Game state loaded successfully!");
     }
 }

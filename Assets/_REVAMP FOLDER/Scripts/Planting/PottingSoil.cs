@@ -88,7 +88,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         }
         renderer.material = materialToSwitch;
 
-        SoilManager.Instance.OnSoilStateChange(id, soilStatus, timeWatered);
+        //SoilManager.Instance.OnSoilStateChange(id, soilStatus, timeWatered);
     }
 
     public void Select(bool toggle)

@@ -30,7 +30,7 @@ public class NewCropBehaviour : MonoBehaviour
     {
         LoadCrop(soilID, seedToGrow, CropState.Seed, 0, 0);
 
-        SoilManager.Instance.RegisterCrop(soilID, seedToGrow, cropState, growth, health);
+        //SoilManager.Instance.RegisterCrop(soilID, seedToGrow, cropState, growth, health);
     }
 
     public void LoadCrop(int soilID, SeedData seedToGrow, CropState cropState, int growth, int health)
@@ -85,7 +85,7 @@ public class NewCropBehaviour : MonoBehaviour
             SwitchState(CropState.Harvestable);
         }
 
-        SoilManager.Instance.OnCropStateChange(soilID, cropState, growth, health);
+        //SoilManager.Instance.OnCropStateChange(soilID, cropState, growth, health);
     }
 
     public void Wither()
@@ -97,7 +97,7 @@ public class NewCropBehaviour : MonoBehaviour
             SwitchState(CropState.Wilted);
         }
 
-        SoilManager.Instance.OnCropStateChange(soilID, cropState, growth, health);
+        //SoilManager.Instance.OnCropStateChange(soilID, cropState, growth, health);
     }
 
     void SwitchState(CropState stateToSwitch)
@@ -140,7 +140,7 @@ public class NewCropBehaviour : MonoBehaviour
 
     public void RemoveCrop()
     {
-        SoilManager.Instance.DeregisterCrop(soilID);
+        //SoilManager.Instance.DeregisterCrop(soilID);
         Destroy(gameObject);
     }
 
