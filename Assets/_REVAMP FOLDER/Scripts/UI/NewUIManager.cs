@@ -14,7 +14,10 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
     [Header("Player Equipped Slot")]
     public Image toolEquippedIcon;
+    public TextMeshProUGUI toolQuantityText;
+
     public Image harvestEquippedIcon;
+    public TextMeshProUGUI harvestQuantityText;
 
     [Header("Storage")]
     public NewHandInventorySlot storageEquippedSlot;
@@ -27,6 +30,9 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     [Header("Info Box")]
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemDescriptionText;
+
+    [Header("Yes No Prompt")]
+    public YesNoPrompt yesNoPrompt;
 
     private void Awake()
     {
@@ -48,6 +54,7 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         TimeManager.Instance.RegisterTracker(this);
     }
 
+    #region SlotIndexes
     public void AssignSlotIndexes()
     {
         for(int k = 0; k < storageSlots.Length; k++)
@@ -56,7 +63,9 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
             harvestSlot[k].AssignIndex(k);
         }
     }
+    #endregion
 
+    #region RenderInventory
     public void RenderInventory()
     {
         ItemSlotData[] inventoryStorageSlots = NewInventoryManager.Instance.GetInventorySlots(NewInventorySlot.InventoryType.Storage);
@@ -75,11 +84,21 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         ItemData selectedStorage = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
         ItemData selectedHarvest = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Harvest);
 
+        //By default, quantity text is empty
+        toolQuantityText.text = "";
+        harvestQuantityText.text = "";
+
         // Update the tool equipped icon
         if (selectedStorage != null)
         {
             toolEquippedIcon.sprite = selectedStorage.thumbnail;
             toolEquippedIcon.gameObject.SetActive(true);
+
+            int quantity = NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Storage).quantity;
+            if(quantity > 1)
+            {
+                toolQuantityText.text = quantity.ToString();
+            }
         }
         else
         {
@@ -91,6 +110,12 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         {
             harvestEquippedIcon.sprite = selectedHarvest.thumbnail;
             harvestEquippedIcon.gameObject.SetActive(true);
+
+            int quantity = NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Harvest).quantity;
+            if (quantity > 1)
+            {
+                harvestQuantityText.text = quantity.ToString();
+            }
         }
         else
         {
@@ -107,7 +132,9 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
             uiSlots[i].Display(slots[i]);
         }
     }
+    #endregion
 
+    #region Display Item Info
     public void DisplayItemInfo(ItemData data)
     {
         //If data is null, reset
@@ -122,7 +149,16 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         itemNameText.text = data.name;
         itemDescriptionText.text = data.description;
     }
+    #endregion
 
+    public void TriggerYesNoPrompt(string message, System.Action onYesCallBack)
+    {
+        yesNoPrompt.gameObject.SetActive(true);
+
+        yesNoPrompt.CreatePrompt(message, onYesCallBack);
+    }
+
+    #region Time
     public void ClockUpdate(GameTimeStamp timestamp)
     {
         int hours = timestamp.hour;
@@ -144,4 +180,5 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
         dateText.text = season +" "+ day + " (" + dayOfTheWeek + ")";
     }
+    #endregion
 }
