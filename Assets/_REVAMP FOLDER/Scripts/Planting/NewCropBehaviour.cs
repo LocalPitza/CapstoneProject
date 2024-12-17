@@ -126,8 +126,10 @@ public class NewCropBehaviour : MonoBehaviour
                 {
                     //Unparenting
                     harvestable.transform.parent = null;
-                    RemoveCrop();
-                    //harvestable.GetComponent<InteractableObject>().onInteract.AddListener(RemoveCrop);
+
+                    //RemoveCrop();
+
+                    harvestable.GetComponent<InteractableObject>().onInteract.AddListener(RemoveCrop);
                 }
                 
                 break;

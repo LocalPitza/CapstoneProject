@@ -13,4 +13,19 @@ public struct SoilSaveState
         this.soilStatus = soilStatus;
         this.lastWatered = lastWatered;
     }
+
+    public void ClockUpdate(GameTimeStamp timestamp)
+    {
+        if (soilStatus == PottingSoil.SoilStatus.Watered)
+        {
+            int hoursElapsed = GameTimeStamp.CompareTimestamp(lastWatered, timestamp);
+            Debug.Log(hoursElapsed + " hours since this was watered");
+
+            if (hoursElapsed > 24)
+            {
+                soilStatus = PottingSoil.SoilStatus.Digged;
+            }
+        }
+
+    }
 }

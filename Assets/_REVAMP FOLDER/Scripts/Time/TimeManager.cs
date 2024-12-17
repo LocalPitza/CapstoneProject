@@ -34,6 +34,11 @@ public class TimeManager : MonoBehaviour
         StartCoroutine(TimeUpdate());
     }
 
+    public void LoadTime(GameTimeStamp timeStamp)
+    {
+        this.gameTimeStamp = new GameTimeStamp(timeStamp);
+    }
+
     IEnumerator TimeUpdate()
     {
         while (true)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameStateManager : MonoBehaviour
+public class GameStateManager : MonoBehaviour, ITimeTracker
 {
     public static GameStateManager Instance { get; private set; }
 
@@ -22,11 +22,66 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        TimeManager.Instance.RegisterTracker(this);
+    }
+
     private void Update()
     {
         if(Input.GetKey(KeyCode.P))
         {
             TimeManager.Instance.Tick();
+        }
+    }
+
+    public void ClockUpdate(GameTimeStamp timestamp)
+    {
+        //Updates the Land and Crop Save states as long as the player is outside of the PlantingArea scene
+        if(SceneTransitionManager.Instance.currentLocation != SceneTransitionManager.Location.PlantingArea)
+        {
+            List<SoilSaveState> soilData = SoilManager.urbanFarmData.Item1;
+            List<CropSaveState> cropData = SoilManager.urbanFarmData.Item2;
+
+            //If there are no crops planted on a certain soil, don't need to update
+            if(cropData.Count == 0)
+            {
+                return;
+            }
+
+            for(int i = 0; i < cropData.Count; i++)
+            {
+                CropSaveState crop = cropData[i];
+                SoilSaveState soil = soilData[crop.soilID];
+
+                //Check if the crop is already wilted
+                if(crop.cropState == NewCropBehaviour.CropState.Wilted)
+                {
+                    continue;
+                }
+
+                //Update the Soil's state
+                soil.ClockUpdate(timestamp);
+
+                //Update the crop's state based on the soil state
+                if(soil.soilStatus == PottingSoil.SoilStatus.Watered)
+                {
+                    crop.Grow();
+                }
+                else if(crop.cropState != NewCropBehaviour.CropState.Seed)
+                {
+                    crop.Wither();
+                }
+
+                //Update the element in the array
+                cropData[i] = crop;
+                soilData[crop.soilID] = soil;
+            }
+
+            SoilManager.urbanFarmData.Item2.ForEach((CropSaveState crop) =>
+            {
+                Debug.Log(crop.seedToGrow + "\n Health: " + crop.health + "\n Growth: " + crop.growth + "\n State: " + crop.cropState.ToString());
+            });
         }
     }
 
@@ -92,5 +147,26 @@ public class GameStateManager : MonoBehaviour
         GameTimeStamp timestamp = TimeManager.Instance.GetGameTimeStamp();
 
         return new GameSaveState(soilData, cropData, storageSlots, harvestlots, equippedStorageSlot, equippedHarvestSlot, timestamp);
+    }
+
+    public void LoadSave()
+    {
+        SceneTransitionManager.Instance.SwitchLocation(SceneTransitionManager.Location.Bedroom);
+
+        GameSaveState save = SaveManager.Load();
+
+        TimeManager.Instance.LoadTime(save.timestamp);
+
+        ItemSlotData[] storageSlots = save.storageSlot;
+        ItemSlotData equippedStorageSlot = save.equippedStorageSlot;
+
+        ItemSlotData[] harvestSlots = save.harvestSlot;
+        ItemSlotData equippedHarvestSlot = save.equippedHarvestSlot;
+
+        NewInventoryManager.Instance.LoadInventory(storageSlots, equippedStorageSlot, harvestSlots, equippedHarvestSlot);
+
+        SoilManager.urbanFarmData = new System.Tuple<List<SoilSaveState>, List<CropSaveState>>(save.soilData, save.cropData);
+
+        Debug.Log("Game state loaded successfully!");
     }
 }

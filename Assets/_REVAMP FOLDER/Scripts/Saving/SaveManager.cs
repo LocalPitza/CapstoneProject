@@ -13,4 +13,17 @@ public class SaveManager : MonoBehaviour
         string json = JsonUtility.ToJson(save);
         File.WriteAllText(FILEPATH, json);
     }
+
+    public static GameSaveState Load()
+    {
+        GameSaveState loadedSave = null;
+
+        if(File.Exists(FILEPATH))
+        {
+            string json = File.ReadAllText(FILEPATH);
+            loadedSave = JsonUtility.FromJson<GameSaveState>(json);
+        }
+
+        return loadedSave;
+    }
 }

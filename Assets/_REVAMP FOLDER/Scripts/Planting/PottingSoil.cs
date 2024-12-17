@@ -141,10 +141,6 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
             SpawnCrop();
 
-            //GameObject cropObject = Instantiate(cropPrefab, transform);
-            //cropObject.transform.position = plantPosition.position;
-
-            //cropPlanted = cropObject.GetComponent<NewCropBehaviour>();
             cropPlanted.Plant(id, seed);
 
             //Consumes the Item for planting
@@ -187,7 +183,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
             if(hoursElapsed > 24)
             {
-                SwitchSoilStatus(SoilStatus.Soil);
+                SwitchSoilStatus(SoilStatus.Digged);
             }
         }
 
@@ -200,5 +196,10 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                 cropPlanted.Wither();
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        TimeManager.Instance.UnregisterTracker(this);
     }
 }

@@ -37,6 +37,17 @@ public class NewInventoryManager : MonoBehaviour
 
     public Transform handPoint;
 
+    public void LoadInventory(ItemSlotData[] storageSlots, ItemSlotData equippedStorageSlot, ItemSlotData[] harvestedSlots, ItemSlotData equippedHarvestSlot)
+    {
+        this.storageSlots = storageSlots;
+        this.equippedStorageSlot = equippedStorageSlot;
+
+        this.harvestedSlots = harvestedSlots;
+        this.equippedHarvestSlot = equippedHarvestSlot;
+
+        NewUIManager.Instance.RenderInventory();
+    }
+
     //Equipping
     public void InventoryToEquip(int slotIndex, NewInventorySlot.InventoryType inventoryType)
     {
