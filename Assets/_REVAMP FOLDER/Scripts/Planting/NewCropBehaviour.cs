@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NewCropBehaviour : MonoBehaviour
 {
+    int soilID;
+
     SeedData seedToGrow;
 
     [Header("Plant Stages")]
@@ -24,9 +26,19 @@ public class NewCropBehaviour : MonoBehaviour
     }
     public CropState cropState;
 
-    public void Plant(SeedData seedToGrow)
+    public void Plant(int soilID, SeedData seedToGrow)
     {
+        LoadCrop(soilID, seedToGrow, CropState.Seed, 0, 0);
+
+        SoilManager.Instance.RegisterCrop(soilID, seedToGrow, cropState, growth, health);
+    }
+
+    public void LoadCrop(int soilID, SeedData seedToGrow, CropState cropState, int growth, int health)
+    {
+        this.soilID = soilID;
+
         this.seedToGrow = seedToGrow;
+
         seedling = Instantiate(seedToGrow.seedling, transform);
 
         ItemData cropToYield = seedToGrow.cropToYield;
@@ -38,6 +50,9 @@ public class NewCropBehaviour : MonoBehaviour
         //Convert to Minutes, since tha plant grows by the minutes
         maxGrowth = GameTimeStamp.HoursToMinutes(hoursToGrow);
 
+        this.growth = growth;
+        this.health = health;
+
         //Check if its regrowable
         if (seedToGrow.regrowable)
         {
@@ -46,7 +61,7 @@ public class NewCropBehaviour : MonoBehaviour
         }
 
         //Initial state to seed
-        SwitchState(CropState.Seed);
+        SwitchState(cropState);
     }
 
     public void Grow()
@@ -69,6 +84,8 @@ public class NewCropBehaviour : MonoBehaviour
         {
             SwitchState(CropState.Harvestable);
         }
+
+        SoilManager.Instance.OnCropStateChange(soilID, cropState, growth, health);
     }
 
     public void Wither()
@@ -79,6 +96,8 @@ public class NewCropBehaviour : MonoBehaviour
         {
             SwitchState(CropState.Wilted);
         }
+
+        SoilManager.Instance.OnCropStateChange(soilID, cropState, growth, health);
     }
 
     void SwitchState(CropState stateToSwitch)
@@ -107,7 +126,10 @@ public class NewCropBehaviour : MonoBehaviour
                 {
                     //Unparenting
                     harvestable.transform.parent = null;
-                    Destroy(gameObject);
+
+                    //RemoveCrop();
+
+                    harvestable.GetComponent<InteractableObject>().onInteract.AddListener(RemoveCrop);
                 }
                 
                 break;
@@ -116,6 +138,12 @@ public class NewCropBehaviour : MonoBehaviour
                 break;
         }
         cropState = stateToSwitch;
+    }
+
+    public void RemoveCrop()
+    {
+        SoilManager.Instance.DeregisterCrop(soilID);
+        Destroy(gameObject);
     }
 
     public void Regrow()

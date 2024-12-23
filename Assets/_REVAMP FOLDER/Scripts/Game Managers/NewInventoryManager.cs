@@ -18,6 +18,9 @@ public class NewInventoryManager : MonoBehaviour
         }
     }
 
+    //The Full list of Items
+    public ItemIndex itemIndex;
+
     [Header("Storage UI")]
     [SerializeField]
     private ItemSlotData equippedStorageSlot = null;
@@ -33,6 +36,17 @@ public class NewInventoryManager : MonoBehaviour
     private ItemSlotData[] harvestedSlots = new ItemSlotData[17];
 
     public Transform handPoint;
+
+    public void LoadInventory(ItemSlotData[] storageSlots, ItemSlotData equippedStorageSlot, ItemSlotData[] harvestedSlots, ItemSlotData equippedHarvestSlot)
+    {
+        this.storageSlots = storageSlots;
+        this.equippedStorageSlot = equippedStorageSlot;
+
+        this.harvestedSlots = harvestedSlots;
+        this.equippedHarvestSlot = equippedHarvestSlot;
+
+        NewUIManager.Instance.RenderInventory();
+    }
 
     //Equipping
     public void InventoryToEquip(int slotIndex, NewInventorySlot.InventoryType inventoryType)
@@ -205,6 +219,22 @@ public class NewInventoryManager : MonoBehaviour
         }
     }
 
+    public void ConsumeItem(ItemSlotData itemSlot)
+    {
+        if (itemSlot.IsEmpty())
+        {
+            Debug.LogError("No more to consume");
+            return;
+        }
+
+        itemSlot.Remove();
+
+        //Refreshes the Inventory
+        NewUIManager.Instance.RenderInventory();
+    }
+
+    #region Inventory Slot Validation
+
     private void OnValidate()
     {
         ValidateInventorySlot(equippedStorageSlot);
@@ -229,5 +259,6 @@ public class NewInventoryManager : MonoBehaviour
             ValidateInventorySlot(slot);
         }
     }
+    #endregion
 
 }

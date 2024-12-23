@@ -7,11 +7,9 @@ public class PlayerInteraction : MonoBehaviour
 {
     PlayerMove playerMove;
 
-    //[HideInInspector]
     public PottingSoil selectedSoil = null;
     InteractableObject selectedInteractableObject = null;
 
-    ShowUISeeds showUISeeds;
     //[HideInInspector]
     public bool harvestableHit = false;
 
@@ -49,8 +47,6 @@ public class PlayerInteraction : MonoBehaviour
             PottingSoil soilIndicator = other.GetComponent<PottingSoil>();
             SelectPot(soilIndicator);
 
-            showUISeeds = other.GetComponent<ShowUISeeds>();
-
             return;
         }
 
@@ -71,8 +67,6 @@ public class PlayerInteraction : MonoBehaviour
             selectedSoil.Select(false);
             selectedSoil = null;
         }
-
-        showUISeeds = null;
     }
 
     void SelectPot(PottingSoil soilIndicator)
@@ -92,19 +86,13 @@ public class PlayerInteraction : MonoBehaviour
         {
             selectedSoil.Interact();
 
-            /*if (showUISeeds != null && selectedSoil.soilStatus == PottingSoil.SoilStatus.Digged)
-            {
-                showUISeeds.ToggleUI();
-                NewUIManager.Instance.RenderInventory();
-            }*/
-
             return;
         }
     }
 
     public void HarvestInteract()
     {
-        ItemData playerToolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
+        /*ItemData playerToolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
         EquipmentData equipmentTool = playerToolSlot as EquipmentData;
 
         //If Plalyer is not using the right tool for Harvesting
@@ -117,7 +105,7 @@ public class PlayerInteraction : MonoBehaviour
         else
         {
             message.text = "";
-        }
+        }*/
 
         if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
         {
