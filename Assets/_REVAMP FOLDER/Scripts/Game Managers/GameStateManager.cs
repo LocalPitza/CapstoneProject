@@ -40,6 +40,11 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
         //Updates the Land and Crop Save states as long as the player is outside of the PlantingArea scene
         if(SceneTransitionManager.Instance.currentLocation != SceneTransitionManager.Location.PlantingArea)
         {
+            if (SoilManager.urbanFarmData == null)
+            {
+                return;
+            }
+
             List<SoilSaveState> soilData = SoilManager.urbanFarmData.Item1;
             List<CropSaveState> cropData = SoilManager.urbanFarmData.Item2;
 
@@ -151,8 +156,6 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
     public void LoadSave()
     {
-        SceneTransitionManager.Instance.SwitchLocation(SceneTransitionManager.Location.Bedroom);
-
         GameSaveState save = SaveManager.Load();
 
         TimeManager.Instance.LoadTime(save.timestamp);

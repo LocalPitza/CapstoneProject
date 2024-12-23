@@ -120,6 +120,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\OpenBackpack.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\InteractMessage.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\PlayerInteraction.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Menu\MainMenu.cs" />
     <Compile Include="Assets\Scripts\MainMenu\SoundSetting.cs" />
     <Compile Include="Assets\Scripts\MainMenu\LoadingManager.cs" />
   </ItemGroup>

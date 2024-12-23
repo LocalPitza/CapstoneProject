@@ -52,6 +52,11 @@ public class SceneTransitionManager : MonoBehaviour
         //Find the start point
         Transform startPoint = LocationManager.Instance.GetPlayerStartingPosition(oldLocation);
 
+        if (playerPoint == null)
+        {
+            return;
+        }
+
         //Disable the player's CharacterController component
         CharacterController playerCharacter = playerPoint.GetComponent<CharacterController>();
         playerCharacter.enabled = false;
