@@ -7,19 +7,18 @@ public class PlayerInteraction : MonoBehaviour
 {
     PlayerMove playerMove;
 
-    public PottingSoil selectedSoil = null;
+    PottingSoil selectedSoil = null;
     InteractableObject selectedInteractableObject = null;
-
-    //[HideInInspector]
-    public bool harvestableHit = false;
 
     [Header("Messages to Player")]
     [Header("Harvesting Vegestable")]
-    [SerializeField] private string equipGlove;
+    [SerializeField] string equipGloveMessage;
+
+    [Header("Unequip Harvested Item")]
+    [SerializeField] string unequipMessage;
 
     [Header("Harvesting Fruits")]
-
-    public static TextMeshProUGUI message;
+    public TextMeshProUGUI message;
 
     void Start()
     {
@@ -53,7 +52,6 @@ public class PlayerInteraction : MonoBehaviour
         if (other.CompareTag("Harvestable"))
         {
             selectedInteractableObject = other.GetComponent<InteractableObject>();
-            harvestableHit = true;
             return;
         }
 
@@ -82,7 +80,22 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Interact()
     {
-        if(selectedSoil != null)
+        //The Player must unequipped first the equipped Harvested before he can interact with the pots
+        if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
+        {
+            Debug.Log("Hand is full with Harvested Crop");
+
+            message.text = unequipMessage;
+            StartCoroutine(ClearMessageAfterDelay(2f));
+
+            return;
+        }
+        else
+        {
+            message.text = "";
+        }
+
+        if (selectedSoil != null)
         {
             selectedSoil.Interact();
 
@@ -98,7 +111,7 @@ public class PlayerInteraction : MonoBehaviour
         //If Plalyer is not using the right tool for Harvesting
         if (equipmentTool == null || equipmentTool.toolType != EquipmentData.ToolType.HandGloves)
         {
-            message.text = equipGlove;
+            message.text = equipGloveMessage;
             StartCoroutine(ClearMessageAfterDelay(2f));
             return;
         }

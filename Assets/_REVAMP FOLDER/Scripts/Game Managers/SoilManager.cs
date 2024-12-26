@@ -9,7 +9,7 @@ public class SoilManager : MonoBehaviour
 
     public static Tuple<List<SoilSaveState>, List<CropSaveState>> urbanFarmData = null;
 
-    //public GameObject plantingAreas;
+    public GameObject[] plantingAreas;
 
     List<PottingSoil> soilPlots = new List<PottingSoil>();
 
@@ -56,15 +56,16 @@ public class SoilManager : MonoBehaviour
     #region Register and Deregistering
     void RegisterSoilPlots()
     {
-        foreach (Transform soilTransform in transform)
+        /*foreach (Transform soilTransform in transform)
         {
             PottingSoil potSoil = soilTransform.GetComponent<PottingSoil>();
             soilPlots.Add(potSoil);
 
             soilData.Add(new SoilSaveState());
             potSoil.id = soilPlots.Count - 1;
-        }
-        /*foreach (GameObject plantingArea in plantingAreas)
+        }*/
+
+        foreach (GameObject plantingArea in plantingAreas)
         {
             foreach (Transform soilTransform in plantingArea.transform)
             {
@@ -76,7 +77,7 @@ public class SoilManager : MonoBehaviour
                     potSoil.id = soilPlots.Count - 1; // Assign unique ID
                 }
             }
-        }*/
+        }
 
         Debug.Log($"Registered {soilPlots.Count} soil plots.");
     }

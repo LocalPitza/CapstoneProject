@@ -39,14 +39,22 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (playerInteraction.harvestableHit)
+            playerInteraction.Interact();
+
+            //NOTE: This causes the Bug for some reason
+            /*if (playerInteraction.harvestableHit)
             {
                 playerInteraction.HarvestInteract();
             }
             else
             {
                 playerInteraction.Interact();
-            }
+            }*/
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            playerInteraction.HarvestInteract();
         }
     }
 }
