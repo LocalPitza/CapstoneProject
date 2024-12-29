@@ -34,6 +34,9 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     [Header("Yes No Prompt")]
     public YesNoPrompt yesNoPrompt;
 
+    [Header("Player Stats")]
+    public TextMeshProUGUI moneyText;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -50,6 +53,7 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     {
         RenderInventory();
         AssignSlotIndexes();
+        RenderPlayerStats();
 
         TimeManager.Instance.RegisterTracker(this);
     }
@@ -181,4 +185,9 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         dateText.text = season +" "+ day + " (" + dayOfTheWeek + ")";
     }
     #endregion
+
+    public void RenderPlayerStats()
+    {
+        moneyText.text = PlayerStats.Money + PlayerStats.CURRENCY;
+    }
 }

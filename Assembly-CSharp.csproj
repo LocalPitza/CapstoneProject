@@ -86,6 +86,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Saving\SoilSaveState.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\NewInventorySlot.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\BedInteract.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Buying and Selling\ShippingBin.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\DoorInteract.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\SceneTransition\LocationEntryPoint.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\PlayerInteraction.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Menu\MainMenu.cs" />
     <Compile Include="Assets\Scripts\MainMenu\SoundSetting.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\MainMenu\LoadingManager.cs" />
   </ItemGroup>
   <ItemGroup>

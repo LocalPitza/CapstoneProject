@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MessageManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI interactionText;
+    [SerializeField] private TextMeshProUGUI interactionText = null;
 
     private void Start()
     {

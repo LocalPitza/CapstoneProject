@@ -37,6 +37,21 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
     public void ClockUpdate(GameTimeStamp timestamp)
     {
+        //UpdateShippingState(timestamp);
+        UpdateFarmState(timestamp);
+    }
+
+    /*void UpdateShippingState(GameTimeStamp timestamp)
+    {
+        //Check if the hour is Exactly shipping hours
+        if(timestamp.hour == ShippingBin.hoursToShip && timestamp.minute == 0)
+        {
+            ShippingBin.ShipItens();
+        }
+    }*/
+
+    void UpdateFarmState(GameTimeStamp timestamp)
+    {
         //Updates the Land and Crop Save states as long as the player is outside of the PlantingArea scene
         if(SceneTransitionManager.Instance.currentLocation != SceneTransitionManager.Location.PlantingArea)
         {
@@ -151,7 +166,7 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
         //Time
         GameTimeStamp timestamp = TimeManager.Instance.GetGameTimeStamp();
 
-        return new GameSaveState(soilData, cropData, storageSlots, harvestlots, equippedStorageSlot, equippedHarvestSlot, timestamp);
+        return new GameSaveState(soilData, cropData, storageSlots, harvestlots, equippedStorageSlot, equippedHarvestSlot, timestamp, PlayerStats.Money);
     }
 
     public void LoadSave()
@@ -170,6 +185,6 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
         SoilManager.urbanFarmData = new System.Tuple<List<SoilSaveState>, List<CropSaveState>>(save.soilData, save.cropData);
 
-        Debug.Log("Game state loaded successfully!");
+        PlayerStats.LoadStats(save.money);
     }
 }

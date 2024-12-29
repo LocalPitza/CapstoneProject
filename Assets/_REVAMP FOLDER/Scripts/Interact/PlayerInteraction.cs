@@ -120,15 +120,18 @@ public class PlayerInteraction : MonoBehaviour
             message.text = "";
         }*/
 
+        if(selectedInteractableObject != null)
+        {
+            selectedInteractableObject.PickUp();
+        }
+    }
+
+    public void HarvestKeep()
+    {
         if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
         {
             NewInventoryManager.Instance.EquipToInventory(NewInventorySlot.InventoryType.Harvest);
             return;
-        }
-
-        if(selectedInteractableObject != null)
-        {
-            selectedInteractableObject.PickUp();
         }
     }
 

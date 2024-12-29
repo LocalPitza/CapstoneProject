@@ -56,5 +56,10 @@ public class PlayerMove : MonoBehaviour
         {
             playerInteraction.HarvestInteract();
         }
+
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            playerInteraction.HarvestKeep();
+        }
     }
 }
