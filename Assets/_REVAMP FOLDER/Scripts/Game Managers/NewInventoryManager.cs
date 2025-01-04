@@ -133,6 +133,78 @@ public class NewInventoryManager : MonoBehaviour
         return false;
     }
 
+    public void ShopToInventory(ItemSlotData itemSlotToMove)
+    {
+        ItemSlotData[] inventoryToAlter = IsTool(itemSlotToMove.itemData) ? storageSlots : harvestedSlots;
+
+        if (!StackItemToInventory(itemSlotToMove, inventoryToAlter))
+        {
+            for (int i = 0; i < inventoryToAlter.Length; i++)
+            {
+                if (inventoryToAlter[i].IsEmpty())
+                {
+                    inventoryToAlter[i] = new ItemSlotData(itemSlotToMove);
+                    break;
+                }
+
+            }
+        }
+
+        NewUIManager.Instance.RenderInventory();
+    }
+
+    public void UnstackEquippedItem(NewInventorySlot.InventoryType inventoryType)
+    {
+        ItemSlotData equippedSlot = (inventoryType == NewInventorySlot.InventoryType.Harvest)
+        ? equippedHarvestSlot
+        : equippedStorageSlot;
+
+        ItemSlotData[] inventoryToAlter = (inventoryType == NewInventorySlot.InventoryType.Harvest)
+            ? harvestedSlots
+            : storageSlots;
+
+        if (equippedSlot.IsEmpty())
+        {
+            Debug.Log("No item to unstack.");
+            return;
+        }
+
+        if (equippedSlot.quantity == 1)
+        {
+            for (int i = 0; i < inventoryToAlter.Length; i++)
+            {
+                if (inventoryToAlter[i].IsEmpty())
+                {
+                    inventoryToAlter[i] = new ItemSlotData(equippedSlot);
+                    equippedSlot.Empty();
+                    NewUIManager.Instance.RenderInventory();
+                    return;
+                }
+            }
+
+            Debug.LogWarning("No empty slots available. Cannot move the last item.");
+            return;
+        }
+
+        equippedSlot.Remove(); // Reduce the quantity by 1
+
+        ItemSlotData unstackedItem = new ItemSlotData(equippedSlot.itemData, 1);
+
+        // Find the first empty slot in the inventory and place the unstacked item there
+        for (int i = 0; i < inventoryToAlter.Length; i++)
+        {
+            if (inventoryToAlter[i].IsEmpty())
+            {
+                inventoryToAlter[i] = unstackedItem;
+                NewUIManager.Instance.RenderInventory();
+                return;
+            }
+        }
+
+        Debug.LogWarning("No empty slots available. Returning the unstacked item to the equipped slot.");
+        equippedSlot.AddQuantity(1); // Undo the removal
+    }
+
     public void RenderHand()
     {
         if(handPoint.childCount > 0)

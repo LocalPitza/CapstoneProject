@@ -7,6 +7,13 @@ public class PlayerStats
     public static int Money {  get; private set; }
 
     public const string CURRENCY = "G";
+    public const int STARTING_MONEY = 2000;
+
+    static PlayerStats()
+    {
+        Money = STARTING_MONEY;
+        NewUIManager.Instance?.RenderPlayerStats();
+    }
 
     public static void Spend(int cost)
     {

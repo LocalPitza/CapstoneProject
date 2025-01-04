@@ -20,6 +20,7 @@ public class MessageManager : MonoBehaviour
                 if (interactionText == null)
                 {
                     Debug.LogError("TextMeshProUGUI component not found on playerTextBox.");
+                    return;
                 }
             }
             else
