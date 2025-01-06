@@ -15,4 +15,6 @@ public class ItemData : ScriptableObject
     public Sprite thumbnail;
     public GameObject gameModel;
     public ItemType itemType;
+
+    public int cost;
 }

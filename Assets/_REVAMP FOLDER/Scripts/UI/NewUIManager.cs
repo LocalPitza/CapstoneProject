@@ -28,11 +28,18 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     public NewInventorySlot[] harvestSlot;
 
     [Header("Info Box")]
+    public GameObject itemInfoBox;
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemDescriptionText;
 
     [Header("Yes No Prompt")]
     public YesNoPrompt yesNoPrompt;
+
+    [Header("Player Stats")]
+    public TextMeshProUGUI moneyText;
+
+    [Header("Shop")]
+    public ShopListingManager shopListingManager;
 
     private void Awake()
     {
@@ -50,6 +57,8 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     {
         RenderInventory();
         AssignSlotIndexes();
+        RenderPlayerStats();
+        DisplayItemInfo(null);
 
         TimeManager.Instance.RegisterTracker(this);
     }
@@ -142,10 +151,11 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         {
             itemNameText.text = "";
             itemDescriptionText.text = "";
-
+            itemInfoBox.SetActive(false);
             return;
         }
 
+        itemInfoBox.SetActive(true);
         itemNameText.text = data.name;
         itemDescriptionText.text = data.description;
     }
@@ -181,4 +191,15 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         dateText.text = season +" "+ day + " (" + dayOfTheWeek + ")";
     }
     #endregion
+
+    public void RenderPlayerStats()
+    {
+        moneyText.text = PlayerStats.Money + PlayerStats.CURRENCY;
+    }
+
+    public void OpenShop(List<ItemData> shopItems)
+    {
+        shopListingManager.gameObject.SetActive(true);
+        shopListingManager.RenderShop(shopItems);
+    }
 }

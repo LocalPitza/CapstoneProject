@@ -6,10 +6,22 @@ using System.IO;
 
 public class SaveManager : MonoBehaviour
 {
-    static readonly string FILEPATH = Application.persistentDataPath + "/Save.json";
+    static readonly string CompanyName = Application.companyName != null && Application.companyName != ""
+                                         ? Application.companyName
+                                         : "DefaultCompany";
+
+    static readonly string SaveFolderPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), CompanyName);
+    static readonly string FILEPATH = Path.Combine(SaveFolderPath, "Save.json");
+
+    //static readonly string FILEPATH = Application.persistentDataPath + "/Save.json";
 
     public static void Save(GameSaveState save)
     {
+        if (!Directory.Exists(SaveFolderPath))
+        {
+            Directory.CreateDirectory(SaveFolderPath);
+        }
+
         string json = JsonUtility.ToJson(save);
         File.WriteAllText(FILEPATH, json);
     }

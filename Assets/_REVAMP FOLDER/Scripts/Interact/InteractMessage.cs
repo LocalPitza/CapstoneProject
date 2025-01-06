@@ -10,8 +10,21 @@ public class InteractMessage : MonoBehaviour
 
     [Header("Message")]
     [SerializeField] private string interactionMessage;
+    private TextMeshProUGUI message;
 
-    public static TextMeshProUGUI message;
+    private void Start()
+    {
+        MessageManager messageManager = FindObjectOfType<MessageManager>();
+        if (messageManager != null)
+        {
+            message = messageManager.GetInteractionText();
+            Debug.Log("MessageManager found and interactionText assigned.");
+        }
+        else
+        {
+            Debug.LogError("MessageManager not found in the scene.");
+        }
+    }
 
     private void Update()
     {
@@ -19,9 +32,12 @@ public class InteractMessage : MonoBehaviour
 
         if (playerInRange)
         {
-            message.text = interactionMessage;
+            if (message != null && message.text != interactionMessage)
+            {
+                message.text = interactionMessage;
+            }
         }
-        else if (message.text == interactionMessage)
+        else if (message != null && message.text == interactionMessage)
         {
             message.text = " ";
         }
