@@ -83,41 +83,59 @@ public class PlayerInteraction : MonoBehaviour
     public void Interact()
     {
         ItemData toolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
-        EquipmentData equipmentTool = toolSlot as EquipmentData;
+        Debug.Log($"Equipped item: {toolSlot?.name ?? "None"}");
 
-        //The Player must unequipped first the equipped Harvested before he can interact with the pots
+        EquipmentData equipmentTool = toolSlot as EquipmentData;
+        SeedData seedData = toolSlot as SeedData;
+
+        // Check if the player has an equipped item in the Harvest slot
         if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
         {
             Debug.Log("Hand is full with Harvested Crop");
-
             message.text = unequipMessage;
             StartCoroutine(ClearMessageAfterDelay(2f));
-
             return;
-        }
-        else
-        {
-            message.text = "";
         }
 
         if (selectedSoil != null)
         {
-            EquipmentData.ToolType toolType = equipmentTool.toolType;
-
-            switch (toolType)
+            if (seedData != null)
             {
-                case EquipmentData.ToolType.HandTrowel:
-                    PlayerStats.UseStamina(10);
-                    selectedSoil.Interact();
-                    return;
-
-                case EquipmentData.ToolType.WateringCan:
-                    PlayerStats.UseStamina(10);
-                    selectedSoil.Interact();
-                    return;
+                // If the player is holding a seed, plant it
+                Debug.Log($"Planting seed: {seedData.name}");
+                PlayerStats.UseStamina(5);
+                selectedSoil.Interact();
+                return;
             }
 
-            return;
+            if (equipmentTool != null)
+            {
+                EquipmentData.ToolType toolType = equipmentTool.toolType;
+
+                switch (toolType)
+                {
+                    case EquipmentData.ToolType.HandTrowel:
+                        PlayerStats.UseStamina(10);
+                        selectedSoil.Interact();
+                        break;
+
+                    case EquipmentData.ToolType.WateringCan:
+                        PlayerStats.UseStamina(10);
+                        selectedSoil.Interact();
+                        break;
+
+                    default:
+                        Debug.LogWarning("Tool not recognized for planting or watering.");
+                        message.text = "This tool can't be used here.";
+                        StartCoroutine(ClearMessageAfterDelay(2f));
+                        break;
+                }
+                return;
+            }
+
+            Debug.LogWarning("No valid item equipped for interaction.");
+            message.text = " ";
+            StartCoroutine(ClearMessageAfterDelay(2f));
         }
     }
 
