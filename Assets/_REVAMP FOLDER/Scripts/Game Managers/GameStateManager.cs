@@ -118,6 +118,8 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
         SaveManager.Save(ExportSaveState());
 
         StartCoroutine(FadeInOut());
+
+        PlayerStats.RestoreStamina();
     }
 
     private IEnumerator FadeInOut()
@@ -166,7 +168,7 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
         //Time
         GameTimeStamp timestamp = TimeManager.Instance.GetGameTimeStamp();
 
-        return new GameSaveState(soilData, cropData, storageSlots, harvestlots, equippedStorageSlot, equippedHarvestSlot, timestamp, PlayerStats.Money);
+        return new GameSaveState(soilData, cropData, storageSlots, harvestlots, equippedStorageSlot, equippedHarvestSlot, timestamp, PlayerStats.Money, PlayerStats.Stamina);
     }
 
     public void LoadSave()
@@ -185,6 +187,6 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
         SoilManager.urbanFarmData = new System.Tuple<List<SoilSaveState>, List<CropSaveState>>(save.soilData, save.cropData);
 
-        PlayerStats.LoadStats(save.money);
+        PlayerStats.LoadStats(save.money, save.stamina);
     }
 }

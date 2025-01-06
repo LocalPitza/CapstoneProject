@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerStats
 {
     public static int Money {  get; private set; }
+    public static int Stamina;
 
     public const string CURRENCY = "G";
     public const int STARTING_MONEY = 2000;
@@ -34,9 +35,23 @@ public class PlayerStats
         NewUIManager.Instance.RenderPlayerStats();
     }
 
-    public static void LoadStats(int money)
+    public static void LoadStats(int money, int stamina)
     {
         Money = money;
+        Stamina = stamina;
+        RestoreStamina();
+        NewUIManager.Instance.RenderPlayerStats();
+    }
+
+    public static void UseStamina(int staminaLost)
+    {
+        Stamina -= staminaLost;
+        NewUIManager.Instance.RenderPlayerStats();
+    }
+
+    public static void RestoreStamina()
+    {
+        Stamina = 100;
         NewUIManager.Instance.RenderPlayerStats();
     }
 }

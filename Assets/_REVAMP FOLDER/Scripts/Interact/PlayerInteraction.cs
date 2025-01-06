@@ -20,6 +20,8 @@ public class PlayerInteraction : MonoBehaviour
     [Header("Harvesting Fruits")]
     public TextMeshProUGUI message;
 
+    EquipmentData equipmentTool;
+
     void Start()
     {
         playerMove = transform.parent.GetComponent<PlayerMove>();
@@ -80,6 +82,9 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Interact()
     {
+        ItemData toolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
+        EquipmentData equipmentTool = toolSlot as EquipmentData;
+
         //The Player must unequipped first the equipped Harvested before he can interact with the pots
         if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
         {
@@ -97,7 +102,20 @@ public class PlayerInteraction : MonoBehaviour
 
         if (selectedSoil != null)
         {
-            selectedSoil.Interact();
+            EquipmentData.ToolType toolType = equipmentTool.toolType;
+
+            switch (toolType)
+            {
+                case EquipmentData.ToolType.HandTrowel:
+                    PlayerStats.UseStamina(10);
+                    selectedSoil.Interact();
+                    return;
+
+                case EquipmentData.ToolType.WateringCan:
+                    PlayerStats.UseStamina(10);
+                    selectedSoil.Interact();
+                    return;
+            }
 
             return;
         }
