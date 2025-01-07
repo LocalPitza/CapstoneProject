@@ -83,10 +83,7 @@ public class PlayerInteraction : MonoBehaviour
     public void Interact()
     {
         ItemData toolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
-        Debug.Log($"Equipped item: {toolSlot?.name ?? "None"}");
-
         EquipmentData equipmentTool = toolSlot as EquipmentData;
-        SeedData seedData = toolSlot as SeedData;
 
         // Check if the player has an equipped item in the Harvest slot
         if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
@@ -99,10 +96,9 @@ public class PlayerInteraction : MonoBehaviour
 
         if (selectedSoil != null)
         {
-            if (seedData != null)
+            if (toolSlot is SeedData)
             {
                 // If the player is holding a seed, plant it
-                Debug.Log($"Planting seed: {seedData.name}");
                 PlayerStats.UseStamina(5);
                 selectedSoil.Interact();
                 return;

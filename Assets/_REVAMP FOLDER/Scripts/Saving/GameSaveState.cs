@@ -22,8 +22,9 @@ public class GameSaveState
     //PlayerStats
     public int money;
     public int stamina;
+    public int hunger;
 
-    public GameSaveState(List<SoilSaveState> soilData, List<CropSaveState> cropData, ItemSlotData[] storageSlot, ItemSlotData[] harvestSlot, ItemSlotData equippedStorageSlot, ItemSlotData equippedHarvestSlot, GameTimeStamp timestamp, int money, int stamina)
+    public GameSaveState(List<SoilSaveState> soilData, List<CropSaveState> cropData, ItemSlotData[] storageSlot, ItemSlotData[] harvestSlot, ItemSlotData equippedStorageSlot, ItemSlotData equippedHarvestSlot, GameTimeStamp timestamp, int money, int stamina, int hunger)
     {
         this.soilData = soilData;
         this.cropData = cropData;
@@ -34,5 +35,6 @@ public class GameSaveState
         this.timestamp = timestamp;
         this.money = money;
         this.stamina = stamina;
+        this.hunger = hunger;
     }
 }
