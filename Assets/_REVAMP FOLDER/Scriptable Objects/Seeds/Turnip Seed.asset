@@ -16,7 +16,8 @@ MonoBehaviour:
   thumbnail: {fileID: 21300000, guid: 7ae3faf90f101bb49924c2e709ba3e56, type: 3}
   gameModel: {fileID: 0}
   itemType: 0
-  daysToGrow: 3
+  cost: 20
+  daysToGrow: 1
   cropToYield: {fileID: 11400000, guid: 0cad9ee927204de45aac3698ea0fc5ef, type: 2}
   seedling: {fileID: 1000013410243764, guid: 42ea4bc7ab684e1439fe7e06657fcf84, type: 3}
   regrowable: 0

@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PottingSoil : MonoBehaviour, ITimeTracker
 {
+    public int id;
+
     public enum SoilStatus
     {
         Soil, Digged, Watered
     }
 
     public SoilStatus soilStatus;
-    private SoilStatus previousStatus;
 
     public Material soilMat, diggedMat, wateredMat;
     new Renderer renderer;
@@ -31,20 +33,39 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         //Default Material
         SwitchSoilStatus(SoilStatus.Soil);
 
+        Select(false);
+
         TimeManager.Instance.RegisterTracker(this);
+    }
+
+    public void LoadSoilData(SoilStatus statusToSwitch, GameTimeStamp lastwatered)
+    {
+        soilStatus = statusToSwitch;
+        timeWatered = lastwatered;
+
+        Material materialToSwitch = soilMat;
+        switch (statusToSwitch)
+        {
+            case SoilStatus.Soil:
+                materialToSwitch = soilMat;
+                break;
+            case SoilStatus.Digged:
+                materialToSwitch = diggedMat;
+
+                break;
+            case SoilStatus.Watered:
+                materialToSwitch = wateredMat;
+                break;
+        }
+        renderer.material = materialToSwitch;
     }
 
     public void SwitchSoilStatus(SoilStatus statusToSwitch)
     {
-        if (statusToSwitch == SoilStatus.Watered)
-        {
-            previousStatus = soilStatus;
-            timeWatered = TimeManager.Instance.GetGameTimeStamp();
-        }
-
         soilStatus = statusToSwitch;
 
         Material materialToSwitch = soilMat;
+
         switch (statusToSwitch)
         {
             case SoilStatus.Soil:
@@ -60,27 +81,25 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                 break;
         }
         renderer.material = materialToSwitch;
+
+        SoilManager.Instance.OnSoilStateChange(id, soilStatus, timeWatered);
     }
 
     public void Select(bool toggle)
     {
         select.SetActive(toggle);
-
-        if (toggle)
-        {
-            SoilManager.Instance.SetSelectedSoil(this);
-        }
     }
 
     public void Interact()
     {
-        ItemData playerToolSlot = NewInventoryManager.Instance.selectedTool;
-        EquipmentData equipmentTool = playerToolSlot as EquipmentData;
+        ItemData playerToolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
 
-        if (playerToolSlot == null) 
+        if (!NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Storage)) 
         {
             return;
         }
+
+        EquipmentData equipmentTool = playerToolSlot as EquipmentData;
 
         if (equipmentTool != null)
         {
@@ -89,14 +108,12 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
             switch (toolType)
             {
                 case EquipmentData.ToolType.HandTrowel:
-                    if (soilStatus != SoilStatus.Digged)
-                    {
-                        SwitchSoilStatus(SoilStatus.Digged);
-                    }
+                    SwitchSoilStatus(SoilStatus.Digged);
+
                     break;
 
                 case EquipmentData.ToolType.WateringCan:
-                    if (soilStatus != SoilStatus.Watered)
+                    if (soilStatus != SoilStatus.Soil)
                     {
                         SwitchSoilStatus(SoilStatus.Watered);
                     }
@@ -106,8 +123,9 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                     //Remove the Plant from the Soil
                     if(cropPlanted != null)
                     {
-                        Destroy(cropPlanted.gameObject);
-                        SwitchSoilStatus(SoilStatus.Soil);
+                        Debug.Log("Remove Deadplant");
+                        cropPlanted.RemoveCrop();
+                        //SwitchSoilStatus(SoilStatus.Soil);
                     }
 
                     break;
@@ -115,36 +133,42 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
             return;
         }
+
+        SeedData seed = playerToolSlot as SeedData;
+
+        if (seed != null && soilStatus != SoilStatus.Soil && cropPlanted == null)
+        {
+            Debug.Log("Planting");
+
+            SpawnCrop();
+
+            cropPlanted.Plant(id, seed);
+
+            //Consumes the Item for planting
+            NewInventoryManager.Instance.ConsumeItem
+                (NewInventoryManager.Instance.GetEquippedSlot
+                (NewInventorySlot.InventoryType.Storage));
+        }
     }
 
-    public NewCropBehaviour.CropState GetCropStatus()
+    public NewCropBehaviour SpawnCrop()
+    {
+        GameObject cropObject = Instantiate(cropPrefab, transform);
+        cropObject.transform.position = plantPosition.position;
+
+        cropPlanted = cropObject.GetComponent<NewCropBehaviour>();
+
+        return cropPlanted;
+    }
+
+    /*public NewCropBehaviour.CropState GetCropStatus()
     {
         if (cropPlanted != null)
         {
             return cropPlanted.cropState;
         }
         return NewCropBehaviour.CropState.Harvestable;
-    }
-
-    public void PlantSeed()
-    {
-        ItemData selectSeed = NewInventoryManager.Instance.selectedSeed;
-        SeedData seed = selectSeed as SeedData;
-
-        if (selectSeed == null)
-        {
-            return;
-        }
-
-        if (seed != null && soilStatus != SoilStatus.Soil && cropPlanted == null)
-        {
-            GameObject cropObject = Instantiate(cropPrefab, transform);
-            cropObject.transform.position = plantPosition.position;
-
-            cropPlanted = cropObject.GetComponent<NewCropBehaviour>();
-            cropPlanted.Plant(seed);
-        }
-    }
+    }*/
 
     public void ClockUpdate(GameTimeStamp timestamp)
     {
@@ -160,7 +184,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
             if(hoursElapsed > 24)
             {
-                SwitchSoilStatus(previousStatus);
+                SwitchSoilStatus(SoilStatus.Digged);
             }
         }
 
@@ -173,5 +197,10 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                 cropPlanted.Wither();
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        TimeManager.Instance.UnregisterTracker(this);
     }
 }

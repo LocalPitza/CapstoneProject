@@ -15,5 +15,5 @@ MonoBehaviour:
   description: Harvest Vegetables
   thumbnail: {fileID: 21300000, guid: 96f07706d37151040a5d69471a97d6bb, type: 3}
   gameModel: {fileID: 0}
-  itemType: 2
+  itemType: 0
   toolType: 3

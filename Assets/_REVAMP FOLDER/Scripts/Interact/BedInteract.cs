@@ -14,11 +14,10 @@ public class BedInteract : MonoBehaviour
 
     void Update()
     {
-        //For Debugging Purposes, GetKeyDown will be GetKey as of the moment
         if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKey(KeyCode.F))
         {
             //EnergyBar.Instance.SetFullEnergy();
-            TimeManager.Instance.Tick();
+            NewUIManager.Instance.TriggerYesNoPrompt("Do you want to Sleep?", GameStateManager.Instance.Sleep);
         }
     }
 }

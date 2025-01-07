@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 01dde8114846ff64fbe04bf7cc23e108
+    path: Assets/_REVAMP FOLDER/Scenes/NewMenu.unity
+    guid: a52ff1b3391610d4583c4c636c03d1b2
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
-    guid: 0e1c8ed0d57859040bd30ac073eb49a2
+    path: Assets/_REVAMP FOLDER/Scenes/Bedroom.unity
+    guid: 6cba070bb6e2f3e4ba7c3e496fdc3a54
+  - enabled: 1
+    path: Assets/_REVAMP FOLDER/Scenes/PlantingArea.unity
+    guid: 4ffcff6eeca25b044adb7f870a1f78c3
+  - enabled: 1
+    path: Assets/_REVAMP FOLDER/Scenes/TestCity.unity
+    guid: cdeea389e98ecc64ea56da72becf94d2
   m_configObjects: {}

@@ -10,7 +10,6 @@ public class PlayerMove : MonoBehaviour
     public float turnSpeed = 180f;
 
     PlayerInteraction playerInteraction;
-    private ShowUISeeds showUISeeds;
     private StorageInteract storageInteract;
 
     private void Start()
@@ -23,8 +22,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        if ((showUISeeds == null || !showUISeeds.IsUIActive()) &&
-            (storageInteract == null || !storageInteract.IsUIActive()))
+        if ((storageInteract == null || !storageInteract.IsUIActive()))
         {
             Vector3 movDir;
 
@@ -41,20 +39,27 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (playerInteraction.harvestableHit)
+            playerInteraction.Interact();
+
+            //NOTE: This causes the Bug for some reason
+            /*if (playerInteraction.harvestableHit)
             {
-                Debug.Log("Harvesting");
                 playerInteraction.HarvestInteract();
             }
             else
             {
                 playerInteraction.Interact();
-            }
+            }*/
+        }
 
-            if (playerInteraction.selectedSoil != null)
-            {
-                showUISeeds = playerInteraction.selectedSoil.GetComponent<ShowUISeeds>();
-            }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            playerInteraction.HarvestInteract();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            playerInteraction.HarvestKeep();
         }
     }
 }

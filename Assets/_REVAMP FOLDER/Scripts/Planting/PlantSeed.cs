@@ -14,6 +14,6 @@ public class PlantSeed : MonoBehaviour
 
     private void OnPlantSeedButtonClick()
     {
-        SoilManager.Instance.PlantSeed();
+        //SoilManager.Instance.PlantSeed();
     }
 }

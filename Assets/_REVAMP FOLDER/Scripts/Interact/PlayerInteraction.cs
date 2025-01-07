@@ -7,21 +7,18 @@ public class PlayerInteraction : MonoBehaviour
 {
     PlayerMove playerMove;
 
-    //[HideInInspector]
-    public PottingSoil selectedSoil = null;
+    PottingSoil selectedSoil = null;
     InteractableObject selectedInteractableObject = null;
-
-    ShowUISeeds showUISeeds;
-    //[HideInInspector]
-    public bool harvestableHit = false;
 
     [Header("Messages to Player")]
     [Header("Harvesting Vegestable")]
-    [SerializeField] private string equipGlove;
+    [SerializeField] string equipGloveMessage;
+
+    [Header("Unequip Harvested Item")]
+    [SerializeField] string unequipMessage;
 
     [Header("Harvesting Fruits")]
-
-    public static TextMeshProUGUI message;
+    public TextMeshProUGUI message;
 
     void Start()
     {
@@ -49,15 +46,12 @@ public class PlayerInteraction : MonoBehaviour
             PottingSoil soilIndicator = other.GetComponent<PottingSoil>();
             SelectPot(soilIndicator);
 
-            showUISeeds = other.GetComponent<ShowUISeeds>();
-
             return;
         }
 
         if (other.CompareTag("Harvestable"))
         {
             selectedInteractableObject = other.GetComponent<InteractableObject>();
-            harvestableHit = true;
             return;
         }
 
@@ -71,8 +65,6 @@ public class PlayerInteraction : MonoBehaviour
             selectedSoil.Select(false);
             selectedSoil = null;
         }
-
-        showUISeeds = null;
     }
 
     void SelectPot(PottingSoil soilIndicator)
@@ -88,36 +80,14 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Interact()
     {
-        //The Player shouldn't be ablle to use his Tool when hands is full with an Item
-        /*if(NewInventoryManager.Instance.selectedTool != null)
+        //The Player must unequipped first the equipped Harvested before he can interact with the pots
+        if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
         {
-            return;
-        }*/
+            Debug.Log("Hand is full with Harvested Crop");
 
-        if(selectedSoil != null)
-        {
-            selectedSoil.Interact();
-
-            if (showUISeeds != null && selectedSoil.soilStatus == PottingSoil.SoilStatus.Digged)
-            {
-                showUISeeds.ToggleUI();
-                NewUIManager.Instance.RenderInventory();
-            }
-
-            return;
-        }
-    }
-
-    public void HarvestInteract()
-    {
-        ItemData playerToolSlot = NewInventoryManager.Instance.selectedTool;
-        EquipmentData equipmentTool = playerToolSlot as EquipmentData;
-
-        //If Plalyer is not using the right tool for Harvesting
-        if (equipmentTool == null || equipmentTool.toolType != EquipmentData.ToolType.HandGloves)
-        {
-            message.text = equipGlove;
+            message.text = unequipMessage;
             StartCoroutine(ClearMessageAfterDelay(2f));
+
             return;
         }
         else
@@ -125,15 +95,43 @@ public class PlayerInteraction : MonoBehaviour
             message.text = "";
         }
 
-        if (NewInventoryManager.Instance.selectedPocket != null)
+        if (selectedSoil != null)
         {
-            NewInventoryManager.Instance.EquipToInventory(NewInventorySlot.InventoryType.PlayerPocket);
+            selectedSoil.Interact();
+
             return;
         }
+    }
+
+    public void HarvestInteract()
+    {
+        /*ItemData playerToolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
+        EquipmentData equipmentTool = playerToolSlot as EquipmentData;
+
+        //If Plalyer is not using the right tool for Harvesting
+        if (equipmentTool == null || equipmentTool.toolType != EquipmentData.ToolType.HandGloves)
+        {
+            message.text = equipGloveMessage;
+            StartCoroutine(ClearMessageAfterDelay(2f));
+            return;
+        }
+        else
+        {
+            message.text = "";
+        }*/
 
         if(selectedInteractableObject != null)
         {
             selectedInteractableObject.PickUp();
+        }
+    }
+
+    public void HarvestKeep()
+    {
+        if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
+        {
+            NewInventoryManager.Instance.EquipToInventory(NewInventorySlot.InventoryType.Harvest);
+            return;
         }
     }
 

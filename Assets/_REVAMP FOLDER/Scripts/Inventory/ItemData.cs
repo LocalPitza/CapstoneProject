@@ -4,9 +4,7 @@ using UnityEngine;
 
 public enum ItemType
 {
-    Seed,
-    StorageItem,
-    Tool,
+    StorageItem, HarvestItem
 }
 
 [CreateAssetMenu(menuName = "Items/Item")]
@@ -17,4 +15,6 @@ public class ItemData : ScriptableObject
     public Sprite thumbnail;
     public GameObject gameModel;
     public ItemType itemType;
+
+    public int cost;
 }
