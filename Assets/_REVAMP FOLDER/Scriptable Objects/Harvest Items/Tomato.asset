@@ -18,3 +18,4 @@ MonoBehaviour:
     type: 3}
   itemType: 1
   cost: 15
+  hungerRefill: 10

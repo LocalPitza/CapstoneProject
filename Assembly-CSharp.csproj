@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\MainMenu\Settings.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\Shop\ShopListingManager.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Eat Table\TestEat.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\ItemSlotData.cs" />
     <Compile Include="Assets\Scripts\Planting\Soil.cs" />
     <Compile Include="Assets\Scripts\RegrowablePlant.cs" />

@@ -17,3 +17,4 @@ MonoBehaviour:
   gameModel: {fileID: 1000013984154124, guid: aef86cf256a884a4794c62a6f50565e2, type: 3}
   itemType: 1
   cost: 30
+  hungerRefill: 20

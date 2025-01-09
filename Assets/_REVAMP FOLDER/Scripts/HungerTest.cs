@@ -18,9 +18,9 @@ public class HungerTest : MonoBehaviour
             hungerTimer = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        /*if (Input.GetKeyDown(KeyCode.Z))
         {
             PlayerStats.HungerStat(10);
-        }
+        }*/
     }
 }

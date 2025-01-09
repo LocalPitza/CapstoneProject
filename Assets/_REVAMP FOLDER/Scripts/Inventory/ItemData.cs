@@ -17,4 +17,5 @@ public class ItemData : ScriptableObject
     public ItemType itemType;
 
     public int cost;
+    public int hungerRefill;
 }
