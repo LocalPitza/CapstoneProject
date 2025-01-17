@@ -41,6 +41,14 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     [Header("Shop")]
     public ShopListingManager shopListingManager;
 
+    [Header("Stamina")]
+    public Slider energyBar;
+    public int staminaCount;
+
+    [Header("Hunger Bar")]
+    public Slider hungerBar;
+    public int hungerCount;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -55,6 +63,7 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
     private void Start()
     {
+        PlayerStats.RestoreStamina();
         RenderInventory();
         AssignSlotIndexes();
         RenderPlayerStats();
@@ -195,6 +204,24 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     public void RenderPlayerStats()
     {
         moneyText.text = PlayerStats.Money + PlayerStats.CURRENCY;
+        staminaCount = PlayerStats.Stamina;
+        hungerCount = PlayerStats.Hunger;
+        ChangeStatsUI();
+    }
+
+    public void ChangeStatsUI()
+    {
+        if (energyBar != null)
+        {
+            energyBar.maxValue = 100;
+            energyBar.value = staminaCount;
+        }
+
+        if(hungerBar != null)
+        {
+            hungerBar.maxValue = 100;
+            hungerBar.value = hungerCount;
+        }
     }
 
     public void OpenShop(List<ItemData> shopItems)

@@ -20,6 +20,8 @@ public class PlayerInteraction : MonoBehaviour
     [Header("Harvesting Fruits")]
     public TextMeshProUGUI message;
 
+    EquipmentData equipmentTool;
+
     void Start()
     {
         playerMove = transform.parent.GetComponent<PlayerMove>();
@@ -80,26 +82,56 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Interact()
     {
-        //The Player must unequipped first the equipped Harvested before he can interact with the pots
+        ItemData toolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
+        EquipmentData equipmentTool = toolSlot as EquipmentData;
+
+        // Check if the player has an equipped item in the Harvest slot
         if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
         {
             Debug.Log("Hand is full with Harvested Crop");
-
             message.text = unequipMessage;
             StartCoroutine(ClearMessageAfterDelay(2f));
-
             return;
-        }
-        else
-        {
-            message.text = "";
         }
 
         if (selectedSoil != null)
         {
-            selectedSoil.Interact();
+            if (toolSlot is SeedData)
+            {
+                // If the player is holding a seed, plant it
+                PlayerStats.UseStamina(5);
+                selectedSoil.Interact();
+                return;
+            }
 
-            return;
+            if (equipmentTool != null)
+            {
+                EquipmentData.ToolType toolType = equipmentTool.toolType;
+
+                switch (toolType)
+                {
+                    case EquipmentData.ToolType.HandTrowel:
+                        PlayerStats.UseStamina(10);
+                        selectedSoil.Interact();
+                        break;
+
+                    case EquipmentData.ToolType.WateringCan:
+                        PlayerStats.UseStamina(10);
+                        selectedSoil.Interact();
+                        break;
+
+                    default:
+                        Debug.LogWarning("Tool not recognized for planting or watering.");
+                        message.text = "This tool can't be used here.";
+                        StartCoroutine(ClearMessageAfterDelay(2f));
+                        break;
+                }
+                return;
+            }
+
+            Debug.LogWarning("No valid item equipped for interaction.");
+            message.text = " ";
+            StartCoroutine(ClearMessageAfterDelay(2f));
         }
     }
 
