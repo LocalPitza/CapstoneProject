@@ -34,7 +34,30 @@ public class SceneTransitionManager : MonoBehaviour
     //Switch the player to another scene
     public void SwitchLocation(Location locationToSwitch)
     {
-        SceneManager.LoadScene(locationToSwitch.ToString());
+        StartCoroutine(TransitionToLocation(locationToSwitch));
+    }
+
+    private IEnumerator TransitionToLocation(Location locationToSwitch)
+    {
+        // Trigger fade-out
+        yield return GameStateManager.Instance.FadeOut();
+
+        // Load the new scene
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(locationToSwitch.ToString());
+        asyncLoad.allowSceneActivation = false;
+
+        // Wait until the scene is almost loaded
+        while (!asyncLoad.isDone)
+        {
+            if (asyncLoad.progress >= 0.9f)
+            {
+                asyncLoad.allowSceneActivation = true;
+            }
+            yield return null;
+        }
+
+        // Fade-in after the scene is loaded
+        yield return GameStateManager.Instance.FadeIn();
     }
 
     //Called when a scene is loaded

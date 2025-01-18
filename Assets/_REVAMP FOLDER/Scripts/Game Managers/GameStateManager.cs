@@ -37,18 +37,8 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
     public void ClockUpdate(GameTimeStamp timestamp)
     {
-        //UpdateShippingState(timestamp);
         UpdateFarmState(timestamp);
     }
-
-    /*void UpdateShippingState(GameTimeStamp timestamp)
-    {
-        //Check if the hour is Exactly shipping hours
-        if(timestamp.hour == ShippingBin.hoursToShip && timestamp.minute == 0)
-        {
-            ShippingBin.ShipItens();
-        }
-    }*/
 
     void UpdateFarmState(GameTimeStamp timestamp)
     {
@@ -111,27 +101,34 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
         timestampOfNextDay.day += 1;
         timestampOfNextDay.hour = 6;
         timestampOfNextDay.minute = 0;
-        Debug.Log(timestampOfNextDay.day + " " + timestampOfNextDay.hour + ":" + timestampOfNextDay.minute);
 
         TimeManager.Instance.SkipTime(timestampOfNextDay);
 
         SaveManager.Save(ExportSaveState());
 
-        StartCoroutine(FadeInOut());
-
-        PlayerStats.RestoreStamina();
+        StartCoroutine(SleepSequence());
     }
 
-    private IEnumerator FadeInOut()
+    private IEnumerator SleepSequence()
+    {
+        // Trigger fade-out
+        yield return FadeOut();
+
+        PlayerStats.RestoreStamina();
+
+        // Trigger fade-in
+        yield return FadeIn();
+    }
+
+    public IEnumerator FadeOut()
     {
         fadeImage.gameObject.SetActive(true);
-
         yield return StartCoroutine(Fade(0, 1));
+    }
 
-        yield return new WaitForSeconds(0.5f);
-
+    public IEnumerator FadeIn()
+    {
         yield return StartCoroutine(Fade(1, 0));
-
         fadeImage.gameObject.SetActive(false);
     }
 
