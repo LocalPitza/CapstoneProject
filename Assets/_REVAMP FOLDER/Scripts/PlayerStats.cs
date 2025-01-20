@@ -8,6 +8,8 @@ public class PlayerStats
     public static int Stamina;
     public static int Hunger;
 
+    public static bool hasPlayedMiniGame = false;
+
     public const string CURRENCY = "G";
     public const int STARTING_MONEY = 2000;
 
@@ -64,5 +66,23 @@ public class PlayerStats
     {
         Hunger += restore;
         NewUIManager.Instance.RenderPlayerStats();
+    }
+
+    // Method to check if the player has already played the mini-game
+    public static bool HasPlayedMiniGame()
+    {
+        return hasPlayedMiniGame;
+    }
+
+    // Method to mark the mini-game as played
+    public static void MarkMiniGameAsPlayed()
+    {
+        hasPlayedMiniGame = true;
+    }
+
+    // Method to reset the mini-game status (useful if you want to allow playing again)
+    public static void ResetMiniGameStatus()
+    {
+        hasPlayedMiniGame = false;
     }
 }

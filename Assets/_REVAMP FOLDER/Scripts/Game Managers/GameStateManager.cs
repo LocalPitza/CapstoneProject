@@ -105,6 +105,8 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
         TimeManager.Instance.SkipTime(timestampOfNextDay);
 
+        PlayerStats.ResetMiniGameStatus();
+
         SaveManager.Save(ExportSaveState());
 
         StartCoroutine(SleepSequence());
