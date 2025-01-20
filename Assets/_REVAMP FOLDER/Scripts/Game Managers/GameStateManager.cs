@@ -97,6 +97,7 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
     public void Sleep()
     {
+        //Set the time 
         GameTimeStamp timestampOfNextDay = TimeManager.Instance.GetGameTimeStamp();
         timestampOfNextDay.day += 1;
         timestampOfNextDay.hour = 6;

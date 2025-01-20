@@ -78,46 +78,7 @@ public class TimeManager : MonoBehaviour
         {
             Tick();
         }
-
-        //Make the Time move rapidly
-        //StartCoroutine(FastForwardTime(timeSkipTo));
     }
-
-    /*private IEnumerator FastForwardTime(GameTimeStamp timeSkipTo)
-    {
-        int targetMinutes = GameTimeStamp.TimestampInMinutes(timeSkipTo);
-        int currentMinutes = GameTimeStamp.TimestampInMinutes(gameTimeStamp);
-        int differenceInMinutes = targetMinutes - currentMinutes;
-
-        if (differenceInMinutes <= 0) yield break;
-
-        // Define how fast time should count forward (e.g., 10 in-game minutes per real second)
-        float fastForwardSpeed = 10f;
-
-        while (differenceInMinutes > 0)
-        {
-            // Calculate the amount of minutes to advance in this frame
-            int minutesToAdvance = Mathf.Min(differenceInMinutes, Mathf.CeilToInt(fastForwardSpeed * Time.deltaTime));
-
-            // Advance the clock
-            for (int i = 0; i < minutesToAdvance; i++)
-            {
-                gameTimeStamp.UpdateClock();
-            }
-
-            // Update remaining minutes
-            differenceInMinutes -= minutesToAdvance;
-
-            // Notify listeners and update sun position
-            foreach (ITimeTracker listener in listeners)
-            {
-                listener.ClockUpdate(gameTimeStamp);
-            }
-            UpdateSunMovment();
-
-            yield return null; // Wait until the next frame
-        }
-    }*/
 
     //Day and Night Cycle
     void UpdateSunMovment()

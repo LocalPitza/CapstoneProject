@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class BedInteract : MonoBehaviour
+public class AttendWork : MonoBehaviour
 {
     private InteractMessage interactMessage;
 
@@ -16,7 +15,7 @@ public class BedInteract : MonoBehaviour
     {
         if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKey(KeyCode.F))
         {
-            NewUIManager.Instance.TriggerYesNoPrompt("Do you want to Sleep?", GameStateManager.Instance.Sleep);
+            MiniGameManager.instance.StartMiniGame();
         }
     }
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ShippingBin : MonoBehaviour
 {
-    //public static int hoursToShip = 18;
     public static List<ItemSlotData> harvestToShip = new List<ItemSlotData>();
 
     private InteractMessage interactMessage;

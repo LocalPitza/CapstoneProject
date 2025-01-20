@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MiniGameManager : MonoBehaviour
 {
     public static MiniGameManager instance;
 
-    [SerializeField] GameObject gameOverCanvas;
+    [SerializeField] GameObject miniGameParent;
+    [SerializeField] GameObject endMiniGameCanvas;
+    [SerializeField] TextMeshProUGUI endMiniGameText;
 
     private bool isMiniGameActive = true;
 
@@ -17,8 +20,7 @@ public class MiniGameManager : MonoBehaviour
            instance = this;
         }
 
-        isMiniGameActive = true;
-        gameOverCanvas.SetActive(false);
+        endMiniGameCanvas.SetActive(false);
     }
 
     private void Update()
@@ -29,20 +31,59 @@ public class MiniGameManager : MonoBehaviour
         }
     }
 
+    public void StartMiniGame()
+    {
+        isMiniGameActive = true;
+        miniGameParent.SetActive(true);
+    }
+
     public void GameOver()
     {
-        gameOverCanvas.SetActive(true);
         isMiniGameActive = false;
+
+        WorkTimer.instance.StopTimer();
+
+        FlyBehavior flyBehavior = FindObjectOfType<FlyBehavior>();
+        if (flyBehavior != null)
+        {
+            flyBehavior.DisableGravity();
+        }
+
 
         // Get the current score and add it to the player's money
         int finalScore = MiniGameScore.instance.GetScore();
         PlayerStats.Earn(finalScore);
 
-        Debug.Log($"Game Over! Score: {finalScore} added to player's money. Total Money: {PlayerStats.Money}");
+        TriggerEndMiniGame($"{finalScore} added to player's money");
+
+        Debug.Log($"Score: {finalScore} added to player's money. Total Money: {PlayerStats.Money}");
     }
 
     public bool IsMiniGameActive()
     {
         return isMiniGameActive;
+    }
+
+    public void TriggerEndMiniGame(string message)
+    {
+        endMiniGameCanvas.SetActive(true);
+        endMiniGameText.text = message;
+    }
+
+    public void CloseMiniGame()
+    {
+        // Hide the minigame UI
+        miniGameParent.SetActive(false);
+
+        // Get the current game timestamp
+        GameTimeStamp currentTime = TimeManager.Instance.GetGameTimeStamp();
+
+        // Create a new timestamp for 5 PM the same or next day
+        GameTimeStamp timestampOfNextDay = new GameTimeStamp(currentTime);
+        timestampOfNextDay.hour = 17; // 5 PM
+        timestampOfNextDay.minute = 0;
+
+        // Update the time in the TimeManager
+        TimeManager.Instance.SkipTime(timestampOfNextDay);
     }
 }

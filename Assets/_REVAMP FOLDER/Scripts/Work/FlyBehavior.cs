@@ -7,6 +7,7 @@ public class FlyBehavior : MonoBehaviour
     [SerializeField] private float velocity;
 
     Rigidbody2D rb;
+    private bool isGameOver = false;
 
     private void Start()
     {
@@ -29,6 +30,24 @@ public class FlyBehavior : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        MiniGameManager.instance.GameOver();
+        if (!isGameOver) // Prevent multiple calls
+        {
+            isGameOver = true;
+
+            // Check if collision is with an obstacle
+            if (collision.gameObject.CompareTag("MiniGameObstacle"))
+            {
+                MiniGameManager.instance.GameOver();
+            }
+        }
+    }
+
+    public void DisableGravity()
+    {
+        if (rb != null)
+        {
+            rb.gravityScale = 0; // Disable gravity
+            rb.velocity = Vector2.zero; // Stop movement
+        }
     }
 }
