@@ -34,4 +34,10 @@ public class MiniGameScore : MonoBehaviour
     {
         return score; // Return the current score
     }
+
+    public void ResetScore()
+    {
+        score = 0; // Assuming 'score' is the variable storing the player's score
+        scoreText.text = score.ToString();
+    }
 }

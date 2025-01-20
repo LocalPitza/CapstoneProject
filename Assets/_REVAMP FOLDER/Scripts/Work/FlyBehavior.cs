@@ -8,6 +8,32 @@ public class FlyBehavior : MonoBehaviour
 
     Rigidbody2D rb;
     private bool isGameOver = false;
+    private Vector3 initialPosition;
+    private RectTransform rectTransform;
+
+    private void OnEnable()
+    {
+        // Ensure the GameObject is active
+        gameObject.SetActive(true);
+
+        // Initialize the RectTransform when the GameObject is enabled
+        rectTransform = GetComponent<RectTransform>();
+
+        // Check if RectTransform is found
+        if (rectTransform != null)
+        {
+            // Set the initial position if it's the first time
+            if (initialPosition == Vector3.zero)
+            {
+                initialPosition = rectTransform.position; // Store the initial position
+            }
+            rectTransform.position = initialPosition; // Reset position to the initial one
+        }
+        else
+        {
+            Debug.LogError("rectTransform is null, cannot reset position.");
+        }
+    }
 
     private void Start()
     {
@@ -48,6 +74,29 @@ public class FlyBehavior : MonoBehaviour
         {
             rb.gravityScale = 0; // Disable gravity
             rb.velocity = Vector2.zero; // Stop movement
+        }
+    }
+
+    public void ResetGravity()
+    {
+        if (rb != null)
+        {
+            rb.gravityScale = 50; // Re-enable gravity
+            rb.velocity = Vector2.zero; // Reset velocity
+        }
+    }
+
+    public void ResetPosition()
+    {
+        gameObject.SetActive(true);
+
+        if (rectTransform != null)
+        {
+            rectTransform.position = initialPosition; // Reset to the recorded initial position for UI elements
+        }
+        else
+        {
+            Debug.LogError("rectTransform is null, cannot reset position.");
         }
     }
 }

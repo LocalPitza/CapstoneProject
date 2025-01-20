@@ -20,6 +20,7 @@ public class ObstacleSpawner : MonoBehaviour
     [SerializeField] RectTransform obstacleSpawnPoint;
 
     float timer;
+    private List<GameObject> spawnedObstacles = new List<GameObject>();
 
     private void Start()
     {
@@ -56,6 +57,24 @@ public class ObstacleSpawner : MonoBehaviour
             rectTransform.anchoredPosition = spawnPos; // Set position relative to the Canvas
         }
 
+        spawnedObstacles.Add(obstacle);
+
         Destroy(obstacle, destroyIn);
+    }
+
+    public void ResetSpawner()
+    {
+        // Debug to check if the method is being called
+        Debug.Log("ResetSpawner called");
+
+        // Stop any existing obstacle spawning and destroy all spawned obstacles
+        foreach (GameObject obstacle in spawnedObstacles)
+        {
+            Destroy(obstacle); // Destroy existing obstacles
+        }
+        spawnedObstacles.Clear(); // Clear the list of obstacles
+
+        // Restart obstacle spawning by resetting the timer
+        timer = maxTime;
     }
 }

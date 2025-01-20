@@ -23,7 +23,7 @@ public class WorkTimer : MonoBehaviour
 
     private void Start()
     {
-        StartTimer(initialTime);
+        
     }
 
     private void Update()
@@ -52,7 +52,7 @@ public class WorkTimer : MonoBehaviour
     {
         countDown = initialTime;
         UpdateTimerText();
-        isCountingDown = false;
+        isCountingDown = true;
     }
 
     public void StopTimer()

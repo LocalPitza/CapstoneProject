@@ -6,6 +6,7 @@ using UnityEngine;
 public class MiniGameManager : MonoBehaviour
 {
     public static MiniGameManager instance;
+    public ObstacleSpawner obstacleSpawner;
 
     [SerializeField] GameObject miniGameParent;
     [SerializeField] GameObject endMiniGameCanvas;
@@ -35,6 +36,23 @@ public class MiniGameManager : MonoBehaviour
     {
         isMiniGameActive = true;
         miniGameParent.SetActive(true);
+
+        // Reset the timer
+        WorkTimer.instance.ResetTimer();
+
+        // Reset player's position and gravity
+        FlyBehavior flyBehavior = FindObjectOfType<FlyBehavior>();
+        if (flyBehavior != null)
+        {
+            flyBehavior.ResetPosition(); // Reset to a default position
+            flyBehavior.ResetGravity(); // Reset gravity to its initial state
+        }
+
+        // Reset the score
+        MiniGameScore.instance.ResetScore();
+
+        // Hide the end game canvas
+        endMiniGameCanvas.SetActive(false);
     }
 
     public void GameOver()
@@ -74,6 +92,17 @@ public class MiniGameManager : MonoBehaviour
     {
         // Hide the minigame UI
         miniGameParent.SetActive(false);
+
+        // Destroy any existing obstacles and reset the spawner
+        if (obstacleSpawner != null)
+        {
+            Debug.Log("ObstacleSpawner found. Resetting.");
+            obstacleSpawner.ResetSpawner();
+        }
+        else
+        {
+            Debug.LogError("ObstacleSpawner not found!");
+        }
 
         // Get the current game timestamp
         GameTimeStamp currentTime = TimeManager.Instance.GetGameTimeStamp();
