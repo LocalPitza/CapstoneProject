@@ -1906,6 +1906,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 234434126}
+    - target: {fileID: 7911732665114736679, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: gameTimeStamp.maxDayMonth
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8142072725605803270, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
       propertyPath: m_Mesh
