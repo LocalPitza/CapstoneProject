@@ -60,6 +60,7 @@
     <Analyzer Include="E:\Unity Hub Engine\2022.3.13f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Rent\ApartmentRent.cs" />
     <Compile Include="Assets\Scripts\MainMenu\Settings.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\ItemSlotData.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\WorkTimer.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\MiniGameScore.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Time\ITimeTracker.cs" />
     <Compile Include="Assets\Scripts\Planting\UI\HandInventorySlot.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\PassiveIncome.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\NewInventorySlot.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\BedInteract.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Buying and Selling\ShippingBin.cs" />
