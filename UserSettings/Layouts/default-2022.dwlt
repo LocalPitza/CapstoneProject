@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 116
+  controlID: 42
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 117
+  controlID: 43
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -494,18 +494,18 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: de8dffff94a4ffff24c3ffffe6c7ffffeec7ffffdac8ffffe0c8ffff70ceffff1acfffff30cfffff54d0ffff84d7ffff5adaffff0afaffff38faffffe2faffffe4fafffff4ffffff708600006a910000c4b30000d2b300004ab40000
+      m_ExpandedIDs: 8808ffff5c09fffffe0affff020bfffff613ffff9c31fffff232ffff94c5ffff9ac5ffff9ec5ffff4ac7ffff84c8ffff48c9ffff98ccffff9adcffff9cdcffff2eedffff38edffff3cedffff6ceeffff9aefffffd6f0ffffe4fafffff4fffffff27c00006c7d0000d08d0000f68e0000168f00000c450100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Locations
-        m_OriginalName: Locations
+        m_Name: Bed
+        m_OriginalName: Bed
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 46046
+        m_UserData: -65646
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -817,7 +817,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 48, y: 25}
+      snapOffset: {x: 48, y: 10}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: UnityEditor.SceneViewCameraOverlay
@@ -888,9 +888,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1.3173068, y: 2.3479786, z: -3.628278}
+    m_Target: {x: 0.59807014, y: 1.0470762, z: 2.106205}
     speed: 2
-    m_Value: {x: 1.3173068, y: 2.3479786, z: -3.628278}
+    m_Value: {x: 0.59807014, y: 1.0470762, z: 2.106205}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -936,13 +936,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.494
   m_Rotation:
-    m_Target: {x: 0.16679333, y: -0.5718126, z: 0.12008533, w: 0.79422295}
+    m_Target: {x: 0.14726202, y: -0.8066473, z: 0.2258538, w: 0.525953}
     speed: 2
-    m_Value: {x: 0.16679332, y: -0.57181257, z: 0.120085314, w: 0.79422283}
+    m_Value: {x: 0.14726184, y: -0.80664635, z: 0.22585353, w: 0.52595234}
   m_Size:
-    m_Target: 1.297806
+    m_Target: 5.691052
     speed: 2
-    m_Value: 1.297806
+    m_Value: 5.691052
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1096,10 +1096,10 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 47}
+    scrollPos: {x: 0, y: 31}
     m_SelectedIDs: aa7a0000
     m_LastClickedID: 31402
-    m_ExpandedIDs: 00000000327a0000667a0000b67a0000de7a0000ffffff7f
+    m_ExpandedIDs: 00000000327a0000667a0000b67a0000ffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1154,7 +1154,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c623000002da0000547b00002cb90000000000006476000026be0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

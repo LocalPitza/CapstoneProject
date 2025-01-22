@@ -66,6 +66,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\WorkTimer.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\StorageInteract.cs" />
     <Compile Include="Assets\Scripts\Planting\Harvestable.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Teleport.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\InteractableObject.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\SeedData.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\IncreaseScore.cs" />
