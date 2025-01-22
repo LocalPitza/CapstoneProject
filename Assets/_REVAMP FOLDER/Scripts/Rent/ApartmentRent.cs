@@ -6,6 +6,7 @@ public class ApartmentRent : MonoBehaviour, ITimeTracker
 {
     [SerializeField] private int rentMin = 500; // Minimum rent
     [SerializeField] private int rentMax = 1000; // Maximum rent
+    [Range(15,30)]
     [SerializeField] private int dayOfRent = 30;
     private int lastProcessedDay = 0;
 

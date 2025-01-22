@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum ItemType
 {
-    StorageItem, HarvestItem
+    StorageItem, ConsumableItem
 }
 
 [CreateAssetMenu(menuName = "Items/Item")]
@@ -18,4 +18,5 @@ public class ItemData : ScriptableObject
 
     public int cost;
     public int hungerRefill;
+    public int energyRefill;
 }
