@@ -35,6 +35,7 @@ public class MiniGameManager : MonoBehaviour
     public void StartMiniGame()
     {
         isMiniGameActive = true;
+        PlayerMove.isUIOpen = true;
         miniGameParent.SetActive(true);
 
         // Reset the timer
@@ -92,6 +93,7 @@ public class MiniGameManager : MonoBehaviour
     {
         // Hide the minigame UI
         miniGameParent.SetActive(false);
+        PlayerMove.isUIOpen = false;
 
         // Destroy any existing obstacles and reset the spawner
         if (obstacleSpawner != null)

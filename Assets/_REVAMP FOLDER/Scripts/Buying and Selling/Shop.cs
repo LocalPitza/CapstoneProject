@@ -32,6 +32,7 @@ public class Shop : MonoBehaviour
         if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKeyDown(KeyCode.F))
         {
             NewUIManager.Instance.OpenShop(shopItems);
+            PlayerMove.isUIOpen = true;
         }
     }
 }

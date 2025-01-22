@@ -10,27 +10,25 @@ public class PlayerMove : MonoBehaviour
     public float turnSpeed = 180f;
 
     PlayerInteraction playerInteraction;
-    private StorageInteract storageInteract;
+
+    public static bool isUIOpen = false;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         playerInteraction = GetComponentInChildren<PlayerInteraction>();
-
-        storageInteract = FindObjectOfType<StorageInteract>();
     }
 
     private void Update()
     {
-        if ((storageInteract == null || !storageInteract.IsUIActive()))
-        {
-            Vector3 movDir;
+        if (isUIOpen) return;
 
-            transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
-            movDir = transform.forward * Input.GetAxis("Vertical") * speed;
+        Vector3 movDir;
 
-            controller.Move(movDir * Time.deltaTime - Vector3.up * 0.1f);
-        }
+        transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
+        movDir = transform.forward * Input.GetAxis("Vertical") * speed;
+
+        controller.Move(movDir * Time.deltaTime - Vector3.up * 0.1f);
 
         Interact();
     }
@@ -40,16 +38,6 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             playerInteraction.Interact();
-
-            //NOTE: This causes the Bug for some reason
-            /*if (playerInteraction.harvestableHit)
-            {
-                playerInteraction.HarvestInteract();
-            }
-            else
-            {
-                playerInteraction.Interact();
-            }*/
         }
 
         if (Input.GetKeyDown(KeyCode.E))

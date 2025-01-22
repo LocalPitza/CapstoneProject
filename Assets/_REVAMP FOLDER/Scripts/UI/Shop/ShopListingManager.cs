@@ -6,6 +6,7 @@ using TMPro;
 
 public class ShopListingManager : MonoBehaviour
 {
+    public GameObject shopParent;
     public GameObject shopListing;
     public Transform listingGrid;
 
@@ -96,5 +97,11 @@ public class ShopListingManager : MonoBehaviour
     public void CancelPurchase()
     {
         confirmationScreen.SetActive(false);
+    }
+
+    public void CloseShop()
+    {
+        shopParent.SetActive(false);
+        PlayerMove.isUIOpen = false;
     }
 }

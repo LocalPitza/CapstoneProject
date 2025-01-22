@@ -31,6 +31,8 @@ public class OpenBackpack : MonoBehaviour
             }
         }
 
+        PlayerMove.isUIOpen = isActive;
+
         NewUIManager.Instance.RenderInventory();
     }
 }
