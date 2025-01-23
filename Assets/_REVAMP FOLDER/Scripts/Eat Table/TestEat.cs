@@ -23,7 +23,7 @@ public class TestEat : MonoBehaviour
                 return;
             }
 
-            NewUIManager.Instance.TriggerYesNoPrompt($"Do you want to eat {handSlotItem.name} ? ", Eatingtable);
+            NewUIManager.Instance.TriggerYesNoPrompt($"Do you want to consuume {handSlotItem.name} ? ", Eatingtable);
         }
     }
 
@@ -33,8 +33,20 @@ public class TestEat : MonoBehaviour
         ItemSlotData handSlot = NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Harvest);
 
         int hungerRefill = handSlot.quantity * handSlot.itemData.hungerRefill;
+        int energyRefill = handSlot.quantity * handSlot.itemData.energyRefill;
 
         PlayerStats.HungerStat(hungerRefill);
+
+        // Update Stamina
+        if (energyRefill > 0)
+        {
+            PlayerStats.Stamina += energyRefill;
+            if (PlayerStats.Stamina > 100)
+            {
+                PlayerStats.Stamina = 100; // Cap stamina at max value
+            }
+            NewUIManager.Instance.RenderPlayerStats();
+        }
 
         handSlot.Empty();
 
