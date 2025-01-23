@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Rent\ApartmentRent.cs" />
     <Compile Include="Assets\Scripts\MainMenu\Settings.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\UpgradeTest.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\ItemSlotData.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\WorkTimer.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\StorageInteract.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Time\GameTimeStamp.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\SceneTransition\LocationManager.cs" />
     <Compile Include="Assets\Scripts\Planting\UI\InventorySlot.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\UpgradeManager.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\OpenBackpack.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\InteractMessage.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\ObstacleSpawner.cs" />
