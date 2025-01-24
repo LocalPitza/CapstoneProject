@@ -8,7 +8,7 @@ public class SceneTransitionManager : MonoBehaviour
 {
     public static SceneTransitionManager Instance;
 
-    public enum Location { Bedroom, PlantingArea, TestCity}
+    public enum Location { Bedroom, PlantingArea, TestCity, MainGame}
     public Location currentLocation;
 
     Transform playerPoint;
