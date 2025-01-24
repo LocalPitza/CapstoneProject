@@ -25,8 +25,25 @@ public class UpgradeTest : MonoBehaviour
             return; // Stop execution if no button is assigned
         }
 
+        // Check upgrade status and update button interactability
+        UpdateButtonState();
+
         // Add listener to the button to enable the specific upgrade
-        upgradeButton.onClick.AddListener(() => upgradeManager.EnableUpgrade(targetObject));
+        upgradeButton.onClick.AddListener(() =>
+        {
+            upgradeManager.EnableUpgrade(targetObject);
+            UpdateButtonState(); // Update the button's interactability after the upgrade
+        });
+    }
+
+    private void UpdateButtonState()
+    {
+        // Check if the upgrade is already purchased
+        string objectKey = upgradeManager.upgradeKeyPrefix + targetObject.name;
+        bool isUpgraded = PlayerPrefs.GetInt(objectKey, 0) == 1;
+
+        // Disable the button if the upgrade is already purchased
+        upgradeButton.interactable = !isUpgraded;
     }
 
 }

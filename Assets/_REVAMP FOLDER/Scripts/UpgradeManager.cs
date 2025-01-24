@@ -7,6 +7,7 @@ public class UpgradeManager : MonoBehaviour
 {
     public string upgradeKeyPrefix = "Upgrade_"; // Prefix for PlayerPrefs keys
     public List<GameObject> managedObjects; // List of objects to manage
+    public int upgradeCost = 500;
 
     void Update()
     {
@@ -18,7 +19,17 @@ public class UpgradeManager : MonoBehaviour
 
     public void EnableUpgrade(GameObject targetObject)
     {
+        if (PlayerStats.Money < upgradeCost)
+        {
+            Debug.LogWarning("Not enough money to purchase this upgrade!");
+            return; // Exit if the player cannot afford the upgrade
+        }
+
         string objectKey = upgradeKeyPrefix + targetObject.name; // Use the object's name for saving
+
+        // Deduct money and enable the upgrade
+        PlayerStats.Spend(upgradeCost);
+
         PlayerPrefs.SetInt(objectKey, 1);
         PlayerPrefs.Save();
 
