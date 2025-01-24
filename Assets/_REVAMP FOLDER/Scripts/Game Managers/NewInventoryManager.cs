@@ -205,6 +205,8 @@ public class NewInventoryManager : MonoBehaviour
         equippedSlot.AddQuantity(1); // Undo the removal
     }
 
+
+    //If we want to render the GameObject Model
     public void RenderHand()
     {
         if(handPoint.childCount > 0)
@@ -217,6 +219,7 @@ public class NewInventoryManager : MonoBehaviour
             Instantiate(GetEquippedSlotItem(NewInventorySlot.InventoryType.Harvest).gameModel, handPoint);
         }
     }
+
 
     public ItemData GetEquippedSlotItem(NewInventorySlot.InventoryType inventoryType)
     {
@@ -265,6 +268,7 @@ public class NewInventoryManager : MonoBehaviour
         SeedData seed = item as SeedData;
         return seed != null;
     }
+
 
     public void EquipHandSlot(ItemData item)
     {

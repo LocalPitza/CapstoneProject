@@ -15,6 +15,10 @@ public class MainMenu : MonoBehaviour
         {
             string bedroom = SceneTransitionManager.Location.Bedroom.ToString();
             loadingManager.LoadScene(bedroom);
+
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+            Debug.Log("All PlayerPrefs have been cleared.");
         }
     }
 
@@ -24,6 +28,7 @@ public class MainMenu : MonoBehaviour
         {
             string bedroom = SceneTransitionManager.Location.Bedroom.ToString();
             loadingManager.LoadScene(bedroom, LoadGame);
+
         }
     }
 

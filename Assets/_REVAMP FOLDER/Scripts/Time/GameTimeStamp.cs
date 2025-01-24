@@ -66,7 +66,7 @@ public class GameTimeStamp
         }
 
         //Rainy 152 Days and Dry 213
-        if (day > 10)
+        if (day > 30)
         {
             day = 1;
 

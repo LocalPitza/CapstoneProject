@@ -57,7 +57,15 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                 materialToSwitch = wateredMat;
                 break;
         }
-        renderer.material = materialToSwitch;
+        // Null check to avoid errors
+        if (renderer != null && materialToSwitch != null)
+        {
+            renderer.material = materialToSwitch;
+        }
+        else
+        {
+            Debug.LogWarning($"Renderer or material is null on {gameObject.name}. Skipping material update.");
+        }
     }
 
     public void SwitchSoilStatus(SoilStatus statusToSwitch)
@@ -80,7 +88,15 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                 timeWatered = TimeManager.Instance.GetGameTimeStamp();
                 break;
         }
-        renderer.material = materialToSwitch;
+        // Null check to avoid errors
+        if (renderer != null && materialToSwitch != null)
+        {
+            renderer.material = materialToSwitch;
+        }
+        else
+        {
+            Debug.LogWarning($"Renderer or material is null on {gameObject.name}. Skipping material update.");
+        }
 
         SoilManager.Instance.OnSoilStateChange(id, soilStatus, timeWatered);
     }

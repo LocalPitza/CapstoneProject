@@ -8,6 +8,7 @@ TagManager:
   - Harvestable
   - Pot
   - Item
+  - MiniGameObstacle
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Pot
   - Harvestable
   - Player
-  - 
+  - MiniGame
   - 
   - 
   - 

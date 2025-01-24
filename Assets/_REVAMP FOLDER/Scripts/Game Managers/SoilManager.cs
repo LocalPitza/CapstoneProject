@@ -56,15 +56,6 @@ public class SoilManager : MonoBehaviour
     #region Register and Deregistering
     void RegisterSoilPlots()
     {
-        /*foreach (Transform soilTransform in transform)
-        {
-            PottingSoil potSoil = soilTransform.GetComponent<PottingSoil>();
-            soilPlots.Add(potSoil);
-
-            soilData.Add(new SoilSaveState());
-            potSoil.id = soilPlots.Count - 1;
-        }*/
-
         foreach (GameObject plantingArea in plantingAreas)
         {
             foreach (Transform soilTransform in plantingArea.transform)
@@ -171,19 +162,6 @@ public class SoilManager : MonoBehaviour
             cropToPlant.LoadCrop(cropSave.soilID, seedToGrow, cropSave.cropState, cropSave.growth, cropSave.health);
             Debug.Log($"Loaded crop with seed {seedToGrow.name} on soil ID {cropSave.soilID}");
         }
-
-        /*cropData = cropDatasetToLoad;
-        foreach (CropSaveState cropSave in cropDatasetToLoad)
-        {
-            PottingSoil soilToPlant = soilPlots[cropSave.soilID];
-
-            NewCropBehaviour cropToPlant = soilToPlant.SpawnCrop();
-            Debug.Log(cropToPlant.gameObject);
-
-            SeedData seedToGrow = (SeedData)NewInventoryManager.Instance.itemIndex.GetItemFromString(cropSave.seedToGrow);
-
-            cropToPlant.LoadCrop(cropSave.soilID, seedToGrow, cropSave.cropState, cropSave.growth, cropSave.health);
-        }*/
     }
     #endregion
 }

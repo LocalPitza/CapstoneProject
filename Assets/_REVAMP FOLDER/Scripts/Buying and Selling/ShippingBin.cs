@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ShippingBin : MonoBehaviour
 {
-    //public static int hoursToShip = 18;
     public static List<ItemSlotData> harvestToShip = new List<ItemSlotData>();
 
     private InteractMessage interactMessage;
@@ -21,6 +20,7 @@ public class ShippingBin : MonoBehaviour
 
             if(handSlotItem == null )
             {
+                //If not holding anything, move on
                 return;
             }
 
@@ -33,12 +33,12 @@ public class ShippingBin : MonoBehaviour
         //Get the ItemsSlotData of what the player is holding
         ItemSlotData handSlot = NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Harvest);
 
-        //harvestToShip.Add(new ItemSlotData(handSlot));
-
+        //If holding 2 items and cost is 10, 2 * 10 = 20 (MoneyEarned)
         int moneyEarned = handSlot.quantity * handSlot.itemData.cost;
 
         PlayerStats.Earn(moneyEarned);
 
+        //Holding nothing
         handSlot.Empty();
 
         foreach(ItemSlotData harvest in harvestToShip)
@@ -46,30 +46,5 @@ public class ShippingBin : MonoBehaviour
             Debug.Log($"In the shipping bin: {harvest.itemData.name} x {harvest.quantity}");
         }
 
-    }
-
-    /*public static void ShipItens()
-    {
-        //Total on how much the player should receive upon shipping the items
-        int moneyToReceive = TallyItems(harvestToShip);
-
-        //Convent the Items to Money
-        PlayerStats.Earn(moneyToReceive);
-
-        //Empty the Shipping Bin
-        harvestToShip.Clear();
-
-    }*/
-
-    static int TallyItems(List<ItemSlotData> items)
-    {
-        int total = 0;
-
-        foreach(ItemSlotData item in items)
-        {
-            total += item.quantity * item.itemData.cost;
-        }
-
-        return total;
     }
 }
