@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_REVAMP FOLDER/Scenes/TestCity.unity
     guid: cdeea389e98ecc64ea56da72becf94d2
+  - enabled: 1
+    path: Assets/Scenes/MainGame.unity
+    guid: dce5134543597e848a7c34a8d05a0cef
   m_configObjects: {}
