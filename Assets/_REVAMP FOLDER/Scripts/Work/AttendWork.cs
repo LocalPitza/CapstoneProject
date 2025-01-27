@@ -13,7 +13,7 @@ public class AttendWork : MonoBehaviour
 
     void Update()
     {
-        if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKeyDown(KeyCode.F))
+        if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
             // Check if the player has already played the mini-game
             if (!PlayerStats.HasPlayedMiniGame())

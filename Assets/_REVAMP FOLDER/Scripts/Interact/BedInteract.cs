@@ -14,7 +14,7 @@ public class BedInteract : MonoBehaviour
 
     void Update()
     {
-        if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKey(KeyCode.F))
+        if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
             NewUIManager.Instance.TriggerYesNoPrompt("Do you want to Sleep?", GameStateManager.Instance.Sleep);
         }

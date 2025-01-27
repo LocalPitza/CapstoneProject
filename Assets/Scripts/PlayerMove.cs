@@ -35,17 +35,18 @@ public class PlayerMove : MonoBehaviour
 
     public void Interact()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        // Use InputManager to check for key presses
+        if (Input.GetKeyDown(InputManager.Instance.interactKey))
         {
             playerInteraction.Interact();
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(InputManager.Instance.harvestKey))
         {
             playerInteraction.HarvestInteract();
         }
 
-        if(Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(InputManager.Instance.harvestKeepKey))
         {
             playerInteraction.HarvestKeep();
         }

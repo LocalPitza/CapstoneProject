@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -190,8 +190,8 @@ MonoBehaviour:
     y: 0
     width: 312
     height: 614
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -294,14 +294,14 @@ MonoBehaviour:
     y: 0
     width: 950
     height: 333
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 21}
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
   - {fileID: 21}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -492,9 +492,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 42720000
-      m_LastClickedID: 29250
-      m_ExpandedIDs: 8ed3ffff76dbffffdef9ffffe4faffff5070000064700000327100005e710000d8710000dc710000aa720000c0720000187300007e770000a27700008c7b00005a82000052840000d284000062c400000ec7000064cd000058d6000020dd0000a61101009c230100642a0100
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 42f0ffffe4faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -888,9 +888,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -7.152589, y: 4.63852, z: 21.481388}
+    m_Target: {x: -5.5881643, y: 1.7671928, z: -1.0070019}
     speed: 2
-    m_Value: {x: -7.152589, y: 4.63852, z: 21.481388}
+    m_Value: {x: -5.5881643, y: 1.7671928, z: -1.0070019}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -936,13 +936,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.494
   m_Rotation:
-    m_Target: {x: 0.1600444, y: -0.79448706, z: 0.23742971, w: 0.53554106}
+    m_Target: {x: 0.31197202, y: -0.026773393, z: 0.0087955, w: 0.9496737}
     speed: 2
-    m_Value: {x: 0.15869337, y: -0.79891515, z: 0.240059, w: 0.52813137}
+    m_Value: {x: -0.31197202, y: 0.026773393, z: -0.0087955, w: -0.9496737}
   m_Size:
-    m_Target: 9.209437
+    m_Target: 7.6411786
     speed: 2
-    m_Value: 8.812859
+    m_Value: 7.6411786
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1082,7 +1082,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/_REVAMP FOLDER/Scenes
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1090,16 +1090,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/_REVAMP FOLDER/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\_Game WIP\CapstoneProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 31}
-    m_SelectedIDs: aa960000
-    m_LastClickedID: 38570
-    m_ExpandedIDs: 0000000042950000ffffff7f
+    m_SelectedIDs: 82960000
+    m_LastClickedID: 38530
+    m_ExpandedIDs: 00000000ec94000022960000ffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1127,7 +1127,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000042950000
+    m_ExpandedIDs: 00000000ec940000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1152,9 +1152,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 9c700000
-    m_LastClickedInstanceID: 28828
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000002da0000547b00002cb90000000000006476000026be0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
