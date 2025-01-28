@@ -5,60 +5,41 @@ using UnityEngine;
 public class Teleport : MonoBehaviour
 {
     [Header("Teleport Settings")]
-    [Tooltip("Set the teleport destination as a Transform.")]
+
+    // The destination Transform to teleport to
     public Transform teleportDestination;
 
-    private bool playerInsideTrigger = false; // Flag to track if the player is in the trigger
+    // The tag to identify the player
+    public string playerTag = "Player";
 
-    private void OnTriggerEnter(Collider other)
+    private GameObject playerInTrigger;
+
+    void OnTriggerEnter(Collider other)
     {
-        // Check if the colliding object has the "Player" tag
-        if (other.CompareTag("Player"))
+        // Check if the object entering the trigger is the player
+        if (other.CompareTag(playerTag))
         {
-            Debug.Log("Player entered the teleport trigger.");
-            playerInsideTrigger = true;
+            playerInTrigger = other.gameObject;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
-        // Reset the flag when the player exits the trigger
-        if (other.CompareTag("Player"))
+        // Clear the reference when the player leaves the trigger
+        if (other.CompareTag(playerTag))
         {
-            Debug.Log("Player exited the teleport trigger.");
-            playerInsideTrigger = false;
+            playerInTrigger = null;
         }
     }
 
-    private void Update()
+    void Update()
     {
-        // Check for the interaction key press if the player is inside the trigger
-        if (playerInsideTrigger && Input.GetKeyDown(InputManager.Instance.interactKey))
+        // Check if the player is in the trigger and the F key is pressed
+        if (playerInTrigger != null && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
-            if (teleportDestination != null)
-            {
-                GameObject player = GameObject.FindGameObjectWithTag("Player"); // Find the player object
-                StartCoroutine(TeleportWithFade(player));
-            }
-            else
-            {
-                Debug.LogWarning("Teleport destination is not set.");
-            }
+            // Teleport the player to the destination
+            playerInTrigger.transform.position = teleportDestination.position;
+            playerInTrigger.transform.rotation = teleportDestination.rotation;
         }
-    }
-
-    private IEnumerator TeleportWithFade(GameObject player)
-    {
-        // Trigger fade-out
-        yield return GameStateManager.Instance.FadeOut();
-
-        // Move the player to the teleport destination
-        player.transform.position = teleportDestination.position;
-
-        // Optionally reset player rotation
-        player.transform.rotation = teleportDestination.rotation;
-
-        // Trigger fade-in
-        yield return GameStateManager.Instance.FadeIn();
     }
 }
