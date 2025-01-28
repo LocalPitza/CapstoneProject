@@ -81,6 +81,7 @@ public class SoilManager : MonoBehaviour
 
     public void DeregisterCrop(int soilID)
     {
+        //Find its index in the list from the landID and remove it
         cropData.RemoveAll(x => x.soilID == soilID);
     }
     #endregion
@@ -92,8 +93,10 @@ public class SoilManager : MonoBehaviour
         soilData[id] = new SoilSaveState(soilStatus, lastWatered);
     }
 
+    //Update the corresponding Crop Data on ever change to the Land's state
     public void OnCropStateChange(int soilID, NewCropBehaviour.CropState cropState, int growth, int health)
     {
+        //Find its index in the list from the landID
         int cropIndex = cropData.FindIndex(x => x.soilID == soilID);
 
         if (cropIndex == -1)
@@ -108,11 +111,14 @@ public class SoilManager : MonoBehaviour
     #endregion
 
     #region LoadingData
+    //Load over the static farmData onto the Instance's landData
     public void ImportSoilData(List<SoilSaveState> soilDatasetToLoad)
     {
         for(int i = 0; i < soilDatasetToLoad.Count; i++)
         {
+            //Get the individual land save state
             SoilSaveState soilDataToLoad = soilDatasetToLoad[i];
+            //Load it up onto the Land instance
             soilPlots[i].LoadSoilData(soilDataToLoad.soilStatus, soilDataToLoad.lastWatered);
         }
 
@@ -121,45 +127,18 @@ public class SoilManager : MonoBehaviour
 
     public void ImportCropData(List<CropSaveState> cropDatasetToLoad)
     {
+        //Load over the static farmData onto the Instance's cropData
         cropData = cropDatasetToLoad;
         foreach (CropSaveState cropSave in cropDatasetToLoad)
         {
             PottingSoil soilToPlant = soilPlots[cropSave.soilID];
+
             NewCropBehaviour cropToPlant = soilToPlant.SpawnCrop();
-
-            if (cropToPlant == null)
-            {
-                Debug.LogError($"Failed to spawn crop for soil ID {cropSave.soilID}");
-                continue;
-            }
-
-            if (NewInventoryManager.Instance == null)
-            {
-                Debug.LogError("NewInventoryManager.Instance is null.");
-                continue;
-            }
-
-            if (NewInventoryManager.Instance.itemIndex == null)
-            {
-                Debug.LogError("ItemIndex is null.");
-                continue;
-            }
-
-            Debug.Log($"Looking for seed: {cropSave.seedToGrow}");
-            foreach (var item in NewInventoryManager.Instance.itemIndex.items)
-            {
-                Debug.Log($"Item in index: {item.name}");
-            }
 
             SeedData seedToGrow = (SeedData)NewInventoryManager.Instance.itemIndex.GetItemFromString(cropSave.seedToGrow);
 
-            if (seedToGrow == null)
-            {
-                Debug.LogWarning($"Seed '{cropSave.seedToGrow}' not found in ItemIndex. Skipping crop planting for soil ID {cropSave.soilID}.");
-                continue;
-            }
-
             cropToPlant.LoadCrop(cropSave.soilID, seedToGrow, cropSave.cropState, cropSave.growth, cropSave.health);
+
             Debug.Log($"Loaded crop with seed {seedToGrow.name} on soil ID {cropSave.soilID}");
         }
     }

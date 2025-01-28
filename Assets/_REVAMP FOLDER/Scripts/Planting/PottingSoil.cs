@@ -9,12 +9,12 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
     public enum SoilStatus
     {
-        Soil, Digged, Watered
+        Soil, Digged, Watered, Weeds
     }
 
     public SoilStatus soilStatus;
 
-    public Material soilMat, diggedMat, wateredMat;
+    public Material soilMat, diggedMat, wateredMat, weedMat;
     new Renderer renderer;
 
     public GameObject select;
@@ -49,12 +49,17 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
             case SoilStatus.Soil:
                 materialToSwitch = soilMat;
                 break;
+
             case SoilStatus.Digged:
                 materialToSwitch = diggedMat;
-
                 break;
+
             case SoilStatus.Watered:
                 materialToSwitch = wateredMat;
+                break;
+
+            case SoilStatus.Weeds:
+                materialToSwitch = weedMat;
                 break;
         }
         // Null check to avoid errors
@@ -79,14 +84,21 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
             case SoilStatus.Soil:
                 materialToSwitch = soilMat;
                 break;
+
             case SoilStatus.Digged:
                 materialToSwitch = diggedMat;
-
                 break;
+
             case SoilStatus.Watered:
                 materialToSwitch = wateredMat;
                 timeWatered = TimeManager.Instance.GetGameTimeStamp();
                 break;
+
+            case SoilStatus.Weeds:
+                materialToSwitch = weedMat;
+                timeWatered = null; // Reset water timestamp
+                break;
+
         }
         // Null check to avoid errors
         if (renderer != null && materialToSwitch != null)
@@ -110,6 +122,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
     {
         ItemData playerToolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
 
+        //If there's nothing equipped, return
         if (!NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Storage)) 
         {
             return;
@@ -124,12 +137,25 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
             switch (toolType)
             {
                 case EquipmentData.ToolType.HandTrowel:
-                    SwitchSoilStatus(SoilStatus.Digged);
-
+                    if (soilStatus == SoilStatus.Weeds)
+                    {
+                        // HandTrowel is used to remove weeds and turn soil back to Digged
+                        SwitchSoilStatus(SoilStatus.Digged);
+                    }
+                    else if (soilStatus == SoilStatus.Soil)
+                    {
+                        // HandTrowel is used to turn Soil into Digged
+                        SwitchSoilStatus(SoilStatus.Digged);
+                    }
                     break;
 
                 case EquipmentData.ToolType.WateringCan:
-                    if (soilStatus != SoilStatus.Soil)
+                    if (soilStatus == SoilStatus.Weeds)
+                    {
+                        //I willl make a UI for this to Notify the Player
+                        Debug.Log("Cannot water soil with weeds. Remove weeds first!");
+                    }
+                    else if (soilStatus != SoilStatus.Soil) // Only water if soil is digged or already watered
                     {
                         SwitchSoilStatus(SoilStatus.Watered);
                     }
@@ -143,7 +169,6 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                         cropPlanted.RemoveCrop();
                         //SwitchSoilStatus(SoilStatus.Soil);
                     }
-
                     break;
             }
 
@@ -154,8 +179,6 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
         if (seed != null && soilStatus != SoilStatus.Soil && cropPlanted == null)
         {
-            Debug.Log("Planting");
-
             SpawnCrop();
 
             cropPlanted.Plant(id, seed);
@@ -177,35 +200,41 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         return cropPlanted;
     }
 
-    /*public NewCropBehaviour.CropState GetCropStatus()
-    {
-        if (cropPlanted != null)
-        {
-            return cropPlanted.cropState;
-        }
-        return NewCropBehaviour.CropState.Harvestable;
-    }*/
-
     public void ClockUpdate(GameTimeStamp timestamp)
     {
-        if(soilStatus == SoilStatus.Watered)
+        if (soilStatus == SoilStatus.Watered)
         {
             int hoursElapsed = GameTimeStamp.CompareTimestamp(timeWatered, timestamp);
 
-            //Plant grow if being watered
-            if(cropPlanted != null)
+            // Plant grows if watered
+            if (cropPlanted != null)
             {
                 cropPlanted.Grow();
             }
 
-            if(hoursElapsed > 24)
+            // Reset to Digged if watered for more than 22 hours
+            if (hoursElapsed > 24)
             {
                 SwitchSoilStatus(SoilStatus.Digged);
             }
         }
+        else if (soilStatus == SoilStatus.Digged || soilStatus == SoilStatus.Soil)
+        {
+            // Handle weeds based on elapsed time since last watered
+            if (timeWatered != null)
+            {
+                int hoursSinceWatered = GameTimeStamp.CompareTimestamp(timeWatered, timestamp);
+
+                // Change to Weeds if more than 24 hours since last watered
+                if (hoursSinceWatered > 24)
+                {
+                    SwitchSoilStatus(SoilStatus.Weeds);
+                }
+            }
+        }
 
         //Handle the wilting when the land is dry
-        if(soilStatus != SoilStatus.Watered && cropPlanted != null)
+        if (soilStatus != SoilStatus.Watered && cropPlanted != null)
         {
             //If the Crop has already germinated, start the withering
             if (cropPlanted.cropState != NewCropBehaviour.CropState.Seed)

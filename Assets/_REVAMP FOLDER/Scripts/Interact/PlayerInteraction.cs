@@ -120,8 +120,13 @@ public class PlayerInteraction : MonoBehaviour
                         selectedSoil.Interact();
                         break;
 
+                    case EquipmentData.ToolType.Hoe:
+                        PlayerStats.UseStamina(10);
+                        selectedSoil.Interact();
+                        break;
+
                     default:
-                        Debug.LogWarning("Tool not recognized for planting or watering.");
+                        Debug.LogWarning("This tool can't be used here.");
                         message.text = "This tool can't be used here.";
                         StartCoroutine(ClearMessageAfterDelay(2f));
                         break;

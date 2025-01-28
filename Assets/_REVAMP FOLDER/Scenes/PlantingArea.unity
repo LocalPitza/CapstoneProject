@@ -3269,6 +3269,7 @@ MonoBehaviour:
   managedObjects:
   - {fileID: 765098176}
   - {fileID: 882462576}
+  upgradeCost: 500
 --- !u!1 &1057164361
 GameObject:
   m_ObjectHideFlags: 0
@@ -8294,16 +8295,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1555249263}
-    - target: {fileID: 6241579153054945395, guid: 89f6eff4e4d810b43a2ac8d154aee789,
-        type: 3}
-      propertyPath: m_VersionIndex
-      value: 977
-      objectReference: {fileID: 0}
-    - target: {fileID: 9163682072395329088, guid: 89f6eff4e4d810b43a2ac8d154aee789,
-        type: 3}
-      propertyPath: plantingSeedsUI
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 9222528886798265567, guid: 89f6eff4e4d810b43a2ac8d154aee789,
         type: 3}
       propertyPath: m_Name
