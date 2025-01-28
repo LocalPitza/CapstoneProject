@@ -79,6 +79,8 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\FlyBehavior.cs" />
     <Compile Include="Assets\Scripts\Planting\SelectPot.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Saving\SoilSaveState.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\InputManager.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\AssignPlayer.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\DoorInteract.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Planting\PlantSeed.cs" />

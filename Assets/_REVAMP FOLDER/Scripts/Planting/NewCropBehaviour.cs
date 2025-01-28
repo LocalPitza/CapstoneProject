@@ -26,6 +26,8 @@ public class NewCropBehaviour : MonoBehaviour
     }
     public CropState cropState;
 
+    //Initialisation for the crop GameObject
+    //Called when the player plants a seed
     public void Plant(int soilID, SeedData seedToGrow)
     {
         LoadCrop(soilID, seedToGrow, CropState.Seed, 0, 0);
@@ -92,7 +94,7 @@ public class NewCropBehaviour : MonoBehaviour
     {
         health--;
 
-        if(health <= 0 && cropState != CropState.Seed)
+        if (health <= 0 && cropState != CropState.Seed)
         {
             SwitchState(CropState.Wilted);
         }

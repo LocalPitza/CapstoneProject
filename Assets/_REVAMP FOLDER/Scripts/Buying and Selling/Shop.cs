@@ -29,7 +29,7 @@ public class Shop : MonoBehaviour
 
     void Update()
     {
-        if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKeyDown(KeyCode.F))
+        if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
             NewUIManager.Instance.OpenShop(shopItems);
             PlayerMove.isUIOpen = true;

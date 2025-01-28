@@ -7,6 +7,7 @@ public class ShippingBin : MonoBehaviour
     public static List<ItemSlotData> harvestToShip = new List<ItemSlotData>();
 
     private InteractMessage interactMessage;
+
     void Start()
     {
         interactMessage = GetComponent<InteractMessage>();
@@ -14,7 +15,7 @@ public class ShippingBin : MonoBehaviour
 
     void Update()
     {
-        if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKeyDown(KeyCode.F))
+        if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
             ItemData handSlotItem = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Harvest);
 
