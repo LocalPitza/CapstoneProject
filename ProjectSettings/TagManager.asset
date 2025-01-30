@@ -9,6 +9,10 @@ TagManager:
   - Pot
   - Item
   - MiniGameObstacle
+  - Footstep/STONE
+  - Footstep/WOOD
+  - Footstep/TILE
+  - Footstep/METAL
   layers:
   - Default
   - TransparentFX
@@ -20,7 +24,7 @@ TagManager:
   - Harvestable
   - Player
   - MiniGame
-  - 
+  - Floor
   - 
   - 
   - 
