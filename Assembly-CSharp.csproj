@@ -119,6 +119,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\MiniGameScore.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Time\ITimeTracker.cs" />
     <Compile Include="Assets\Scripts\Planting\UI\HandInventorySlot.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\StoreImageAssign.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\PassiveIncome.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\NewInventorySlot.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\BedInteract.cs" />
