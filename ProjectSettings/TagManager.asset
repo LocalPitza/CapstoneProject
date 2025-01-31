@@ -13,6 +13,9 @@ TagManager:
   - Footstep/WOOD
   - Footstep/TILE
   - Footstep/METAL
+  - Market
+  - Farmer
+  - Store
   layers:
   - Default
   - TransparentFX

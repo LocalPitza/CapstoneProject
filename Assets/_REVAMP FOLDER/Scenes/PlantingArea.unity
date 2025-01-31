@@ -2191,6 +2191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportDestination: {fileID: 1410427267}
+  playerTag: Player
 --- !u!1 &806844086
 GameObject:
   m_ObjectHideFlags: 0
@@ -2326,7 +2327,7 @@ GameObject:
   - component: {fileID: 874350085}
   m_Layer: 0
   m_Name: MarketShop
-  m_TagString: Item
+  m_TagString: Farmer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4445,6 +4446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportDestination: {fileID: 588929887}
+  playerTag: Player
 --- !u!1 &1263472241
 GameObject:
   m_ObjectHideFlags: 0
@@ -8107,7 +8109,7 @@ GameObject:
   - component: {fileID: 2142498901}
   m_Layer: 0
   m_Name: ConvenienceStore
-  m_TagString: Item
+  m_TagString: Store
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
