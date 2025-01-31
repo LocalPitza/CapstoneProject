@@ -21,9 +21,24 @@ public struct SoilSaveState
             int hoursElapsed = GameTimeStamp.CompareTimestamp(lastWatered, timestamp);
             Debug.LogWarning(hoursElapsed + " hours since this was watered");
 
-            if (hoursElapsed > 24)
+            if (hoursElapsed > 23)
             {
                 soilStatus = PottingSoil.SoilStatus.Digged;
+            }
+        }
+
+        else if (soilStatus == PottingSoil.SoilStatus.Digged)
+        {
+            // Handle weeds based on elapsed time since last watered
+            if (lastWatered != null)
+            {
+                int hoursSinceWatered = GameTimeStamp.CompareTimestamp(lastWatered, timestamp);
+
+                // Change to Weeds if more than 24 hours since last watered
+                if (hoursSinceWatered > 24)
+                {
+                    soilStatus = PottingSoil.SoilStatus.Weeds;
+                }
             }
         }
 
