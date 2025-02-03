@@ -63,33 +63,8 @@ public class SceneTransitionManager : MonoBehaviour
     //Called when a scene is loaded
     public void OnLocationLoad(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "NewMenu")
-        {
-            Debug.Log("Destroying Essential Prefab before loading Main Menu...");
-
-            // Unsubscribe first to prevent further calls
-            SceneManager.sceneLoaded -= OnLocationLoad;
-
-            if (gameObject != null)
-            {
-                // Destroy this object safely
-                Destroy(gameObject);
-            }
-
-            return; // Stop execution to prevent further errors
-        }
-
-        // Ensure SceneTransitionManager is still valid before accessing anything
-        if (this == null) return;
-
         //The location the player is coming from when the scene loads
         Location oldLocation = currentLocation;
-
-        // Prevent parsing if the scene is not in the enum
-        if (!Enum.IsDefined(typeof(Location), scene.name))
-        {
-            return;
-        }
 
         //Get the new location by converting the string of our current scene into a Location enum value
         Location newLocation = (Location)Enum.Parse(typeof(Location), scene.name);

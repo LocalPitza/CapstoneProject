@@ -213,12 +213,12 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
             }
 
             // Reset to Digged if watered for more than 22 hours
-            if (hoursElapsed > 23)
+            if (hoursElapsed > 24)
             {
                 SwitchSoilStatus(SoilStatus.Digged);
             }
         }
-        else if (soilStatus == SoilStatus.Digged)
+        else if (soilStatus == SoilStatus.Digged || soilStatus == SoilStatus.Soil)
         {
             // Handle weeds based on elapsed time since last watered
             if (timeWatered != null)

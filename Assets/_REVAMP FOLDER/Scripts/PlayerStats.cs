@@ -54,7 +54,6 @@ public class PlayerStats
     {
         Stamina -= staminaLost;
         NewUIManager.Instance.RenderPlayerStats();
-        CheckGameOver();
     }
 
     public static void RestoreStamina()
@@ -67,7 +66,6 @@ public class PlayerStats
     {
         Hunger += restore;
         NewUIManager.Instance.RenderPlayerStats();
-        CheckGameOver();
     }
 
     // Method to check if the player has already played the mini-game
@@ -86,34 +84,5 @@ public class PlayerStats
     public static void ResetMiniGameStatus()
     {
         hasPlayedMiniGame = false;
-    }
-
-    private static void CheckGameOver()
-    {
-        if (Stamina <= 0 || Hunger <= 0)
-        {
-            // Check if the player is already in the Bedroom if not transition to Bedroom scene
-            if (SceneTransitionManager.Instance.currentLocation != SceneTransitionManager.Location.Bedroom)
-            {
-                SceneTransitionManager.Instance.SwitchLocation(SceneTransitionManager.Location.Bedroom);
-            }
-
-            // Apply the medical pay logic based on which stat hit zero
-            if (Stamina <= 0)
-            {
-                Debug.Log("Game Over: Player has run out of energy");
-                MedicalPay.Instance.PayMedical("Stamina");
-                Stamina = 50;
-            }
-            else if (Hunger <= 0)
-            {
-                Debug.Log("Game Over: Player has run out of hunger.");
-                MedicalPay.Instance.PayMedical("Hunger");
-                Hunger = 50;
-            }
-
-            // Update UI after changes
-            NewUIManager.Instance.RenderPlayerStats();
-        }
     }
 }

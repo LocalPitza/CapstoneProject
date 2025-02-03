@@ -132,9 +132,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\NewUIManager.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Time\TimeManager.cs" />
     <Compile Include="Assets\Scripts\Planting\InventoryManager.cs" />
-    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Menu\PauseMenu.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\MessageManager.cs" />
-    <Compile Include="Assets\_REVAMP FOLDER\MedicalPay.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\Shop\ShopListing.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Saving\GameSaveState.cs" />
     <Compile Include="Assets\Scripts\Planting\UI\UIManager.cs" />
