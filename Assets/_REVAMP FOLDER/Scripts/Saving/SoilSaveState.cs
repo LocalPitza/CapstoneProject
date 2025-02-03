@@ -19,7 +19,7 @@ public struct SoilSaveState
         if (soilStatus == PottingSoil.SoilStatus.Watered)
         {
             int hoursElapsed = GameTimeStamp.CompareTimestamp(lastWatered, timestamp);
-            Debug.LogWarning(hoursElapsed + " hours since this was watered");
+            Debug.Log(hoursElapsed + " hours since this was watered");
 
             if (hoursElapsed > 23)
             {

@@ -69,7 +69,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         }
         else
         {
-            Debug.LogWarning($"Renderer or material is null on {gameObject.name}. Skipping material update.");
+            Debug.Log($"Renderer or material is null on {gameObject.name}. Skipping material update.");
         }
     }
 

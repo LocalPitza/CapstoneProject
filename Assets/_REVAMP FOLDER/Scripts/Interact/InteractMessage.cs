@@ -18,7 +18,7 @@ public class InteractMessage : MonoBehaviour
         if (messageManager != null)
         {
             message = messageManager.GetInteractionText();
-            Debug.Log("MessageManager found and interactionText assigned.");
+            //Debug.Log("MessageManager found and interactionText assigned.");
         }
         else
         {
