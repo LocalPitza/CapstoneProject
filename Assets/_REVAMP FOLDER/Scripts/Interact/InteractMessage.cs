@@ -8,21 +8,13 @@ public class InteractMessage : MonoBehaviour
     public Vector3 boxSize = new Vector3(2f, 2f, 2f);
     private bool playerInRange = false;
 
-    [Header("Message")]
-    [SerializeField] private string interactionMessage;
-    private TextMeshProUGUI message;
+    public GameObject guideUI;
 
     private void Start()
     {
-        MessageManager messageManager = FindObjectOfType<MessageManager>();
-        if (messageManager != null)
+        if(guideUI != null)
         {
-            message = messageManager.GetInteractionText();
-            //Debug.Log("MessageManager found and interactionText assigned.");
-        }
-        else
-        {
-            Debug.LogError("MessageManager not found in the scene.");
+            guideUI.SetActive(false);
         }
     }
 
@@ -30,16 +22,9 @@ public class InteractMessage : MonoBehaviour
     {
         CheckPlayerInRange();
 
-        if (playerInRange)
+        if (guideUI != null)
         {
-            if (message != null && message.text != interactionMessage)
-            {
-                message.text = interactionMessage;
-            }
-        }
-        else if (message != null && message.text == interactionMessage)
-        {
-            message.text = " ";
+            guideUI.SetActive(playerInRange);
         }
     }
 
