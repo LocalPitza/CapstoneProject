@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxSize: {x: 2, y: 2, z: 2}
-  interactionMessage: Work
+  guideUI: {fileID: 0}
 --- !u!65 &696824760
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -754,7 +754,6 @@ GameObject:
   - component: {fileID: 708376713}
   - component: {fileID: 708376712}
   - component: {fileID: 708376711}
-  - component: {fileID: 708376715}
   m_Layer: 0
   m_Name: Test City
   m_TagString: Untagged
@@ -851,19 +850,6 @@ Transform:
   - {fileID: 696824758}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &708376715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 708376710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82d18677f331d184aa0b8c9f805ce041, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionText: {fileID: 0}
 --- !u!1 &820276155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2346,7 +2332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxSize: {x: 2, y: 2, z: 2}
-  interactionMessage: Shop
+  guideUI: {fileID: 0}
 --- !u!1 &1884521743
 GameObject:
   m_ObjectHideFlags: 0

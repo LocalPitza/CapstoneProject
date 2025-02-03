@@ -88,10 +88,10 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
                 soilData[crop.soilID] = soil;
             }
 
-            SoilManager.urbanFarmData.Item2.ForEach((CropSaveState crop) =>
+            /*SoilManager.urbanFarmData.Item2.ForEach((CropSaveState crop) =>
             {
                 Debug.LogWarning(crop.seedToGrow + "\n Health: " + crop.health + "\n Growth: " + crop.growth + "\n State: " + crop.cropState.ToString());
-            });
+            });*/
         }
     }
 
