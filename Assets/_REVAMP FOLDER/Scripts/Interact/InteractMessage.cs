@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,7 @@ public class InteractMessage : MonoBehaviour
     private bool playerInRange = false;
 
     public GameObject guideUI;
+    public Camera targetCamera;
 
     private void Start()
     {
@@ -25,6 +27,12 @@ public class InteractMessage : MonoBehaviour
         if (guideUI != null)
         {
             guideUI.SetActive(playerInRange);
+
+            if (targetCamera != null)
+            {
+                Vector3 direction = guideUI.transform.position - targetCamera.transform.position;
+                guideUI.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+            }
         }
     }
 
