@@ -10,7 +10,7 @@ public class InteractMessage : MonoBehaviour
     private bool playerInRange = false;
 
     public GameObject guideUI;
-    public Camera targetCamera;
+    public CinemachineVirtualCamera targetCamera;
 
     private void Start()
     {

@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\DoorInteract.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Planting\PlantSeed.cs" />
     <Compile Include="Assets\Scripts\Planting\ListOfSoil.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\CameraFollow.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Planting\PottingSoil.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Buying and Selling\UpgradeShop.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Saving\SaveManager.cs" />
