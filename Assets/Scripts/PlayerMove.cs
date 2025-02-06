@@ -38,14 +38,14 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        if(CanMove)
+        if (isUIOpen) return;
+
+        if (CanMove)
         {
             HandleFootstep();
             Interact();
             HandleMovement();
         }
-
-        if (isUIOpen) return;
 
     }
 

@@ -131,12 +131,17 @@ public class SoilManager : MonoBehaviour
         cropData = cropDatasetToLoad;
         foreach (CropSaveState cropSave in cropDatasetToLoad)
         {
+            Debug.LogWarning($"Importing crop - Health before: {cropSave.health}");
+
+            //Access the Soil
             PottingSoil soilToPlant = soilPlots[cropSave.soilID];
 
+            //Spawn the crop
             NewCropBehaviour cropToPlant = soilToPlant.SpawnCrop();
+            Debug.Log(cropToPlant.gameObject);
 
+            //Load in the data
             SeedData seedToGrow = (SeedData)NewInventoryManager.Instance.itemIndex.GetItemFromString(cropSave.seedToGrow);
-
             cropToPlant.LoadCrop(cropSave.soilID, seedToGrow, cropSave.cropState, cropSave.growth, cropSave.health);
 
             Debug.Log($"Loaded crop with seed {seedToGrow.name} on soil ID {cropSave.soilID}");

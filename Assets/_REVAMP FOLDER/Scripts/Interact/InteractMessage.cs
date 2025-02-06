@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,21 +9,14 @@ public class InteractMessage : MonoBehaviour
     public Vector3 boxSize = new Vector3(2f, 2f, 2f);
     private bool playerInRange = false;
 
-    [Header("Message")]
-    [SerializeField] private string interactionMessage;
-    private TextMeshProUGUI message;
+    public GameObject guideUI;
+    public CinemachineVirtualCamera targetCamera;
 
     private void Start()
     {
-        MessageManager messageManager = FindObjectOfType<MessageManager>();
-        if (messageManager != null)
+        if(guideUI != null)
         {
-            message = messageManager.GetInteractionText();
-            Debug.Log("MessageManager found and interactionText assigned.");
-        }
-        else
-        {
-            Debug.LogError("MessageManager not found in the scene.");
+            guideUI.SetActive(false);
         }
     }
 
@@ -30,16 +24,15 @@ public class InteractMessage : MonoBehaviour
     {
         CheckPlayerInRange();
 
-        if (playerInRange)
+        if (guideUI != null)
         {
-            if (message != null && message.text != interactionMessage)
+            guideUI.SetActive(playerInRange);
+
+            if (targetCamera != null)
             {
-                message.text = interactionMessage;
+                Vector3 direction = guideUI.transform.position - targetCamera.transform.position;
+                guideUI.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
             }
-        }
-        else if (message != null && message.text == interactionMessage)
-        {
-            message.text = " ";
         }
     }
 
