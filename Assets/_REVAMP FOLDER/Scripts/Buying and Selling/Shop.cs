@@ -48,16 +48,22 @@ public class Shop : MonoBehaviour
     {
         if (npcData != null)
         {
+            int currentDay = TimeManager.Instance.GetGameTimeStamp().day;
             bool hasMetBefore = PlayerPrefs.GetInt(npcID, 0) == 1;
+
+            // Check if there is a special dialogue for this day
+            List<DialogueLine> specialDialogue = npcData.GetDialogueForDay(currentDay);
 
             if (!hasMetBefore)
             {
-                // First time meeting the NPC
                 DialogueManager.Instance.StartDialogue(npcData.onFirstMeet, AfterFirstMeet);
+            }
+            else if (specialDialogue != null)
+            {
+                DialogueManager.Instance.StartDialogue(specialDialogue, ShopOpen);
             }
             else
             {
-                // Already met before, use default dialogue
                 DialogueManager.Instance.StartDialogue(npcData.defaultDialogue, ShopOpen);
             }
 

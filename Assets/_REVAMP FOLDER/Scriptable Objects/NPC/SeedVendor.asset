@@ -20,3 +20,10 @@ MonoBehaviour:
   defaultDialogue:
   - speaker: Seed Vendor
     message: Great to see you again, take your time to choose
+  specialDayDialogues:
+  - day: 2
+    dialogue:
+    - speaker: Seed Vendor
+      message: Happy Monday
+    - speaker: Seed Vendor
+      message: Though my selection are still the same
