@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 12819
+  controlID: 42
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 12794
+  controlID: 43
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 50}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 12690
+  controlID: 44
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -216,8 +216,8 @@ MonoBehaviour:
     y: 0
     width: 1070
     height: 603
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 12795
+  controlID: 118
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -347,8 +347,8 @@ MonoBehaviour:
     y: 0
     width: 364
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
@@ -492,20 +492,20 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: fc7d0000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 6a5efeff8c99feff369afeff529afeff54e2feffb2e2feff9ce7feff6cf1feff4e1cffff9823ffff5c53ffff5e53ffff9653ffffac53ffff7c56ffff8261ffff2265ffff8489ffff308affff42a8ffff62dfffffe2e8ffff28eeffff36faffffe2faffffe4faffff8e840000a6d40000cad4000014d5000078d60000bad60000120201004c020100f0020100fc0201005e030100c803010064040100c204010004050100
+      m_ExpandedIDs: 0ce9ffffc6eeffff8cefffffe4faffff9c7d0000147e0000807e00007e800000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Essentials
-        m_OriginalName: Essentials
+        m_Name: Canvas
+        m_OriginalName: Canvas
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -91594
+        m_UserData: 32572
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -888,9 +888,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -78.40733, y: 2.4626057, z: 2.1889658}
+    m_Target: {x: 25.511478, y: 25.907942, z: -24.995226}
     speed: 2
-    m_Value: {x: -78.40733, y: 2.4626057, z: 2.1889658}
+    m_Value: {x: 25.511478, y: 25.907942, z: -24.995226}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -936,13 +936,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.494
   m_Rotation:
-    m_Target: {x: -0.06984045, y: -0.9135159, z: 0.17758256, w: -0.3592716}
+    m_Target: {x: -0.19507469, y: 0.7405102, z: -0.24252377, w: -0.5956309}
     speed: 2
-    m_Value: {x: -0.06984043, y: -0.9135156, z: 0.1775825, w: -0.35927147}
+    m_Value: {x: -0.19507436, y: 0.740509, z: -0.24252337, w: -0.5956299}
   m_Size:
-    m_Target: 3.042491
+    m_Target: 5.8662963
     speed: 2
-    m_Value: 3.042491
+    m_Value: 5.8662963
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1082,7 +1082,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/_REVAMP FOLDER/Scenes
+    - Assets/_REVAMP FOLDER/Scriptable Objects/NPC
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1090,16 +1090,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/_REVAMP FOLDER/Scenes
+  - Assets/_REVAMP FOLDER/Scriptable Objects/NPC
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\_Game WIP\CapstoneProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 31}
-    m_SelectedIDs: 7c7c0000
-    m_LastClickedID: 31868
-    m_ExpandedIDs: 00000000ee7b0000247c00007e7c0000807c0000ffffff7f
+    m_SelectedIDs: 3ab60000
+    m_LastClickedID: 46650
+    m_ExpandedIDs: 000000001c7c0000527c0000a27c0000ffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1127,7 +1127,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ee7b0000ffffff7f
+    m_ExpandedIDs: 000000001c7c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
