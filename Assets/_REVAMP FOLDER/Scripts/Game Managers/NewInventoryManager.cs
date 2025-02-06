@@ -133,6 +133,34 @@ public class NewInventoryManager : MonoBehaviour
         return false;
     }
 
+    public bool ConsumeIngredient(ItemData ingredient, int quantity)
+    {
+        int remainingToConsume = quantity;
+
+        for (int i = 0; i < harvestedSlots.Length; i++)
+        {
+            if (harvestedSlots[i].itemData == ingredient && harvestedSlots[i].quantity > 0)
+            {
+                int amountToRemove = Mathf.Min(harvestedSlots[i].quantity, remainingToConsume);
+                harvestedSlots[i].quantity -= amountToRemove;
+                remainingToConsume -= amountToRemove;
+
+                if (harvestedSlots[i].quantity <= 0)
+                {
+                    harvestedSlots[i].Empty();
+                }
+
+                if (remainingToConsume <= 0)
+                {
+                    NewUIManager.Instance.RenderInventory();
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public void ShopToInventory(ItemSlotData itemSlotToMove)
     {
         ItemSlotData[] inventoryToAlter = IsTool(itemSlotToMove.itemData) ? storageSlots : harvestedSlots;

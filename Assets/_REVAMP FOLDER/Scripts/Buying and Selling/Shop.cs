@@ -7,9 +7,6 @@ public class Shop : MonoBehaviour
     private InteractMessage interactMessage;
     public List<ItemData> shopItems;
 
-    //[Header("Dialogues")]
-    //public List<DialogueLine> dialogueOnShopOpen;
-
     [Header("NPC Data")]
     public NPCData npcData;
 
@@ -25,15 +22,29 @@ public class Shop : MonoBehaviour
     {
         int totalCost = item.cost * quantity;
 
-        if(PlayerStats.Money >= totalCost)
+        if (item.needIngredient)
         {
-            PlayerStats.Spend(totalCost);
-
-            ItemSlotData purchasedItem = new ItemSlotData(item, quantity);
-
-            //Send the purchased Item to the player's inventory
-            NewInventoryManager.Instance.ShopToInventory(purchasedItem);
+            // Check if the required ingredient is available
+            if (!NewInventoryManager.Instance.ConsumeIngredient(item.requiredIngredient, quantity))
+            {
+                Debug.Log("Missing required ingredient!");
+                return;
+            }
         }
+        else
+        {
+            // Check if the player has enough money
+            if (PlayerStats.Money < totalCost)
+            {
+                Debug.Log("Not enough money!");
+                return;
+            }
+            PlayerStats.Spend(totalCost);
+        }
+
+        // Proceed with giving the item
+        ItemSlotData purchasedItem = new ItemSlotData(item, quantity);
+        NewInventoryManager.Instance.ShopToInventory(purchasedItem);
     }
 
     void Update()

@@ -19,3 +19,5 @@ MonoBehaviour:
   cost: 150
   hungerRefill: 15
   energyRefill: 25
+  needIngredient: 1
+  requiredIngredient: {fileID: 11400000, guid: 3547e728c0b652a4fb643bb362591ceb, type: 2}

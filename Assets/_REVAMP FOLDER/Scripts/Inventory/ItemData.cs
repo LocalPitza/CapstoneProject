@@ -19,4 +19,7 @@ public class ItemData : ScriptableObject
     public int cost;
     public int hungerRefill;
     public int energyRefill;
+
+    public bool needIngredient;
+    public ItemData requiredIngredient;
 }
