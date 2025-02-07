@@ -88,10 +88,28 @@ public class PlayerInteraction : MonoBehaviour
         // Check if the player has an equipped item in the Harvest slot
         if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
         {
-            Debug.Log("Hand is full with Harvested Crop");
-            message.text = unequipMessage;
-            StartCoroutine(ClearMessageAfterDelay(2f));
-            return;
+            ItemData handSlotItem = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Harvest);
+
+            if (handSlotItem == null)
+            {
+                return;
+            }
+
+            if (handSlotItem is FoodData)
+            {
+                FoodData foodData = handSlotItem as FoodData;
+                foodData.OnConsume();
+
+                //Consume it
+                NewInventoryManager.Instance.ConsumeItem(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Harvest));
+            }
+            else
+            {
+                Debug.Log("Hand is full with Harvested Crop");
+                message.text = unequipMessage;
+                StartCoroutine(ClearMessageAfterDelay(2f));
+                return;
+            }
         }
 
         if (selectedSoil != null)

@@ -63,7 +63,7 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
 
     private void Start()
     {
-        PlayerStats.RestoreStamina();
+        PlayerStats.RestoreStamina(100);
         RenderInventory();
         AssignSlotIndexes();
         RenderPlayerStats();

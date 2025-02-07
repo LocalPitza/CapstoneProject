@@ -33,6 +33,8 @@ public class LocationEntryPoint : MonoBehaviour
                 doorUI.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
             }
         }
+
+        ChangeScene();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,6 +43,7 @@ public class LocationEntryPoint : MonoBehaviour
         {
             Debug.Log("Player entered the trigger.");
             playerInsideTrigger = true;
+            PlayerMove.isInTeleportTrigger = true; //Prevent interaction
             doorUI.SetActive(true);
         }
     }
@@ -51,13 +54,14 @@ public class LocationEntryPoint : MonoBehaviour
         {
             Debug.Log("Player exited the trigger.");
             playerInsideTrigger = false;
+            PlayerMove.isInTeleportTrigger = false; //Allow interaction again
             doorUI.SetActive(false);
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    void ChangeScene()
     {
-        if (other.CompareTag("Player") && Input.GetKeyDown(InputManager.Instance.interactKey))
+        if (playerInsideTrigger && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
             Debug.Log("Switching location.");
             SceneTransitionManager.Instance.SwitchLocation(locationToSwitch);

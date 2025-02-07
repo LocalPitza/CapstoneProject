@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
     PlayerInteraction playerInteraction;
 
     public static bool isUIOpen = false;
-
+    public static bool isInTeleportTrigger = false;
 
     [SerializeField] private float baseStepSpeed = 0.1f;
     [SerializeField] private AudioSource footstepAudioSource = default;
@@ -43,7 +43,10 @@ public class PlayerMove : MonoBehaviour
         if (CanMove)
         {
             HandleFootstep();
-            Interact();
+            if (!isInTeleportTrigger) //Prevent interaction when in teleport trigger
+            {
+                Interact();
+            }
             HandleMovement();
         }
 

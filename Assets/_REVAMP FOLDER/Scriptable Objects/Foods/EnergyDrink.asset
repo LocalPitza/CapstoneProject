@@ -9,13 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c381e774e816e4383c9e581ded97b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 636713afd1fdb544183f57843fc5fba7, type: 3}
   m_Name: EnergyDrink
   m_EditorClassIdentifier: 
-  description: +50 Energy
+  description: 'Energy Bar
+
+    +20 Energy '
   thumbnail: {fileID: 21300000, guid: 806f6a2e31d5dd4419992b8138ba2766, type: 3}
   gameModel: {fileID: 0}
   itemType: 1
-  cost: 525
+  cost: 50
   hungerRefill: 0
-  energyRefill: 50
+  energyRefill: 20
+  needIngredient: 0
+  requiredIngredients: []
