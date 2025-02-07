@@ -32,6 +32,7 @@ public class Teleport : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             playerInTrigger = other.gameObject;
+            PlayerMove.isInTeleportTrigger = true; //Prevent interaction
             if (guideUI != null)
             {
                 guideUI.SetActive(true);
@@ -45,6 +46,7 @@ public class Teleport : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             playerInTrigger = null;
+            PlayerMove.isInTeleportTrigger = false; //Allow interaction again
             if (guideUI != null)
             {
                 guideUI.SetActive(false);

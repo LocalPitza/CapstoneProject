@@ -11,15 +11,11 @@ public enum ItemType
 
 public class ItemData : ScriptableObject
 {
+    [TextArea (5,5)]
     public string description;
     public Sprite thumbnail;
     public GameObject gameModel;
     public ItemType itemType;
 
     public int cost;
-    public int hungerRefill;
-    public int energyRefill;
-
-    public bool needIngredient;
-    public ItemData requiredIngredient;
 }

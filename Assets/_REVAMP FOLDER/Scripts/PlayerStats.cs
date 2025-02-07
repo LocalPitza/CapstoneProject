@@ -46,7 +46,7 @@ public class PlayerStats
         Money = money;
         Stamina = stamina;
         Hunger = hunger;
-        RestoreStamina();
+        RestoreStamina(100);
         NewUIManager.Instance.RenderPlayerStats();
     }
 
@@ -57,9 +57,14 @@ public class PlayerStats
         CheckGameOver();
     }
 
-    public static void RestoreStamina()
+    public static void RestoreStamina(int amount)
     {
-        Stamina = 100;
+        Stamina += amount;
+
+        if(Stamina > 100)
+        {
+            Stamina = 100;
+        }
         NewUIManager.Instance.RenderPlayerStats();
     }
 

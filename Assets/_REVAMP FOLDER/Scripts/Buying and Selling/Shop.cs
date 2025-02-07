@@ -22,12 +22,12 @@ public class Shop : MonoBehaviour
     {
         int totalCost = item.cost * quantity;
 
-        if (item.needIngredient)
+        /*if (item.needIngredient)
         {
-            // Check if the required ingredient is available
-            if (!NewInventoryManager.Instance.ConsumeIngredient(item.requiredIngredient, quantity))
+            // Check if all required ingredients are available in the correct amounts
+            if (!NewInventoryManager.Instance.ConsumeIngredients(item.requiredIngredients, quantity))
             {
-                Debug.Log("Missing required ingredient!");
+                Debug.Log("Missing required ingredients!");
                 return;
             }
         }
@@ -40,7 +40,15 @@ public class Shop : MonoBehaviour
                 return;
             }
             PlayerStats.Spend(totalCost);
+        }*/
+
+        // Check if the player has enough money
+        if (PlayerStats.Money < totalCost)
+        {
+            Debug.Log("Not enough money!");
+            return;
         }
+        PlayerStats.Spend(totalCost);
 
         // Proceed with giving the item
         ItemSlotData purchasedItem = new ItemSlotData(item, quantity);

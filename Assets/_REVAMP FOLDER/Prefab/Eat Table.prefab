@@ -331,7 +331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3187056317623452877
 Transform:
   m_ObjectHideFlags: 0
@@ -460,7 +460,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1457099255201932898}
-  - component: {fileID: 2786531344621505322}
   - component: {fileID: 6233442660240814230}
   m_Layer: 0
   m_Name: Physic Trigger
@@ -484,18 +483,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6999021923010256798}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2786531344621505322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8567141883828406931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c473e6c304ada04d9b7a52ffc54e8ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6233442660240814230
 MonoBehaviour:
   m_ObjectHideFlags: 0
