@@ -7,6 +7,7 @@ public class TestEat : MonoBehaviour
     public static List<ItemSlotData> harvestToEat = new List<ItemSlotData>();
 
     private InteractMessage interactMessage;
+
     void Start()
     {
         interactMessage = GetComponent<InteractMessage>();
@@ -14,7 +15,7 @@ public class TestEat : MonoBehaviour
 
     void Update()
     {
-        if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKeyDown(InputManager.Instance.interactKey))
+        if (Input.GetKeyDown(InputManager.Instance.interactKey))
         {
             ItemData handSlotItem = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Harvest);
 
@@ -23,11 +24,20 @@ public class TestEat : MonoBehaviour
                 return;
             }
 
-            NewUIManager.Instance.TriggerYesNoPrompt($"Do you want to consuume {handSlotItem.name} ? ", Eatingtable);
+            if(handSlotItem is FoodData)
+            {
+                FoodData foodData = handSlotItem as FoodData;
+                foodData.OnConsume();
+
+                //Consume it
+                NewInventoryManager.Instance.ConsumeItem(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Harvest));
+            }
+
+            //NewUIManager.Instance.TriggerYesNoPrompt($"Do you want to consuume {handSlotItem.name} ? ", Eatingtable);
         }
     }
 
-    void Eatingtable()
+    /*void Eatingtable()
     {
         //Get the ItemsSlotData of what the player is holding
         ItemSlotData handSlot = NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Harvest);
@@ -54,5 +64,5 @@ public class TestEat : MonoBehaviour
         {
             Debug.Log($"In the Eating table: {harvest.itemData.name} x {harvest.quantity}");
         }
-    }
+    }*/
 }

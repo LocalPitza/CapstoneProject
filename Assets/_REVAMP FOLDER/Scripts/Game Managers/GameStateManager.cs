@@ -117,7 +117,7 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
         // Trigger fade-out
         yield return FadeOut();
 
-        PlayerStats.RestoreStamina();
+        PlayerStats.RestoreStamina(100);
 
         // Trigger fade-in
         yield return FadeIn();

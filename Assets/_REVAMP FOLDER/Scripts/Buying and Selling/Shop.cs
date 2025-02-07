@@ -7,9 +7,6 @@ public class Shop : MonoBehaviour
     private InteractMessage interactMessage;
     public List<ItemData> shopItems;
 
-    //[Header("Dialogues")]
-    //public List<DialogueLine> dialogueOnShopOpen;
-
     [Header("NPC Data")]
     public NPCData npcData;
 
@@ -25,15 +22,37 @@ public class Shop : MonoBehaviour
     {
         int totalCost = item.cost * quantity;
 
-        if(PlayerStats.Money >= totalCost)
+        /*if (item.needIngredient)
         {
-            PlayerStats.Spend(totalCost);
-
-            ItemSlotData purchasedItem = new ItemSlotData(item, quantity);
-
-            //Send the purchased Item to the player's inventory
-            NewInventoryManager.Instance.ShopToInventory(purchasedItem);
+            // Check if all required ingredients are available in the correct amounts
+            if (!NewInventoryManager.Instance.ConsumeIngredients(item.requiredIngredients, quantity))
+            {
+                Debug.Log("Missing required ingredients!");
+                return;
+            }
         }
+        else
+        {
+            // Check if the player has enough money
+            if (PlayerStats.Money < totalCost)
+            {
+                Debug.Log("Not enough money!");
+                return;
+            }
+            PlayerStats.Spend(totalCost);
+        }*/
+
+        // Check if the player has enough money
+        if (PlayerStats.Money < totalCost)
+        {
+            Debug.Log("Not enough money!");
+            return;
+        }
+        PlayerStats.Spend(totalCost);
+
+        // Proceed with giving the item
+        ItemSlotData purchasedItem = new ItemSlotData(item, quantity);
+        NewInventoryManager.Instance.ShopToInventory(purchasedItem);
     }
 
     void Update()
@@ -48,16 +67,22 @@ public class Shop : MonoBehaviour
     {
         if (npcData != null)
         {
+            int currentDay = TimeManager.Instance.GetGameTimeStamp().day;
             bool hasMetBefore = PlayerPrefs.GetInt(npcID, 0) == 1;
+
+            // Check if there is a special dialogue for this day
+            List<DialogueLine> specialDialogue = npcData.GetDialogueForDay(currentDay);
 
             if (!hasMetBefore)
             {
-                // First time meeting the NPC
                 DialogueManager.Instance.StartDialogue(npcData.onFirstMeet, AfterFirstMeet);
+            }
+            else if (specialDialogue != null)
+            {
+                DialogueManager.Instance.StartDialogue(specialDialogue, ShopOpen);
             }
             else
             {
-                // Already met before, use default dialogue
                 DialogueManager.Instance.StartDialogue(npcData.defaultDialogue, ShopOpen);
             }
 
