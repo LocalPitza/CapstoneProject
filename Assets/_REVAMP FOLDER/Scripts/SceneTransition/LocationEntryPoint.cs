@@ -65,6 +65,7 @@ public class LocationEntryPoint : MonoBehaviour
         {
             Debug.Log("Switching location.");
             SceneTransitionManager.Instance.SwitchLocation(locationToSwitch);
+            PlayerMove.isInTeleportTrigger = false;
         }
     }
 
