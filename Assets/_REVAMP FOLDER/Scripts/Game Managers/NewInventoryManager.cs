@@ -133,59 +133,6 @@ public class NewInventoryManager : MonoBehaviour
         return false;
     }
 
-    //For Cooking
-    /*public bool ConsumeIngredients(RequiredIngredient[] requiredIngredients, int quantity)
-    {
-        Dictionary<ItemData, int> requiredCounts = new Dictionary<ItemData, int>();
-
-        // Calculate total required per ingredient
-        foreach (RequiredIngredient req in requiredIngredients)
-        {
-            int totalRequired = req.requiredAmount * quantity;
-            requiredCounts[req.ingredient] = totalRequired;
-        }
-
-        // Check if all ingredients are available
-        Dictionary<int, int> slotsToConsume = new Dictionary<int, int>(); // slot index -> amount to consume
-
-        foreach (var required in requiredCounts)
-        {
-            int remainingNeeded = required.Value;
-
-            for (int i = 0; i < harvestedSlots.Length; i++)
-            {
-                if (harvestedSlots[i].itemData == required.Key)
-                {
-                    int available = harvestedSlots[i].quantity;
-
-                    if (available >= remainingNeeded)
-                    {
-                        slotsToConsume[i] = remainingNeeded;
-                        remainingNeeded = 0;
-                        break;
-                    }
-                    else
-                    {
-                        slotsToConsume[i] = available;
-                        remainingNeeded -= available;
-                    }
-                }
-            }
-
-            if (remainingNeeded > 0) return false; // Not enough ingredients
-        }
-
-        // Deduct ingredients from inventory
-        foreach (var slot in slotsToConsume)
-        {
-            harvestedSlots[slot.Key].quantity -= slot.Value;
-            if (harvestedSlots[slot.Key].quantity <= 0) harvestedSlots[slot.Key].Empty();
-        }
-
-        NewUIManager.Instance.RenderInventory();
-        return true;
-    }*/
-
     public void ShopToInventory(ItemSlotData itemSlotToMove)
     {
         ItemSlotData[] inventoryToAlter = IsTool(itemSlotToMove.itemData) ? storageSlots : harvestedSlots;

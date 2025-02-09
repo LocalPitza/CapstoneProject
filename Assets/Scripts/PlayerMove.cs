@@ -50,7 +50,7 @@ public class PlayerMove : MonoBehaviour
             HandleMovement();
         }
 
-        Debug.LogWarning("Player is in Teleport Trigger:" + isInTeleportTrigger);
+        //Debug.LogWarning("Player is in Teleport Trigger:" + isInTeleportTrigger);
 
     }
 

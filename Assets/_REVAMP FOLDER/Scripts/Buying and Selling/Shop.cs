@@ -22,10 +22,12 @@ public class Shop : MonoBehaviour
     {
         int totalCost = item.cost * quantity;
 
-        /*if (item.needIngredient)
+        // Check if the item is a FoodData and requires ingredients
+        FoodData food = item as FoodData;
+        if (food != null && food.needIngredient)
         {
             // Check if all required ingredients are available in the correct amounts
-            if (!NewInventoryManager.Instance.ConsumeIngredients(item.requiredIngredients, quantity))
+            if (!CookManager.Instance.ConsumeIngredients(food.requiredIngredients, quantity))
             {
                 Debug.Log("Missing required ingredients!");
                 return;
@@ -40,15 +42,7 @@ public class Shop : MonoBehaviour
                 return;
             }
             PlayerStats.Spend(totalCost);
-        }*/
-
-        // Check if the player has enough money
-        if (PlayerStats.Money < totalCost)
-        {
-            Debug.Log("Not enough money!");
-            return;
         }
-        PlayerStats.Spend(totalCost);
 
         // Proceed with giving the item
         ItemSlotData purchasedItem = new ItemSlotData(item, quantity);
