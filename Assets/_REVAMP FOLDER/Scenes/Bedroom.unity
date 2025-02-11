@@ -2268,6 +2268,32 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -157.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: storageSlots.Array.data[7].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 82130c2438e5b8b419b7d2bdda8c4fdd,
+        type: 2}
+    - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: storageSlots.Array.data[7].quantity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: harvestedSlots.Array.data[2].quantity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: harvestedSlots.Array.data[4].itemData
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: harvestedSlots.Array.data[4].quantity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1754433315907366489, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
       propertyPath: m_Mesh

@@ -129,17 +129,17 @@ public class PlayerInteraction : MonoBehaviour
                 switch (toolType)
                 {
                     case EquipmentData.ToolType.HandTrowel:
-                        PlayerStats.UseStamina(10);
+                        PlayerStats.UseStamina(5);
                         selectedSoil.Interact();
                         break;
 
                     case EquipmentData.ToolType.WateringCan:
-                        PlayerStats.UseStamina(10);
+                        PlayerStats.UseStamina(5);
                         selectedSoil.Interact();
                         break;
 
                     case EquipmentData.ToolType.Hoe:
-                        PlayerStats.UseStamina(10);
+                        PlayerStats.UseStamina(5);
                         selectedSoil.Interact();
                         break;
 
@@ -175,20 +175,28 @@ public class PlayerInteraction : MonoBehaviour
             message.text = "";
         }*/
 
-        if(selectedInteractableObject != null)
+        //If the Player is holding a Harvested Fruit/Vegetable, keep it first before harvesting again
+        if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
+        {
+            NewInventoryManager.Instance.EquipToInventory(NewInventorySlot.InventoryType.Harvest);
+            return;
+        }
+
+
+        if (selectedInteractableObject != null)
         {
             selectedInteractableObject.PickUp();
         }
     }
 
-    public void HarvestKeep()
+    /*public void HarvestKeep()
     {
         if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
         {
             NewInventoryManager.Instance.EquipToInventory(NewInventorySlot.InventoryType.Harvest);
             return;
         }
-    }
+    }*/
 
     private IEnumerator ClearMessageAfterDelay(float delay)
     {

@@ -67,10 +67,10 @@ public class PlayerMove : MonoBehaviour
             playerInteraction.HarvestInteract();
         }
 
-        if (Input.GetKeyDown(InputManager.Instance.harvestKeepKey))
+        /*if (Input.GetKeyDown(InputManager.Instance.harvestKeepKey))
         {
             playerInteraction.HarvestKeep();
-        }
+        }*/
     }
 
     private void HandleMovement()
