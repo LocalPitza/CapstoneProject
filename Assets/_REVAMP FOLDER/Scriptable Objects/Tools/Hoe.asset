@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: Hoe
   m_EditorClassIdentifier: 
   description: Remove Plants
-  thumbnail: {fileID: 21300000, guid: 72865cc55bb4a914c9b8e88b777c6dd1, type: 3}
+  thumbnail: {fileID: 21300000, guid: 800b844049992f14db022b2e4900709b, type: 3}
   gameModel: {fileID: 0}
   itemType: 0
   cost: 0
-  hungerRefill: 0
-  energyRefill: 0
   toolType: 4
