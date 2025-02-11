@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4c381e774e816e4383c9e581ded97b1, type: 3}
-  m_Name: Tomato
+  m_Name: Garlic
   m_EditorClassIdentifier: 
-  description: Tomato Fruit
-  thumbnail: {fileID: 21300000, guid: 65ab33b4d680e73418649364cc7246b0, type: 3}
-  gameModel: {fileID: 6683548704163537989, guid: 4572790e613c37847a302bf51adb5e2b,
+  description: Garlic Vegetable
+  thumbnail: {fileID: 21300000, guid: 231edb1713f33db4c910820034c0b866, type: 3}
+  gameModel: {fileID: 2573042295353780087, guid: a2d18ce3070f8c54f9c5e97c121b907f,
     type: 3}
   itemType: 1
-  cost: 15
+  cost: 10

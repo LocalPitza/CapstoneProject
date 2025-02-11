@@ -57,7 +57,38 @@ public class ShopListingManager : MonoBehaviour
 
         quantityText.text = "x" + quantity;
 
-        int cost = itemToBuy.cost * quantity;
+        // Check if the item is a FoodData type and requires ingredients
+        FoodData food = itemToBuy as FoodData;
+        if (food != null && food.needIngredient)
+        {
+            // Check if the player has enough ingredients
+            bool hasIngredients = CookManager.Instance.HasEnoughIngredients(food.requiredIngredients, quantity);
+            purchaseButton.interactable = hasIngredients;
+
+            if (!hasIngredients)
+            {
+                costCalculationText.text = "Not enough ingredients!";
+                return;
+            }
+        }
+        else
+        {
+            // Normal money-based purchase
+            int cost = itemToBuy.cost * quantity;
+            int playerMoneyLeft = PlayerStats.Money - cost;
+
+            if (playerMoneyLeft < 0)
+            {
+                costCalculationText.text = "Insufficient funds.";
+                purchaseButton.interactable = false;
+                return;
+            }
+
+            costCalculationText.text = $"{PlayerStats.Money} > {playerMoneyLeft}";
+            purchaseButton.interactable = true;
+        }
+
+        /*int cost = itemToBuy.cost * quantity;
 
         int playerMoneyLeft = PlayerStats.Money - cost;
 
@@ -70,15 +101,17 @@ public class ShopListingManager : MonoBehaviour
 
         purchaseButton.interactable = true;
 
-        costCalculationText.text = $"{PlayerStats.Money} > {playerMoneyLeft} ";
+        costCalculationText.text = $"{PlayerStats.Money} > {playerMoneyLeft} ";*/
     }
 
+    //Accessed by the Add Quantity Button
     public void AddQuantity()
     {
         quantity++;
         RenderConfirmationScreen();
     }
 
+    //Accessed by the Reduce Quantity Button
     public void SubtractQuantity()
     {
         if(quantity > 1)
