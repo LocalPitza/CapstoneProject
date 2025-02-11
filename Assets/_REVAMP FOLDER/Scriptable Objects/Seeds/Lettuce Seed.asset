@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a988084b0b5d3b4a80175942a3a8932, type: 3}
+  m_Name: Lettuce Seed
+  m_EditorClassIdentifier: 
+  description: 'Lettuce Seed
+
+'
+  thumbnail: {fileID: 21300000, guid: fd521548722ed8542ae1574e4194c91e, type: 3}
+  gameModel: {fileID: 0}
+  itemType: 0
+  cost: 25
+  daysToGrow: 2
+  cropToYield: {fileID: 11400000, guid: 8e99caa3712634640ab12e229203f657, type: 2}
+  seedling: {fileID: 1000013410243764, guid: 42ea4bc7ab684e1439fe7e06657fcf84, type: 3}
+  regrowable: 0
+  daysToRegrow: 0
