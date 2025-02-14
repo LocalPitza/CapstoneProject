@@ -70,6 +70,19 @@ public class ShopListingManager : MonoBehaviour
                 costCalculationText.text = "Not enough ingredients!";
                 return;
             }
+
+            // If ingredients are present
+            if (food.requirePayment)
+            {
+                int cost = itemToBuy.cost * quantity;
+                int playerMoneyLeft = PlayerStats.Money - cost;
+
+                costCalculationText.text = $"Ingredients available!\n{PlayerStats.Money} > {playerMoneyLeft}";
+            }
+            else
+            {
+                costCalculationText.text = "Ingredients available!";
+            }
         }
         else
         {
@@ -87,21 +100,6 @@ public class ShopListingManager : MonoBehaviour
             costCalculationText.text = $"{PlayerStats.Money} > {playerMoneyLeft}";
             purchaseButton.interactable = true;
         }
-
-        /*int cost = itemToBuy.cost * quantity;
-
-        int playerMoneyLeft = PlayerStats.Money - cost;
-
-        if(playerMoneyLeft < 0)
-        {
-            costCalculationText.text = "Insufficient funds.";
-            purchaseButton.interactable = false;
-            return;
-        }
-
-        purchaseButton.interactable = true;
-
-        costCalculationText.text = $"{PlayerStats.Money} > {playerMoneyLeft} ";*/
     }
 
     //Accessed by the Add Quantity Button

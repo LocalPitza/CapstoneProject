@@ -8,6 +8,7 @@ public class FoodData : ItemData
 {
     public int hungerRefill;
     public int energyRefill;
+    public bool requirePayment;
     public bool needIngredient;
     public RequiredIngredient[] requiredIngredients;
 
