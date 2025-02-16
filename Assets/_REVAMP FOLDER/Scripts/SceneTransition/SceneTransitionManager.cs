@@ -74,6 +74,7 @@ public class SceneTransitionManager : MonoBehaviour
             {
                 // Destroy this object safely
                 Destroy(gameObject);
+                return;
             }
 
             return; // Stop execution to prevent further errors

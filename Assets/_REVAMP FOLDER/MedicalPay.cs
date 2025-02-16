@@ -6,7 +6,8 @@ using TMPro;
 public class MedicalPay : MonoBehaviour
 {
     public static MedicalPay Instance;
-    
+
+    [SerializeField] int medicalCost;
     public GameObject medicalPayUI;
     public TextMeshProUGUI causeText;
 
@@ -36,7 +37,7 @@ public class MedicalPay : MonoBehaviour
         // Activate the Medical UI
         medicalPayUI.SetActive(true);
 
-        PlayerStats.Spend(1000);
+        PlayerStats.Spend(medicalCost);
     }
 
     public void CloseMedicalUI()

@@ -46,6 +46,7 @@ public class PauseMenu : MonoBehaviour
         if (loadingManager != null)
         {
             loadingManager.LoadScene("NewMenu");
+            PlayerMove.isUIOpen = false;
         }
     }
 
