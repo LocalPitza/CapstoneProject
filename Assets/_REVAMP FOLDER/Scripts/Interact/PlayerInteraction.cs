@@ -160,21 +160,6 @@ public class PlayerInteraction : MonoBehaviour
 
     public void HarvestInteract()
     {
-        /*ItemData playerToolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
-        EquipmentData equipmentTool = playerToolSlot as EquipmentData;
-
-        //If Plalyer is not using the right tool for Harvesting
-        if (equipmentTool == null || equipmentTool.toolType != EquipmentData.ToolType.HandGloves)
-        {
-            message.text = equipGloveMessage;
-            StartCoroutine(ClearMessageAfterDelay(2f));
-            return;
-        }
-        else
-        {
-            message.text = "";
-        }*/
-
         //If the Player is holding a Harvested Fruit/Vegetable, keep it first before harvesting again
         if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
         {
@@ -182,6 +167,17 @@ public class PlayerInteraction : MonoBehaviour
             return;
         }
 
+        // Check if gloves are equipped in the tool slot
+        ItemData toolSlot = NewInventoryManager.Instance.GetEquippedSlotItem(NewInventorySlot.InventoryType.Storage);
+        EquipmentData equipmentTool = toolSlot as EquipmentData;
+
+        if (equipmentTool == null || equipmentTool.toolType != EquipmentData.ToolType.HandGloves)
+        {
+            // Display message if gloves are not equipped
+            message.text = equipGloveMessage;
+            StartCoroutine(ClearMessageAfterDelay(2f));
+            return;
+        }
 
         if (selectedInteractableObject != null)
         {

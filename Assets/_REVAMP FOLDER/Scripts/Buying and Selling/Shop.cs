@@ -22,20 +22,34 @@ public class Shop : MonoBehaviour
     {
         int totalCost = item.cost * quantity;
 
-        // Check if the item is a FoodData and requires ingredients
+        // Check if the item is a FoodData
         FoodData food = item as FoodData;
+        bool hasRequiredIngredients = true;
+
+        // Check and consume ingredients if needed
         if (food != null && food.needIngredient)
         {
-            // Check if all required ingredients are available in the correct amounts
-            if (!CookManager.Instance.ConsumeIngredients(food.requiredIngredients, quantity))
+            hasRequiredIngredients = CookManager.Instance.ConsumeIngredients(food.requiredIngredients, quantity);
+            if (!hasRequiredIngredients)
             {
                 Debug.Log("Missing required ingredients!");
                 return;
             }
         }
+
+        // Check for payment if required
+        if (food != null && food.requirePayment)
+        {
+            if (PlayerStats.Money < totalCost)
+            {
+                Debug.Log("Not enough money!");
+                return;
+            }
+            PlayerStats.Spend(totalCost);
+        }
         else
         {
-            // Check if the player has enough money
+            //For Buying the Seeds
             if (PlayerStats.Money < totalCost)
             {
                 Debug.Log("Not enough money!");
@@ -47,6 +61,8 @@ public class Shop : MonoBehaviour
         // Proceed with giving the item
         ItemSlotData purchasedItem = new ItemSlotData(item, quantity);
         NewInventoryManager.Instance.ShopToInventory(purchasedItem);
+
+        Debug.Log("Purchase successful!");
     }
 
     void Update()

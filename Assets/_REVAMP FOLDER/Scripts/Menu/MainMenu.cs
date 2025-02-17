@@ -18,6 +18,8 @@ public class MainMenu : MonoBehaviour
 
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();
+            PlayerStats.Hunger = 100;
+            PlayerStats.Stamina = 100;
             Debug.Log("All PlayerPrefs have been cleared.");
         }
     }

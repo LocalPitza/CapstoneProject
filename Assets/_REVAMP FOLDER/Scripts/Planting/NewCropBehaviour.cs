@@ -156,4 +156,10 @@ public class NewCropBehaviour : MonoBehaviour
         growth = maxGrowth - GameTimeStamp.HoursToMinutes(hoursToRegrow);
         SwitchState(CropState.Seedling);
     }
+
+    // Add this method inside NewCropBehaviour
+    public SeedData GetSeedData()
+    {
+        return seedToGrow;
+    }
 }

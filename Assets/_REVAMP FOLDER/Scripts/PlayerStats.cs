@@ -22,11 +22,13 @@ public class PlayerStats
         NewUIManager.Instance?.RenderPlayerStats();
     }
 
-    public static void Spend(int cost)
+    public static void Spend(int cost, string cause = "")
     {
-        if(cost > Money)
+        if (cost > Money)
         {
-            Debug.LogError("Player does not have enough money");
+            Debug.LogWarning("Player does not have enough money");
+            string gameOverCause = string.IsNullOrEmpty(cause) ? "Failed to pay an expense" : cause;
+            GameOver.Instance.GameIsOver(gameOverCause);
             return;
         }
         Money -= cost;
@@ -46,7 +48,8 @@ public class PlayerStats
         Money = money;
         Stamina = stamina;
         Hunger = hunger;
-        RestoreStamina(100);
+        RestoreStamina(stamina);
+        HungerStat(hunger);
         NewUIManager.Instance.RenderPlayerStats();
     }
 
@@ -54,7 +57,7 @@ public class PlayerStats
     {
         Stamina -= staminaLost;
         NewUIManager.Instance.RenderPlayerStats();
-        CheckGameOver();
+        CheckHungerEnergy();
     }
 
     public static void RestoreStamina(int amount)
@@ -72,7 +75,7 @@ public class PlayerStats
     {
         Hunger += restore;
         NewUIManager.Instance.RenderPlayerStats();
-        CheckGameOver();
+        CheckHungerEnergy();
     }
 
     // Method to check if the player has already played the mini-game
@@ -93,7 +96,7 @@ public class PlayerStats
         hasPlayedMiniGame = false;
     }
 
-    private static void CheckGameOver()
+    private static void CheckHungerEnergy()
     {
         if (Stamina <= 0 || Hunger <= 0)
         {
