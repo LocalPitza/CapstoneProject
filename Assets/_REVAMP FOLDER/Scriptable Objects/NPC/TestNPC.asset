@@ -10,20 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35ddb11424bf7484bbfd6b2de763f10f, type: 3}
-  m_Name: SeedVendor
+  m_Name: TestNPC
   m_EditorClassIdentifier: 
   onFirstMeet:
-  - speaker: Seed Vendor
-    message: Hello, I am the Seed Vendor in this Back Alley
-  - speaker: Seed Vendor
-    message: What seeds would you like
+  - speaker: Street NPC
+    message: Hello there, sure is smogy
   defaultDialogue:
-  - speaker: Seed Vendor
-    message: Great to see you again, take your time to choose
+  - speaker: Street NPC
+    message: This smog will surely destroy my lungs, but I must attend work
   specialDayDialogues:
   - day: 2
     dialogue:
-    - speaker: Seed Vendor
-      message: It is a Special Day
-    - speaker: Seed Vendor
-      message: Though my selection are still the same
+    - speaker: Street NPC
+      message: Urban Gardening...
+    - speaker: Street NPC
+      message: Yes that sound nice

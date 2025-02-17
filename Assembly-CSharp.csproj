@@ -144,6 +144,7 @@
     <Compile Include="Assets\Scripts\Planting\UI\UIManager.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Planting\RegrowableHarvestBehaviour.cs" />
     <Compile Include="Assets\Scripts\PopupTrigger.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\NPC\NPCInteractable.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\BarsUnit.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\MoveObstacle.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\ItemIndex.cs" />
