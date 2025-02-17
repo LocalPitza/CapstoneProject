@@ -6,7 +6,7 @@ public class ApartmentRent : MonoBehaviour, ITimeTracker
 {
     [SerializeField] private int rentMin = 500; // Minimum rent
     [SerializeField] private int rentMax = 1000; // Maximum rent
-    [Range(15,30)]
+    [Range(2,30)]
     [SerializeField] private int dayOfRent = 30;
     private int lastProcessedDay = 0;
 
@@ -43,7 +43,7 @@ public class ApartmentRent : MonoBehaviour, ITimeTracker
         int rentAmount = Random.Range(rentMin, rentMax + 1);
 
         // Deduct the rent amount from the player's money
-        PlayerStats.Spend(rentAmount);
+        PlayerStats.Spend(rentAmount, "Failed to pay rent");
 
         // Log the rent for debugging purposes
         Debug.LogWarning($"Rent day! {rentAmount}{PlayerStats.CURRENCY} has been deducted for rent. Remaining Money: {PlayerStats.Money}{PlayerStats.CURRENCY}");
