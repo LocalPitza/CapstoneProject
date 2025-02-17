@@ -47,6 +47,16 @@ public class Shop : MonoBehaviour
             }
             PlayerStats.Spend(totalCost);
         }
+        else
+        {
+            //For Buying the Seeds
+            if (PlayerStats.Money < totalCost)
+            {
+                Debug.Log("Not enough money!");
+                return;
+            }
+            PlayerStats.Spend(totalCost);
+        }
 
         // Proceed with giving the item
         ItemSlotData purchasedItem = new ItemSlotData(item, quantity);

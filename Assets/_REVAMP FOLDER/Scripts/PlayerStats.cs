@@ -22,12 +22,13 @@ public class PlayerStats
         NewUIManager.Instance?.RenderPlayerStats();
     }
 
-    public static void Spend(int cost)
+    public static void Spend(int cost, string cause = "")
     {
-        if(cost > Money)
+        if (cost > Money)
         {
             Debug.LogWarning("Player does not have enough money");
-            GameOver.Instance.GameIsOver();
+            string gameOverCause = string.IsNullOrEmpty(cause) ? "Failed to pay an expense" : cause;
+            GameOver.Instance.GameIsOver(gameOverCause);
             return;
         }
         Money -= cost;

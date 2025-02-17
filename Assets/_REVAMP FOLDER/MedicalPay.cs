@@ -37,7 +37,7 @@ public class MedicalPay : MonoBehaviour
         // Activate the Medical UI
         medicalPayUI.SetActive(true);
 
-        PlayerStats.Spend(medicalCost);
+        PlayerStats.Spend(medicalCost, "Failed to pay medical expenses");
     }
 
     public void CloseMedicalUI()
