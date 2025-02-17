@@ -41,7 +41,7 @@ public class LocationEntryPoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player entered the trigger.");
+            //Debug.Log("Player entered the trigger.");
             playerInsideTrigger = true;
             PlayerMove.isInTeleportTrigger = true; //Prevent interaction
             doorUI.SetActive(true);
@@ -52,7 +52,7 @@ public class LocationEntryPoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player exited the trigger.");
+            //Debug.Log("Player exited the trigger.");
             playerInsideTrigger = false;
             PlayerMove.isInTeleportTrigger = false; //Allow interaction again
             doorUI.SetActive(false);
@@ -63,7 +63,7 @@ public class LocationEntryPoint : MonoBehaviour
     {
         if (playerInsideTrigger && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
-            Debug.Log("Switching location.");
+            //Debug.Log("Switching location.");
             SceneTransitionManager.Instance.SwitchLocation(locationToSwitch);
             PlayerMove.isInTeleportTrigger = false;
         }
