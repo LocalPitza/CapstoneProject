@@ -7,11 +7,15 @@ public class NPCData : ScriptableObject
 {
     [Header("Dialogue")]
 
+    public ItemData wantItem;
+
     //The dialogue on first meet
     public List<DialogueLine> onFirstMeet;
 
     //Default words
     public List<DialogueLine> defaultDialogue;
+
+    public List<DialogueLine> thankYouDialogue;
 
     public List<SpecialDayDialogue> specialDayDialogues;
 

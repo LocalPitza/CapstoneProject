@@ -1147,7 +1147,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testObject: {fileID: 1756784096}
   npcData: {fileID: 11400000, guid: 33504e9d8932bfd49be70e8339a17a8b, type: 2}
-  wantItem: {fileID: 11400000, guid: 3547e728c0b652a4fb643bb362591ceb, type: 2}
 --- !u!1 &215009894
 GameObject:
   m_ObjectHideFlags: 0
@@ -2908,6 +2907,17 @@ PrefabInstance:
         type: 3}
       propertyPath: storageSlots.Array.data[7].quantity
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: harvestedSlots.Array.data[0].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 3547e728c0b652a4fb643bb362591ceb,
+        type: 2}
+    - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: harvestedSlots.Array.data[0].quantity
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}

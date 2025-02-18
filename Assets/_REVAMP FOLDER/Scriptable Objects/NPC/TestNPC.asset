@@ -12,16 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35ddb11424bf7484bbfd6b2de763f10f, type: 3}
   m_Name: TestNPC
   m_EditorClassIdentifier: 
+  wantItem: {fileID: 11400000, guid: 3547e728c0b652a4fb643bb362591ceb, type: 2}
   onFirstMeet:
   - speaker: Street NPC
     message: Hello there, sure is smogy
   defaultDialogue:
   - speaker: Street NPC
     message: This smog will surely destroy my lungs, but I must attend work
+  thankYouDialogue:
+  - speaker: Street NPC
+    message: Thank you for the Tomato, I will surely use its seed to plant
   specialDayDialogues:
-  - day: 2
+  - day: 1
     dialogue:
     - speaker: Street NPC
       message: Urban Gardening...
     - speaker: Street NPC
-      message: Yes that sound nice
+      message: Yes that sound nice, if only I could have a Tomato, the seed inside
+        will be plenty
+    - speaker: Street NPC
+      message: I will be using that

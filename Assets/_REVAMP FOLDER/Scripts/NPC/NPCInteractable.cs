@@ -8,9 +8,6 @@ public class NPCInteractable : MonoBehaviour
     [SerializeField] GameObject testObject;
     [SerializeField] NPCData npcData;
 
-    [Header("Want Item")]
-    [SerializeField] ItemData wantItem;
-
     private string npcID;
     private string activatedKey;
 
@@ -50,21 +47,48 @@ public class NPCInteractable : MonoBehaviour
             return;
         }
 
-        // Check if testObject is already activated or it's a special day
+        // Check if it's a special day
         if (!isActivated && specialDialogue != null)
         {
-            // Special day dialogue triggers testObject activation
             DialogueManager.Instance.StartDialogue(specialDialogue, () =>
             {
-                ActivateTestObject();
-                DialogueManager.Instance.StartDialogue(npcData.defaultDialogue);
+                if (TryGiveWantedItem())
+                {
+                    DialogueManager.Instance.StartDialogue(npcData.thankYouDialogue);
+                    ActivateTestObject();
+                }
+                else
+                {
+                    DialogueManager.Instance.StartDialogue(npcData.defaultDialogue);
+                }
             });
+            return;
         }
-        else
+
+        // If object is already activated or no special dialogue, go to default
+        DialogueManager.Instance.StartDialogue(npcData.defaultDialogue);
+    }
+
+    bool TryGiveWantedItem()
+    {
+        if (npcData.wantItem == null) return false;
+
+        var harvestedSlots = NewInventoryManager.Instance.GetInventorySlots(NewInventorySlot.InventoryType.Harvest);
+
+        for (int i = 0; i < harvestedSlots.Length; i++)
         {
-            // If object is already activated or no special dialogue, go to default
-            DialogueManager.Instance.StartDialogue(npcData.defaultDialogue);
+            var slot = harvestedSlots[i];
+            if (slot.itemData == npcData.wantItem && slot.quantity > 0)
+            {
+                // Remove one item
+                slot.Remove();
+                harvestedSlots[i] = slot;
+                NewUIManager.Instance.RenderInventory();
+                return true;
+            }
         }
+
+        return false;
     }
 
     void AfterFirstMeet()
@@ -76,6 +100,12 @@ public class NPCInteractable : MonoBehaviour
         // Transition to default dialogue after the first meeting
         DialogueManager.Instance.StartDialogue(npcData.defaultDialogue);
     }
+
+    /*IEnumerator ActivateTestObjectDelayed()
+    {
+        yield return new WaitForSeconds(2f);  // Wait for 2 seconds
+        ActivateTestObject();
+    }*/
 
     void ActivateTestObject()
     {
