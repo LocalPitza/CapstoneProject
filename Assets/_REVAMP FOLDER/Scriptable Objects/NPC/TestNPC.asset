@@ -23,7 +23,8 @@ MonoBehaviour:
   - speaker: Street NPC
     message: Thank you for the Tomato, I will surely use its seed to plant
   specialDayDialogues:
-  - day: 1
+  - startDay: 2
+    endDay: 4
     dialogue:
     - speaker: Street NPC
       message: Urban Gardening...

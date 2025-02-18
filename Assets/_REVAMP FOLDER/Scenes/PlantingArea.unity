@@ -2917,7 +2917,7 @@ PrefabInstance:
     - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
       propertyPath: harvestedSlots.Array.data[0].quantity
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}

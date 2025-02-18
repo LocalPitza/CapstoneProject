@@ -22,7 +22,8 @@ public class NPCData : ScriptableObject
     [System.Serializable]
     public struct SpecialDayDialogue
     {
-        public int day; // Specific in-game day for the dialogue
+        public int startDay; // The start of the special dialogue period
+        public int endDay; // Specific in-game day for the dialogue
         public List<DialogueLine> dialogue;
     }
 
@@ -30,7 +31,7 @@ public class NPCData : ScriptableObject
     {
         foreach (var specialDialogue in specialDayDialogues)
         {
-            if (specialDialogue.day == currentDay)
+            if (currentDay >= specialDialogue.startDay && currentDay <= specialDialogue.endDay)
             {
                 return specialDialogue.dialogue;
             }
