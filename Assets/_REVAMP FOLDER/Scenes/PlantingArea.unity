@@ -3551,7 +3551,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8936507197009456480, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      insertIndex: 10
+      addedObject: {fileID: 1853957637}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c563a24b82ed7a54c87831c436a6a751, type: 3}
 --- !u!114 &517248093 stripped
@@ -3581,6 +3585,12 @@ MonoBehaviour:
 --- !u!1 &517248095 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 759630601914156842, guid: c563a24b82ed7a54c87831c436a6a751,
+    type: 3}
+  m_PrefabInstance: {fileID: 517248092}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &517248096 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8936507197009456480, guid: c563a24b82ed7a54c87831c436a6a751,
     type: 3}
   m_PrefabInstance: {fileID: 517248092}
   m_PrefabAsset: {fileID: 0}
@@ -5270,8 +5280,10 @@ MonoBehaviour:
   teleportDestination: {fileID: 1410427267}
   guideUI: {fileID: 1851955476}
   targetCamera: {fileID: 1068560817}
+  fadeDuration: 0.5
   playerTag: Player
   DoorAudio: 
+  teleportSpeed: 0
 --- !u!1 &806844086
 GameObject:
   m_ObjectHideFlags: 0
@@ -7455,6 +7467,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 984814995}
   m_CullTransparentMesh: 1
+--- !u!1 &991140378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 991140380}
+  - component: {fileID: 991140379}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &991140379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991140378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ad0c242b9b13d49a7d182c788fe63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeCanvasGroup: {fileID: 1853957638}
+  fadeDuration: 0.5
+--- !u!4 &991140380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991140378}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1021907821
 GameObject:
   m_ObjectHideFlags: 0
@@ -9231,8 +9289,10 @@ MonoBehaviour:
   teleportDestination: {fileID: 588929887}
   guideUI: {fileID: 939571756}
   targetCamera: {fileID: 787361347}
+  fadeDuration: 0.5
   playerTag: Player
   DoorAudio: 
+  teleportSpeed: 0
 --- !u!1 &1263472241
 GameObject:
   m_ObjectHideFlags: 0
@@ -13023,6 +13083,94 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1851955476}
   m_CullTransparentMesh: 1
+--- !u!1 &1853957636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1853957637}
+  - component: {fileID: 1853957640}
+  - component: {fileID: 1853957639}
+  - component: {fileID: 1853957638}
+  m_Layer: 5
+  m_Name: Fade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1853957637
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853957636}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 517248096}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1853957638
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853957636}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &1853957639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853957636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1853957640
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853957636}
+  m_CullTransparentMesh: 1
 --- !u!1 &1867624746
 GameObject:
   m_ObjectHideFlags: 0
@@ -15251,6 +15399,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 153162606}
+  - {fileID: 991140380}
   - {fileID: 1137174767}
   - {fileID: 1644214072}
   - {fileID: 1048250489}
