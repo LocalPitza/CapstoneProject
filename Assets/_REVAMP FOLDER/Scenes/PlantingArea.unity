@@ -2952,6 +2952,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 917000584}
+    - target: {fileID: 1056392291624240730, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1178048663565119376, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -3102,6 +3107,11 @@ PrefabInstance:
     - target: {fileID: 2985280881946026984, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
       propertyPath: currentLocation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3075704936164802743, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3438495608793267169, guid: c563a24b82ed7a54c87831c436a6a751,
@@ -3324,6 +3334,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -157.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5823482708869195650, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5944839529756872313, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
       propertyPath: m_Mesh
@@ -3447,6 +3462,11 @@ PrefabInstance:
     - target: {fileID: 7461060945465482560, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477742929749513844, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7604211291265419066, guid: c563a24b82ed7a54c87831c436a6a751,
@@ -5271,7 +5291,6 @@ MonoBehaviour:
   guideUI: {fileID: 1851955476}
   targetCamera: {fileID: 1068560817}
   playerTag: Player
-  DoorAudio: 
 --- !u!1 &806844086
 GameObject:
   m_ObjectHideFlags: 0
@@ -9232,7 +9251,6 @@ MonoBehaviour:
   guideUI: {fileID: 939571756}
   targetCamera: {fileID: 787361347}
   playerTag: Player
-  DoorAudio: 
 --- !u!1 &1263472241
 GameObject:
   m_ObjectHideFlags: 0

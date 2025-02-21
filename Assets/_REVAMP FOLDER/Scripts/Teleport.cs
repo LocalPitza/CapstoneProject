@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-using UnityEngine.ProBuilder.Shapes;
-using DG.Tweening;
 
 public class Teleport : MonoBehaviour
 {
@@ -13,12 +11,9 @@ public class Teleport : MonoBehaviour
     public Transform teleportDestination;
     public GameObject guideUI;
     public CinemachineVirtualCamera targetCamera;
-    [SerializeField] float fadeDuration = 0.5f;
 
     // The tag to identify the player
     public string playerTag = "Player";
-    public string DoorAudio;
-    public float teleportSpeed;
 
     private GameObject playerInTrigger;
 
@@ -74,26 +69,35 @@ public class Teleport : MonoBehaviour
         // Check if the player is in the trigger and the F key is pressed
         if (playerInTrigger != null && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
-            FadeManager.Instance.SetFadeDuration(fadeDuration);
-            FadeManager.Instance.FadeIn();
-            StartCoroutine(TeleportAfterFade());
+            StartCoroutine(TeleportWithFade());
         }
-    }  
-
-    private IEnumerator TeleportAfterFade()
-    {
-        yield return new WaitForSeconds(fadeDuration);
-        TeleportPlayer();
-        yield return new WaitForSeconds(fadeDuration);
-        FadeManager.Instance.FadeOut();
     }
 
-    private void TeleportPlayer()
+    private IEnumerator TeleportWithFade()
     {
-        //FindObjectOfType<SoundManager>().Play(DoorAudio);
-        //playerInTrigger.transform.DOMove(teleportDestination, teleportSpeed);
+        PlayerMove.isUIOpen = true;
+
+        // Trigger fade-out
+        NewUIManager.Instance.FadeOutScreen();
+
+        // Wait for 1 second (adjust if needed)
+        yield return new WaitForSeconds(1f);
+
+        // Teleport player
         playerInTrigger.transform.position = teleportDestination.position;
         playerInTrigger.transform.rotation = teleportDestination.rotation;
         Debug.Log("Player teleported to " + teleportDestination);
+
+        // Trigger fade-in
+        NewUIManager.Instance.FadeInScreen();
+
+        // Wait for fade-in to complete
+        yield return new WaitForSeconds(1f);
+
+        // Reset fade effect
+        NewUIManager.Instance.OnFadeInComplete();
+        NewUIManager.Instance.ResetFadeDefaults();
+
+        PlayerMove.isUIOpen = false;
     }
 }

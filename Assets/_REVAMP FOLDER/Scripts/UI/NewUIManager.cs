@@ -49,6 +49,10 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     public Slider hungerBar;
     public int hungerCount;
 
+    [Header("Screen Transitions")]
+    public GameObject fadeIn;
+    public GameObject fadeOut;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -70,6 +74,27 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         DisplayItemInfo(null);
 
         TimeManager.Instance.RegisterTracker(this);
+    }
+
+    public void FadeOutScreen()
+    {
+        fadeOut.SetActive(true);
+    }
+
+    public void FadeInScreen()
+    {
+        fadeIn.SetActive(true);
+    }
+
+    public void OnFadeInComplete()
+    {
+        fadeIn.SetActive(false);
+    }
+
+    public void ResetFadeDefaults()
+    {
+        fadeOut.SetActive(false);
+        fadeIn.SetActive(true);
     }
 
     #region SlotIndexes
