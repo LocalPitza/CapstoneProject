@@ -13,10 +13,12 @@ public class Teleport : MonoBehaviour
     public Transform teleportDestination;
     public GameObject guideUI;
     public CinemachineVirtualCamera targetCamera;
+    [SerializeField] float fadeDuration = 0.5f;
 
     // The tag to identify the player
     public string playerTag = "Player";
     public string DoorAudio;
+    public float teleportSpeed;
 
     private GameObject playerInTrigger;
 
@@ -72,17 +74,24 @@ public class Teleport : MonoBehaviour
         // Check if the player is in the trigger and the F key is pressed
         if (playerInTrigger != null && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
-            /* Teleport the player to the destination
-            playerInTrigger.transform.position = teleportDestination.position;
-            playerInTrigger.transform.rotation = teleportDestination.rotation;
-            */
-            teleport();
+            FadeManager.Instance.SetFadeDuration(fadeDuration);
+            FadeManager.Instance.FadeIn();
+            StartCoroutine(TeleportAfterFade());
         }
+    }  
+
+    private IEnumerator TeleportAfterFade()
+    {
+        yield return new WaitForSeconds(fadeDuration);
+        TeleportPlayer();
+        yield return new WaitForSeconds(fadeDuration);
+        FadeManager.Instance.FadeOut();
     }
 
-    void teleport()
+    private void TeleportPlayer()
     {
         //FindObjectOfType<SoundManager>().Play(DoorAudio);
+        //playerInTrigger.transform.DOMove(teleportDestination, teleportSpeed);
         playerInTrigger.transform.position = teleportDestination.position;
         playerInTrigger.transform.rotation = teleportDestination.rotation;
         Debug.Log("Player teleported to " + teleportDestination);

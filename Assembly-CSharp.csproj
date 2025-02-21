@@ -83,6 +83,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\EquipmentData.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\FlyBehavior.cs" />
     <Compile Include="Assets\Scripts\Planting\SelectPot.cs" />
+    <Compile Include="Assets\CornejoFolder\Scripts\FadeManager.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Saving\SoilSaveState.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\CookManager.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\FoodData.cs" />
