@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35ddb11424bf7484bbfd6b2de763f10f, type: 3}
   m_Name: SeedVendor
   m_EditorClassIdentifier: 
+  wantItem: {fileID: 0}
   onFirstMeet:
   - speaker: Seed Vendor
     message: Hello, I am the Seed Vendor in this Back Alley
@@ -20,10 +21,12 @@ MonoBehaviour:
   defaultDialogue:
   - speaker: Seed Vendor
     message: Great to see you again, take your time to choose
+  thankYouDialogue: []
   specialDayDialogues:
-  - day: 2
+  - startDay: 1
+    endDay: 1
     dialogue:
     - speaker: Seed Vendor
-      message: Happy Monday
+      message: It is a Special Day
     - speaker: Seed Vendor
       message: Though my selection are still the same
