@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.ProBuilder.Shapes;
+using DG.Tweening;
 
 public class Teleport : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Teleport : MonoBehaviour
 
     // The tag to identify the player
     public string playerTag = "Player";
+    public string DoorAudio;
 
     private GameObject playerInTrigger;
 
@@ -70,9 +72,19 @@ public class Teleport : MonoBehaviour
         // Check if the player is in the trigger and the F key is pressed
         if (playerInTrigger != null && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
-            // Teleport the player to the destination
+            /* Teleport the player to the destination
             playerInTrigger.transform.position = teleportDestination.position;
             playerInTrigger.transform.rotation = teleportDestination.rotation;
+            */
+            teleport();
         }
+    }
+
+    void teleport()
+    {
+        //FindObjectOfType<SoundManager>().Play(DoorAudio);
+        playerInTrigger.transform.position = teleportDestination.position;
+        playerInTrigger.transform.rotation = teleportDestination.rotation;
+        Debug.Log("Player teleported to " + teleportDestination);
     }
 }
