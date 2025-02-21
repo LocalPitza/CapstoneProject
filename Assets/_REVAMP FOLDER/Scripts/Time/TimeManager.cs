@@ -10,6 +10,9 @@ public class TimeManager : MonoBehaviour
     [SerializeField] GameTimeStamp gameTimeStamp;
     public float timeScale = 1.0f;
 
+    // Added property to get the current day easily
+    public int CurrentDay => gameTimeStamp.day;
+
     [Header("Sun")]
     public Transform sunTransform;
 
