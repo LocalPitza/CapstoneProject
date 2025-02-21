@@ -14562,7 +14562,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 96cd4fcd3ba80b142a14fbf00d33b7da, type: 2}
   - {fileID: 11400000, guid: 783b228a07fbaea439ea6b8d329295b2, type: 2}
   - {fileID: 11400000, guid: 7d49099f40388924b874e91462b4237e, type: 2}
-  npcData: {fileID: 11400000, guid: 582d2c407d675cf45be9065ca90a6243, type: 2}
+  npcData: {fileID: 11400000, guid: 7ba5784f0f04a01419d5a033b9b57a6e, type: 2}
 --- !u!65 &2142498903
 BoxCollider:
   m_ObjectHideFlags: 0

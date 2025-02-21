@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ddb11424bf7484bbfd6b2de763f10f, type: 3}
+  m_Name: KonbiniClerk
+  m_EditorClassIdentifier: 
+  wantItem: {fileID: 0}
+  onFirstMeet:
+  - speaker: Store Clerk
+    message: Hello, I am the Cashier here
+  defaultDialogue:
+  - speaker: Store Clerk
+    message: 'Hello...
+
+      What would like to have?'
+  thankYouDialogue: []
+  specialDayDialogues: []
