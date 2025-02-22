@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class MiniGameManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class MiniGameManager : MonoBehaviour
     [SerializeField] GameObject endMiniGameCanvas;
     [SerializeField] GameObject startGameButton;
     [SerializeField] TextMeshProUGUI endMiniGameText;
+
+    [SerializeField] VideoPlayer videoPlayer;
+    [SerializeField] RawImage videoScreen;
 
     private bool isMiniGameActive = true;
     [SerializeField] private float fadeDuration = 1f;
@@ -28,11 +32,28 @@ public class MiniGameManager : MonoBehaviour
         endMiniGameCanvas.SetActive(false);
         miniGameParent.SetActive(false);
         backgroundPanel.color = new Color(backgroundPanel.color.r, backgroundPanel.color.g, backgroundPanel.color.b, 0);
+        videoScreen.gameObject.SetActive(false);
     }
 
     public void OpenMiniGameUI()
     {
         isMiniGameActive = false;
+        PlayerMove.isUIOpen = true;
+        StartCoroutine(PlayVideoBeforeMinigame());
+    }
+
+    private IEnumerator PlayVideoBeforeMinigame()
+    {
+        videoScreen.gameObject.SetActive(true);
+        videoPlayer.time = 0;
+        videoPlayer.Play();
+
+        while (videoPlayer.isPlaying)
+        {
+            yield return null;
+        }
+
+        videoScreen.gameObject.SetActive(false);
         StartCoroutine(FadeBackground(0, 1, () => {
             miniGameParent.SetActive(true);
             startGameButton.SetActive(true);
@@ -42,7 +63,6 @@ public class MiniGameManager : MonoBehaviour
     public void StartMiniGame()
     {
         isMiniGameActive = true;
-        PlayerMove.isUIOpen = true;
 
         startGameButton.SetActive(false);
 
