@@ -44,6 +44,10 @@ public class MiniGameManager : MonoBehaviour
 
     private IEnumerator PlayVideoBeforeMinigame()
     {
+        // Fade to black first
+        yield return StartCoroutine(FadeBackground(0, 1, null));
+
+        // Play the video after fade is complete
         videoScreen.gameObject.SetActive(true);
         videoPlayer.time = 0;
         videoPlayer.Play();
@@ -54,10 +58,9 @@ public class MiniGameManager : MonoBehaviour
         }
 
         videoScreen.gameObject.SetActive(false);
-        StartCoroutine(FadeBackground(0, 1, () => {
-            miniGameParent.SetActive(true);
-            startGameButton.SetActive(true);
-        }));
+
+        miniGameParent.SetActive(true);
+        startGameButton.SetActive(true);
     }
 
     public void StartMiniGame()
