@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MiniGameManager : MonoBehaviour
 {
     public static MiniGameManager instance;
     public ObstacleSpawner obstacleSpawner;
 
+    [SerializeField] Image backgroundPanel;
     [SerializeField] GameObject miniGameParent;
     [SerializeField] GameObject endMiniGameCanvas;
+    [SerializeField] GameObject startGameButton;
     [SerializeField] TextMeshProUGUI endMiniGameText;
 
     private bool isMiniGameActive = true;
+    [SerializeField] private float fadeDuration = 1f;
 
     private void Awake()
     {
@@ -22,21 +26,25 @@ public class MiniGameManager : MonoBehaviour
         }
 
         endMiniGameCanvas.SetActive(false);
+        miniGameParent.SetActive(false);
+        backgroundPanel.color = new Color(backgroundPanel.color.r, backgroundPanel.color.g, backgroundPanel.color.b, 0);
     }
 
-    private void Update()
+    public void OpenMiniGameUI()
     {
-        if (!isMiniGameActive)
-        {
-            return; // Skip updates if the minigame is inactive
-        }
+        isMiniGameActive = false;
+        StartCoroutine(FadeBackground(0, 1, () => {
+            miniGameParent.SetActive(true);
+            startGameButton.SetActive(true);
+        }));
     }
 
     public void StartMiniGame()
     {
         isMiniGameActive = true;
         PlayerMove.isUIOpen = true;
-        miniGameParent.SetActive(true);
+
+        startGameButton.SetActive(false);
 
         // Reset the timer
         WorkTimer.instance.ResetTimer();
@@ -89,11 +97,13 @@ public class MiniGameManager : MonoBehaviour
         endMiniGameText.text = message;
     }
 
+    //Accessed by the Button UI
     public void CloseMiniGame()
     {
         // Hide the minigame UI
         miniGameParent.SetActive(false);
         PlayerMove.isUIOpen = false;
+        StartCoroutine(FadeBackground(1, 0, null));
 
         // Destroy any existing obstacles and reset the spawner
         if (obstacleSpawner != null)
@@ -116,5 +126,22 @@ public class MiniGameManager : MonoBehaviour
 
         // Update the time in the TimeManager
         TimeManager.Instance.SkipTime(timestampOfNextDay);
+    }
+
+    private IEnumerator FadeBackground(float startAlpha, float endAlpha, System.Action onComplete)
+    {
+        float elapsedTime = 0f;
+        Color color = backgroundPanel.color;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / fadeDuration);
+            backgroundPanel.color = new Color(color.r, color.g, color.b, newAlpha);
+            yield return null;
+        }
+
+        backgroundPanel.color = new Color(color.r, color.g, color.b, endAlpha);
+        onComplete?.Invoke();
     }
 }

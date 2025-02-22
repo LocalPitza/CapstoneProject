@@ -82,10 +82,12 @@ public class Teleport : MonoBehaviour
 
     private IEnumerator TeleportAfterFade()
     {
+        PlayerMove.isUIOpen = true;
         yield return new WaitForSeconds(fadeDuration);
         TeleportPlayer();
         yield return new WaitForSeconds(fadeDuration);
         FadeManager.Instance.FadeOut();
+        PlayerMove.isUIOpen = false;
     }
 
     private void TeleportPlayer()
