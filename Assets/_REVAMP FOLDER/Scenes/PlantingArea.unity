@@ -3392,7 +3392,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639895243}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 3db447b6a50f72144bc09ec6dee6c72f, type: 3}
+  m_VideoClip: {fileID: 0}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -10189,6 +10189,8 @@ MonoBehaviour:
   endMiniGameText: {fileID: 219887638}
   videoPlayer: {fileID: 639895245}
   videoScreen: {fileID: 1491163517}
+  goingToWorkVideo: {fileID: 32900000, guid: 3db447b6a50f72144bc09ec6dee6c72f, type: 3}
+  goingHomeVideo: {fileID: 32900000, guid: f963f1c05e726ce4690d9a2c5658a6d7, type: 3}
   fadeDuration: 1
 --- !u!4 &1392473657
 Transform:

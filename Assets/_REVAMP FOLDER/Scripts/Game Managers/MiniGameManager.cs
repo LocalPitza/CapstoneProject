@@ -18,6 +18,8 @@ public class MiniGameManager : MonoBehaviour
 
     [SerializeField] VideoPlayer videoPlayer;
     [SerializeField] RawImage videoScreen;
+    [SerializeField] private VideoClip goingToWorkVideo;
+    [SerializeField] private VideoClip goingHomeVideo;
 
     private bool isMiniGameActive = true;
     [SerializeField] private float fadeDuration = 1f;
@@ -44,20 +46,36 @@ public class MiniGameManager : MonoBehaviour
 
     private IEnumerator PlayVideoBeforeMinigame()
     {
-        // Fade to black first
         yield return StartCoroutine(FadeBackground(0, 1, null));
 
-        // Play the video after fade is complete
         videoScreen.gameObject.SetActive(true);
+        videoPlayer.Stop();
+        videoPlayer.clip = goingToWorkVideo;
         videoPlayer.time = 0;
         videoPlayer.Play();
 
+        Debug.Log("Playing GoingToWork video...");
+
+        // Wait for the video to start playing
+        while (!videoPlayer.isPlaying)
+        {
+            yield return null;
+        }
+
+        Debug.Log("Video started playing");
+
+        // Wait for the video to finish
         while (videoPlayer.isPlaying)
         {
             yield return null;
         }
 
+        Debug.Log("Video finished playing, hiding screen and showing minigame UI");
+
         videoScreen.gameObject.SetActive(false);
+
+        // Delay before showing minigame UI
+        yield return new WaitForSeconds(0.5f);
 
         miniGameParent.SetActive(true);
         startGameButton.SetActive(true);
@@ -120,35 +138,61 @@ public class MiniGameManager : MonoBehaviour
         endMiniGameText.text = message;
     }
 
-    //Accessed by the Button UI
     public void CloseMiniGame()
     {
-        // Hide the minigame UI
         miniGameParent.SetActive(false);
         PlayerMove.isUIOpen = false;
-        StartCoroutine(FadeBackground(1, 0, null));
+        StartCoroutine(PlayClosingVideo());
+    }
 
-        // Destroy any existing obstacles and reset the spawner
-        if (obstacleSpawner != null)
+    private IEnumerator PlayClosingVideo()
+    {
+        videoScreen.gameObject.SetActive(true);
+        videoPlayer.Stop();
+        videoPlayer.clip = goingHomeVideo;
+        videoPlayer.time = 0;
+        videoPlayer.Play();
+
+        Debug.Log("Playing GoingHome video...");
+
+        // Wait for the video to start playing
+        while (!videoPlayer.isPlaying)
         {
-            Debug.Log("ObstacleSpawner found. Resetting.");
-            obstacleSpawner.ResetSpawner();
-        }
-        else
-        {
-            Debug.LogError("ObstacleSpawner not found!");
+            yield return null;
         }
 
-        // Get the current game timestamp
+        Debug.Log("Video started playing");
+
+        // Wait for the video to finish
+        while (videoPlayer.isPlaying)
+        {
+            yield return null;
+        }
+
+        Debug.Log("Video finished playing, skipping time before fade-out");
+
+        // Skip time immediately after the video finishes
         GameTimeStamp currentTime = TimeManager.Instance.GetGameTimeStamp();
-
-        // Create a new timestamp for 5 PM the same or next day
         GameTimeStamp timestampOfNextDay = new GameTimeStamp(currentTime);
-        timestampOfNextDay.hour = 17; // 5 PM
+        timestampOfNextDay.hour = 17;
         timestampOfNextDay.minute = 0;
-
-        // Update the time in the TimeManager
         TimeManager.Instance.SkipTime(timestampOfNextDay);
+
+        // Hide the video screen
+        videoScreen.gameObject.SetActive(false);
+
+        // Now proceed with the fade-out
+        StartCoroutine(FadeBackground(1, 0, () => {
+            if (obstacleSpawner != null)
+            {
+                Debug.Log("ObstacleSpawner found. Resetting.");
+                obstacleSpawner.ResetSpawner();
+            }
+            else
+            {
+                Debug.LogError("ObstacleSpawner not found!");
+            }
+        }));
     }
 
     private IEnumerator FadeBackground(float startAlpha, float endAlpha, System.Action onComplete)
