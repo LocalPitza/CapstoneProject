@@ -126,6 +126,7 @@
     <Compile Include="Assets\Scripts\Sleep\DayCounter.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\MiniGameScore.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Time\ITimeTracker.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Video\OpeningCutscene.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\NPC\NPCData.cs" />
     <Compile Include="Assets\Scripts\Planting\UI\HandInventorySlot.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\StoreImageAssign.cs" />

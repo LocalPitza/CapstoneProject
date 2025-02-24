@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.ProBuilder.Shapes;
-using DG.Tweening;
 
 public class Teleport : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class Teleport : MonoBehaviour
     public Transform teleportDestination;
     public GameObject guideUI;
     public CinemachineVirtualCamera targetCamera;
-    [SerializeField] float fadeDuration = 0.5f;
+    //[SerializeField] float fadeDuration = 0.5f;
 
     // The tag to identify the player
     public string playerTag = "Player";
@@ -74,8 +73,8 @@ public class Teleport : MonoBehaviour
         // Check if the player is in the trigger and the F key is pressed
         if (playerInTrigger != null && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
-            FadeManager.Instance.SetFadeDuration(fadeDuration);
-            FadeManager.Instance.FadeIn();
+            //FadeManager.Instance.SetFadeDuration(fadeDuration);
+            //FadeManager.Instance.FadeIn();
             StartCoroutine(TeleportAfterFade());
         }
     }  
@@ -83,11 +82,25 @@ public class Teleport : MonoBehaviour
     private IEnumerator TeleportAfterFade()
     {
         PlayerMove.isUIOpen = true;
+
+        // Start fade out
+        yield return GameStateManager.Instance.FadeOut();
+
+        // Teleport the player
+        TeleportPlayer();
+
+        // Start fade in
+        yield return GameStateManager.Instance.FadeIn();
+
+        PlayerMove.isUIOpen = false;
+
+        /*PlayerMove.isUIOpen = true;
+        TeleportPlayer();
         yield return new WaitForSeconds(fadeDuration);
         TeleportPlayer();
         yield return new WaitForSeconds(fadeDuration);
         FadeManager.Instance.FadeOut();
-        PlayerMove.isUIOpen = false;
+        PlayerMove.isUIOpen = false;*/
     }
 
     private void TeleportPlayer()
