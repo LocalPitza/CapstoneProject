@@ -811,7 +811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPoints:
-  - enteringFrom: 1
+  - enteringFrom: 3
     playerStart: {fileID: 1820821214}
 --- !u!1 &1157132503
 GameObject:
@@ -1033,7 +1033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e790582f2a23a5c4a930d527af2f135c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locationToSwitch: 1
+  locationToSwitch: 3
   doorUI: {fileID: 436266183}
   targetCamera: {fileID: 406222424}
 --- !u!65 &1676150847

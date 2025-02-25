@@ -38,6 +38,8 @@ public class FlyBehavior : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        rb.gravityScale = 0;
     }
 
     private void Update()

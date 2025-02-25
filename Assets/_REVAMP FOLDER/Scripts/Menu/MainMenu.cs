@@ -13,8 +13,10 @@ public class MainMenu : MonoBehaviour
     {
         if (loadingManager != null)
         {
-            string bedroom = SceneTransitionManager.Location.Bedroom.ToString();
-            loadingManager.LoadScene(bedroom);
+            /*string bedroom = SceneTransitionManager.Location.Bedroom.ToString();
+            loadingManager.LoadScene(bedroom);*/
+
+            loadingManager.LoadScene("OpeningCutscene");
 
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();

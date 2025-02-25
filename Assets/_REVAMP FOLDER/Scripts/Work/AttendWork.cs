@@ -18,7 +18,8 @@ public class AttendWork : MonoBehaviour
             // Check if the player has already played the mini-game
             if (!PlayerStats.HasPlayedMiniGame())
             {
-                MiniGameManager.instance.StartMiniGame();
+                MiniGameManager.instance.OpenMiniGameUI();
+                //MiniGameManager.instance.StartMiniGame();
                 // Mark the mini-game as played after starting it
                 PlayerStats.MarkMiniGameAsPlayed();
             }
