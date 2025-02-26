@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a988084b0b5d3b4a80175942a3a8932, type: 3}
-  m_Name: Lettuce Seed
+  m_Name: Onion Seed
   m_EditorClassIdentifier: 
-  description: 'Lettuce Seed
-
-'
-  thumbnail: {fileID: 21300000, guid: fd521548722ed8542ae1574e4194c91e, type: 3}
+  description: 
+  thumbnail: {fileID: 21300000, guid: 28de5d16ef3ea964a82281470e751f89, type: 3}
   gameModel: {fileID: 0}
   itemType: 0
-  cost: 25
-  daysToGrow: 2
-  cropToYield: {fileID: 11400000, guid: 8e99caa3712634640ab12e229203f657, type: 2}
-  seedling: {fileID: 1000013410243764, guid: a8f9d9de0ba1c404fa4518e175b13586, type: 3}
+  cost: 250
+  daysToGrow: 1
+  cropToYield: {fileID: 11400000, guid: cce40df5c813d0147adc9ab0313553b5, type: 2}
+  seedling: {fileID: 1000013410243764, guid: 7eb53447ca492eb43851c1ae24a7c957, type: 3}
   regrowable: 0
   daysToRegrow: 0
