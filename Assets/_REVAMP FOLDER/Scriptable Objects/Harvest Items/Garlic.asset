@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Garlic Vegetable
   thumbnail: {fileID: 21300000, guid: 231edb1713f33db4c910820034c0b866, type: 3}
-  gameModel: {fileID: 2573042295353780087, guid: a2d18ce3070f8c54f9c5e97c121b907f,
+  gameModel: {fileID: 2573042295353780087, guid: 08e5c311cd44bdf44bd7d3ef6d85d02e,
     type: 3}
   itemType: 1
   cost: 10

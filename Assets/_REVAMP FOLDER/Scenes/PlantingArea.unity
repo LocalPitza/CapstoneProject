@@ -2299,6 +2299,17 @@ PrefabInstance:
       propertyPath: storageSlots.Array.data[8].quantity
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: storageSlots.Array.data[9].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: ee2190d2622c19043a6c40d892fa241d,
+        type: 2}
+    - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: storageSlots.Array.data[9].quantity
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1691330958341544496, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
       propertyPath: medicalCost
