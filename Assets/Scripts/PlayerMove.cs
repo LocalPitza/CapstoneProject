@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
 
 
     private CharacterController controller;
+    public Animator animator;
 
     public float speed = 5f;
     public GameObject playerObject;
@@ -34,6 +35,7 @@ public class PlayerMove : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerInteraction = GetComponentInChildren<PlayerInteraction>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -48,6 +50,11 @@ public class PlayerMove : MonoBehaviour
                 Interact();
             }
             HandleMovement();
+
+            if(Input.GetKeyDown("horizontal") || Input.GetKeyDown("vertical"))
+            {
+                animator.SetBool("IsWalking", true);
+            }
         }
 
         //Debug.LogWarning("Player is in Teleport Trigger:" + isInTeleportTrigger);
