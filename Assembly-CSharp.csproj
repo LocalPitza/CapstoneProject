@@ -1095,6 +1095,10 @@
       <Project>{02A688A6-C6F9-3A26-D0C8-A28CB78428AE}</Project>
       <Name>UnityEngine.UI</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.2D.Sprite.Editor.csproj">
+      <Project>{1A114E88-EC92-86F5-01CF-2276DA03B6A6}</Project>
+      <Name>Unity.2D.Sprite.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Formats.Fbx.Runtime.csproj">
       <Project>{72DB2D24-6D1B-16DC-8054-74573DD6EEF5}</Project>
       <Name>Unity.Formats.Fbx.Runtime</Name>

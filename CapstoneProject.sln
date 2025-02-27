@@ -93,6 +93,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.ProBuilder.Stl", "Uni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Settings.Editor", "Unity.Settings.Editor.csproj", "{BC748373-39E4-2628-65D4-3EFAF922B695}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.2D.Sprite.Editor", "Unity.2D.Sprite.Editor.csproj", "{1A114E88-EC92-86F5-01CF-2276DA03B6A6}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.ProBuilder.KdTree", "Unity.ProBuilder.KdTree.csproj", "{7C09EE4F-31FA-8F21-8506-79CFED7535D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.ProBuilder.AddOns.Editor", "Unity.ProBuilder.AddOns.Editor.csproj", "{6277995B-A3B4-8A9B-A295-1226CFFB6AF2}"
@@ -361,6 +363,10 @@ Global
 		{BC748373-39E4-2628-65D4-3EFAF922B695}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC748373-39E4-2628-65D4-3EFAF922B695}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC748373-39E4-2628-65D4-3EFAF922B695}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A114E88-EC92-86F5-01CF-2276DA03B6A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A114E88-EC92-86F5-01CF-2276DA03B6A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A114E88-EC92-86F5-01CF-2276DA03B6A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A114E88-EC92-86F5-01CF-2276DA03B6A6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7C09EE4F-31FA-8F21-8506-79CFED7535D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7C09EE4F-31FA-8F21-8506-79CFED7535D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C09EE4F-31FA-8F21-8506-79CFED7535D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
