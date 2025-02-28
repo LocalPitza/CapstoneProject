@@ -51,7 +51,7 @@ public class PlayerMove : MonoBehaviour
             }
             HandleMovement();
 
-            if(Input.GetKeyDown("horizontal") || Input.GetKeyDown("vertical"))
+            if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
             {
                 animator.SetBool("IsWalking", true);
             }

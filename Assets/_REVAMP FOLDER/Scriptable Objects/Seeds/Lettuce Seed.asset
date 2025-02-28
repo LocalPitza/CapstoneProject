@@ -21,6 +21,6 @@ MonoBehaviour:
   cost: 25
   daysToGrow: 2
   cropToYield: {fileID: 11400000, guid: 8e99caa3712634640ab12e229203f657, type: 2}
-  seedling: {fileID: 1000013410243764, guid: 42ea4bc7ab684e1439fe7e06657fcf84, type: 3}
+  seedling: {fileID: 1000013410243764, guid: a8f9d9de0ba1c404fa4518e175b13586, type: 3}
   regrowable: 0
   daysToRegrow: 0
