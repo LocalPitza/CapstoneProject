@@ -73,6 +73,7 @@ public class WorkTimer : MonoBehaviour
         MiniGameManager minigameManager = FindObjectOfType<MiniGameManager>();
         if (minigameManager != null)
         {
+            FindObjectOfType<SoundManager>().Play("MinigameOutTimeSFX");
             MiniGameManager.instance.GameOver();
         }
     }

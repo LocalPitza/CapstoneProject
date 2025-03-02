@@ -52,6 +52,7 @@ public class FlyBehavior : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space)) 
         {
+            FindObjectOfType<SoundManager>().Play("MinigameJump");
             rb.velocity = Vector2.up * velocity;
         }
     }
@@ -65,6 +66,7 @@ public class FlyBehavior : MonoBehaviour
             // Check if collision is with an obstacle
             if (collision.gameObject.CompareTag("MiniGameObstacle"))
             {
+                FindObjectOfType<SoundManager>().Play("MinigameLoseSFX");
                 MiniGameManager.instance.GameOver();
             }
         }
