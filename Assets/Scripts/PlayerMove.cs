@@ -16,6 +16,9 @@ public class PlayerMove : MonoBehaviour
     public float turnSpeed = 180f;
     public Vector2 CurrentInput;
 
+    public float mouseSensitivity = 5f;
+    private float rotationX = 0f;
+
     PlayerInteraction playerInteraction;
 
     public static bool isUIOpen = false;
@@ -36,14 +39,22 @@ public class PlayerMove : MonoBehaviour
         controller = GetComponent<CharacterController>();
         playerInteraction = GetComponentInChildren<PlayerInteraction>();
         animator = GetComponent<Animator>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
     {
         if (isUIOpen) return;
 
+        HandleMouseLock();
+
         if (CanMove)
         {
+            if (!Input.GetKey(KeyCode.LeftAlt)) // Prevent rotation when LeftAlt is held
+            {
+                HandleMouseLook();
+            }
             HandleFootstep();
             if (!isInTeleportTrigger) //Prevent interaction when in teleport trigger
             {
@@ -51,7 +62,7 @@ public class PlayerMove : MonoBehaviour
             }
             HandleMovement();
 
-            if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
+            if (Input.GetButtonDown("Vertical"))
             {
                 animator.SetBool("IsWalking", true);
             }
@@ -78,6 +89,27 @@ public class PlayerMove : MonoBehaviour
         {
             playerInteraction.HarvestKeep();
         }*/
+    }
+
+    private void HandleMouseLock()
+    {
+        if (Input.GetKey(KeyCode.LeftAlt))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
+    private void HandleMouseLook()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        Quaternion newRotation = Quaternion.Euler(0, mouseX, 0);
+        transform.rotation = Quaternion.Lerp(transform.rotation, transform.rotation * newRotation, Time.deltaTime * turnSpeed);
     }
 
     private void HandleMovement()

@@ -16,6 +16,15 @@ public class OpenBackpack : MonoBehaviour
                 panel.SetActive(false);
             }
         }
+
+        UpdateCursorState(false);
+    }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            ToggleBackpackPanel();
+        }
     }
 
     public void ToggleBackpackPanel()
@@ -34,5 +43,21 @@ public class OpenBackpack : MonoBehaviour
         PlayerMove.isUIOpen = isActive;
 
         NewUIManager.Instance.RenderInventory();
+
+        UpdateCursorState(isActive);
+    }
+
+    private void UpdateCursorState(bool isUIOpen)
+    {
+        if (isUIOpen)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }
