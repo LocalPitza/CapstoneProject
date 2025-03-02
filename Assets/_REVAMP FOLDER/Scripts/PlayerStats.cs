@@ -9,6 +9,8 @@ public class PlayerStats
     public static int Hunger;
 
     public static bool hasPlayedMiniGame = false;
+    public static bool isStaminaDepleted = false; // Track if stamina was depleted
+    public static bool isHungerDepleted = false;  // Track if hunger was depleted
 
     public const string CURRENCY = "G";
     public const int STARTING_MONEY = 2000;
@@ -55,9 +57,49 @@ public class PlayerStats
 
     public static void UseStamina(int staminaLost)
     {
+        /*Stamina -= staminaLost;
+        NewUIManager.Instance.RenderPlayerStats();
+        CheckHungerEnergy();*/
+
+        // If stamina is already zero and they attempt another action, trigger medical expense
+        if (Stamina <= 0)
+        {
+            if (!isStaminaDepleted)
+            {
+                isStaminaDepleted = true; // Mark that stamina was depleted
+            }
+            else
+            {
+                Debug.Log("Game Over: Player performed action with zero stamina.");
+                MedicalPay.Instance.PayMedical("Stamina");
+
+                // If already in Bedroom, restore Stamina immediately
+                if (SceneTransitionManager.Instance.currentLocation == SceneTransitionManager.Location.Bedroom)
+                {
+                    Stamina = 50;
+                    isStaminaDepleted = false;
+                    NewUIManager.Instance.RenderPlayerStats();
+                }
+                else
+                {
+                    SceneTransitionManager.Instance.SwitchLocation(SceneTransitionManager.Location.Bedroom);
+                    Stamina = 50;
+                    isStaminaDepleted = false;
+                    NewUIManager.Instance.RenderPlayerStats();
+                }
+            }
+            return;
+        }
+
+        // Normal stamina usage
         Stamina -= staminaLost;
         NewUIManager.Instance.RenderPlayerStats();
-        CheckHungerEnergy();
+
+        // Check if stamina just dropped to zero
+        if (Stamina <= 0)
+        {
+            isStaminaDepleted = true; // Set flag when stamina reaches zero
+        }
     }
 
     public static void RestoreStamina(int amount)
@@ -73,9 +115,51 @@ public class PlayerStats
 
     public static void HungerStat(int restore)
     {
+        /*Hunger += restore;
+        NewUIManager.Instance.RenderPlayerStats();
+        CheckHungerEnergy();*/
+
+        // If hunger is already zero and player attempts another action, trigger medical expense
+        if (Hunger <= 0)
+        {
+            if (!isHungerDepleted)
+            {
+                isHungerDepleted = true; // Mark that hunger was depleted
+            }
+            else
+            {
+                Debug.Log("Game Over: Zero hunger for a set of time.");
+                MedicalPay.Instance.PayMedical("Hunger");
+                Hunger = 50;
+                isHungerDepleted = false;
+
+                // If already in Bedroom, restore Hunger immediately
+                if (SceneTransitionManager.Instance.currentLocation == SceneTransitionManager.Location.Bedroom)
+                {
+                    Hunger = 50;
+                    isHungerDepleted = false;
+                    NewUIManager.Instance.RenderPlayerStats();
+                }
+                else
+                {
+                    SceneTransitionManager.Instance.SwitchLocation(SceneTransitionManager.Location.Bedroom);
+                    Hunger = 50;
+                    isHungerDepleted = false;
+                    NewUIManager.Instance.RenderPlayerStats();
+                }
+            }
+            return;
+        }
+
+        // Normal hunger increase
         Hunger += restore;
         NewUIManager.Instance.RenderPlayerStats();
-        CheckHungerEnergy();
+
+        // Check if hunger just dropped to zero
+        if (Hunger <= 0)
+        {
+            isHungerDepleted = true; // Set flag when hunger reaches zero
+        }
     }
 
     // Method to check if the player has already played the mini-game
@@ -94,34 +178,5 @@ public class PlayerStats
     public static void ResetMiniGameStatus()
     {
         hasPlayedMiniGame = false;
-    }
-
-    private static void CheckHungerEnergy()
-    {
-        if (Stamina <= 0 || Hunger <= 0)
-        {
-            // Check if the player is already in the Bedroom if not transition to Bedroom scene
-            if (SceneTransitionManager.Instance.currentLocation != SceneTransitionManager.Location.Bedroom)
-            {
-                SceneTransitionManager.Instance.SwitchLocation(SceneTransitionManager.Location.Bedroom);
-            }
-
-            // Apply the medical pay logic based on which stat hit zero
-            if (Stamina <= 0)
-            {
-                Debug.Log("Game Over: Player has run out of energy");
-                MedicalPay.Instance.PayMedical("Stamina");
-                Stamina = 50;
-            }
-            else if (Hunger <= 0)
-            {
-                Debug.Log("Game Over: Player has run out of hunger.");
-                MedicalPay.Instance.PayMedical("Hunger");
-                Hunger = 50;
-            }
-
-            // Update UI after changes
-            NewUIManager.Instance.RenderPlayerStats();
-        }
     }
 }
