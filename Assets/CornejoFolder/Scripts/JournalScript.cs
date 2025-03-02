@@ -11,7 +11,8 @@ public class JournalScript : MonoBehaviour
     public Button seedsButton, guideButton, itemsButton;
     public GameObject seedsMenu, guideMenu, itemsMenu;
     public TMP_Text descriptionText;
-    
+    public Transform listingGrid;
+
     [System.Serializable]
     public class JournalEntry
     {
@@ -50,6 +51,17 @@ public class JournalScript : MonoBehaviour
     {
         //journalPanel.SetActive(!journalPanel.activeSelf);
 
+        descriptionText.text = "";
+
+        //Resets the listings if there was a previous one
+        if (listingGrid.childCount > 0)
+        {
+            foreach (Transform child in listingGrid)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
         bool isActive = !journalPanel.activeSelf;
         journalPanel.SetActive(isActive);
 
@@ -57,16 +69,21 @@ public class JournalScript : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            PlayerMove.isUIOpen = true;
         }
         else
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            PlayerMove.isUIOpen = false;
         }
     }
     
     void ShowMenu(GameObject menu, List<JournalEntry> entries, bool isGuide)
     {
+        // Clear the description text when changing menus
+        descriptionText.text = "";
+
         seedsMenu.SetActive(false);
         guideMenu.SetActive(false);
         itemsMenu.SetActive(false);
@@ -80,12 +97,16 @@ public class JournalScript : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        
+
         foreach (JournalEntry entry in entries)
         {
             Button newButton = Instantiate(entry.buttonPrefab, menu.transform);
             newButton.GetComponentInChildren<TMP_Text>().text = entry.name;
-            newButton.onClick.AddListener(() => ShowDescription(entry.itemData != null ? entry.itemData.description : "No description available"));
+
+            // Check if customDescription is not empty or null
+            string descriptionToShow = string.IsNullOrEmpty(entry.customDescription) ? entry.itemData.description : entry.customDescription;
+
+            newButton.onClick.AddListener(() => ShowDescription(descriptionToShow));
         }
     }
     
