@@ -12,6 +12,8 @@ public class PlayerMove : MonoBehaviour
     public Animator animator;
 
     public float speed = 5f;
+    public float runSpeed = 8f;
+    private float currentSpeed;
     public GameObject playerObject;
     public float turnSpeed = 180f;
     public Vector2 CurrentInput;
@@ -41,6 +43,7 @@ public class PlayerMove : MonoBehaviour
         animator = GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        currentSpeed = speed;
     }
 
     private void Update()
@@ -118,16 +121,23 @@ public class PlayerMove : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (Input.GetKey(KeyCode.LeftAlt)) return; 
-
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            currentSpeed = runSpeed;
+        }
+        else
+        {
+            currentSpeed = speed;
+        }
+        
         Vector3 movDir;
+        CurrentInput = new Vector2((currentSpeed) * Input.GetAxis("Vertical"), (currentSpeed) * Input.GetAxis("Horizontal"));
 
-        CurrentInput = new Vector2((speed) * Input.GetAxis("Vertical"), (speed) * Input.GetAxis("Horizontal"));
-
-        transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
-        movDir = transform.forward * Input.GetAxis("Vertical") * speed;
-
-        controller.Move(movDir * Time.deltaTime - Vector3.up * 0.1f);
+        if (!Input.GetKey(KeyCode.LeftAlt)) // Prevent rotation while LeftAlt is held
+        {
+            movDir = transform.forward * Input.GetAxis("Vertical") * currentSpeed;
+            controller.Move(movDir * Time.deltaTime - Vector3.up * 0.1f);
+        }
     }
 
     private void HandleFootstep()

@@ -69,6 +69,8 @@ public class Shop : MonoBehaviour
     {
         if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             StartConversation();
         }
     }
