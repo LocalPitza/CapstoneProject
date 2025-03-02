@@ -118,6 +118,8 @@ public class PlayerMove : MonoBehaviour
 
     private void HandleMovement()
     {
+        if (Input.GetKey(KeyCode.LeftAlt)) return; 
+
         Vector3 movDir;
 
         CurrentInput = new Vector2((speed) * Input.GetAxis("Vertical"), (speed) * Input.GetAxis("Horizontal"));
