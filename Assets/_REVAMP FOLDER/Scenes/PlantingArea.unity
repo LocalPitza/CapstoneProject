@@ -10632,7 +10632,7 @@ MonoBehaviour:
   guideUI: {fileID: 939571756}
   targetCamera: {fileID: 787361347}
   playerTag: Player
-  DoorAudio: 
+  DoorAudio: ApartmentDoor
   teleportSpeed: 0
 --- !u!1 &1256273089
 GameObject:
@@ -14032,6 +14032,148 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714713881}
   m_CullTransparentMesh: 1
+--- !u!1 &1720533680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1720533682}
+  - component: {fileID: 1720533681}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1720533681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720533680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1c4fe394afd92a429595ad3a11a6e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: BackAlleyShop
+    clips: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    outputGroup: {fileID: -1056694900011050246, guid: 68a9ec7773f61a0428eae285962fe168,
+      type: 2}
+  - name: ConvenienceStore
+    clips: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    outputGroup: {fileID: -1056694900011050246, guid: 68a9ec7773f61a0428eae285962fe168,
+      type: 2}
+  - name: ApartmentDoor
+    clips: {fileID: 8300000, guid: 127c3c7497262f34c9cc4e2feda1d0f0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    outputGroup: {fileID: -1056694900011050246, guid: 68a9ec7773f61a0428eae285962fe168,
+      type: 2}
+  - name: ConvenienceDoor
+    clips: {fileID: 8300000, guid: 9fae9bd9366e5994bb3d039daab7d676, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    outputGroup: {fileID: -1056694900011050246, guid: 68a9ec7773f61a0428eae285962fe168,
+      type: 2}
+  - name: MinigameJump
+    clips: {fileID: 8300000, guid: 480147e5713883143ac8d782c3c8961b, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    outputGroup: {fileID: -1056694900011050246, guid: 68a9ec7773f61a0428eae285962fe168,
+      type: 2}
+  - name: HarvestSFX
+    clips: {fileID: 8300000, guid: 005707df4d37900448465d1669d87146, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    outputGroup: {fileID: -1056694900011050246, guid: 68a9ec7773f61a0428eae285962fe168,
+      type: 2}
+  - name: DigSFX
+    clips: {fileID: 8300000, guid: 153bd92f27bf53c47b3b028527471317, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    outputGroup: {fileID: -1056694900011050246, guid: 68a9ec7773f61a0428eae285962fe168,
+      type: 2}
+  - name: WaterSFX
+    clips: {fileID: 8300000, guid: 7b7d72e116101514fb2c6011a95dec45, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    outputGroup: {fileID: -1056694900011050246, guid: 68a9ec7773f61a0428eae285962fe168,
+      type: 2}
+  - name: RemoveSFX
+    clips: {fileID: 8300000, guid: fc7e90344d850d142af4f3e8451325dd, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    outputGroup: {fileID: -1056694900011050246, guid: 68a9ec7773f61a0428eae285962fe168,
+      type: 2}
+  - name: ConsumeSFX
+    clips: {fileID: 8300000, guid: 9fae9bd9366e5994bb3d039daab7d676, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    outputGroup: {fileID: -1056694900011050246, guid: 68a9ec7773f61a0428eae285962fe168,
+      type: 2}
+  - name: MinigameLoseSFX
+    clips: {fileID: 8300000, guid: 720d95933e6c756469312bfc970d30e3, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    outputGroup: {fileID: -1056694900011050246, guid: 68a9ec7773f61a0428eae285962fe168,
+      type: 2}
+  - name: MinigameOutTimeSFX
+    clips: {fileID: 8300000, guid: 789949c27383eff49b2dd60a38cfa9d6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    outputGroup: {fileID: -1056694900011050246, guid: 68a9ec7773f61a0428eae285962fe168,
+      type: 2}
+  audioMixer: {fileID: 24100000, guid: 68a9ec7773f61a0428eae285962fe168, type: 2}
+--- !u!4 &1720533682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720533680}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 23.94491, y: -0.06903939, z: -29.561047}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1756784096
 GameObject:
   m_ObjectHideFlags: 0
@@ -17504,6 +17646,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 153162606}
+  - {fileID: 1720533682}
   - {fileID: 1137174767}
   - {fileID: 1644214072}
   - {fileID: 1048250489}
