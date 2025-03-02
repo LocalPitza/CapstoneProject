@@ -62,9 +62,13 @@ public class PlayerMove : MonoBehaviour
             }
             HandleMovement();
 
-            if (Input.GetButtonDown("Vertical"))
+            if (Input.GetButton("Vertical"))
             {
                 animator.SetBool("IsWalking", true);
+            }
+            else
+            {
+                animator.SetBool("IsWalking", false);
             }
         }
 
