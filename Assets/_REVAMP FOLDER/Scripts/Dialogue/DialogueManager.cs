@@ -37,6 +37,10 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueQueue = new Queue<DialogueLine>(dialogueLinesToQueue);
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        PlayerMove.isUIOpen = true;
+
         UpdateDialogue();
     }
 
@@ -83,6 +87,20 @@ public class DialogueManager : MonoBehaviour
 
         //Reset the Action
         onDialogueEnd = null;
+
+        // Check if the shop UI is still open
+        if (NewUIManager.Instance.IsShopOpen())
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            PlayerMove.isUIOpen = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            PlayerMove.isUIOpen = false;
+        }
     }
 
     public void Talk(string speaker, string messaage)

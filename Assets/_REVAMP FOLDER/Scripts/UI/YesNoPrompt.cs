@@ -16,7 +16,6 @@ public class YesNoPrompt : MonoBehaviour
     {
         this.onYesSelected = onYesSelected;
         promptText.text = message;
-        PlayerMove.isUIOpen = true;
     }
 
     public void Answer(bool yes)
@@ -29,6 +28,9 @@ public class YesNoPrompt : MonoBehaviour
         onYesSelected = null;
 
         gameObject.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         PlayerMove.isUIOpen = false;
     }
 }
