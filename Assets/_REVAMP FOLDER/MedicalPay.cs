@@ -28,6 +28,8 @@ public class MedicalPay : MonoBehaviour
     {
         Debug.Log($"Game Over! Cause: {cause}");
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         PlayerMove.isUIOpen = true;
 
         // Show the correct cause on the UI
@@ -43,6 +45,8 @@ public class MedicalPay : MonoBehaviour
     {
         medicalPayUI.SetActive(false);
 
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         PlayerMove.isUIOpen = false;
     }
 }

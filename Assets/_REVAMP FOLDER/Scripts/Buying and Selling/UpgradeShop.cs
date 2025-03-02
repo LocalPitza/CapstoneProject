@@ -18,6 +18,8 @@ public class UpgradeShop : MonoBehaviour
         if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
             upgradeStoreUI.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             PlayerMove.isUIOpen = true;
         }
     }
@@ -25,6 +27,8 @@ public class UpgradeShop : MonoBehaviour
     public void CloseUpgradeShop()
     {
         upgradeStoreUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         PlayerMove.isUIOpen = false;
     }
 }

@@ -69,8 +69,6 @@ public class Shop : MonoBehaviour
     {
         if (interactMessage != null && interactMessage.IsPlayerInRange() && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
             StartConversation();
         }
     }
@@ -97,8 +95,6 @@ public class Shop : MonoBehaviour
             {
                 DialogueManager.Instance.StartDialogue(npcData.defaultDialogue, ShopOpen);
             }
-
-            PlayerMove.isUIOpen = true;
         }
     }
 
@@ -115,6 +111,5 @@ public class Shop : MonoBehaviour
     void ShopOpen()
     {
         NewUIManager.Instance.OpenShop(shopItems);
-        PlayerMove.isUIOpen = true;
     }
 }
