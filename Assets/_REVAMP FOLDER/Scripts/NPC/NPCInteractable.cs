@@ -33,7 +33,7 @@ public class NPCInteractable : MonoBehaviour
     }
 
     void StartConversation()
-    {
+    { 
         int currentDay = TimeManager.Instance.CurrentDay;
         bool hasMetBefore = PlayerPrefs.GetInt(npcID, 0) == 1;
         bool isActivated = PlayerPrefs.GetInt(activatedKey, 0) == 1;
