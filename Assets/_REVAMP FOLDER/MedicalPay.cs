@@ -23,7 +23,6 @@ public class MedicalPay : MonoBehaviour
         }
 
     }
-    
 
     public void PayMedical(string cause)
     {
