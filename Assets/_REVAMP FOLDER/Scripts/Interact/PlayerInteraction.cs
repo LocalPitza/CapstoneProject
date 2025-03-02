@@ -18,8 +18,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] string unequipMessage;
 
     [Header("Harvesting Fruits")]
-    public TextMeshProUGUI message;
-
+    public TextMeshProUGUI message; 
     EquipmentData equipmentTool;
 
     void Start()
@@ -99,7 +98,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 FoodData foodData = handSlotItem as FoodData;
                 foodData.OnConsume();
-
+                FindObjectOfType<SoundManager>().Play("ConsumeSFX");
                 //Consume it
                 NewInventoryManager.Instance.ConsumeItem(NewInventoryManager.Instance.GetEquippedSlot(NewInventorySlot.InventoryType.Harvest));
             }
@@ -118,6 +117,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 // If the player is holding a seed, plant it
                 PlayerStats.UseStamina(5);
+                FindObjectOfType<SoundManager>().Play("HarvestSFX");
                 selectedSoil.Interact();
                 return;
             }
@@ -130,16 +130,19 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     case EquipmentData.ToolType.HandTrowel:
                         PlayerStats.UseStamina(5);
+                        FindObjectOfType<SoundManager>().Play("DigSFX");
                         selectedSoil.Interact();
                         break;
 
                     case EquipmentData.ToolType.WateringCan:
                         PlayerStats.UseStamina(5);
+                        FindObjectOfType<SoundManager>().Play("WaterSFX");
                         selectedSoil.Interact();
                         break;
 
                     case EquipmentData.ToolType.Hoe:
                         PlayerStats.UseStamina(5);
+                        FindObjectOfType<SoundManager>().Play("RemoveSFX");
                         selectedSoil.Interact();
                         break;
 
@@ -164,6 +167,7 @@ public class PlayerInteraction : MonoBehaviour
         if (NewInventoryManager.Instance.SlotEquipped(NewInventorySlot.InventoryType.Harvest))
         {
             NewInventoryManager.Instance.EquipToInventory(NewInventorySlot.InventoryType.Harvest);
+            FindObjectOfType<SoundManager>().Play("HarvestSFX");
             return;
         }
 
