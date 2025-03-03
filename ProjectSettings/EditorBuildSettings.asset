@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/_REVAMP FOLDER/Scenes/Bedroom.unity
     guid: 6cba070bb6e2f3e4ba7c3e496fdc3a54
   - enabled: 1
+    path: Assets/Scenes/NewBedroom.unity
+    guid: 5ce3d90fb29e3584f83a0947d1ab42d5
+  - enabled: 1
     path: Assets/_REVAMP FOLDER/Scenes/PlantingArea.unity
     guid: 4ffcff6eeca25b044adb7f870a1f78c3
   - enabled: 1

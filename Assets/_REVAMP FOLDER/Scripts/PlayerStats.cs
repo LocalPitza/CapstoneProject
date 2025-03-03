@@ -134,7 +134,7 @@ public class PlayerStats
                 isHungerDepleted = false;
 
                 // If already in Bedroom, restore Hunger immediately
-                if (SceneTransitionManager.Instance.currentLocation == SceneTransitionManager.Location.Bedroom)
+                if (SceneTransitionManager.Instance.currentLocation == SceneTransitionManager.Location.NewBedroom)
                 {
                     Hunger = 50;
                     isHungerDepleted = false;
@@ -142,7 +142,7 @@ public class PlayerStats
                 }
                 else
                 {
-                    SceneTransitionManager.Instance.SwitchLocation(SceneTransitionManager.Location.Bedroom);
+                    SceneTransitionManager.Instance.SwitchLocation(SceneTransitionManager.Location.NewBedroom);
                     Hunger = 50;
                     isHungerDepleted = false;
                     NewUIManager.Instance.RenderPlayerStats();

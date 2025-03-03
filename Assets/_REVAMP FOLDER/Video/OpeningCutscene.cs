@@ -49,7 +49,7 @@ public class OpeningCutscene : MonoBehaviour
         // Load the next scene using the loading manager
         if (loadingManager != null)
         {
-            string bedroom = SceneTransitionManager.Location.Bedroom.ToString();
+            string bedroom = SceneTransitionManager.Location.NewBedroom.ToString();
             loadingManager.LoadScene(bedroom);
         }
     }
