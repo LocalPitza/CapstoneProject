@@ -10,6 +10,7 @@ public class JournalScript : MonoBehaviour
     public Button openJournalButton;
     public Button seedsButton, guideButton, itemsButton;
     public GameObject seedsMenu, guideMenu, itemsMenu;
+    [TextArea(5, 5)]
     public TMP_Text descriptionText;
     public Transform listingGrid;
 
@@ -70,6 +71,9 @@ public class JournalScript : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             PlayerMove.isUIOpen = true;
+
+            // Show the SeedsMenu by default when opening the Journal
+            ShowMenu(seedsMenu, seedsList, false);
         }
         else
         {
