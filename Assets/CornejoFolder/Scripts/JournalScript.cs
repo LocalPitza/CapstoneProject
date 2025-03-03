@@ -10,7 +10,6 @@ public class JournalScript : MonoBehaviour
     public Button openJournalButton;
     public Button seedsButton, guideButton, itemsButton;
     public GameObject seedsMenu, guideMenu, itemsMenu;
-    [TextArea(5, 5)]
     public TMP_Text descriptionText;
     public Transform listingGrid;
 
@@ -19,6 +18,7 @@ public class JournalScript : MonoBehaviour
     {
         public string name;
         public ItemData itemData; // Use Scriptable Object for description
+        [TextArea(5, 5)]
         public string customDescription; 
         public Button buttonPrefab;
     }
