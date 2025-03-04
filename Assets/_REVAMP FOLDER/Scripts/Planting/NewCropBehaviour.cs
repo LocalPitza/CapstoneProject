@@ -81,8 +81,8 @@ public class NewCropBehaviour : MonoBehaviour
             SwitchState(CropState.Seedling);
         }
 
-        //Grow to seedling
-        if(growth >= maxGrowth && cropState == CropState.Seedling)
+        //Grow from seedling to harvestable
+        if (growth >= maxGrowth && cropState == CropState.Seedling)
         {
             SwitchState(CropState.Harvestable);
         }
@@ -117,7 +117,12 @@ public class NewCropBehaviour : MonoBehaviour
             case CropState.Seedling:
                 seedling.SetActive(true);
 
-                health = maxHealth;
+                if (this.health <= 0) //Only reset health if it's empty
+                {
+                    health = maxHealth;
+                }
+
+                //health = maxHealth;
 
                 break;
             case CropState.Harvestable:
@@ -155,11 +160,5 @@ public class NewCropBehaviour : MonoBehaviour
         int hoursToRegrow = GameTimeStamp.DaysToHours(seedToGrow.daysToGrow);
         growth = maxGrowth - GameTimeStamp.HoursToMinutes(hoursToRegrow);
         SwitchState(CropState.Seedling);
-    }
-
-    // Add this method inside NewCropBehaviour
-    public SeedData GetSeedData()
-    {
-        return seedToGrow;
     }
 }
