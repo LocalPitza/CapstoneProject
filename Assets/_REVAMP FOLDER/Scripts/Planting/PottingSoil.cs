@@ -144,6 +144,22 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
     {
         if (guideText == null) return;
 
+        if (cropPlanted != null)
+        {
+            if (cropPlanted.cropState == NewCropBehaviour.CropState.Harvestable)
+            {
+                potGuideUI.gameObject.SetActive(true);
+                guideText.text = "Glove to Harvest";
+                return;
+            }
+            else if (cropPlanted.cropState == NewCropBehaviour.CropState.Wilted)
+            {
+                potGuideUI.gameObject.SetActive(true);
+                guideText.text = "Hoe to Remove Plant";
+                return;
+            }
+        }
+
         switch (soilStatus)
         {
             case SoilStatus.Soil:
@@ -155,7 +171,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                 guideText.text = (cropPlanted != null) ? "Needs Water" : "Ready to Plant";
                 break;
             case SoilStatus.Watered:
-                guideText.text = "";
+                guideText.text = "Watered";
                 potGuideUI.gameObject.SetActive(false);
                 break;
             case SoilStatus.Weeds:
