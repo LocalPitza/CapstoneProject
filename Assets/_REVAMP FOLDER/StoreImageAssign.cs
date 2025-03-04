@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class StoreImageAssign : MonoBehaviour
 {
     public Image uiImage; // UI Image to update
-    public Sprite marketSprite, farmerSprite, storeSprite; // Sprites for each tag
+    public Sprite marketSprite, farmerSprite, storeSprite, chefSprite; // Sprites for each tag
     public Vector3 detectionBoxSize = new Vector3(2f, 2f, 2f); // Size of detection box
 
     private Dictionary<string, Sprite> spriteDictionary;
@@ -18,7 +18,8 @@ public class StoreImageAssign : MonoBehaviour
         {
             {"Market", marketSprite},
             {"Farmer", farmerSprite},
-            {"Store", storeSprite}
+            {"Store", storeSprite},
+            {"Chef", chefSprite}
         };
     }
 
@@ -35,7 +36,7 @@ public class StoreImageAssign : MonoBehaviour
 
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.CompareTag("Market") || hitCollider.CompareTag("Farmer") || hitCollider.CompareTag("Store"))
+            if (hitCollider.CompareTag("Market") || hitCollider.CompareTag("Farmer") || hitCollider.CompareTag("Store") || hitCollider.CompareTag("Chef"))
             {
                 detectedStore = hitCollider.gameObject;
                 break; // Stop once a store is found
