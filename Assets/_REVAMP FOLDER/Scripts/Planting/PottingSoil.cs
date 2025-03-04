@@ -1,10 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 using TMPro;
 
 public class PottingSoil : MonoBehaviour, ITimeTracker
 {
+    public Canvas potGuideUI; // Assign your Canvas in the Inspector
+    public CinemachineVirtualCamera targetCamera;
+    public TMP_Text guideText;
+
+    private Transform cameraTransform; // To store the camera's transform
+
     public int id;
 
     public enum SoilStatus
@@ -30,12 +35,34 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
     {
         renderer = GetComponent<Renderer>();
 
+        // Get the camera transform from the assigned Cinemachine Virtual Camera
+        if (targetCamera != null)
+        {
+            cameraTransform = targetCamera.transform;
+        }
+        else
+        {
+            Debug.LogError("No Cinemachine Virtual Camera assigned to PottingSoil!");
+        }
+
         //Default Material
         SwitchSoilStatus(SoilStatus.Soil);
 
         Select(false);
 
         TimeManager.Instance.RegisterTracker(this);
+    }
+
+    void LateUpdate()
+    {
+        if (potGuideUI != null && cameraTransform != null)
+        {
+            // Make the Canvas always face the Cinemachine Camera
+            potGuideUI.transform.LookAt(potGuideUI.transform.position + cameraTransform.forward);
+        }
+
+        // Update the text UI
+        UpdatePotGuideText();
     }
 
     public void LoadSoilData(SoilStatus statusToSwitch, GameTimeStamp lastwatered)
@@ -111,6 +138,31 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         }
 
         SoilManager.Instance.OnSoilStateChange(id, soilStatus, timeWatered);
+    }
+
+    private void UpdatePotGuideText()
+    {
+        if (guideText == null) return;
+
+        switch (soilStatus)
+        {
+            case SoilStatus.Soil:
+                potGuideUI.gameObject.SetActive(true);
+                guideText.text = "Hand Trowel to Dig";
+                break;
+            case SoilStatus.Digged:
+                potGuideUI.gameObject.SetActive(true);
+                guideText.text = (cropPlanted != null) ? "Needs Water" : "Ready to Plant";
+                break;
+            case SoilStatus.Watered:
+                guideText.text = "";
+                potGuideUI.gameObject.SetActive(false);
+                break;
+            case SoilStatus.Weeds:
+                potGuideUI.gameObject.SetActive(true);
+                guideText.text = "Hand Trowel to Remove Weed";
+                break;
+        }
     }
 
     public void Select(bool toggle)

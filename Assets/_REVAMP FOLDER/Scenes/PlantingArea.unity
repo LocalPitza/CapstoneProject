@@ -361,6 +361,11 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 977
       objectReference: {fileID: 0}
+    - target: {fileID: 6862517389137261450, guid: 89f6eff4e4d810b43a2ac8d154aee789,
+        type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 787361347}
     - target: {fileID: 9163682072395329088, guid: 89f6eff4e4d810b43a2ac8d154aee789,
         type: 3}
       propertyPath: plantingSeedsUI
@@ -1830,6 +1835,11 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 977
       objectReference: {fileID: 0}
+    - target: {fileID: 6862517389137261450, guid: 89f6eff4e4d810b43a2ac8d154aee789,
+        type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 787361347}
     - target: {fileID: 9163682072395329088, guid: 89f6eff4e4d810b43a2ac8d154aee789,
         type: 3}
       propertyPath: plantingSeedsUI
@@ -7901,6 +7911,11 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 977
       objectReference: {fileID: 0}
+    - target: {fileID: 6862517389137261450, guid: 89f6eff4e4d810b43a2ac8d154aee789,
+        type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 787361347}
     - target: {fileID: 9163682072395329088, guid: 89f6eff4e4d810b43a2ac8d154aee789,
         type: 3}
       propertyPath: plantingSeedsUI
@@ -7995,6 +8010,11 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 977
       objectReference: {fileID: 0}
+    - target: {fileID: 6862517389137261450, guid: 89f6eff4e4d810b43a2ac8d154aee789,
+        type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 787361347}
     - target: {fileID: 9163682072395329088, guid: 89f6eff4e4d810b43a2ac8d154aee789,
         type: 3}
       propertyPath: plantingSeedsUI
@@ -11409,6 +11429,11 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 977
       objectReference: {fileID: 0}
+    - target: {fileID: 6862517389137261450, guid: 89f6eff4e4d810b43a2ac8d154aee789,
+        type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 787361347}
     - target: {fileID: 9163682072395329088, guid: 89f6eff4e4d810b43a2ac8d154aee789,
         type: 3}
       propertyPath: plantingSeedsUI
@@ -13326,6 +13351,11 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 977
       objectReference: {fileID: 0}
+    - target: {fileID: 6862517389137261450, guid: 89f6eff4e4d810b43a2ac8d154aee789,
+        type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 787361347}
     - target: {fileID: 9163682072395329088, guid: 89f6eff4e4d810b43a2ac8d154aee789,
         type: 3}
       propertyPath: plantingSeedsUI
@@ -14328,6 +14358,11 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 977
       objectReference: {fileID: 0}
+    - target: {fileID: 6862517389137261450, guid: 89f6eff4e4d810b43a2ac8d154aee789,
+        type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 787361347}
     - target: {fileID: 9163682072395329088, guid: 89f6eff4e4d810b43a2ac8d154aee789,
         type: 3}
       propertyPath: plantingSeedsUI
@@ -17540,6 +17575,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 871914829}
+    - target: {fileID: 6862517389137261450, guid: 89f6eff4e4d810b43a2ac8d154aee789,
+        type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 787361347}
     - target: {fileID: 9222528886798265567, guid: 89f6eff4e4d810b43a2ac8d154aee789,
         type: 3}
       propertyPath: m_Name
