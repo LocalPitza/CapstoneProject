@@ -75,28 +75,30 @@ public class Shop : MonoBehaviour
 
     void StartConversation()
     {
-        if (npcData != null)
+        if (npcData == null)
         {
-            int currentDay = TimeManager.Instance.GetGameTimeStamp().day;
-            bool hasMetBefore = PlayerPrefs.GetInt(npcID, 0) == 1;
+            // If there's no NPCData, directly open the shop
+            ShopOpen();
+            return;
+        }
 
-            // Check if there is a special dialogue for this day
-            List<DialogueLine> specialDialogue = npcData.GetDialogueForDay(currentDay);
+        int currentDay = TimeManager.Instance.GetGameTimeStamp().day;
+        bool hasMetBefore = PlayerPrefs.GetInt(npcID, 0) == 1;
 
-            if (!hasMetBefore)
-            {
-                DialogueManager.Instance.StartDialogue(npcData.onFirstMeet, AfterFirstMeet);
-            }
-            else if (specialDialogue != null)
-            {
-                DialogueManager.Instance.StartDialogue(specialDialogue, ShopOpen);
-            }
-            else
-            {
-                DialogueManager.Instance.StartDialogue(npcData.defaultDialogue, ShopOpen);
-            }
+        // Check if there is a special dialogue for this day
+        List<DialogueLine> specialDialogue = npcData.GetDialogueForDay(currentDay);
 
-            PlayerMove.isUIOpen = true;
+        if (!hasMetBefore)
+        {
+            DialogueManager.Instance.StartDialogue(npcData.onFirstMeet, AfterFirstMeet);
+        }
+        else if (specialDialogue != null)
+        {
+            DialogueManager.Instance.StartDialogue(specialDialogue, ShopOpen);
+        }
+        else
+        {
+            DialogueManager.Instance.StartDialogue(npcData.defaultDialogue, ShopOpen);
         }
     }
 
@@ -113,6 +115,5 @@ public class Shop : MonoBehaviour
     void ShopOpen()
     {
         NewUIManager.Instance.OpenShop(shopItems);
-        PlayerMove.isUIOpen = true;
     }
 }

@@ -123,6 +123,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Saving\CropSaveState.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\SceneTransition\StartPoint.cs" />
     <Compile Include="Assets\Scripts\HomeDoor.cs" />
+    <Compile Include="Assets\CornejoFolder\Scripts\JournalScript.cs" />
     <Compile Include="Assets\Scripts\Sleep\DayCounter.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\MiniGameScore.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Time\ITimeTracker.cs" />

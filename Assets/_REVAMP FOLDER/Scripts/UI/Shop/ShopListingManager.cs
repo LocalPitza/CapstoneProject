@@ -134,5 +134,7 @@ public class ShopListingManager : MonoBehaviour
     {
         shopParent.SetActive(false);
         PlayerMove.isUIOpen = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     public Sound[] sounds;
 
     public static SoundManager instance;
+    public AudioMixer audioMixer;
    
     void Awake()
     {
@@ -28,7 +29,11 @@ public class SoundManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
-           
+
+            if (s.outputGroup != null)
+                s.source.outputAudioMixerGroup = s.outputGroup;
+            else
+                s.source.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master")[1]; 
         }
     }
 

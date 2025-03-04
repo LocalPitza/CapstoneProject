@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MedicalPay : MonoBehaviour
 {
@@ -23,18 +24,23 @@ public class MedicalPay : MonoBehaviour
         }
 
     }
-    
+
+    private void Update()
+    {
+        // Stop hunger decrease if medicalPrompt is active
+        if (medicalPayUI != null && medicalPayUI.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            PlayerMove.isUIOpen = true;
+        }
+    }
 
     public void PayMedical(string cause)
     {
         Debug.Log($"Game Over! Cause: {cause}");
 
-        PlayerMove.isUIOpen = true;
-
-        // Show the correct cause on the UI
         causeText.text = "Cause of medical emergency: " + cause;
-
-        // Activate the Medical UI
         medicalPayUI.SetActive(true);
 
         PlayerStats.Spend(medicalCost, "Failed to pay medical expenses");
@@ -44,6 +50,8 @@ public class MedicalPay : MonoBehaviour
     {
         medicalPayUI.SetActive(false);
 
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         PlayerMove.isUIOpen = false;
     }
 }

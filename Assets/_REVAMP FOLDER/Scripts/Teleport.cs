@@ -73,6 +73,7 @@ public class Teleport : MonoBehaviour
         // Check if the player is in the trigger and the F key is pressed
         if (playerInTrigger != null && Input.GetKeyDown(InputManager.Instance.interactKey))
         {
+            FindObjectOfType<SoundManager>().Play(DoorAudio);
             //FadeManager.Instance.SetFadeDuration(fadeDuration);
             //FadeManager.Instance.FadeIn();
             StartCoroutine(TeleportAfterFade());

@@ -25,6 +25,13 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
     void Start()
     {
         TimeManager.Instance.RegisterTracker(this);
+
+        // Ensure fade image is active and fully black at the start
+        fadeImage.gameObject.SetActive(true);
+        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1);
+
+        // Start fading to transparent
+        StartCoroutine(FadeIn());
     }
 
     private void Update()
