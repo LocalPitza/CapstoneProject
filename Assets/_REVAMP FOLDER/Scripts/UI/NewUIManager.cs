@@ -232,6 +232,10 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     {
         shopListingManager.gameObject.SetActive(true);
         shopListingManager.RenderShop(shopItems);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        PlayerMove.isUIOpen = true;
     }
 
     public bool IsShopOpen()
