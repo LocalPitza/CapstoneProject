@@ -26,6 +26,15 @@ public class NewCropBehaviour : MonoBehaviour
     }
     public CropState cropState;
 
+    public SeedData seedData => seedToGrow;
+
+    public int GetDaysLeftToHarvest()
+    {
+        if (seedToGrow == null) return 0; // Safety check
+        int daysLeft = Mathf.CeilToInt((maxGrowth - growth) / (float)GameTimeStamp.HoursToMinutes(24));
+        return Mathf.Max(daysLeft, 0);
+    }
+
     //Initialisation for the crop GameObject
     //Called when the player plants a seed
     public void Plant(int soilID, SeedData seedToGrow)

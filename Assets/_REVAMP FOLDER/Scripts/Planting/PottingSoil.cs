@@ -7,6 +7,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
     public Canvas potGuideUI; // Assign your Canvas in the Inspector
     public CinemachineVirtualCamera targetCamera;
     public TMP_Text guideText;
+    public TMP_Text plantInformtation;
 
     private Transform cameraTransform; // To store the camera's transform
 
@@ -63,6 +64,26 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
         // Update the text UI
         UpdatePotGuideText();
+        UpdatePlantInformation();
+    }
+
+    private void UpdatePlantInformation()
+    {
+        if (plantInformtation == null) return;
+
+        if (cropPlanted != null)
+        {
+            string plantName = cropPlanted.seedData != null ? cropPlanted.seedData.name.Replace(" Seed", "") : "Unknown";
+            int daysLeft = cropPlanted.GetDaysLeftToHarvest();
+
+            plantInformtation.text = $"{plantName}\nDays Left: {daysLeft} to Harvest";
+            plantInformtation.transform.parent.gameObject.SetActive(true); // Enable UI
+        }
+        else
+        {
+            plantInformtation.text = "";
+            plantInformtation.transform.parent.gameObject.SetActive(false); // Disable UI when no plant
+        }
     }
 
     public void LoadSoilData(SoilStatus statusToSwitch, GameTimeStamp lastwatered)
@@ -148,13 +169,11 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         {
             if (cropPlanted.cropState == NewCropBehaviour.CropState.Harvestable)
             {
-                potGuideUI.gameObject.SetActive(true);
                 guideText.text = "Glove to Harvest";
                 return;
             }
             else if (cropPlanted.cropState == NewCropBehaviour.CropState.Wilted)
             {
-                potGuideUI.gameObject.SetActive(true);
                 guideText.text = "Hoe to Remove Plant";
                 return;
             }
@@ -163,19 +182,15 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         switch (soilStatus)
         {
             case SoilStatus.Soil:
-                potGuideUI.gameObject.SetActive(true);
                 guideText.text = "Hand Trowel to Dig";
                 break;
             case SoilStatus.Digged:
-                potGuideUI.gameObject.SetActive(true);
                 guideText.text = (cropPlanted != null) ? "Needs Water" : "Ready to Plant";
                 break;
             case SoilStatus.Watered:
                 guideText.text = "Watered";
-                potGuideUI.gameObject.SetActive(false);
                 break;
             case SoilStatus.Weeds:
-                potGuideUI.gameObject.SetActive(true);
                 guideText.text = "Hand Trowel to Remove Weed";
                 break;
         }
@@ -262,9 +277,9 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
     {
         GameObject cropObject = Instantiate(cropPrefab, transform);
         cropObject.transform.position = plantPosition.position;
-
         cropPlanted = cropObject.GetComponent<NewCropBehaviour>();
 
+        UpdatePlantInformation();
         return cropPlanted;
     }
 
@@ -310,6 +325,8 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                 cropPlanted.Wither();
             }
         }
+
+        UpdatePlantInformation();
     }
 
     private void OnDestroy()
