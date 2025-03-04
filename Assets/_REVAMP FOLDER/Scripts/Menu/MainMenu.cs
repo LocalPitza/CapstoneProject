@@ -30,7 +30,7 @@ public class MainMenu : MonoBehaviour
     {
         if (loadingManager != null)
         {
-            string bedroom = SceneTransitionManager.Location.Bedroom.ToString();
+            string bedroom = SceneTransitionManager.Location.NewBedroom.ToString();
             loadingManager.LoadScene(bedroom, LoadGame);
 
         }

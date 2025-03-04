@@ -16,6 +16,8 @@ TagManager:
   - Market
   - Farmer
   - Store
+  - UpgradeStore
+  - Chef
   layers:
   - Default
   - TransparentFX
@@ -28,9 +30,9 @@ TagManager:
   - Player
   - MiniGame
   - Floor
-  - 
-  - 
-  - 
+  - Farmer
+  - Market
+  - Store
   - 
   - 
   - 

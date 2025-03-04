@@ -57,10 +57,6 @@ public class PlayerStats
 
     public static void UseStamina(int staminaLost)
     {
-        /*Stamina -= staminaLost;
-        NewUIManager.Instance.RenderPlayerStats();
-        CheckHungerEnergy();*/
-
         // If stamina is already zero and they attempt another action, trigger medical expense
         if (Stamina <= 0)
         {
@@ -74,7 +70,7 @@ public class PlayerStats
                 MedicalPay.Instance.PayMedical("Stamina");
 
                 // If already in Bedroom, restore Stamina immediately
-                if (SceneTransitionManager.Instance.currentLocation == SceneTransitionManager.Location.Bedroom)
+                if (SceneTransitionManager.Instance.currentLocation == SceneTransitionManager.Location.NewBedroom)
                 {
                     Stamina = 50;
                     isStaminaDepleted = false;
@@ -82,7 +78,7 @@ public class PlayerStats
                 }
                 else
                 {
-                    SceneTransitionManager.Instance.SwitchLocation(SceneTransitionManager.Location.Bedroom);
+                    SceneTransitionManager.Instance.SwitchLocation(SceneTransitionManager.Location.NewBedroom);
                     Stamina = 50;
                     isStaminaDepleted = false;
                     NewUIManager.Instance.RenderPlayerStats();
@@ -115,10 +111,6 @@ public class PlayerStats
 
     public static void HungerStat(int restore)
     {
-        /*Hunger += restore;
-        NewUIManager.Instance.RenderPlayerStats();
-        CheckHungerEnergy();*/
-
         // If hunger is already zero and player attempts another action, trigger medical expense
         if (Hunger <= 0)
         {
@@ -134,7 +126,7 @@ public class PlayerStats
                 isHungerDepleted = false;
 
                 // If already in Bedroom, restore Hunger immediately
-                if (SceneTransitionManager.Instance.currentLocation == SceneTransitionManager.Location.Bedroom)
+                if (SceneTransitionManager.Instance.currentLocation == SceneTransitionManager.Location.NewBedroom)
                 {
                     Hunger = 50;
                     isHungerDepleted = false;
@@ -142,7 +134,7 @@ public class PlayerStats
                 }
                 else
                 {
-                    SceneTransitionManager.Instance.SwitchLocation(SceneTransitionManager.Location.Bedroom);
+                    SceneTransitionManager.Instance.SwitchLocation(SceneTransitionManager.Location.NewBedroom);
                     Hunger = 50;
                     isHungerDepleted = false;
                     NewUIManager.Instance.RenderPlayerStats();
