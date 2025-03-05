@@ -36,7 +36,15 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.P))
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            //TimeManager.Instance.Tick();
+            
+            Sleep();
+
+        }
+
+        if (Input.GetKey(KeyCode.U))
         {
             TimeManager.Instance.Tick();
         }
@@ -93,12 +101,12 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
                 //Update the element in the array
                 cropData[i] = crop;
                 soilData[crop.soilID] = soil;
-            }
 
-            SoilManager.urbanFarmData.Item2.ForEach((CropSaveState crop) =>
-            {
-                Debug.LogWarning(crop.seedToGrow + "\n Health: " + crop.health + "\n Growth: " + crop.growth + "\n State: " + crop.cropState.ToString());
-            });
+                SoilManager.urbanFarmData.Item2.ForEach((CropSaveState crop) =>
+                {
+                    Debug.LogWarning(crop.seedToGrow + "\n Health: " + crop.health + "\n Growth: " + crop.growth + "\n State: " + crop.cropState.ToString());
+                });
+            }
         }
     }
 
@@ -114,9 +122,9 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
         PlayerStats.ResetMiniGameStatus();
 
-        SaveManager.Save(ExportSaveState());
+        //SaveManager.Save(ExportSaveState());
 
-        StartCoroutine(SleepSequence());
+        //StartCoroutine(SleepSequence());
     }
 
     private IEnumerator SleepSequence()
