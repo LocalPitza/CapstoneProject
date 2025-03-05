@@ -188,6 +188,12 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
     {
         if (guideText == null) return;
 
+        if (soilStatus == SoilStatus.Weeds)
+        {
+            guideText.text = "Hand Trowel to Remove Weeds";
+            return;
+        }
+
         if (cropPlanted != null)
         {
             if (cropPlanted.cropState == NewCropBehaviour.CropState.Harvestable)
@@ -213,9 +219,6 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
             case SoilStatus.Watered:
                 guideText.text = "Watered";
                 break;
-            case SoilStatus.Weeds:
-                guideText.text = "Hand Trowel to Remove Weed";
-                break;
         }
     }
 
@@ -236,6 +239,26 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
         EquipmentData equipmentTool = playerToolSlot as EquipmentData;
 
+        // If the soil is in the Weeds state, restrict interactions except removing weeds or removing plants
+        if (soilStatus == SoilStatus.Weeds)
+        {
+            if (equipmentTool != null)
+            {
+                if (equipmentTool.toolType == EquipmentData.ToolType.HandTrowel)
+                {
+                    SwitchSoilStatus(SoilStatus.Soil); // Remove weeds
+                    return;
+                }
+                else if (equipmentTool.toolType == EquipmentData.ToolType.Hoe && cropPlanted != null)
+                {
+                    Debug.Log("Remove Deadplant");
+                    cropPlanted.RemoveCrop(); // Allow removing a plant even if there are weeds
+                    return;
+                }
+            }
+            return;
+        }
+
         if (equipmentTool != null)
         {
             EquipmentData.ToolType toolType = equipmentTool.toolType;
@@ -243,24 +266,14 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
             switch (toolType)
             {
                 case EquipmentData.ToolType.HandTrowel:
-                    if (soilStatus == SoilStatus.Weeds)
+                    if (soilStatus == SoilStatus.Soil)
                     {
-                        // HandTrowel is used to remove weeds and turn soil back to Digged
-                        SwitchSoilStatus(SoilStatus.Digged);
-                    }
-                    else if (soilStatus == SoilStatus.Soil)
-                    {
-                        // HandTrowel is used to turn Soil into Digged
                         SwitchSoilStatus(SoilStatus.Digged);
                     }
                     break;
 
                 case EquipmentData.ToolType.WateringCan:
-                    if (soilStatus == SoilStatus.Weeds)
-                    {
-                        guideText.text = "Remove weeds first";
-                    }
-                    else if (soilStatus != SoilStatus.Soil) // Only water if soil is digged or already watered
+                    if (soilStatus == SoilStatus.Digged) // Ensure water only applies when digged
                     {
                         SwitchSoilStatus(SoilStatus.Watered);
                     }
@@ -282,16 +295,18 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
         SeedData seed = playerToolSlot as SeedData;
 
-        if (seed != null && soilStatus != SoilStatus.Soil && cropPlanted == null)
+        if (seed != null)
         {
-            SpawnCrop();
+            if (soilStatus != SoilStatus.Soil && cropPlanted == null)
+            {
+                SpawnCrop();
+                cropPlanted.Plant(id, seed);
 
-            cropPlanted.Plant(id, seed);
-
-            //Consumes the Item for planting
-            NewInventoryManager.Instance.ConsumeItem
-                (NewInventoryManager.Instance.GetEquippedSlot
-                (NewInventorySlot.InventoryType.Storage));
+                //Consumes the Item for planting
+                NewInventoryManager.Instance.ConsumeItem
+                    (NewInventoryManager.Instance.GetEquippedSlot
+                    (NewInventorySlot.InventoryType.Storage));
+            }
         }
     }
 
