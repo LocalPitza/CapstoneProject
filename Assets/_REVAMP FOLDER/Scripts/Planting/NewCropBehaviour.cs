@@ -166,7 +166,7 @@ public class NewCropBehaviour : MonoBehaviour
     {
         //Reset Growth
         //Get the regrowth time in hours
-        int hoursToRegrow = GameTimeStamp.DaysToHours(seedToGrow.daysToGrow);
+        int hoursToRegrow = GameTimeStamp.DaysToHours(seedToGrow.daysToRegrow);
         growth = maxGrowth - GameTimeStamp.HoursToMinutes(hoursToRegrow);
         SwitchState(CropState.Seedling);
     }

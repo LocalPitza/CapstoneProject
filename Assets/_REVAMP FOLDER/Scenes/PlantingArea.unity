@@ -7025,6 +7025,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: storageSlots.Array.data[5].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 70007a27a981dcb49aa61a02de856635,
+        type: 2}
     - target: {fileID: 1754433315907366489, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
       propertyPath: m_Mesh
