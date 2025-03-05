@@ -74,9 +74,32 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         if (cropPlanted != null)
         {
             string plantName = cropPlanted.seedData != null ? cropPlanted.seedData.name.Replace(" Seed", "") : "Unknown";
-            int daysLeft = cropPlanted.GetDaysLeftToHarvest();
 
-            plantInformtation.text = $"{plantName}\nDays Left: {daysLeft} to Harvest";
+            // Default text for the plant
+            plantInformtation.text = $"{plantName}";
+
+            if (cropPlanted.cropState == NewCropBehaviour.CropState.Wilted)
+            {
+                plantInformtation.text = "Dead Plant";
+            }
+            else if (soilStatus == SoilStatus.Watered)
+            {
+                // Show "Days Left to Harvest" when watered
+                int daysLeft = cropPlanted.GetDaysLeftToHarvest();
+                plantInformtation.text += $"\nDays Left to Harvest: {daysLeft}";
+                plantInformtation.text += "\nGrowing!";
+            }
+            else
+            {
+                // Show "Days Left to Wither" instead when NOT watered
+                if (cropPlanted.cropState != NewCropBehaviour.CropState.Seed) // Only for seedling or later
+                {
+                    int daysLeftToWither = cropPlanted.GetDaysLeftToWither();
+                    plantInformtation.text += $"\nDays Left to Wither: {Mathf.Max(daysLeftToWither, 0)}";
+                }
+                plantInformtation.text += "\nNot Growing!";
+            }
+
             plantInformtation.transform.parent.gameObject.SetActive(true); // Enable UI
         }
         else
@@ -235,8 +258,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                 case EquipmentData.ToolType.WateringCan:
                     if (soilStatus == SoilStatus.Weeds)
                     {
-                        //I willl make a UI for this to Notify the Player
-                        Debug.Log("Cannot water soil with weeds. Remove weeds first!");
+                        guideText.text = "Remove weeds first";
                     }
                     else if (soilStatus != SoilStatus.Soil) // Only water if soil is digged or already watered
                     {
@@ -295,7 +317,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                 cropPlanted.Grow();
             }
 
-            // Reset to Digged if watered for more than 22 hours
+            // Reset to Digged if watered for more than 23 hours
             if (hoursElapsed > 23)
             {
                 SwitchSoilStatus(SoilStatus.Digged);

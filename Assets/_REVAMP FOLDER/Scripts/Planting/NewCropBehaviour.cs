@@ -170,4 +170,9 @@ public class NewCropBehaviour : MonoBehaviour
         growth = maxGrowth - GameTimeStamp.HoursToMinutes(hoursToRegrow);
         SwitchState(CropState.Seedling);
     }
+
+    public int GetDaysLeftToWither()
+    {
+        return Mathf.CeilToInt(health / (float)GameTimeStamp.HoursToMinutes(24));
+    }
 }
