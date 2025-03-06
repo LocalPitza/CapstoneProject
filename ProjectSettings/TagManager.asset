@@ -18,6 +18,7 @@ TagManager:
   - Store
   - UpgradeStore
   - Chef
+  - Lights
   layers:
   - Default
   - TransparentFX

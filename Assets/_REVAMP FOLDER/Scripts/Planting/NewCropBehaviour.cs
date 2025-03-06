@@ -26,6 +26,15 @@ public class NewCropBehaviour : MonoBehaviour
     }
     public CropState cropState;
 
+    public SeedData seedData => seedToGrow;
+
+    public int GetDaysLeftToHarvest()
+    {
+        if (seedToGrow == null) return 0; // Safety check
+        int daysLeft = Mathf.CeilToInt((maxGrowth - growth) / (float)GameTimeStamp.HoursToMinutes(24));
+        return Mathf.Max(daysLeft, 0);
+    }
+
     //Initialisation for the crop GameObject
     //Called when the player plants a seed
     public void Plant(int soilID, SeedData seedToGrow)
@@ -81,8 +90,8 @@ public class NewCropBehaviour : MonoBehaviour
             SwitchState(CropState.Seedling);
         }
 
-        //Grow to seedling
-        if(growth >= maxGrowth && cropState == CropState.Seedling)
+        //Grow from seedling to harvestable
+        if (growth >= maxGrowth && cropState == CropState.Seedling)
         {
             SwitchState(CropState.Harvestable);
         }
@@ -117,7 +126,12 @@ public class NewCropBehaviour : MonoBehaviour
             case CropState.Seedling:
                 seedling.SetActive(true);
 
-                health = maxHealth;
+                if (this.health <= 0) //Only reset health if it's empty
+                {
+                    health = maxHealth;
+                }
+
+                //health = maxHealth;
 
                 break;
             case CropState.Harvestable:
@@ -152,14 +166,13 @@ public class NewCropBehaviour : MonoBehaviour
     {
         //Reset Growth
         //Get the regrowth time in hours
-        int hoursToRegrow = GameTimeStamp.DaysToHours(seedToGrow.daysToGrow);
+        int hoursToRegrow = GameTimeStamp.DaysToHours(seedToGrow.daysToRegrow);
         growth = maxGrowth - GameTimeStamp.HoursToMinutes(hoursToRegrow);
         SwitchState(CropState.Seedling);
     }
 
-    // Add this method inside NewCropBehaviour
-    public SeedData GetSeedData()
+    public int GetDaysLeftToWither()
     {
-        return seedToGrow;
+        return Mathf.CeilToInt(health / (float)GameTimeStamp.HoursToMinutes(24));
     }
 }

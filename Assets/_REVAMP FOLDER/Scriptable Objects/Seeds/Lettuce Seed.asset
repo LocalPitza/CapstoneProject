@@ -15,7 +15,7 @@ MonoBehaviour:
   description: 'Lettuce Seed
 
 '
-  thumbnail: {fileID: 21300000, guid: fd521548722ed8542ae1574e4194c91e, type: 3}
+  thumbnail: {fileID: 21300000, guid: 69d986779c51eb64aa349add1db14223, type: 3}
   gameModel: {fileID: 0}
   itemType: 0
   cost: 25
