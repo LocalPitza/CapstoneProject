@@ -17,6 +17,7 @@ public class InteractableObject : MonoBehaviour
         Debug.Log("Harvest Plant");
         //Move Item from Equipped to Inventory
         NewInventoryManager.Instance.EquipHandSlot(item);
+        NewUIManager.Instance.RenderInventory();
         //NewInventoryManager.Instance.RenderHand();
 
         Destroy(gameObject);
