@@ -71,12 +71,14 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\WorkTimer.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\StorageInteract.cs" />
     <Compile Include="Assets\Scripts\Planting\Harvestable.cs" />
+    <Compile Include="Assets\CornejoFolder\Scripts\LoadNextScene.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\GameOver.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Teleport.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Interact\InteractableObject.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\SeedData.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Work\IncreaseScore.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\NewHandInventorySlot.cs" />
+    <Compile Include="Assets\CornejoFolder\Scripts\AudioFadeIn.cs" />
     <Compile Include="Assets\Scripts\Bars\HungerBar.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Planting\NewCropBehaviour.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Inventory\ItemData.cs" />
