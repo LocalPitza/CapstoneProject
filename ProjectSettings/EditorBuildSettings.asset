@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/OpeningGameScene.unity
     guid: 93b07128560cbb14e97dbdef871d6efe
   - enabled: 1
-    path: Assets/_REVAMP FOLDER/Scenes/NewMenu.unity
+    path: Assets/Scenes/NewMenu.unity
     guid: a52ff1b3391610d4583c4c636c03d1b2
   - enabled: 1
-    path: Assets/_REVAMP FOLDER/Scenes/OpeningCutscene.unity
+    path: Assets/Scenes/OpeningCutscene.unity
     guid: cc194503d2977204781bc291492accf9
   - enabled: 1
     path: Assets/Scenes/NewBedroom.unity
