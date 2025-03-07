@@ -367,8 +367,8 @@ MonoBehaviour:
   farmerSprite: {fileID: 21300000, guid: f7e40aa7ade67d9459576c3e53266780, type: 3}
   storeSprite: {fileID: 21300000, guid: 4806f7f97e1da7849b8d0f93e3cda4dc, type: 3}
   chefSprite: {fileID: 21300000, guid: ec3480c91811b87448dc8c8c32d055ba, type: 3}
-  detectionBoxSize: {x: 1, y: 0, z: 1}
-  detectionBoxCenter: {x: 0, y: 1, z: 0}
+  detectionBoxSize: {x: 1, y: 1, z: 1}
+  detectionBoxCenter: {x: 0, y: 0.65, z: 0}
 --- !u!1 &922429360876047269
 GameObject:
   m_ObjectHideFlags: 0
