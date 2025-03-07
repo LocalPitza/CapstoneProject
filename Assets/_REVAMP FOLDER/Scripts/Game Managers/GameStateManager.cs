@@ -36,7 +36,7 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        /*if(Input.GetKeyDown(KeyCode.P))
         {
             //TimeManager.Instance.Tick();
             
@@ -47,7 +47,7 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
         if (Input.GetKey(KeyCode.U))
         {
             TimeManager.Instance.Tick();
-        }
+        }*/
     }
 
     public void ClockUpdate(GameTimeStamp timestamp)
@@ -58,7 +58,7 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
     void UpdateFarmState(GameTimeStamp timestamp)
     {
         //Updates the Land and Crop Save states as long as the player is outside of the PlantingArea scene
-        if(SceneTransitionManager.Instance.currentLocation != SceneTransitionManager.Location.PlantingArea)
+        if(SceneTransitionManager.Instance.currentLocation != SceneTransitionManager.Location.MainGame)
         {
             if (SoilManager.urbanFarmData == null)
             {
@@ -122,9 +122,9 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
         PlayerStats.ResetMiniGameStatus();
 
-        //SaveManager.Save(ExportSaveState());
+        SaveManager.Save(ExportSaveState());
 
-        //StartCoroutine(SleepSequence());
+        StartCoroutine(SleepSequence());
     }
 
     private IEnumerator SleepSequence()
