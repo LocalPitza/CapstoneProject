@@ -19,6 +19,7 @@ TagManager:
   - UpgradeStore
   - Chef
   - Lights
+  - TargetCam
   layers:
   - Default
   - TransparentFX

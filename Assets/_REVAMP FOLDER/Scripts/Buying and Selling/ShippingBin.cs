@@ -47,5 +47,6 @@ public class ShippingBin : MonoBehaviour
             Debug.Log($"In the shipping bin: {harvest.itemData.name} x {harvest.quantity}");
         }
 
+        NewUIManager.Instance.RenderInventory();
     }
 }

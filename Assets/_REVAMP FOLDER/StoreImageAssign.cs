@@ -8,9 +8,11 @@ public class StoreImageAssign : MonoBehaviour
     public Image uiImage; // UI Image to update
     public Sprite marketSprite, farmerSprite, storeSprite, chefSprite; // Sprites for each tag
     public Vector3 detectionBoxSize = new Vector3(2f, 2f, 2f); // Size of detection box
+    public Vector3 detectionBoxCenter = Vector3.zero; // Center offset of the detection box
 
     private Dictionary<string, Sprite> spriteDictionary;
     private GameObject detectedStore; // Stores the currently detected store
+
 
     private void Start()
     {
@@ -63,6 +65,6 @@ public class StoreImageAssign : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position, detectionBoxSize);
+        Gizmos.DrawWireCube(transform.position + detectionBoxCenter, detectionBoxSize);
     }
 }
