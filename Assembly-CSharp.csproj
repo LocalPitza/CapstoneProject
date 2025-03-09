@@ -99,6 +99,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\SoilManager.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\YesNoPrompt.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Buying and Selling\Shop.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\CursorManager.cs" />
     <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Time\GameTimeStamp.cs" />

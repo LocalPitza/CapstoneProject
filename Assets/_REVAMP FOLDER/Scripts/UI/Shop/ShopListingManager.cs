@@ -133,8 +133,6 @@ public class ShopListingManager : MonoBehaviour
     public void CloseShop()
     {
         shopParent.SetActive(false);
-        PlayerMove.isUIOpen = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        CursorManager.Instance.UIClosed();
     }
 }
