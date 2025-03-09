@@ -10,6 +10,8 @@ public class JournalScript : MonoBehaviour
     public Button openJournalButton;
     public Button seedsButton, guideButton, itemsButton;
     public GameObject seedsMenu, guideMenu, itemsMenu;
+
+    public Image itemIcon;
     public TMP_Text descriptionText;
     public Transform listingGrid;
 
@@ -18,7 +20,7 @@ public class JournalScript : MonoBehaviour
     {
         public string name;
         public ItemData itemData; // Use Scriptable Object for description
-        [TextArea(5, 5)]
+        [TextArea(5,5)]
         public string customDescription; 
         public Button buttonPrefab;
     }
@@ -85,8 +87,9 @@ public class JournalScript : MonoBehaviour
     
     void ShowMenu(GameObject menu, List<JournalEntry> entries, bool isGuide)
     {
-        // Clear the description text when changing menus
+        // Clear the description text and Icon when changing menus
         descriptionText.text = "";
+        itemIcon.gameObject.SetActive(false);
 
         seedsMenu.SetActive(false);
         guideMenu.SetActive(false);
@@ -107,15 +110,17 @@ public class JournalScript : MonoBehaviour
             Button newButton = Instantiate(entry.buttonPrefab, menu.transform);
             newButton.GetComponentInChildren<TMP_Text>().text = entry.name;
 
-            // Check if customDescription is not empty or null
             string descriptionToShow = string.IsNullOrEmpty(entry.customDescription) ? entry.itemData.description : entry.customDescription;
+            Sprite iconToShow = entry.itemData.thumbnail; // Get the thumbnail
 
-            newButton.onClick.AddListener(() => ShowDescription(descriptionToShow));
+            newButton.onClick.AddListener(() => ShowDescription(descriptionToShow, iconToShow));
         }
     }
-    
-    void ShowDescription(string text)
+
+    void ShowDescription(string text, Sprite icon)
     {
         descriptionText.text = text;
+        itemIcon.sprite = icon;
+        itemIcon.gameObject.SetActive(icon != null); // Hide if no icon
     }
 }
