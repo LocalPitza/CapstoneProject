@@ -90,6 +90,9 @@ public class Teleport : MonoBehaviour
         // Teleport the player
         TeleportPlayer();
 
+        // Wait for 1 second while the screen stays black
+        yield return new WaitForSeconds(1.5f);
+
         // Start fade in
         yield return GameStateManager.Instance.FadeIn();
 
