@@ -1033,10 +1033,6 @@
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.Burst.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1143,10 +1139,6 @@
     </Reference>
     <Reference Include="Autodesk.Fbx">
       <HintPath>Library\ScriptAssemblies\Autodesk.Fbx.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
