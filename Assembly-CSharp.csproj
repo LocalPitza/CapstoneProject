@@ -148,6 +148,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\Shop\ShopListing.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Saving\GameSaveState.cs" />
     <Compile Include="Assets\Scripts\Planting\UI\UIManager.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\ClosePassivePrompt.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Planting\RegrowableHarvestBehaviour.cs" />
     <Compile Include="Assets\CornejoFolder\Scripts\LightController.cs" />
     <Compile Include="Assets\Scripts\PopupTrigger.cs" />
