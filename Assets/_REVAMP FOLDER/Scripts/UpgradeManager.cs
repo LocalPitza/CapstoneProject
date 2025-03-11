@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,8 +6,48 @@ using UnityEngine.SceneManagement;
 public class UpgradeManager : MonoBehaviour
 {
     public string upgradeKeyPrefix = "Upgrade_"; // Prefix for PlayerPrefs keys
-    public List<GameObject> managedObjects; // List of objects to manage
+    public List<GameObject> managedObjects; // List of base objects
+    public List<GameObject> upgradedObjects; // List of upgraded versions
     public int upgradeCost = 500;
+
+    private Dictionary<GameObject, GameObject> upgradeMap = new Dictionary<GameObject, GameObject>();
+
+    void Awake()
+    {
+        if (managedObjects.Count != upgradedObjects.Count)
+        {
+            Debug.LogError("Managed Objects and Upgraded Objects lists must be the same length!");
+            return;
+        }
+
+        // Populate dictionary with original → upgraded object mapping
+        for (int i = 0; i < managedObjects.Count; i++)
+        {
+            GameObject oldObject = managedObjects[i];
+            GameObject newObject = upgradedObjects[i];
+
+            if (newObject != null)
+            {
+                if (oldObject != null)
+                {
+                    upgradeMap[oldObject] = newObject;
+                    oldObject.SetActive(true); // Keep original active initially
+                }
+                else
+                {
+                    // No old object, but a new object exists
+                    upgradeMap[null] = newObject;
+                }
+
+                newObject.SetActive(false); // Disable upgrades at start
+            }
+        }
+    }
+
+    void Start()
+    {
+        LoadUpgrades();
+    }
 
     void Update()
     {
@@ -17,70 +57,55 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    public void EnableUpgrade(GameObject targetObject)
+    public void EnableUpgrade(GameObject oldObject, GameObject newObject)
     {
         if (PlayerStats.Money < upgradeCost)
         {
             Debug.LogWarning("Not enough money to purchase this upgrade!");
-            return; // Exit if the player cannot afford the upgrade
+            return;
         }
 
-        string objectKey = upgradeKeyPrefix + targetObject.name; // Use the object's name for saving
+        if (newObject == null)
+        {
+            Debug.LogError("Cannot upgrade! No upgraded GameObject assigned.");
+            return;
+        }
 
-        // Deduct money and enable the upgrade
+        string objectKey = upgradeKeyPrefix + (oldObject != null ? oldObject.name : newObject.name);
+
         PlayerStats.Spend(upgradeCost);
-
         PlayerPrefs.SetInt(objectKey, 1);
         PlayerPrefs.Save();
 
-        if (targetObject != null)
+        if (oldObject != null)
         {
-            targetObject.SetActive(true); // Enable the object
+            oldObject.SetActive(false); // ✅ Disable old object
         }
-        else
-        {
-            Debug.LogWarning("Target GameObject is null or missing!");
-        }
+
+        newObject.SetActive(true); // ✅ Always activate new object
+        Debug.Log($"Upgraded to {newObject.name}");
     }
 
     public void LoadUpgrades()
     {
-        foreach (GameObject obj in managedObjects)
+        foreach (var pair in upgradeMap)
         {
-            if (obj != null)
+            GameObject oldObject = pair.Key;
+            GameObject newObject = pair.Value;
+
+            string objectKey = upgradeKeyPrefix + (oldObject != null ? oldObject.name : newObject.name);
+            bool isUpgraded = PlayerPrefs.GetInt(objectKey, 0) == 1;
+
+            if (oldObject != null)
             {
-                string objectKey = upgradeKeyPrefix + obj.name;
-                if (PlayerPrefs.GetInt(objectKey, 0) == 1)
-                {
-                    obj.SetActive(true); // Enable upgraded object
-                }
-                else
-                {
-                    obj.SetActive(false); // Disable by default
-                }
+                oldObject.SetActive(!isUpgraded); // ✅ Disable if upgraded
             }
-            else
+
+            if (newObject != null)
             {
-                Debug.LogWarning("One of the managed GameObjects is null.");
+                newObject.SetActive(isUpgraded); // ✅ Activate if upgraded
             }
         }
-    }
-
-    private void Awake()
-    {
-        // Disable all managed objects immediately when the scene is loaded
-        foreach (GameObject obj in managedObjects)
-        {
-            if (obj != null)
-            {
-                obj.SetActive(false); // Disable by default
-            }
-        }
-    }
-
-    private void Start()
-    {
-        LoadUpgrades(); // Re-enable purchased objects
     }
 
     void ClearAllPlayerPrefs()
