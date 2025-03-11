@@ -39,6 +39,8 @@ public class SceneTransitionManager : MonoBehaviour
 
     private IEnumerator TransitionToLocation(Location locationToSwitch)
     {
+        PlayerMove.isUIOpen = true;
+
         // Trigger fade-out
         yield return GameStateManager.Instance.FadeOut();
 
@@ -56,8 +58,12 @@ public class SceneTransitionManager : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(1.5f);
+
         // Fade-in after the scene is loaded
         yield return GameStateManager.Instance.FadeIn();
+
+        PlayerMove.isUIOpen = false;
     }
 
     //Called when a scene is loaded

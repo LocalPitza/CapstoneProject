@@ -40,9 +40,7 @@ public class MiniGameManager : MonoBehaviour
     public void OpenMiniGameUI()
     {
         isMiniGameActive = false;
-        PlayerMove.isUIOpen = true;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        CursorManager.Instance.UIOpened();
         StartCoroutine(PlayVideoBeforeMinigame());
     }
 
@@ -143,9 +141,7 @@ public class MiniGameManager : MonoBehaviour
     public void CloseMiniGame()
     {
         miniGameParent.SetActive(false);
-        PlayerMove.isUIOpen = false;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        CursorManager.Instance.UIClosed();
         StartCoroutine(PlayClosingVideo());
     }
 

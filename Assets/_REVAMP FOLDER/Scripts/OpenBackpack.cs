@@ -21,8 +21,6 @@ public class OpenBackpack : MonoBehaviour
                 panel.SetActive(false);
             }
         }
-
-        UpdateCursorState(false);
         UpdateBagIcon(); // Set initial icon
     }
     private void Update()
@@ -45,25 +43,19 @@ public class OpenBackpack : MonoBehaviour
             }
         }
 
-        PlayerMove.isUIOpen = isOpen;
-        NewUIManager.Instance.RenderInventory();
-        UpdateCursorState(isOpen);
-        UpdateBagIcon(); // Update bag image
-    }
-
-    private void UpdateCursorState(bool isUIOpen)
-    {
-        if (isUIOpen)
+        if (isOpen)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            CursorManager.Instance.UIOpened(); // Notify UI Manager when opened
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            CursorManager.Instance.UIClosed(); // Notify UI Manager when closed
         }
+
+        NewUIManager.Instance.RenderInventory();
+        UpdateBagIcon(); // Update bag image
     }
+
 
     private void UpdateBagIcon()
     {

@@ -174,9 +174,7 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     {
         yesNoPrompt.gameObject.SetActive(true);
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        PlayerMove.isUIOpen = true;
+        CursorManager.Instance.UIOpened();
 
         yesNoPrompt.CreatePrompt(message, onYesCallBack);
     }
@@ -233,9 +231,7 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         shopListingManager.gameObject.SetActive(true);
         shopListingManager.RenderShop(shopItems);
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        PlayerMove.isUIOpen = true;
+        CursorManager.Instance.UIOpened();
     }
 
     public bool IsShopOpen()

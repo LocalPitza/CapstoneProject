@@ -70,18 +70,14 @@ public class JournalScript : MonoBehaviour
 
         if (isActive)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            PlayerMove.isUIOpen = true;
+            CursorManager.Instance.UIOpened();
 
             // Show the SeedsMenu by default when opening the Journal
             ShowMenu(seedsMenu, seedsList, false);
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            PlayerMove.isUIOpen = false;
+            CursorManager.Instance.UIClosed();
         }
     }
     

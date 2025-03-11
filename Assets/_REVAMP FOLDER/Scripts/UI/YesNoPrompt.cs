@@ -29,8 +29,6 @@ public class YesNoPrompt : MonoBehaviour
 
         gameObject.SetActive(false);
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        PlayerMove.isUIOpen = false;
+        CursorManager.Instance.UIClosed();
     }
 }

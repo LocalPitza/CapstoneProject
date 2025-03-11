@@ -30,9 +30,7 @@ public class MedicalPay : MonoBehaviour
         // Stop hunger decrease if medicalPrompt is active
         if (medicalPayUI != null && medicalPayUI.activeSelf)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            PlayerMove.isUIOpen = true;
+            CursorManager.Instance.UIOpened();
         }
     }
 
@@ -50,8 +48,6 @@ public class MedicalPay : MonoBehaviour
     {
         medicalPayUI.SetActive(false);
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        PlayerMove.isUIOpen = false;
+        CursorManager.Instance.UIClosed();
     }
 }

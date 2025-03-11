@@ -47,8 +47,7 @@ public class GameOver : MonoBehaviour
 
         gameOverCauseText.text = $"Game Over: {cause}";
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        CursorManager.Instance.UIOpened();
         Time.timeScale = 0f;
     }
 

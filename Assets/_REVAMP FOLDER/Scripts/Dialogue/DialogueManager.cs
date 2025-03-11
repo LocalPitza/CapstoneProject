@@ -37,9 +37,7 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueQueue = new Queue<DialogueLine>(dialogueLinesToQueue);
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        PlayerMove.isUIOpen = true;
+        CursorManager.Instance.UIOpened();
 
         UpdateDialogue();
     }
@@ -91,15 +89,11 @@ public class DialogueManager : MonoBehaviour
         // Check if the shop UI is still open
         if (NewUIManager.Instance.IsShopOpen())
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            PlayerMove.isUIOpen = true;
+            CursorManager.Instance.UIOpened();
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            PlayerMove.isUIOpen = false;
+            CursorManager.Instance.UIClosed();
         }
     }
 
