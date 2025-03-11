@@ -70,12 +70,10 @@ public class Teleport : MonoBehaviour
             }
         }
 
-        // Check if the player is in the trigger and the F key is pressed
-        if (playerInTrigger != null && Input.GetKeyDown(InputManager.Instance.interactKey))
+        // Prevent teleportation if the screen is fading
+        if (playerInTrigger != null && Input.GetKeyDown(InputManager.Instance.interactKey) && !GameStateManager.Instance.IsFading)
         {
             FindObjectOfType<SoundManager>().Play(DoorAudio);
-            //FadeManager.Instance.SetFadeDuration(fadeDuration);
-            //FadeManager.Instance.FadeIn();
             StartCoroutine(TeleportAfterFade());
         }
     }  

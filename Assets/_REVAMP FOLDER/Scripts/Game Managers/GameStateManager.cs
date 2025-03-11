@@ -7,6 +7,8 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 {
     public static GameStateManager Instance { get; private set; }
 
+    public bool IsFading { get; private set; } = false;
+
     public Image fadeImage;
     public float fadeDuration = 1.0f;
 
@@ -127,19 +129,9 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
         StartCoroutine(SleepSequence());
     }
 
-    private IEnumerator SleepSequence()
-    {
-        // Trigger fade-out
-        yield return FadeOut();
-
-        PlayerStats.RestoreStamina(100);
-
-        // Trigger fade-in
-        yield return FadeIn();
-    }
-
     public IEnumerator FadeOut()
     {
+        IsFading = true; // Prevent interaction
         fadeImage.gameObject.SetActive(true);
         yield return StartCoroutine(Fade(0, 1));
     }
@@ -148,6 +140,14 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
     {
         yield return StartCoroutine(Fade(1, 0));
         fadeImage.gameObject.SetActive(false);
+        IsFading = false; // Re-enable interaction
+    }
+
+    private IEnumerator SleepSequence()
+    {
+        yield return FadeOut();
+        PlayerStats.RestoreStamina(100);
+        yield return FadeIn();
     }
 
     private IEnumerator Fade(float startAlpha, float endAlpha)
