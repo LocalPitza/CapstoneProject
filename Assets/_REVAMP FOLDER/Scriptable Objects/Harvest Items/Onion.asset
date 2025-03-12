@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Onion Vegetable
   thumbnail: {fileID: 21300000, guid: 2e65d44a54b6dfa48a8dd94753295bd6, type: 3}
-  gameModel: {fileID: 8199270299260257011, guid: 75ec6556f4f1a764cbe7771c02b68e4b,
+  gameModel: {fileID: 4862280906125729891, guid: 78beb700f17ae35408b6969b72e55d13,
     type: 3}
   itemType: 1
   cost: 50
