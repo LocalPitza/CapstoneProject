@@ -246,7 +246,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
             {
                 if (equipmentTool.toolType == EquipmentData.ToolType.HandTrowel)
                 {
-                    SwitchSoilStatus(SoilStatus.Soil); // Remove weeds
+                    SwitchSoilStatus(SoilStatus.Digged); // Remove weeds
                     return;
                 }
                 else if (equipmentTool.toolType == EquipmentData.ToolType.Hoe && cropPlanted != null)
