@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ApartmentRent : MonoBehaviour, ITimeTracker
 {
     [SerializeField] private int rentMin = 500; // Minimum rent
     [SerializeField] private int rentMax = 1000; // Maximum rent
-    [Range(2,30)]
+    [Range(2, 30)]
     [SerializeField] private int dayOfRent = 30;
+
+    public GameObject rentPrompt;
+    public TextMeshProUGUI rentText;
+
     private int lastProcessedDay = 0;
 
     void Start()
@@ -45,7 +50,19 @@ public class ApartmentRent : MonoBehaviour, ITimeTracker
         // Deduct the rent amount from the player's money
         PlayerStats.Spend(rentAmount, "Failed to pay rent");
 
+        rentText.text = "Pay rent: " + rentAmount;
+        rentPrompt.SetActive(true);
+
+        CursorManager.Instance.UIOpened();
+
         // Log the rent for debugging purposes
         Debug.LogWarning($"Rent day! {rentAmount}{PlayerStats.CURRENCY} has been deducted for rent. Remaining Money: {PlayerStats.Money}{PlayerStats.CURRENCY}");
+    }
+
+    public void CloseRentPrompt()
+    {
+        rentPrompt.SetActive(false);
+
+        CursorManager.Instance.UIClosed();
     }
 }

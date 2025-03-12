@@ -25,21 +25,14 @@ public class MedicalPay : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        // Stop hunger decrease if medicalPrompt is active
-        if (medicalPayUI != null && medicalPayUI.activeSelf)
-        {
-            CursorManager.Instance.UIOpened();
-        }
-    }
-
     public void PayMedical(string cause)
     {
         Debug.Log($"Game Over! Cause: {cause}");
 
         causeText.text = "Cause of medical emergency: " + cause;
         medicalPayUI.SetActive(true);
+
+        CursorManager.Instance.UIOpened();
 
         PlayerStats.Spend(medicalCost, "Failed to pay medical expenses");
     }

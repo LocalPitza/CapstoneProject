@@ -48,7 +48,8 @@ public class PauseMenu : MonoBehaviour
         if (loadingManager != null)
         {
             loadingManager.LoadScene("NewMenu");
-            PlayerMove.isUIOpen = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 

@@ -61,9 +61,8 @@ public class LocationEntryPoint : MonoBehaviour
 
     void ChangeScene()
     {
-        if (playerInsideTrigger && Input.GetKeyDown(InputManager.Instance.interactKey))
+        if (playerInsideTrigger && Input.GetKeyDown(InputManager.Instance.interactKey) && !GameStateManager.Instance.IsFading)
         {
-            //Debug.Log("Switching location.");
             SceneTransitionManager.Instance.SwitchLocation(locationToSwitch);
             PlayerMove.isInTeleportTrigger = false;
         }

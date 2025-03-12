@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: The Crop the Player will harvest first
   thumbnail: {fileID: 0}
-  gameModel: {fileID: 3506001669769316713, guid: e5ce57f3e07cd8f4a8cb9044fd8561da,
+  gameModel: {fileID: 2072866692390478259, guid: c209fedee14f6c644b457bbbb9113df5,
     type: 3}
   itemType: 1
   cost: 0

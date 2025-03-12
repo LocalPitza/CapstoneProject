@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PassiveIncome : MonoBehaviour, ITimeTracker
@@ -8,6 +9,9 @@ public class PassiveIncome : MonoBehaviour, ITimeTracker
     [SerializeField] int passiveIncomeMax = 200;
     [Tooltip("The day of the week when passive income is received.")]
     [SerializeField] private GameTimeStamp.DayOfTheWeek incomeDay = GameTimeStamp.DayOfTheWeek.WED;
+
+    public GameObject incomeUI;
+    public TextMeshProUGUI incomeText;
 
     private GameTimeStamp.DayOfTheWeek lastProcessedDay = GameTimeStamp.DayOfTheWeek.SUN;
 
@@ -48,7 +52,19 @@ public class PassiveIncome : MonoBehaviour, ITimeTracker
         // Add money to the player's stats
         PlayerStats.Earn(income);
 
+        incomeUI.SetActive(true);
+        incomeText.text = "Income this week: " + income;
+
+        CursorManager.Instance.UIOpened();
+
         // Log the money for debugging purposes
         Debug.Log($"It's Wednesday! You received {income}{PlayerStats.CURRENCY}. Total Money: {PlayerStats.Money}{PlayerStats.CURRENCY}");
+    }
+
+    public void CloseIncomeUI()
+    {
+        incomeUI.SetActive(false);
+
+        CursorManager.Instance.UIClosed();
     }
 }
