@@ -45,8 +45,10 @@ Material:
     - _BumpScale: 5
     - _Metallic: 0
     - _Parallax: 0.0238
-    - _Smoothness: 0.5
-    m_Colors: []
+    - _Smoothness: 0
+    m_Colors:
+    - _BaseColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    - _Color: {r: 0.8113207, g: 0.8113207, b: 0.8113207, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5663202931471036640
 MonoBehaviour:
