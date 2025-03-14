@@ -24,8 +24,29 @@ public class CursorManager : MonoBehaviour
 
     public void UIClosed()
     {
-        uiOpenCount = Mathf.Max(0, uiOpenCount - 1); // Prevent negative values
-        UpdateCursorState();
+        Debug.Log("Cursor Hide, Player Move");
+        if (uiOpenCount > 0)
+        {
+            uiOpenCount--;
+        }
+
+        Debug.Log("UI Closed - Count: " + uiOpenCount);
+
+        if (uiOpenCount <= 0)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            PlayerMove.isUIOpen = false;
+        }
+    }
+
+    public void ResetUICount()
+    {
+        uiOpenCount = 0;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        PlayerMove.isUIOpen = false;
+        Debug.Log("UI Count Reset");
     }
 
     private void UpdateCursorState()

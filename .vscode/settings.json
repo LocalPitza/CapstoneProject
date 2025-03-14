@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "CapstoneProject-Test.sln"
+    "dotnet.defaultSolution": "CapstoneProject.sln"
 }

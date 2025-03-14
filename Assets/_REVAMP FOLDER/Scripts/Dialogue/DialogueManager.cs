@@ -89,6 +89,7 @@ public class DialogueManager : MonoBehaviour
         // Check if the shop UI is still open
         if (NewUIManager.Instance.IsShopOpen())
         {
+            Debug.Log("Shop Open");
             CursorManager.Instance.UIOpened();
         }
         else
