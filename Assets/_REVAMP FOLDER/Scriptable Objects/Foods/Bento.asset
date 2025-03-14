@@ -12,7 +12,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 636713afd1fdb544183f57843fc5fba7, type: 3}
   m_Name: Bento
   m_EditorClassIdentifier: 
-  description: "Bento \n+50 Energy \n+25 Fullness\n"
+  description: 'Hunger Refill: 50
+
+    Energy Refill: 25
+
+
+    Hunger Refill: 50
+
+    Energy
+    Refill: 25
+
+
+    Hunger Refill: 50
+
+    Energy Refill: 25
+
+
+    Hunger Refill:
+    50
+
+    Energy Refill: 25
+
+
+    Hunger Refill: 50
+
+    Energy Refill: 25'
+  NewDescription: 'Hunger Refill: 50
+
+    Energy Refill: 25
+
+
+    Hunger Refill:
+    50
+
+    Energy Refill: 25
+
+
+    Hunger Refill: 50
+
+    Energy Refill: 25
+
+
+    Hunger
+    Refill: 50
+
+    Energy Refill: 25
+
+
+    Hunger Refill: 50
+
+    Energy Refill:
+    25
+
+
+    Hunger Refill: 50
+
+    Energy Refill: 25'
   thumbnail: {fileID: 21300000, guid: 3670724ad90f11244a797840f152f714, type: 3}
   gameModel: {fileID: 0}
   itemType: 1

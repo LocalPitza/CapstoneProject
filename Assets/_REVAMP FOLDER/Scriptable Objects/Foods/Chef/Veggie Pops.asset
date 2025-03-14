@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 636713afd1fdb544183f57843fc5fba7, type: 3}
+  m_Name: Veggie Pops
+  m_EditorClassIdentifier: 
+  description: Veggie Pops Food
+  thumbnail: {fileID: 21300000, guid: 22a02cdb8de441d4da91e8d6b58f87e7, type: 3}
+  gameModel: {fileID: 0}
+  itemType: 1
+  cost: 75
+  hungerRefill: 50
+  energyRefill: 20
+  requirePayment: 1
+  needIngredient: 1
+  requiredIngredients:
+  - ingredient: {fileID: 11400000, guid: 8e99caa3712634640ab12e229203f657, type: 2}
+    requiredAmount: 3
+  - ingredient: {fileID: 11400000, guid: 3547e728c0b652a4fb643bb362591ceb, type: 2}
+    requiredAmount: 3
