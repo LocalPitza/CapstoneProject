@@ -132,7 +132,8 @@ public class ShopListingManager : MonoBehaviour
 
     public void CloseShop()
     {
+        Debug.Log("Shop Close");
         shopParent.SetActive(false);
-        CursorManager.Instance.UIClosed();
+        CursorManager.Instance.ResetUICount();
     }
 }

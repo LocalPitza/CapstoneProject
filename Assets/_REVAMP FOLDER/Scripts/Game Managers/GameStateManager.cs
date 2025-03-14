@@ -38,7 +38,7 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        /*if(Input.GetKeyDown(KeyCode.P))
         {
             //TimeManager.Instance.Tick();
             
@@ -49,7 +49,7 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
         if (Input.GetKey(KeyCode.U))
         {
             TimeManager.Instance.Tick();
-        }
+        }*/
     }
 
     public void ClockUpdate(GameTimeStamp timestamp)
@@ -124,9 +124,9 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
         PlayerStats.ResetMiniGameStatus();
 
-        //SaveManager.Save(ExportSaveState());
+        SaveManager.Save(ExportSaveState());
 
-        //StartCoroutine(SleepSequence());
+        StartCoroutine(SleepSequence());
     }
 
     public IEnumerator FadeOut()
