@@ -16272,6 +16272,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
+      propertyPath: storageSlots.Array.data[6].quantity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
       propertyPath: storageSlots.Array.data[7].itemData
       value: 
       objectReference: {fileID: 11400000, guid: c39b37d0cfc1b114da4913ac5b586c3e,
@@ -16331,6 +16336,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 9b9d475e53e1b774cb2fb58a4cee6b06,
         type: 2}
+    - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: storageSlots.Array.data[12].quantity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1674062953695513933, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
       propertyPath: storageSlots.Array.data[13].itemData
@@ -18759,6 +18769,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VersionIndex
       value: 1284
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168879452346036929, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: debugging
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9168879452346036929, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
