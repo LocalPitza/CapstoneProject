@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 636713afd1fdb544183f57843fc5fba7, type: 3}
   m_Name: Choco
   m_EditorClassIdentifier: 
-  description: "Choco \n+10 Energy \n+5 Fullness\n"
+  description: 'Choco
+
+
+    Hunger Refill: 5
+
+    Energy Refill: 10'
+  itemName: Choco
   thumbnail: {fileID: 21300000, guid: b0a8c8225ff8db5469e31143837040a5, type: 3}
   gameModel: {fileID: 0}
   itemType: 1
