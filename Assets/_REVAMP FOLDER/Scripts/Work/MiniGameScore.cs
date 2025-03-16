@@ -24,9 +24,9 @@ public class MiniGameScore : MonoBehaviour
         scoreText.text = score.ToString();
     }
 
-    public void UpdateScore()
+    public void UpdateScore(int addScore)
     {
-        score++;
+        score += addScore;
         scoreText.text = score.ToString();
     }
 
