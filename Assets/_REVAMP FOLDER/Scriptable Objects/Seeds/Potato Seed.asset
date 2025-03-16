@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Potato Seed
   m_EditorClassIdentifier: 
   description: Potato Seed
+  NewDescription: 'Potato Seed
+
+
+    Days to Harvest: 2
+
+    Regrowable: No'
   thumbnail: {fileID: 21300000, guid: 4eafc263408f3a54f9d450767ee0c4dc, type: 3}
   gameModel: {fileID: 0}
   itemType: 0

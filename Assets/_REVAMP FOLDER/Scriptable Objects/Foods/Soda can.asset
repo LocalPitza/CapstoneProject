@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 'Soda can
 
-    +30 Energy'
+
+    Hunger Refill: 0
+
+    Energy Refill: 30'
+  itemName: Soda can
   thumbnail: {fileID: 21300000, guid: 4d0472f501bcba947b03a8ab2b045640, type: 3}
   gameModel: {fileID: 0}
   itemType: 1

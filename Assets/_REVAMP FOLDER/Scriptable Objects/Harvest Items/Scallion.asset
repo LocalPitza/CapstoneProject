@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Scallion
   m_EditorClassIdentifier: 
   description: Scallion Vegetable
+  itemName: 
   thumbnail: {fileID: 21300000, guid: 4933802ed76d29c4da33fde6e46cdb8d, type: 3}
-  gameModel: {fileID: 6554952542696577557, guid: a778e24c5ddb97e499aaf99fbe69637a,
+  gameModel: {fileID: 6221474697404384188, guid: d44ec2807f52e7440a372121c9ba0f8c,
     type: 3}
   itemType: 1
   cost: 50

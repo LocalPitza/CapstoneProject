@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 636713afd1fdb544183f57843fc5fba7, type: 3}
   m_Name: RiceBall
   m_EditorClassIdentifier: 
-  description: "Rice Ball \n+15 Energy \n+25 Fullness"
+  description: 'RiceBall
+
+
+    Hunger Refill: 25
+
+    Energy Refill: 15'
+  itemName: RiceBall
   thumbnail: {fileID: 21300000, guid: 1006319840e027740b26475d8d3c94f1, type: 3}
   gameModel: {fileID: 0}
   itemType: 1

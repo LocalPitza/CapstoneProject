@@ -12,13 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a988084b0b5d3b4a80175942a3a8932, type: 3}
   m_Name: Scalion Seed
   m_EditorClassIdentifier: 
-  description: Scalion Seed
+  description: 'Scalion Seed
+
+
+    Days to Harvest: 1
+
+    Regrowable: No'
+  itemName: Scalion Seed
   thumbnail: {fileID: 21300000, guid: fc1bb54ffede2c1469bcd9670f9f2036, type: 3}
   gameModel: {fileID: 0}
   itemType: 0
   cost: 25
   daysToGrow: 1
   cropToYield: {fileID: 11400000, guid: 8df8ee7da0331a3479113d8f9800c0cc, type: 2}
-  seedling: {fileID: 1000013410243764, guid: 3093440eadfea72448913d9ea2559cf5, type: 3}
+  seedling: {fileID: 5501691677184266575, guid: 1a8fe3c3be3532548b04e290664b899d,
+    type: 3}
   regrowable: 0
   daysToRegrow: 0

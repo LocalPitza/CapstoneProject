@@ -15,25 +15,27 @@ public class FoodData : ItemData
 
     private void OnValidate()
     {
+        itemName = this.name;
+
         UpdateDescription();
     }
 
     private void UpdateDescription()
     {
         // **Reset NewDescription every time OnValidate() runs** to avoid duplication
-        NewDescription = description;
+        description = itemName;
 
         // Append Hunger and Energy Refill values
-        NewDescription += $"\n\nHunger Refill: {hungerRefill}\nEnergy Refill: {energyRefill}";
+        description += $"\n\nHunger Refill: {hungerRefill}\nEnergy Refill: {energyRefill}";
 
         // Append required ingredients if needed
         if (needIngredient && requiredIngredients.Length > 0)
         {
-            NewDescription += "\nRequired Ingredients:";
+            description += "\nRequired Ingredients:";
             foreach (var ingredient in requiredIngredients)
             {
                 if (ingredient.ingredient != null) // Ensure ingredient is not null
-                    NewDescription += $"\n- {ingredient.ingredient.name} x{ingredient.requiredAmount}";
+                    description += $"\n- {ingredient.ingredient.name} x{ingredient.requiredAmount}";
             }
         }
     }

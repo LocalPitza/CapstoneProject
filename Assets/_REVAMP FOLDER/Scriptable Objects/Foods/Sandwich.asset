@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 'Sandwich
 
-    +10 Energy
 
-    +20 Fullness'
+    Hunger Refill: 20
+
+    Energy Refill: 10'
+  itemName: Sandwich
   thumbnail: {fileID: 21300000, guid: 444de9857b9eb894083e504a210c2ef6, type: 3}
   gameModel: {fileID: 0}
   itemType: 1

@@ -12,6 +12,8 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
     public Image fadeImage;
     public float fadeDuration = 1.0f;
 
+    public bool debugging = false;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -38,18 +40,18 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
     private void Update()
     {
-        /*if(Input.GetKeyDown(KeyCode.P))
+        if (debugging)
         {
-            //TimeManager.Instance.Tick();
-            
-            Sleep();
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                Sleep();
+            }
 
+            if (Input.GetKey(KeyCode.U))
+            {
+                TimeManager.Instance.Tick();
+            }
         }
-
-        if (Input.GetKey(KeyCode.U))
-        {
-            TimeManager.Instance.Tick();
-        }*/
     }
 
     public void ClockUpdate(GameTimeStamp timestamp)
@@ -124,9 +126,12 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
         PlayerStats.ResetMiniGameStatus();
 
-        SaveManager.Save(ExportSaveState());
+        if (!debugging)
+        {
+            SaveManager.Save(ExportSaveState());
 
-        StartCoroutine(SleepSequence());
+            StartCoroutine(SleepSequence());
+        }
     }
 
     public IEnumerator FadeOut()

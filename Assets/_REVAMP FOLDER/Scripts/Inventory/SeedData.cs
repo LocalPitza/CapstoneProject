@@ -17,4 +17,30 @@ public class SeedData : ItemData
     [Header("Regrowable")]
     public bool regrowable;
     public int daysToRegrow;
+
+    private void OnValidate()
+    {
+        itemName = this.name;
+
+        UpdateDescription();
+    }
+
+    private void UpdateDescription()
+    {
+        // Reset NewDescription before adding new details
+        description = itemName;
+
+        // Append Days to Harvest info
+        description += $"\n\nDays to Harvest: {daysToGrow}";
+
+        // Append Regrowable info
+        string regrowableText = regrowable ? "Yes" : "No";
+        description += $"\nRegrowable: {regrowableText}";
+
+        // Append Days to Regrow if applicable
+        if (regrowable)
+        {
+            description += $"\nDays to Regrow: {daysToRegrow}";
+        }
+    }
 }

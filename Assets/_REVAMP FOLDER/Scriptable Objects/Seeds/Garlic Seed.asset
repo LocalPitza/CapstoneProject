@@ -12,13 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a988084b0b5d3b4a80175942a3a8932, type: 3}
   m_Name: Garlic Seed
   m_EditorClassIdentifier: 
-  description: Garlic Seed
+  description: 'Garlic Seed
+
+
+    Days to Harvest: 1
+
+    Regrowable: No'
+  itemName: Garlic Seed
   thumbnail: {fileID: 21300000, guid: e948385a8af12ba49943399bcf409046, type: 3}
   gameModel: {fileID: 0}
   itemType: 0
   cost: 150
   daysToGrow: 1
   cropToYield: {fileID: 11400000, guid: 476808a3ed839214c8ea6d746a62a2b1, type: 2}
-  seedling: {fileID: 1000013410243764, guid: 60af3d6d38392534383cbd6241d16dce, type: 3}
+  seedling: {fileID: 2524749156736127740, guid: 27f61903cfc941345af065e0c09808df,
+    type: 3}
   regrowable: 0
   daysToRegrow: 0
