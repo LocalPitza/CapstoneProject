@@ -13,7 +13,6 @@ public class ItemData : ScriptableObject
 {
     [TextArea(5, 5)]
     public string description;  // Store the original description separately
-    [TextArea(5, 5)]
     public string itemName;  // This will be updated dynamically
     public Sprite thumbnail;
     public GameObject gameModel;

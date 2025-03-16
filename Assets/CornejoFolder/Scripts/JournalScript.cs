@@ -44,7 +44,7 @@ public class JournalScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(InputManager.Instance.openJournal))
         {
             ToggleJournal();
         }
