@@ -19702,7 +19702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 299529862}
-  initialTime: 10
+  initialTime: 60
   isCountingDown: 0
 --- !u!1 &2138521691
 GameObject:
@@ -19735,10 +19735,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1714713882}
+  - {fileID: 1799731564}
   - {fileID: 1173308546}
   - {fileID: 385997672}
   - {fileID: 2130020664}
-  - {fileID: 1799731564}
   - {fileID: 1163212204}
   m_Father: {fileID: 1073993849}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
