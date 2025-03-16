@@ -16497,6 +16497,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2199436398331543567, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2199436398331543567, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2262481324610780789, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -17032,6 +17042,96 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[3].name
+      value: How to Dig
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[4].name
+      value: How to Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[5].name
+      value: How to Harvest
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[6].name
+      value: How to Remove Plant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[7].name
+      value: How to Remove Weeds
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[3].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 6effd85d15e8d7e45aeee866a2c92d56,
+        type: 2}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[4].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 0d1ca0c6c7d38e449805970f1e5c6091,
+        type: 2}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[5].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 8156b55756cda8d4e9d2c0f5b1371864,
+        type: 2}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[6].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 445cd28317ebafc479bdb68946af545e,
+        type: 2}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[7].itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: ecfbfe916ef0ce849993f269fcb5ea70,
+        type: 2}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[3].buttonPrefab
+      value: 
+      objectReference: {fileID: 4523716613052823718, guid: bb9e25a420e7a2c4887799d293bd0779,
+        type: 3}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[4].buttonPrefab
+      value: 
+      objectReference: {fileID: 4523716613052823718, guid: bb9e25a420e7a2c4887799d293bd0779,
+        type: 3}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[5].buttonPrefab
+      value: 
+      objectReference: {fileID: 4523716613052823718, guid: bb9e25a420e7a2c4887799d293bd0779,
+        type: 3}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[6].buttonPrefab
+      value: 
+      objectReference: {fileID: 4523716613052823718, guid: bb9e25a420e7a2c4887799d293bd0779,
+        type: 3}
+    - target: {fileID: 3845376611130334769, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: guideList.Array.data[7].buttonPrefab
+      value: 
+      objectReference: {fileID: 4523716613052823718, guid: bb9e25a420e7a2c4887799d293bd0779,
+        type: 3}
     - target: {fileID: 3940473271813619330, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
       propertyPath: m_Mesh
@@ -17867,6 +17967,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704547678312907525, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704547678312907525, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704547678312907525, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704547678312907525, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704547678312907525, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6704547678312907525, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: m_Maskable
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6711204322912387668, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
