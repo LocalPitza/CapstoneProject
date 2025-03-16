@@ -163,6 +163,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\ShowUISeeds.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UI\EnergyBar.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Game Managers\MiniGameManager.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\ShowOverlayGuide.cs" />
     <Compile Include="Assets\Scripts\MainMenu\LoadingManager.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class UpgradeTest : MonoBehaviour
 {
     public GameObject targetObject; // The original GameObject
     public GameObject upgradedObject;
     public Button upgradeButton; // Button assigned for this upgrade
+    public TextMeshProUGUI purchasedText;
     private UpgradeManager upgradeManager;
 
     void Start()
@@ -47,7 +49,17 @@ public class UpgradeTest : MonoBehaviour
     {
         string objectKey = upgradeManager.upgradeKeyPrefix + (targetObject != null ? targetObject.name : upgradedObject.name);
         bool isUpgraded = PlayerPrefs.GetInt(objectKey, 0) == 1;
+        
         upgradeButton.interactable = !isUpgraded;
+        
+        if (isUpgraded)
+        {
+            purchasedText.text = "Purchased";
+        }
+        else
+        {
+            purchasedText.text = "500";
+        }
     }
 
 }
