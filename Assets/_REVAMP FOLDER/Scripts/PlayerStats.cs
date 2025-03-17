@@ -13,7 +13,7 @@ public class PlayerStats
     public static bool isHungerDepleted = false;  // Track if hunger was depleted
 
     public const string CURRENCY = "G";
-    public const int STARTING_MONEY = 2000;
+    public const int STARTING_MONEY = 700;
 
     public const int STARTING_HUNGER = 100;
 

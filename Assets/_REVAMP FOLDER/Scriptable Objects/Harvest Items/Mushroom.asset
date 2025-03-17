@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Mushroom
   m_EditorClassIdentifier: 
   description: Mushroom Vegetable
+  itemName: 
   thumbnail: {fileID: 21300000, guid: 71e4ec4520ae34e43a673ae003d49c23, type: 3}
   gameModel: {fileID: 5666215917969191528, guid: ff53c449165e6204fb6e5c6250e7182c,
     type: 3}
   itemType: 1
-  cost: 50
+  cost: 60

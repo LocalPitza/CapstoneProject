@@ -15,15 +15,16 @@ MonoBehaviour:
   description: 'Garlic Seed
 
 
-    Days to Harvest: 1
+    Days to Harvest: 6
+
 
     Regrowable: No'
   itemName: Garlic Seed
   thumbnail: {fileID: 21300000, guid: e948385a8af12ba49943399bcf409046, type: 3}
   gameModel: {fileID: 0}
   itemType: 0
-  cost: 150
-  daysToGrow: 1
+  cost: 20
+  daysToGrow: 6
   cropToYield: {fileID: 11400000, guid: 476808a3ed839214c8ea6d746a62a2b1, type: 2}
   seedling: {fileID: 2524749156736127740, guid: 27f61903cfc941345af065e0c09808df,
     type: 3}

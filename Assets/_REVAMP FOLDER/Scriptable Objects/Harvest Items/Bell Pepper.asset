@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Bell Pepper
   m_EditorClassIdentifier: 
   description: Bell Pepper Fruit
+  itemName: 
   thumbnail: {fileID: 21300000, guid: e5b55732f17a72145ab9529636b57026, type: 3}
   gameModel: {fileID: 449315936691367106, guid: e1cfd1d9083662a4ba6be985a526bb71,
     type: 3}
   itemType: 1
-  cost: 50
+  cost: 75

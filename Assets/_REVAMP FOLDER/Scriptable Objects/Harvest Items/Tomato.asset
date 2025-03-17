@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Tomato
   m_EditorClassIdentifier: 
   description: Tomato Fruit
+  itemName: 
   thumbnail: {fileID: 21300000, guid: 65ab33b4d680e73418649364cc7246b0, type: 3}
   gameModel: {fileID: 6683548704163537989, guid: 4572790e613c37847a302bf51adb5e2b,
     type: 3}
   itemType: 1
-  cost: 15
+  cost: 65

@@ -17,14 +17,14 @@ MonoBehaviour:
 
     Hunger Refill: 50
 
-    Energy Refill: 25'
+    Energy Refill: 15'
   itemName: Bento
   thumbnail: {fileID: 21300000, guid: 3670724ad90f11244a797840f152f714, type: 3}
   gameModel: {fileID: 0}
   itemType: 1
-  cost: 75
+  cost: 100
   hungerRefill: 50
-  energyRefill: 25
+  energyRefill: 15
   requirePayment: 1
   needIngredient: 0
   requiredIngredients: []

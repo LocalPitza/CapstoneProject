@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Lettuce
   m_EditorClassIdentifier: 
   description: Lettuce Vegetable
+  itemName: 
   thumbnail: {fileID: 21300000, guid: 47ea3f730d6bf3d4397fc18b0982a028, type: 3}
   gameModel: {fileID: 269950399610480495, guid: faf850cca1026f541bd2b3cf155ed77f,
     type: 3}

@@ -12,17 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 636713afd1fdb544183f57843fc5fba7, type: 3}
   m_Name: Salad
   m_EditorClassIdentifier: 
-  description: Salad Food
+  description: 'Salad
+
+
+    Hunger Refill: 30
+
+    Energy Refill: 25
+
+
+    Required
+    Ingredients:
+
+    - Lettuce x2
+
+    - Tomato x3'
+  itemName: Salad
   thumbnail: {fileID: 21300000, guid: 0bfae862c36cd7542bae9a5322467167, type: 3}
   gameModel: {fileID: 0}
   itemType: 1
-  cost: 50
-  hungerRefill: 20
-  energyRefill: 20
+  cost: 75
+  hungerRefill: 30
+  energyRefill: 25
   requirePayment: 1
   needIngredient: 1
   requiredIngredients:
   - ingredient: {fileID: 11400000, guid: 8e99caa3712634640ab12e229203f657, type: 2}
     requiredAmount: 2
   - ingredient: {fileID: 11400000, guid: 3547e728c0b652a4fb643bb362591ceb, type: 2}
-    requiredAmount: 2
+    requiredAmount: 3

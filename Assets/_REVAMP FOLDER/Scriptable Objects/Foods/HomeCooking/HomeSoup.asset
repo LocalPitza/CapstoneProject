@@ -12,17 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 636713afd1fdb544183f57843fc5fba7, type: 3}
   m_Name: HomeSoup
   m_EditorClassIdentifier: 
-  description: Home Soup
+  description: 'HomeSoup
+
+
+    Hunger Refill: 40
+
+    Energy Refill: 20
+
+
+    Required
+    Ingredients:
+
+    - Lettuce x3
+
+    - Mushroom x2
+
+    - Potato x1'
+  itemName: HomeSoup
   thumbnail: {fileID: 21300000, guid: cac0d82fb04838443ac910b9aa1788d5, type: 3}
   gameModel: {fileID: 0}
   itemType: 1
   cost: 0
-  hungerRefill: 50
+  hungerRefill: 40
   energyRefill: 20
   requirePayment: 0
   needIngredient: 1
   requiredIngredients:
-  - ingredient: {fileID: 11400000, guid: 0cad9ee927204de45aac3698ea0fc5ef, type: 2}
-    requiredAmount: 1
-  - ingredient: {fileID: 11400000, guid: 3547e728c0b652a4fb643bb362591ceb, type: 2}
+  - ingredient: {fileID: 11400000, guid: 8e99caa3712634640ab12e229203f657, type: 2}
+    requiredAmount: 3
+  - ingredient: {fileID: 11400000, guid: d3f787326354bef4fbb39437d39314df, type: 2}
+    requiredAmount: 2
+  - ingredient: {fileID: 11400000, guid: 971c105e21c502340805cc6305423841, type: 2}
     requiredAmount: 1
