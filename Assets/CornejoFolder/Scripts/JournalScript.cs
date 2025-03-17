@@ -49,6 +49,7 @@ public class JournalScript : MonoBehaviour
 
         if (Input.GetKeyDown(InputManager.Instance.openJournal))
         {
+            FindObjectOfType<SoundManager>().Play("SNBClick");
             ToggleJournal();
         }
     }

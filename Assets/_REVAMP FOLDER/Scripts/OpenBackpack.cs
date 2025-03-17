@@ -30,6 +30,7 @@ public class OpenBackpack : MonoBehaviour
 
         if (Input.GetKeyDown(InputManager.Instance.openBackpack))
         {
+            FindObjectOfType<SoundManager>().Play("SNBClick");
             ToggleBackpackPanel();
         }
     }

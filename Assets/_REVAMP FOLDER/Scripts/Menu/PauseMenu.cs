@@ -5,52 +5,84 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
-
+    
+    [Header("UI References")]
     public GameObject pauseMenuUI;
+    public GameObject settingsMenuUI;
+    public GameObject backdropPanel;
 
-    [SerializeField] LoadingManager loadingManager;
-
+    [SerializeField] private LoadingManager loadingManager;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameIsPaused)
+            if (settingsMenuUI.activeSelf)
             {
-                Resume();
+                // Close settings and return to the pause menu
+                OpenPauseMenu();
             }
             else
             {
-                Pause();
+                TogglePause();
             }
+        }
+    }
+
+    private void TogglePause()
+    {
+        if (GameIsPaused)
+        {
+            Resume();
+        }
+        else
+        {
+            Pause();
         }
     }
 
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        settingsMenuUI.SetActive(false);
+        backdropPanel.SetActive(false);
         Time.timeScale = 1f;
-        CursorManager.Instance.UIClosed();
+        CursorManager.Instance?.UIClosed();
         GameIsPaused = false;
     }
 
-    void Pause()
+    private void Pause()
     {
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        CursorManager.Instance.UIOpened();
+        settingsMenuUI.SetActive(false);
+        backdropPanel.SetActive(true);
+        CursorManager.Instance?.UIOpened();
         GameIsPaused = true;
+    }
+
+    public void OpenSettings()
+    {
+        settingsMenuUI.SetActive(true);
+        pauseMenuUI.SetActive(false);
+    }
+
+    public void OpenPauseMenu()
+    {
+        settingsMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(true);
     }
 
     public void LoadMenu()
     {
-        // Load the Main Menu
         if (loadingManager != null)
         {
-            loadingManager.LoadScene("NewMenu");
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            loadingManager.LoadScene("NewMenu");
+        }
+        else
+        {
+            Debug.LogWarning("LoadingManager is not assigned in PauseMenu!");
         }
     }
-
 }
