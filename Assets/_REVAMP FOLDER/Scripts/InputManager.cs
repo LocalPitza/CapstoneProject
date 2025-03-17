@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
     // Key bindings (defaults)
     public KeyCode interactKey = KeyCode.F;
     public KeyCode harvestKey = KeyCode.E;
-    public KeyCode harvestKeepKey = KeyCode.Q;
+    //public KeyCode harvestKeepKey = KeyCode.Q;
     public KeyCode openJournal = KeyCode.O;
     public KeyCode openBackpack = KeyCode.I;
 

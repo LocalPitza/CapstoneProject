@@ -25,7 +25,10 @@ public class OpenBackpack : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyDown(InputManager.Instance.openBackpack))
+        // Prevent opening if multiple UIs are already open
+        if (CursorManager.Instance.GetUIOpenCount() > 1) return;
+
+        if (Input.GetKeyDown(InputManager.Instance.openBackpack))
         {
             ToggleBackpackPanel();
         }
@@ -33,6 +36,9 @@ public class OpenBackpack : MonoBehaviour
 
     public void ToggleBackpackPanel()
     {
+        // If multiple UIs are open, don't allow opening
+        if (!isOpen && CursorManager.Instance.GetUIOpenCount() >= 1) return;
+
         isOpen = !isOpen; // Toggle state
 
         foreach (GameObject panel in backpackUI)

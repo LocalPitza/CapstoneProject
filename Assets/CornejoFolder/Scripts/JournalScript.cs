@@ -44,6 +44,9 @@ public class JournalScript : MonoBehaviour
 
     void Update()
     {
+        // Prevent opening if multiple UIs are already open
+        if (CursorManager.Instance.GetUIOpenCount() > 1) return;
+
         if (Input.GetKeyDown(InputManager.Instance.openJournal))
         {
             ToggleJournal();
@@ -52,7 +55,8 @@ public class JournalScript : MonoBehaviour
 
     void ToggleJournal()
     {
-        //journalPanel.SetActive(!journalPanel.activeSelf);
+        // If multiple UIs are open, don't allow opening
+        if (!journalPanel.activeSelf && CursorManager.Instance.GetUIOpenCount() >= 1) return;
 
         descriptionText.text = "";
 

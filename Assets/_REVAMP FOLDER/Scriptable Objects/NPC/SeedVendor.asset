@@ -17,7 +17,7 @@ MonoBehaviour:
   - speaker: Seed Vendor
     message: Hello, I am the Seed Vendor in this Back Alley
   - speaker: Seed Vendor
-    message: What seeds would you like
+    message: What seeds or veggies would you like
   defaultDialogue:
   - speaker: Seed Vendor
     message: Great to see you again, take your time to choose

@@ -14,6 +14,11 @@ public class CursorManager : MonoBehaviour
         {
             Instance = this;
         }
+        else
+        {
+            Destroy(gameObject); // Prevent multiple CursorManagers
+            return;
+        }
     }
 
     public void UIOpened()
@@ -32,12 +37,8 @@ public class CursorManager : MonoBehaviour
 
         Debug.Log("UI Closed - Count: " + uiOpenCount);
 
-        if (uiOpenCount <= 0)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            PlayerMove.isUIOpen = false;
-        }
+        // Ensure cursor state updates correctly when all UIs close
+        UpdateCursorState();
     }
 
     public void ResetUICount()
@@ -63,5 +64,10 @@ public class CursorManager : MonoBehaviour
             Cursor.visible = false;
             PlayerMove.isUIOpen = false;
         }
+    }
+
+    public int GetUIOpenCount()
+    {
+        return uiOpenCount;
     }
 }
