@@ -49,13 +49,13 @@ public class UpgradeManager : MonoBehaviour
         LoadUpgrades();
     }
 
-    void Update()
+    /*void Update()
     {
         if (Input.GetKeyDown(KeyCode.R)) // Replace 'R' with your desired key
         {
             ClearAllPlayerPrefs();
         }
-    }
+    }*/
 
     public void EnableUpgrade(GameObject oldObject, GameObject newObject)
     {
@@ -108,10 +108,10 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    void ClearAllPlayerPrefs()
+    /*void ClearAllPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
         Debug.Log("All PlayerPrefs have been cleared.");
-    }
+    }*/
 }
