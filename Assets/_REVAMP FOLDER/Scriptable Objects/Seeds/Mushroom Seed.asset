@@ -15,7 +15,7 @@ MonoBehaviour:
   description: 'Mushroom Seed
 
 
-    Days to Harvest: 10
+    Days to Harvest: 13
 
 
     Regrowable: No'
@@ -24,7 +24,7 @@ MonoBehaviour:
   gameModel: {fileID: 0}
   itemType: 0
   cost: 50
-  daysToGrow: 10
+  daysToGrow: 13
   cropToYield: {fileID: 11400000, guid: d3f787326354bef4fbb39437d39314df, type: 2}
   seedling: {fileID: 5666215917969191528, guid: 871bda3a184169d48817b5b14334c148,
     type: 3}

@@ -15,7 +15,7 @@ MonoBehaviour:
   description: 'BellPepper Seed
 
 
-    Days to Harvest: 13
+    Days to Harvest: 15
 
 
     Regrowable: Yes
@@ -27,7 +27,7 @@ MonoBehaviour:
   gameModel: {fileID: 0}
   itemType: 0
   cost: 50
-  daysToGrow: 13
+  daysToGrow: 15
   cropToYield: {fileID: 11400000, guid: fba57da4667eb39458253b36c8d23e20, type: 2}
   seedling: {fileID: 2149203244062433810, guid: fd3c44869ee69544489a68f2bb39a9b3,
     type: 3}

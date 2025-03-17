@@ -15,7 +15,7 @@ MonoBehaviour:
   description: 'Strawberry Seed
 
 
-    Days to Harvest: 12
+    Days to Harvest: 16
 
 
     Regrowable: Yes
@@ -27,7 +27,7 @@ MonoBehaviour:
   gameModel: {fileID: 0}
   itemType: 0
   cost: 75
-  daysToGrow: 12
+  daysToGrow: 16
   cropToYield: {fileID: 11400000, guid: 098d26cc741f97242bac65d8775de445, type: 2}
   seedling: {fileID: 2105558366176389943, guid: b0ceda83f1b3d78489372371c548e982,
     type: 3}
