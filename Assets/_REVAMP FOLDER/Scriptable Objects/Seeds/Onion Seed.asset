@@ -12,12 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a988084b0b5d3b4a80175942a3a8932, type: 3}
   m_Name: Onion Seed
   m_EditorClassIdentifier: 
-  description: Onion Seed
+  description: 'Onion Seed
+
+
+    Days to Harvest: 7
+
+
+    Regrowable: No'
+  itemName: Onion Seed
   thumbnail: {fileID: 21300000, guid: e04a201e48d0b9841891a909a8ce3ddc, type: 3}
   gameModel: {fileID: 0}
   itemType: 0
-  cost: 250
-  daysToGrow: 1
+  cost: 30
+  daysToGrow: 7
   cropToYield: {fileID: 11400000, guid: cce40df5c813d0147adc9ab0313553b5, type: 2}
   seedling: {fileID: 4989300981323973992, guid: cdce3278c3608874987b12e7f885af33,
     type: 3}

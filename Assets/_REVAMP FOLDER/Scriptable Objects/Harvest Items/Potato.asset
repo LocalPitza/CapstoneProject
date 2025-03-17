@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Potato
   m_EditorClassIdentifier: 
   description: Potato Vegetable
+  itemName: 
   thumbnail: {fileID: 21300000, guid: 27202f07625e3764da4cba1bb618b8c1, type: 3}
   gameModel: {fileID: 3506001669769316713, guid: 26a3eea377e99a140b302c4f93092904,
     type: 3}
   itemType: 1
-  cost: 25
+  cost: 75

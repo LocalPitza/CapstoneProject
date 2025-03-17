@@ -18,4 +18,4 @@ MonoBehaviour:
   gameModel: {fileID: 6221474697404384188, guid: d44ec2807f52e7440a372121c9ba0f8c,
     type: 3}
   itemType: 1
-  cost: 50
+  cost: 45

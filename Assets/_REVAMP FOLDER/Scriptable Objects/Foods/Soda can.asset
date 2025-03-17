@@ -15,16 +15,16 @@ MonoBehaviour:
   description: 'Soda can
 
 
-    Hunger Refill: 0
+    Hunger Refill: -5
 
-    Energy Refill: 30'
+    Energy Refill: 20'
   itemName: Soda can
   thumbnail: {fileID: 21300000, guid: 4d0472f501bcba947b03a8ab2b045640, type: 3}
   gameModel: {fileID: 0}
   itemType: 1
   cost: 50
-  hungerRefill: 0
-  energyRefill: 30
+  hungerRefill: -5
+  energyRefill: 20
   requirePayment: 1
   needIngredient: 0
   requiredIngredients: []

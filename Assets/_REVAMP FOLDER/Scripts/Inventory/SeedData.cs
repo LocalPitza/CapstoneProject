@@ -35,7 +35,7 @@ public class SeedData : ItemData
 
         // Append Regrowable info
         string regrowableText = regrowable ? "Yes" : "No";
-        description += $"\nRegrowable: {regrowableText}";
+        description += $"\n\nRegrowable: {regrowableText}";
 
         // Append Days to Regrow if applicable
         if (regrowable)

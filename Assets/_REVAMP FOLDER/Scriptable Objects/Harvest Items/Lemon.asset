@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Lemon
   m_EditorClassIdentifier: 
   description: Lemon Fruit
+  itemName: 
   thumbnail: {fileID: 21300000, guid: f7abc544abdbb014aa4211e169b3f91f, type: 3}
   gameModel: {fileID: 2472758744665634790, guid: 0571472a40fbc834789a6ea75d0777bd,
     type: 3}
   itemType: 1
-  cost: 50
+  cost: 150

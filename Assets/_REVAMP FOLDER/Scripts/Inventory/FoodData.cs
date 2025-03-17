@@ -31,7 +31,7 @@ public class FoodData : ItemData
         // Append required ingredients if needed
         if (needIngredient && requiredIngredients.Length > 0)
         {
-            description += "\nRequired Ingredients:";
+            description += "\n\nRequired Ingredients:";
             foreach (var ingredient in requiredIngredients)
             {
                 if (ingredient.ingredient != null) // Ensure ingredient is not null
