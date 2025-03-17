@@ -10,6 +10,10 @@ public class MiniGameManager : MonoBehaviour
     public static MiniGameManager instance;
     public ObstacleSpawner obstacleSpawner;
 
+    [Header("If Cutscene is Available")]
+    [SerializeField] private bool playVideo = true; // Toggle in Inspector
+
+    [Header("Minigame Components")]
     [SerializeField] Image backgroundPanel;
     [SerializeField] GameObject miniGameParent;
     [SerializeField] GameObject endMiniGameCanvas;
@@ -48,6 +52,13 @@ public class MiniGameManager : MonoBehaviour
     {
         yield return StartCoroutine(FadeBackground(0, 1, null));
 
+        if (!playVideo)
+        {
+            Debug.Log("Skipping video, starting minigame directly.");
+            StartMiniGameUI();
+            yield break;
+        }
+
         videoScreen.gameObject.SetActive(true);
         videoPlayer.Stop();
         videoPlayer.clip = goingToWorkVideo;
@@ -77,6 +88,11 @@ public class MiniGameManager : MonoBehaviour
         // Delay before showing minigame UI
         yield return new WaitForSeconds(0.5f);
 
+        StartMiniGameUI();
+    }
+
+    private void StartMiniGameUI()
+    {
         miniGameParent.SetActive(true);
         startGameButton.SetActive(true);
     }
@@ -141,12 +157,18 @@ public class MiniGameManager : MonoBehaviour
     public void CloseMiniGame()
     {
         miniGameParent.SetActive(false);
-        CursorManager.Instance.UIClosed();
         StartCoroutine(PlayClosingVideo());
     }
 
     private IEnumerator PlayClosingVideo()
     {
+        if (!playVideo)
+        {
+            Debug.Log("Skipping closing video.");
+            SkipTimeAndFadeOut();
+            yield break;
+        }
+
         videoScreen.gameObject.SetActive(true);
         videoPlayer.Stop();
         videoPlayer.clip = goingHomeVideo;
@@ -155,33 +177,30 @@ public class MiniGameManager : MonoBehaviour
 
         Debug.Log("Playing GoingHome video...");
 
-        // Wait for the video to start playing
         while (!videoPlayer.isPlaying)
         {
             yield return null;
         }
 
-        Debug.Log("Video started playing");
-
-        // Wait for the video to finish
         while (videoPlayer.isPlaying)
         {
             yield return null;
         }
 
         Debug.Log("Video finished playing, skipping time before fade-out");
+        SkipTimeAndFadeOut();
+    }
 
-        // Skip time immediately after the video finishes
+    private void SkipTimeAndFadeOut()
+    {
         GameTimeStamp currentTime = TimeManager.Instance.GetGameTimeStamp();
         GameTimeStamp timestampOfNextDay = new GameTimeStamp(currentTime);
         timestampOfNextDay.hour = 17;
         timestampOfNextDay.minute = 0;
         TimeManager.Instance.SkipTime(timestampOfNextDay);
 
-        // Hide the video screen
         videoScreen.gameObject.SetActive(false);
 
-        // Now proceed with the fade-out
         StartCoroutine(FadeBackground(1, 0, () => {
             if (obstacleSpawner != null)
             {
@@ -193,6 +212,8 @@ public class MiniGameManager : MonoBehaviour
                 Debug.LogError("ObstacleSpawner not found!");
             }
         }));
+
+        CursorManager.Instance.UIClosed();
     }
 
     private IEnumerator FadeBackground(float startAlpha, float endAlpha, System.Action onComplete)
