@@ -15,6 +15,8 @@ public class GameOver : MonoBehaviour
     [SerializeField] Sprite rentExpenseSprite;
     [SerializeField] GameObject medicalUI;
 
+    public static bool isGameOver = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -32,6 +34,7 @@ public class GameOver : MonoBehaviour
 
     public void GameIsOver(string cause)
     {
+        isGameOver = true;
         medicalUI.SetActive(false);
         gameOverScreenUI.SetActive(true);
 
