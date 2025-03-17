@@ -10369,6 +10369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleSpawner: {fileID: 1799731563}
+  playVideo: 1
   backgroundPanel: {fileID: 1256273090}
   miniGameParent: {fileID: 2138521691}
   endMiniGameCanvas: {fileID: 1163212203}
