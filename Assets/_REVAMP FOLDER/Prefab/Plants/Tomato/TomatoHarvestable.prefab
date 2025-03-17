@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7667209846612683365}
   - component: {fileID: 1246844033842049549}
   - component: {fileID: 642261089547207538}
-  - component: {fileID: 1614901368971974768}
   m_Layer: 7
   m_Name: TomatoFruit (4)
   m_TagString: Untagged
@@ -84,28 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1614901368971974768
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2572450374733523602}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300008, guid: b69b26c8b73b8bd49bf243bbe541a2e0, type: 3}
 --- !u!1 &4258219957815967407
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,8 +94,8 @@ GameObject:
   - component: {fileID: 35859848594790697}
   - component: {fileID: 6570789952853820265}
   - component: {fileID: 8266447075662231294}
-  - component: {fileID: 5690918461412271383}
   - component: {fileID: 5742280463086372446}
+  - component: {fileID: 5690918461412271383}
   m_Layer: 7
   m_Name: TomatoHarvestable
   m_TagString: Harvestable
@@ -194,22 +171,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5690918461412271383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4258219957815967407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 537d1b03b30b6f54d96091a882bef5ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 3547e728c0b652a4fb643bb362591ceb, type: 2}
-  onInteract:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &5742280463086372446
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -229,8 +190,24 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 0.5, y: 0, z: 0.5}
+  m_Center: {x: 0, y: 0.5, z: 0.17}
+--- !u!114 &5690918461412271383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4258219957815967407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537d1b03b30b6f54d96091a882bef5ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 3547e728c0b652a4fb643bb362591ceb, type: 2}
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4877631670070985889
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +219,6 @@ GameObject:
   - component: {fileID: 748898733486294102}
   - component: {fileID: 8164559791183715390}
   - component: {fileID: 7559921837468904769}
-  - component: {fileID: 8532828056536282691}
   m_Layer: 7
   m_Name: TomatoFruit (3)
   m_TagString: Untagged
@@ -315,28 +291,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8532828056536282691
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4877631670070985889}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300008, guid: b69b26c8b73b8bd49bf243bbe541a2e0, type: 3}
 --- !u!1 &7643725197843945608
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +302,6 @@ GameObject:
   - component: {fileID: 2578236941749639295}
   - component: {fileID: 6407905834055450647}
   - component: {fileID: 4704325799618769256}
-  - component: {fileID: 6902208776529701482}
   m_Layer: 7
   m_Name: TomatoFruit (5)
   m_TagString: Untagged
@@ -421,25 +374,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6902208776529701482
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7643725197843945608}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300008, guid: b69b26c8b73b8bd49bf243bbe541a2e0, type: 3}
