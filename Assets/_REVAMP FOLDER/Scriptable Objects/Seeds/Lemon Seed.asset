@@ -15,20 +15,20 @@ MonoBehaviour:
   description: 'Lemon Seed
 
 
-    Days to Harvest: 1
+    Days to Harvest: 20
 
 
     Regrowable: Yes
 
     Days
-    to Regrow: 1'
+    to Regrow: 13'
   itemName: Lemon Seed
   thumbnail: {fileID: 21300000, guid: 13efd21aed8de4943817b33ad0aaf607, type: 3}
   gameModel: {fileID: 0}
   itemType: 0
   cost: 100
-  daysToGrow: 1
+  daysToGrow: 20
   cropToYield: {fileID: 11400000, guid: dfa3e9c309576464694d1ac905373190, type: 2}
   seedling: {fileID: 494803832373256564, guid: 0d2d5e17272a84c49b7de58803aef3f8, type: 3}
   regrowable: 1
-  daysToRegrow: 1
+  daysToRegrow: 13

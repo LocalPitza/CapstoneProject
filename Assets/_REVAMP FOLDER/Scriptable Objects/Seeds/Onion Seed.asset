@@ -15,7 +15,7 @@ MonoBehaviour:
   description: 'Onion Seed
 
 
-    Days to Harvest: 1
+    Days to Harvest: 10
 
 
     Regrowable: No'
@@ -24,7 +24,7 @@ MonoBehaviour:
   gameModel: {fileID: 0}
   itemType: 0
   cost: 30
-  daysToGrow: 1
+  daysToGrow: 10
   cropToYield: {fileID: 11400000, guid: cce40df5c813d0147adc9ab0313553b5, type: 2}
   seedling: {fileID: 4989300981323973992, guid: cdce3278c3608874987b12e7f885af33,
     type: 3}
