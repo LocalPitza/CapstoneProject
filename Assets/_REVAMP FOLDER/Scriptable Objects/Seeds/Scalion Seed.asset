@@ -15,7 +15,7 @@ MonoBehaviour:
   description: 'Scalion Seed
 
 
-    Days to Harvest: 9
+    Days to Harvest: 1
 
 
     Regrowable: No'
@@ -24,7 +24,7 @@ MonoBehaviour:
   gameModel: {fileID: 0}
   itemType: 0
   cost: 25
-  daysToGrow: 9
+  daysToGrow: 1
   cropToYield: {fileID: 11400000, guid: 8df8ee7da0331a3479113d8f9800c0cc, type: 2}
   seedling: {fileID: 5501691677184266575, guid: 1a8fe3c3be3532548b04e290664b899d,
     type: 3}

@@ -3990,7 +3990,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5789
+  m_VersionIndex: 5795
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4890,7 +4890,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 989
+  m_VersionIndex: 995
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -5010,6 +5010,7 @@ MonoBehaviour:
   targetCamera: {fileID: 0}
   guideText: {fileID: 7885731787908096545}
   plantInformtation: {fileID: 6964738115189194451}
+  materialTarget: {fileID: 9222528886798265567}
   id: 0
   soilStatus: 0
   soilMat: {fileID: 2100000, guid: 372bfc922a7202b44bbb8ad0d4395f49, type: 2}

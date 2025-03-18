@@ -330,7 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 4673661063784202097}
   speed: 2
-  runSpeed: 8
+  runSpeed: 4
   playerObject: {fileID: 9078468963544393599}
   turnSpeed: 150
   CurrentInput: {x: 0, y: 0}

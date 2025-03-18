@@ -15,7 +15,7 @@ MonoBehaviour:
   description: 'Potato Seed
 
 
-    Days to Harvest: 7
+    Days to Harvest: 1
 
 
     Regrowable: No'
@@ -24,7 +24,7 @@ MonoBehaviour:
   gameModel: {fileID: 0}
   itemType: 0
   cost: 50
-  daysToGrow: 7
+  daysToGrow: 1
   cropToYield: {fileID: 11400000, guid: 971c105e21c502340805cc6305423841, type: 2}
   seedling: {fileID: 1000013410243764, guid: 01b572a7c31ab9141aa1e9c7467eafb0, type: 3}
   regrowable: 0

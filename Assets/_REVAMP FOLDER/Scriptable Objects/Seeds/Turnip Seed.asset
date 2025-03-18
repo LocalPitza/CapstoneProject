@@ -12,13 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a988084b0b5d3b4a80175942a3a8932, type: 3}
   m_Name: Turnip Seed
   m_EditorClassIdentifier: 
-  description: Turnip Seeds
+  description: 'Turnip Seed
+
+
+    Days to Harvest: 1
+
+
+    Regrowable: No'
+  itemName: Turnip Seed
   thumbnail: {fileID: 21300000, guid: 7ae3faf90f101bb49924c2e709ba3e56, type: 3}
   gameModel: {fileID: 0}
   itemType: 0
   cost: 20
-  daysToGrow: 2
+  daysToGrow: 1
   cropToYield: {fileID: 11400000, guid: 0cad9ee927204de45aac3698ea0fc5ef, type: 2}
   seedling: {fileID: 1000013410243764, guid: 42ea4bc7ab684e1439fe7e06657fcf84, type: 3}
   regrowable: 0
-  daysToRegrow: 0
+  daysToRegrow: 1
