@@ -8,6 +8,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
     public CinemachineVirtualCamera targetCamera;
     public TMP_Text guideText;
     public TMP_Text plantInformtation;
+    public GameObject materialTarget;
 
     private Transform cameraTransform; // To store the camera's transform
 
@@ -21,7 +22,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
     public SoilStatus soilStatus;
 
     public Material soilMat, diggedMat, wateredMat, weedMat;
-    new Renderer renderer;
+    //new Renderer renderer;
 
     public GameObject select;
 
@@ -34,7 +35,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
     void Start()
     {
-        renderer = GetComponent<Renderer>();
+        //renderer = GetComponent<Renderer>();
 
         // Get the camera transform from the assigned Cinemachine Virtual Camera
         if (targetCamera != null)
@@ -133,10 +134,13 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                 materialToSwitch = weedMat;
                 break;
         }
-        // Null check to avoid errors
-        if (renderer != null && materialToSwitch != null)
+
+        // Change material on the assigned GameObject
+        Renderer targetRenderer = materialTarget != null ? materialTarget.GetComponent<Renderer>() : null;
+
+        if (targetRenderer != null && materialToSwitch != null)
         {
-            renderer.material = materialToSwitch;
+            targetRenderer.material = materialToSwitch;
         }
         else
         {
@@ -171,10 +175,13 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
                 break;
 
         }
-        // Null check to avoid errors
-        if (renderer != null && materialToSwitch != null)
+
+        // Change material on the assigned GameObject
+        Renderer targetRenderer = materialTarget != null ? materialTarget.GetComponent<Renderer>() : null;
+
+        if (targetRenderer != null && materialToSwitch != null)
         {
-            renderer.material = materialToSwitch;
+            targetRenderer.material = materialToSwitch;
         }
         else
         {

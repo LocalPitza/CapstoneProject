@@ -29,12 +29,24 @@ public class PlayerInteraction : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-
         Debug.DrawRay(transform.position, Vector3.down * 2, Color.red);
 
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 2)) 
-        { 
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 2))
+        {
             OnInteractableHit(hit);
+        }
+        else
+        {
+            // Ensure deselection happens if nothing is hit
+            if (selectedSoil != null)
+            {
+                selectedSoil.Select(false);
+                selectedSoil = null;
+            }
+            if (selectedInteractableObject != null)
+            {
+                selectedInteractableObject = null;
+            }
         }
     }
 
