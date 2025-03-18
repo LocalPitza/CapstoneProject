@@ -150,9 +150,15 @@ public class GameStateManager : MonoBehaviour, ITimeTracker
 
     private IEnumerator SleepSequence()
     {
+        CursorManager.Instance.UIOpened();
+
         yield return FadeOut();
+
         PlayerStats.RestoreStamina(100);
+
         yield return FadeIn();
+
+        CursorManager.Instance.UIClosed();
     }
 
     private IEnumerator Fade(float startAlpha, float endAlpha)
