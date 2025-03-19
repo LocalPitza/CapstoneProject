@@ -155,6 +155,13 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     #region Display Item Info
     public void DisplayItemInfo(ItemData data)
     {
+        // Show ItemInfoBox if the inventory is open OR the shop is open
+        if (!FindObjectOfType<OpenBackpack>().IsBackpackOpen() && !IsShopOpen())
+        {
+            itemInfoBox.SetActive(false);
+            return;
+        }
+
         //If data is null, reset
         if (data == null)
         {
