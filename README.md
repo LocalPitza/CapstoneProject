@@ -18,10 +18,7 @@ E for using some items
 <IMPORTANT NOTES FROM THE DEVELOPERS>
 NPCs still have limited dialogues 
 Story is still work in progress
-<FOR OUR RESEARCH>
-After you play the game please do this quick survey to allow us to finish our research paper, fix issues and improve the content of the game further.
 
-https://docs.google.com/forms/d/e/1FAIpQLSfZ1z782jBhOBd7UsUp-55oFXz0aapOlZlD1ZRq...
 
 CREDITS
 Music
