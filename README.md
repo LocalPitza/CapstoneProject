@@ -12,12 +12,12 @@ Oh and please do give some feedbacks! It helps us improve and We appreciate them
 Thank You For Playing!
 
 <h2><center> CONTROLS </center> </h2></p>
-WASD For Movement
-F for Interacting / Use Item
-E for using some items
-<IMPORTANT NOTES FROM THE DEVELOPERS>
-NPCs still have limited dialogues 
-Story is still work in progress
+-WASD For Movement</p>
+-F for Interacting / Use Item</p>
+-E for using some items</p>
+<h2>IMPORTANT NOTES FROM THE DEVELOPERS </h2>
+NPCs still have limited dialogues </p>
+Story is still work in progress </p>
 
 
 <h2><center> CREDITS </center> </h2></p>
