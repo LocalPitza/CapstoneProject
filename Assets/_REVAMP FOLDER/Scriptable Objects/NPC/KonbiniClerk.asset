@@ -15,11 +15,11 @@ MonoBehaviour:
   wantItem: {fileID: 0}
   onFirstMeet:
   - speaker: Store Clerk
-    message: Hello, I am the Cashier here
+    message: Hello, I am the Cashier here L
   defaultDialogue:
   - speaker: Store Clerk
     message: 'Hello...
 
-      What would like to have?'
+      What would like to have? L'
   thankYouDialogue: []
   specialDayDialogues: []

@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialoguePanel;
     public TextMeshProUGUI speakerText;
     public TextMeshProUGUI dialogueText;
+    public float textSpeed;
 
     //The lines to queue during the dialogue sequence
     Queue<DialogueLine> dialogueQueue;
@@ -98,7 +99,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void Talk(string speaker, string messaage)
+    public void Talk(string speaker, string message)
     {
         dialoguePanel.SetActive(true);
 
@@ -108,7 +109,7 @@ public class DialogueManager : MonoBehaviour
         speakerText.transform.parent.gameObject.SetActive(speaker != "");
 
         //dialogueText.text = messaage;
-        StartCoroutine(TypeText(messaage));
+        StartCoroutine(TypeText(message));
     }
 
     IEnumerator TypeText(string textToType)
@@ -116,22 +117,47 @@ public class DialogueManager : MonoBehaviour
         isTyping = true;
 
         char[] charsToType = textToType.ToCharArray();
-        for(int i = 0; i < charsToType.Length; i++)
+        SoundManager soundManager = FindObjectOfType<SoundManager>();
+        char lastCharacter = textToType.Length > 0 ? textToType[textToType.Length - 1] : ' ';
+
+        for (int i = 0; i < charsToType.Length - 1; i++)
         {
             dialogueText.text += charsToType[i];
-            yield return new WaitForEndOfFrame();
 
-            //Skip the typing sequence and just show the full text
+            if (soundManager != null && (i % 3 == 0 || i % 6 == 0))
+            {
+                int randomIndex = UnityEngine.Random.Range(1, 3);
+                string soundToPlay = "";
+                
+                if (lastCharacter == 'R')
+                {
+                    soundToPlay = (i % 6 == 0) ? "ChefTalk" : randomIndex == 1 ? "Speak1" : "Speak2";
+                }
+                else if (lastCharacter == 'L')
+                {
+                    soundToPlay = (i % 6 == 0) ? "ConbiniTalk" : randomIndex == 2 ? "Speak2" : "Speak3";
+                }
+                else if (lastCharacter == 'P')
+                {
+                    soundToPlay = (i % 6 == 0) ? "SeedStoreTalk" : randomIndex == 1 ? "Speak1" : "Speak3";
+                }
+                else
+                {
+                    soundToPlay = "DefaultTalk";
+                }
+
+                soundManager.Play(soundToPlay);
+            }
+
+            yield return new WaitForSeconds(textSpeed);
+
             if (!isTyping)
             {
                 dialogueText.text = textToType;
-
-                //Break out from the loop
                 break;
             }
         }
 
-        //Typing sequence complete
         isTyping = false;
     }
 }

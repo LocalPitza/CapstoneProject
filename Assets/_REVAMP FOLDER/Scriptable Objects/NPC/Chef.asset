@@ -15,9 +15,9 @@ MonoBehaviour:
   wantItem: {fileID: 0}
   onFirstMeet:
   - speaker: Street Chef
-    message: Come and see the food I make
+    message: Come and see the food I make. R
   defaultDialogue:
   - speaker: Steert Chef
-    message: What would like to have for today?
+    message: What would like to have for today? R
   thankYouDialogue: []
   specialDayDialogues: []
