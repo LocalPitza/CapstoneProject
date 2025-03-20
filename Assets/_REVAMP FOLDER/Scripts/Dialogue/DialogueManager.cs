@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     Action onDialogueEnd = null;
 
     bool isTyping = false;
+    public bool IsDialoguePlaying => dialoguePanel.activeSelf;
 
     private void Awake()
     {
@@ -106,21 +107,29 @@ public class DialogueManager : MonoBehaviour
         speakerText.text = speaker;
 
         //If there is no speaker, do not show the speaker panel
-        speakerText.transform.parent.gameObject.SetActive(speaker != "");
+        speakerText.transform.parent.gameObject.SetActive(!string.IsNullOrEmpty(speaker));
+
+        // Determine the last character for sound selection
+        char lastCharacter = message.Length > 0 ? message[message.Length - 1] : ' ';
+
+        // Remove it only for display if it's R, L, or P
+        if (lastCharacter == 'R' || lastCharacter == 'L' || lastCharacter == 'P')
+        {
+            message = message.Substring(0, message.Length - 1);
+        }
+
 
         //dialogueText.text = messaage;
-        StartCoroutine(TypeText(message));
+        StartCoroutine(TypeText(message, lastCharacter));
     }
 
-    IEnumerator TypeText(string textToType)
+    IEnumerator TypeText(string textToType, char lastCharacter)
     {
         isTyping = true;
-
         char[] charsToType = textToType.ToCharArray();
         SoundManager soundManager = FindObjectOfType<SoundManager>();
-        char lastCharacter = textToType.Length > 0 ? textToType[textToType.Length - 1] : ' ';
 
-        for (int i = 0; i < charsToType.Length - 1; i++)
+        for (int i = 0; i < charsToType.Length; i++)
         {
             dialogueText.text += charsToType[i];
 
@@ -128,7 +137,7 @@ public class DialogueManager : MonoBehaviour
             {
                 int randomIndex = UnityEngine.Random.Range(1, 3);
                 string soundToPlay = "";
-                
+
                 if (lastCharacter == 'R')
                 {
                     soundToPlay = (i % 6 == 0) ? "ChefTalk" : randomIndex == 1 ? "Speak1" : "Speak2";

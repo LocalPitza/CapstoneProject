@@ -75,6 +75,13 @@ public class Shop : MonoBehaviour
 
     void StartConversation()
     {
+        // Prevent interaction if the shop UI is open or dialogue is playing
+        if (NewUIManager.Instance.IsShopOpen() || DialogueManager.Instance.IsDialoguePlaying)
+        {
+            Debug.Log("Interaction blocked: Shop or Dialogue is active.");
+            return;
+        }
+
         if (npcData == null)
         {
             // If there's no NPCData, directly open the shop
