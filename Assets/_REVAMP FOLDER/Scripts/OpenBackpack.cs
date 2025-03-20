@@ -71,4 +71,9 @@ public class OpenBackpack : MonoBehaviour
             bagIcon.sprite = isOpen ? bagSprites[1] : bagSprites[0]; // Change icon
         }
     }
+
+    public bool IsBackpackOpen()
+    {
+        return isOpen;
+    }
 }

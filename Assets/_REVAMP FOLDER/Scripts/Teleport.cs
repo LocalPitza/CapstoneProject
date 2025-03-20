@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.ProBuilder.Shapes;
+using UnityEngine.Video;
 
 public class Teleport : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class Teleport : MonoBehaviour
     public string DoorAudio;
     public float teleportSpeed;
 
+    [Header("Video Settings")]
+    public VideoPlayer videoPlayer; // Assign in Inspector
+    public GameObject videoScreen; // UI or World Space Screen for the video
+
     private GameObject playerInTrigger;
 
     private void Start()
@@ -27,6 +32,9 @@ public class Teleport : MonoBehaviour
         {
             guideUI.SetActive(false);
         }
+
+        if (videoScreen != null)
+            videoScreen.SetActive(false);
     }
 
     void OnTriggerEnter(Collider other)
@@ -85,6 +93,20 @@ public class Teleport : MonoBehaviour
         // Start fade out
         yield return GameStateManager.Instance.FadeOut();
 
+        if (videoPlayer != null && videoScreen != null)
+        {
+            videoScreen.SetActive(true);
+            videoPlayer.Play();
+
+            // Wait until the video finishes
+            while (videoPlayer.isPlaying)
+            {
+                yield return null;
+            }
+            videoScreen.SetActive(false);
+        }
+
+
         // Teleport the player
         TeleportPlayer();
 
@@ -95,14 +117,6 @@ public class Teleport : MonoBehaviour
         yield return GameStateManager.Instance.FadeIn();
 
         PlayerMove.isUIOpen = false;
-
-        /*PlayerMove.isUIOpen = true;
-        TeleportPlayer();
-        yield return new WaitForSeconds(fadeDuration);
-        TeleportPlayer();
-        yield return new WaitForSeconds(fadeDuration);
-        FadeManager.Instance.FadeOut();
-        PlayerMove.isUIOpen = false;*/
     }
 
     private void TeleportPlayer()
