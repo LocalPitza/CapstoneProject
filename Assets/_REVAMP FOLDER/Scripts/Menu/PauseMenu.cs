@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     [Header("UI References")]
     public GameObject pauseMenuUI;
     public GameObject settingsMenuUI;
+    public GameObject controlSettingsUI;
     public GameObject backdropPanel;
 
     [SerializeField] private LoadingManager loadingManager;
@@ -17,10 +18,13 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (settingsMenuUI.activeSelf)
+            if (controlSettingsUI.activeSelf)
             {
-                // Close settings and return to the pause menu
-                OpenPauseMenu();
+                OpenSettings(); // Return to settings if controls menu is open
+            }
+            else if (settingsMenuUI.activeSelf)
+            {
+                OpenPauseMenu(); // Return to pause menu if settings is open
             }
             else
             {
@@ -45,6 +49,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         settingsMenuUI.SetActive(false);
+        controlSettingsUI.SetActive(false);
         backdropPanel.SetActive(false);
         Time.timeScale = 1f;
         CursorManager.Instance?.UIClosed();
@@ -55,6 +60,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         settingsMenuUI.SetActive(false);
+        controlSettingsUI.SetActive(false);
         backdropPanel.SetActive(true);
         CursorManager.Instance?.UIOpened();
         GameIsPaused = true;
@@ -63,13 +69,21 @@ public class PauseMenu : MonoBehaviour
     public void OpenSettings()
     {
         settingsMenuUI.SetActive(true);
+        controlSettingsUI.SetActive(false);
         pauseMenuUI.SetActive(false);
     }
 
     public void OpenPauseMenu()
     {
         settingsMenuUI.SetActive(false);
+        controlSettingsUI.SetActive(false);
         pauseMenuUI.SetActive(true);
+    }
+    
+    public void OpenControlSettings()
+    {
+        controlSettingsUI.SetActive(true);
+        settingsMenuUI.SetActive(false);
     }
 
     public void LoadMenu()

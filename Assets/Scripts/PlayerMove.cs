@@ -26,6 +26,9 @@ public class PlayerMove : MonoBehaviour
     public static bool isUIOpen = false;
     public static bool isInTeleportTrigger = false;
 
+    public bool useMouseLook = true;
+    public float keyboardTurnSpeed = 90f;
+
     [SerializeField] private float baseStepSpeed = 0.1f;
     [SerializeField] private AudioSource footstepAudioSource = default;
     [SerializeField] private AudioClip[] woodClips = default;
@@ -44,6 +47,9 @@ public class PlayerMove : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         currentSpeed = speed;
+
+        useMouseLook = PlayerPrefs.GetInt("UseMouseLook", 1) == 1;
+        mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 5f);
     }
 
     private void Update()
@@ -54,25 +60,15 @@ public class PlayerMove : MonoBehaviour
 
         if (CanMove)
         {
-            if (!Input.GetKey(KeyCode.LeftAlt)) // Prevent rotation when LeftAlt is held
-            {
-                HandleMouseLook();
-            }
+            HandleRotation(); // Updated function to support both rotation methods
             HandleFootstep();
-            if (!isInTeleportTrigger) //Prevent interaction when in teleport trigger
+            if (!isInTeleportTrigger)
             {
                 Interact();
             }
             HandleMovement();
 
-            if (Input.GetButton("Vertical"))
-            {
-                animator.SetBool("IsWalking", true);
-            }
-            else
-            {
-                animator.SetBool("IsWalking", false);
-            }
+            animator.SetBool("IsWalking", Input.GetButton("Vertical"));
         }
 
         //Debug.LogWarning("Player is in Teleport Trigger:" + isInTeleportTrigger);
@@ -114,9 +110,16 @@ public class PlayerMove : MonoBehaviour
 
     private void HandleMouseLook()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        Quaternion newRotation = Quaternion.Euler(0, mouseX, 0);
-        transform.rotation = Quaternion.Lerp(transform.rotation, transform.rotation * newRotation, Time.deltaTime * turnSpeed);
+        if (Input.GetKey(KeyCode.LeftAlt))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     private void HandleMovement()
@@ -137,6 +140,30 @@ public class PlayerMove : MonoBehaviour
         {
             movDir = transform.forward * Input.GetAxis("Vertical") * currentSpeed;
             controller.Move(movDir * Time.deltaTime - Vector3.up * 0.1f);
+        }
+    }
+
+    private void HandleRotation()
+    {
+        if (useMouseLook)
+        {
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+            Quaternion newRotation = Quaternion.Euler(0, mouseX, 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, transform.rotation * newRotation, Time.deltaTime * turnSpeed);
+        }
+        else
+        {
+            float rotateInput = 0f;
+            if (Input.GetKey(KeyCode.A))
+            {
+                rotateInput = -1f;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                rotateInput = 1f;
+            }
+
+            transform.Rotate(Vector3.up * rotateInput * keyboardTurnSpeed * Time.deltaTime);
         }
     }
 
@@ -172,5 +199,16 @@ public class PlayerMove : MonoBehaviour
 
             footstepTimer = GetCurrentOffset;
         }
+    }
+    public void SetUseMouseLook(bool value)
+    {
+        useMouseLook = value;
+        PlayerPrefs.SetInt("UseMouseLook", value ? 1 : 0);
+    }
+
+    public void SetMouseSensitivity(float value)
+    {
+        mouseSensitivity = value;
+        PlayerPrefs.SetFloat("MouseSensitivity", value);
     }
 }
