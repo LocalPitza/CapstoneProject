@@ -215,4 +215,9 @@ public class PlayerInteraction : MonoBehaviour
         yield return new WaitForSeconds(delay);
         message.text = "";
     }
+
+    public bool HasHarvestable()
+    {
+        return selectedInteractableObject != null;
+    }
 }
