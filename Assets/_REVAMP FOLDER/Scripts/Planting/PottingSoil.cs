@@ -205,7 +205,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         {
             if (cropPlanted.cropState == NewCropBehaviour.CropState.Harvestable)
             {
-                guideText.text = "Glove to Harvest";
+                guideText.text = "Use Glove and E to Harvest";
                 return;
             }
             else if (cropPlanted.cropState == NewCropBehaviour.CropState.Wilted)

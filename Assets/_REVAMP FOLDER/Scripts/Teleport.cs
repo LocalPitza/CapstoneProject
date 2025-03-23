@@ -21,6 +21,7 @@ public class Teleport : MonoBehaviour
     public float teleportSpeed;
 
     [Header("Video Settings")]
+    public bool playCutscene = false; // Enable/Disable cutscene
     public VideoPlayer videoPlayer; // Assign in Inspector
     public GameObject videoScreen; // UI or World Space Screen for the video
 
@@ -33,8 +34,7 @@ public class Teleport : MonoBehaviour
             guideUI.SetActive(false);
         }
 
-        if (videoScreen != null)
-            videoScreen.SetActive(false);
+        videoScreen.gameObject.SetActive(false);
     }
 
     void OnTriggerEnter(Collider other)
@@ -93,19 +93,20 @@ public class Teleport : MonoBehaviour
         // Start fade out
         yield return GameStateManager.Instance.FadeOut();
 
-        if (videoPlayer != null && videoScreen != null)
+        if (playCutscene && videoPlayer != null && videoScreen != null)
         {
             videoScreen.SetActive(true);
+            videoPlayer.Stop();
+            videoPlayer.time = 0;
+            Debug.Log($"Playing video: {videoPlayer.clip.name}");
             videoPlayer.Play();
 
-            // Wait until the video finishes
             while (videoPlayer.isPlaying)
             {
                 yield return null;
             }
             videoScreen.SetActive(false);
         }
-
 
         // Teleport the player
         TeleportPlayer();
@@ -121,8 +122,6 @@ public class Teleport : MonoBehaviour
 
     private void TeleportPlayer()
     {
-        //FindObjectOfType<SoundManager>().Play(DoorAudio);
-        //playerInTrigger.transform.DOMove(teleportDestination, teleportSpeed);
         playerInTrigger.transform.position = teleportDestination.position;
         playerInTrigger.transform.rotation = teleportDestination.rotation;
         Debug.Log("Player teleported to " + teleportDestination);
