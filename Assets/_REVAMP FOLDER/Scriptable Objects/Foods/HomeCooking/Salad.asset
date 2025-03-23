@@ -32,7 +32,7 @@ MonoBehaviour:
     - Onion
     x1'
   itemName: Salad
-  thumbnail: {fileID: 21300000, guid: ab5155f3bdc9041468cfe56e67044016, type: 3}
+  thumbnail: {fileID: 21300000, guid: e0ffc867c8a21ea4b8fb631bf58fbc0b, type: 3}
   gameModel: {fileID: 0}
   itemType: 1
   cost: 0

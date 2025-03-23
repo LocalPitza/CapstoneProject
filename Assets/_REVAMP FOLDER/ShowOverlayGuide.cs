@@ -10,9 +10,9 @@ public class ShowOverlayGuide : MonoBehaviour
 
     void Start()
     {
-        // Ensure the overlay is disabled at start
+        // Ensure the overlay is active at start
         if (overlayGuide != null)
-            overlayGuide.SetActive(false);
+            overlayGuide.SetActive(true);
 
         UpdateButtonText();
     }
