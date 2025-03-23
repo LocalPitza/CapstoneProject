@@ -75,6 +75,18 @@ public class Shop : MonoBehaviour
 
     void StartConversation()
     {
+        // If there's no NPCData, directly open the shop and skip dialogue checks
+        if (npcData == null)
+        {
+            if (NewUIManager.Instance.IsShopOpen())
+            {
+                Debug.Log("Interaction blocked: Shop is already open.");
+                return;
+            }
+            ShopOpen();
+            return;
+        }
+
         // Prevent interaction if the shop UI is open or dialogue is playing
         if (NewUIManager.Instance.IsShopOpen() || DialogueManager.Instance.IsDialoguePlaying)
         {
@@ -82,12 +94,6 @@ public class Shop : MonoBehaviour
             return;
         }
 
-        if (npcData == null)
-        {
-            // If there's no NPCData, directly open the shop
-            ShopOpen();
-            return;
-        }
 
         int currentDay = TimeManager.Instance.GetGameTimeStamp().day;
         bool hasMetBefore = PlayerPrefs.GetInt(npcID, 0) == 1;
