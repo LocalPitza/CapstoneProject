@@ -48,6 +48,8 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     [Header("Hunger Bar")]
     public Slider hungerBar;
     public int hungerCount;
+    private Coroutine energyFlickerCoroutine;
+    private Coroutine hungerFlickerCoroutine;
 
     private void Awake()
     {
@@ -224,12 +226,57 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         {
             energyBar.maxValue = 100;
             energyBar.value = staminaCount;
+            UpdateBarColor(energyBar, staminaCount, ref energyFlickerCoroutine);
         }
 
-        if(hungerBar != null)
+        if (hungerBar != null)
         {
             hungerBar.maxValue = 100;
             hungerBar.value = hungerCount;
+            UpdateBarColor(hungerBar, hungerCount, ref hungerFlickerCoroutine);
+        }
+    }
+
+    private void UpdateBarColor(Slider bar, int value, ref Coroutine flickerCoroutine)
+    {
+        Image barImage = bar.fillRect.GetComponent<Image>();
+
+        if (value > 75)
+        {
+            barImage.color = Color.green;
+        }
+        else if (value > 50)
+        {
+            barImage.color = Color.yellow;
+        }
+        else if (value > 20)
+        {
+            barImage.color = new Color(1f, 0.5f, 0f); // Orange
+        }
+        else
+        {
+            barImage.color = Color.red;
+
+            if (flickerCoroutine == null)
+                flickerCoroutine = StartCoroutine(FlickerBar(bar, barImage));
+        }
+
+        if (value > 20 && flickerCoroutine != null)
+        {
+            StopCoroutine(flickerCoroutine);
+            flickerCoroutine = null;
+            barImage.color = value > 50 ? Color.yellow : new Color(1f, 0.5f, 0f); // Reset color
+        }
+    }
+
+    private IEnumerator FlickerBar(Slider bar, Image barImage)
+    {
+        while (true)
+        {
+            barImage.color = new Color(1f, 0f, 0f, 0.2f); // Semi-transparent red
+            yield return new WaitForSeconds(0.2f);
+            barImage.color = Color.red;
+            yield return new WaitForSeconds(0.2f);
         }
     }
 
