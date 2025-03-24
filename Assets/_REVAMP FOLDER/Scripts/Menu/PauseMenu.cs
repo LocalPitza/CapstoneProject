@@ -90,6 +90,8 @@ public class PauseMenu : MonoBehaviour
     {
         if (loadingManager != null)
         {
+            Time.timeScale = 1f; // Ensure time is resumed
+            GameIsPaused = false; // Reset pause state
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             loadingManager.LoadScene("NewMenu");
