@@ -80,12 +80,14 @@ public class PlayerMove : MonoBehaviour
         // Use InputManager to check for key presses
         if (Input.GetKeyDown(InputManager.Instance.interactKey))
         {
-            playerInteraction.Interact();
-        }
-
-        if (Input.GetKeyDown(InputManager.Instance.harvestKey))
-        {
-            playerInteraction.HarvestInteract();
+            if (playerInteraction.HasHarvestable())
+            {
+                playerInteraction.HarvestInteract();
+            }
+            else
+            {
+                playerInteraction.Interact();
+            }
         }
 
         /*if (Input.GetKeyDown(InputManager.Instance.harvestKeepKey))

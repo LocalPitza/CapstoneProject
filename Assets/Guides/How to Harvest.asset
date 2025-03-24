@@ -15,7 +15,7 @@ MonoBehaviour:
   description: 'Use Glove to Harvest.
 
 
-    E = Harvest'
+    F = Harvest'
   itemName: How to Harvest
   thumbnail: {fileID: 21300000, guid: 4a40a6a36611ae241935fb5c85a21fb7, type: 3}
   gameModel: {fileID: 0}

@@ -31,6 +31,20 @@ public class JournalScript : MonoBehaviour
     
     void Start()
     {
+        Debug.Log("IsNewGame: " + PlayerPrefs.GetInt("IsNewGame", 0));
+
+        if (PlayerPrefs.GetInt("IsNewGame", 1) == 1)
+        {
+            journalPanel.SetActive(true);
+            ShowMenu(guideMenu, guideList, false);
+            PlayerPrefs.SetInt("IsNewGame", 0); // Mark as no longer a New Game
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            journalPanel.SetActive(false);
+        }
+
         openJournalButton.onClick.AddListener(ToggleJournal);
         seedsButton.onClick.AddListener(() => ShowMenu(seedsMenu, seedsList, false));
         guideButton.onClick.AddListener(() => ShowMenu(guideMenu, guideList, true));
@@ -77,8 +91,8 @@ public class JournalScript : MonoBehaviour
         {
             CursorManager.Instance.UIOpened();
 
-            // Show the SeedsMenu by default when opening the Journal
-            ShowMenu(seedsMenu, seedsList, false);
+            // Show the Guides by default when opening the Journal
+            ShowMenu(guideMenu, guideList, false);
         }
         else
         {

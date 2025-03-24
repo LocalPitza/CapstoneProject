@@ -13,16 +13,28 @@ public class MainMenu : MonoBehaviour
     {
         if (loadingManager != null)
         {
+            // Reset time and pause state
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
+            CursorManager.Instance?.ResetUICount();
+
+            // Set IsNewGame to ensure the Journal shows up
+            PlayerPrefs.SetInt("IsNewGame", 1);
+            PlayerPrefs.Save();
+
             string bedroom = SceneTransitionManager.Location.NewBedroom.ToString();
             loadingManager.LoadScene(bedroom);
 
-            //loadingManager.LoadScene("OpeningCutscene");
-
+            // Clear other data but keep IsNewGame
             PlayerPrefs.DeleteAll();
+            PlayerPrefs.SetInt("IsNewGame", 1);
             PlayerPrefs.Save();
+
             PlayerStats.Hunger = 100;
             PlayerStats.Stamina = 100;
-            Debug.Log("All PlayerPrefs have been cleared.");
+            Debug.Log("Starting a New Game. Journal will show.");
         }
     }
 
@@ -30,9 +42,18 @@ public class MainMenu : MonoBehaviour
     {
         if (loadingManager != null)
         {
+            // Reset time and pause state
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
+            CursorManager.Instance?.ResetUICount();
+
             string bedroom = SceneTransitionManager.Location.NewBedroom.ToString();
             loadingManager.LoadScene(bedroom, LoadGame);
 
+            PlayerPrefs.SetInt("IsNewGame", 0); // Mark it as Continue Game
+            PlayerPrefs.Save();
         }
     }
 
