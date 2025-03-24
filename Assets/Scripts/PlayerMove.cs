@@ -110,20 +110,6 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private void HandleMouseLook()
-    {
-        if (Input.GetKey(KeyCode.LeftAlt))
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-    }
-
     private void HandleMovement()
     {
         if (Input.GetKey(KeyCode.LeftShift))
@@ -134,13 +120,22 @@ public class PlayerMove : MonoBehaviour
         {
             currentSpeed = speed;
         }
-        
+
         Vector3 movDir;
-        CurrentInput = new Vector2((currentSpeed) * Input.GetAxis("Vertical"), (currentSpeed) * Input.GetAxis("Horizontal"));
+        float verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxis("Horizontal");
+
+        // Apply speed reduction when walking backward
+        if (verticalInput < 0)
+        {
+            currentSpeed *= 0.6f; // Reduce backward speed to 60% of normal
+        }
+
+        CurrentInput = new Vector2(currentSpeed * verticalInput, currentSpeed * horizontalInput);
 
         if (!Input.GetKey(KeyCode.LeftAlt)) // Prevent rotation while LeftAlt is held
         {
-            movDir = transform.forward * Input.GetAxis("Vertical") * currentSpeed;
+            movDir = transform.forward * verticalInput * currentSpeed;
             controller.Move(movDir * Time.deltaTime - Vector3.up * 0.1f);
         }
     }

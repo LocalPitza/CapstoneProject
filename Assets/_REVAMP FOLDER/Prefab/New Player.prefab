@@ -335,6 +335,8 @@ MonoBehaviour:
   turnSpeed: 150
   CurrentInput: {x: 0, y: 0}
   mouseSensitivity: 5
+  useMouseLook: 1
+  keyboardTurnSpeed: 90
   baseStepSpeed: 0.75
   footstepAudioSource: {fileID: 0}
   woodClips:
