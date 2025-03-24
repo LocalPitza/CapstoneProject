@@ -29,7 +29,7 @@ MonoBehaviour:
 
     - Potato x1'
   itemName: HomeSoup
-  thumbnail: {fileID: 21300000, guid: cac0d82fb04838443ac910b9aa1788d5, type: 3}
+  thumbnail: {fileID: 21300000, guid: e0ffc867c8a21ea4b8fb631bf58fbc0b, type: 3}
   gameModel: {fileID: 0}
   itemType: 1
   cost: 0
