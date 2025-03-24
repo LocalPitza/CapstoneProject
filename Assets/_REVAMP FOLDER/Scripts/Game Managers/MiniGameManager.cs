@@ -18,6 +18,7 @@ public class MiniGameManager : MonoBehaviour
     [SerializeField] GameObject miniGameParent;
     [SerializeField] GameObject endMiniGameCanvas;
     [SerializeField] GameObject startGameButton;
+    [SerializeField] GameObject simpleGuide;
     [SerializeField] TextMeshProUGUI endMiniGameText;
 
     [SerializeField] VideoPlayer videoPlayer;
@@ -95,6 +96,7 @@ public class MiniGameManager : MonoBehaviour
     {
         miniGameParent.SetActive(true);
         startGameButton.SetActive(true);
+        simpleGuide.SetActive(true);
     }
 
     public void StartMiniGame()
@@ -102,6 +104,7 @@ public class MiniGameManager : MonoBehaviour
         isMiniGameActive = true;
 
         startGameButton.SetActive(false);
+        simpleGuide.SetActive(false);
 
         // Reset the timer
         WorkTimer.instance.ResetTimer();
