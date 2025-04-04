@@ -27,50 +27,46 @@ public class TutorialPopup : MonoBehaviour
     [SerializeField] private bool disableAfterCompletion = true;
     [SerializeField] private string continueButtonTextDefault = "Continue";
     [SerializeField] private string continueButtonTextFinal = "Got it!";
-    [SerializeField] private string tutorialID = "default_tutorial";
 
     [Header("Input Settings")]
     [SerializeField] private KeyCode continueKey = KeyCode.Space;
     [SerializeField] private bool allowKeyboardInput = true;
-    [SerializeField] private bool persistCompletionState = true;
 
     private int currentMessageIndex = 0;
     private bool isPlayerInTrigger = false;
     private GameObject currentActiveGameObject = null;
     private int messagesRemainingForCurrentObject = 0;
     private bool tutorialCompleted = false;
+    private string originalScene;
 
     private void Awake()
     {
-        // Subscribe to scene change events
+        originalScene = SceneManager.GetActiveScene().name;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDestroy()
     {
-        // Unsubscribe to prevent memory leaks
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Reset tutorial state when a new scene loads
-        ForceCloseTutorial();
+        // Only reset if we're back in the original scene
+        if (scene.name == originalScene)
+        {
+            ForceCloseTutorial();
+            tutorialCompleted = false;
+        }
+        else
+        {
+            // In other scenes, just close but maintain completion state
+            ForceCloseTutorial();
+        }
     }
 
     private void Start()
     {
-        // Check if tutorial was already completed
-        if (persistCompletionState)
-        {
-            tutorialCompleted = PlayerPrefs.GetInt("TutorialCompleted_" + tutorialID, 0) == 1;
-            if (tutorialCompleted && disableAfterCompletion)
-            {
-                gameObject.SetActive(false);
-                return;
-            }
-        }
-
         InitializeTutorial();
     }
 
@@ -100,7 +96,6 @@ public class TutorialPopup : MonoBehaviour
 
     private void ForceCloseTutorial()
     {
-        // Close the tutorial and clean up regardless of completion state
         popupPanel.SetActive(false);
         isPlayerInTrigger = false;
         
@@ -110,7 +105,6 @@ public class TutorialPopup : MonoBehaviour
             currentActiveGameObject = null;
         }
 
-        // Reset message index but don't affect completion state
         currentMessageIndex = 0;
         messagesRemainingForCurrentObject = 0;
     }
@@ -197,12 +191,6 @@ public class TutorialPopup : MonoBehaviour
     private void CompleteTutorial()
     {
         tutorialCompleted = true;
-        
-        if (persistCompletionState)
-        {
-            PlayerPrefs.SetInt("TutorialCompleted_" + tutorialID, 1);
-            PlayerPrefs.Save();
-        }
 
         if (disableAfterCompletion)
         {
@@ -231,12 +219,6 @@ public class TutorialPopup : MonoBehaviour
         messagesRemainingForCurrentObject = 0;
         tutorialCompleted = false;
         continueButton.gameObject.SetActive(true);
-        
-        if (persistCompletionState)
-        {
-            PlayerPrefs.SetInt("TutorialCompleted_" + tutorialID, 0);
-            PlayerPrefs.Save();
-        }
         
         if (finishIndicator != null)
         {
