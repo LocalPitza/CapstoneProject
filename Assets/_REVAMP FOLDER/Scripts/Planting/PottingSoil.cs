@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PottingSoil : MonoBehaviour, ITimeTracker
 {
@@ -9,6 +10,11 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
     public TMP_Text guideText;
     public TMP_Text plantInformtation;
     public GameObject materialTarget;
+
+    [Header("Status Icons")]
+    public Image statusIcon;
+    public Sprite noWaterIcon;
+    public Sprite weedIcon;
 
     private Transform cameraTransform; // To store the camera's transform
 
@@ -107,6 +113,25 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         {
             plantInformtation.text = "";
             plantInformtation.transform.parent.gameObject.SetActive(false); // Disable UI when no plant
+        }
+
+        // Handle status icons
+        if (soilStatus == SoilStatus.Weeds)
+        {
+            statusIcon.sprite = weedIcon;
+            statusIcon.enabled = true;
+        }
+        else if (
+            cropPlanted != null &&
+            soilStatus != SoilStatus.Watered
+        )
+        {
+            statusIcon.sprite = noWaterIcon;
+            statusIcon.enabled = true;
+        }
+        else
+        {
+            statusIcon.enabled = false;
         }
     }
 
