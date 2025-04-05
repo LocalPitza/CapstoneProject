@@ -15,7 +15,7 @@ MonoBehaviour:
   description: Potato Vegetable
   itemName: 
   thumbnail: {fileID: 21300000, guid: 27202f07625e3764da4cba1bb618b8c1, type: 3}
-  gameModel: {fileID: 3506001669769316713, guid: 26a3eea377e99a140b302c4f93092904,
+  gameModel: {fileID: 936361270683349129, guid: 58cadda0530314342aab671d43a2719b,
     type: 3}
   itemType: 1
   cost: 75
