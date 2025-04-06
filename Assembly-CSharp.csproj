@@ -91,6 +91,7 @@
     <Compile Include="Assets\_REVAMP FOLDER\AssignPlayer.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\DoorInteract.cs" />
+    <Compile Include="Assets\_REVAMP FOLDER\Scripts\Planting\PlantStatus.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Planting\PlantSeed.cs" />
     <Compile Include="Assets\Scripts\Planting\ListOfSoil.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\CameraFollow.cs" />
