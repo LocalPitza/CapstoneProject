@@ -2,13 +2,12 @@ using UnityEngine;
 using Cinemachine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class PottingSoil : MonoBehaviour, ITimeTracker
 {
     public Canvas potGuideUI; // Assign your Canvas in the Inspector
     public CinemachineVirtualCamera targetCamera;
-    public TMP_Text guideText;
-    public TMP_Text plantInformtation;
     public GameObject materialTarget;
 
     [Header("Status Icons")]
@@ -61,6 +60,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         TimeManager.Instance.RegisterTracker(this);
     }
 
+
     void LateUpdate()
     {
         if (potGuideUI != null && cameraTransform != null)
@@ -69,52 +69,16 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
             potGuideUI.transform.LookAt(potGuideUI.transform.position + cameraTransform.forward);
         }
 
-        // Update the text UI
-        UpdatePotGuideText();
-        UpdatePlantInformation();
+        if (select.activeSelf)
+        {
+            UpdatePlayerUI();
+        }
+
+        UpdateSoilStatusIcon();
     }
 
-    private void UpdatePlantInformation()
+    void UpdateSoilStatusIcon()
     {
-        if (plantInformtation == null) return;
-
-        if (cropPlanted != null)
-        {
-            string plantName = cropPlanted.seedData != null ? cropPlanted.seedData.name.Replace(" Seed", "") : "Unknown";
-
-            // Default text for the plant
-            plantInformtation.text = $"{plantName}";
-
-            if (cropPlanted.cropState == NewCropBehaviour.CropState.Wilted)
-            {
-                plantInformtation.text = "Dead Plant";
-            }
-            else if (soilStatus == SoilStatus.Watered)
-            {
-                // Show "Days Left to Harvest" when watered
-                int daysLeft = cropPlanted.GetDaysLeftToHarvest();
-                plantInformtation.text += $"\nDays Left to Harvest: {daysLeft}";
-                plantInformtation.text += "\nGrowing!";
-            }
-            else
-            {
-                // Show "Days Left to Wither" instead when NOT watered
-                if (cropPlanted.cropState != NewCropBehaviour.CropState.Seed) // Only for seedling or later
-                {
-                    int daysLeftToWither = cropPlanted.GetDaysLeftToWither();
-                    plantInformtation.text += $"\nDays Left to Wither: {Mathf.Max(daysLeftToWither, 0)}";
-                }
-                plantInformtation.text += "\nNot Growing!";
-            }
-
-            plantInformtation.transform.parent.gameObject.SetActive(true); // Enable UI
-        }
-        else
-        {
-            plantInformtation.text = "";
-            plantInformtation.transform.parent.gameObject.SetActive(false); // Disable UI when no plant
-        }
-
         // Handle status icons
         if (soilStatus == SoilStatus.Weeds)
         {
@@ -132,6 +96,96 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         else
         {
             statusIcon.enabled = false;
+        }
+    }
+
+    private void UpdatePlayerUI()
+    {
+        List<string> guideLines = new List<string>();
+        string plantInfo = "";
+
+        // --- Guide Text ---
+        if (soilStatus == SoilStatus.Weeds)
+        {
+            guideLines.Add("Hand Trowel to Remove Weeds");
+
+            if (cropPlanted != null && cropPlanted.cropState == NewCropBehaviour.CropState.Wilted)
+            {
+                guideLines.Add("Hoe to Remove Plant");
+            }
+        }
+        else if (cropPlanted != null)
+        {
+            // Plant-related guides
+            if (cropPlanted.cropState == NewCropBehaviour.CropState.Harvestable)
+            {
+                guideLines.Add("Use Glove and F to Harvest");
+            }
+            else if (cropPlanted.cropState == NewCropBehaviour.CropState.Wilted)
+            {
+                guideLines.Add("Hoe to Remove Plant");
+            }
+
+            if (soilStatus != SoilStatus.Watered)
+            {
+                guideLines.Add("Needs Water");
+            }
+        }
+        else
+        {
+            // No crop yet
+            switch (soilStatus)
+            {
+                case SoilStatus.Soil:
+                    guideLines.Add("Hand Trowel to Dig");
+                    break;
+                case SoilStatus.Digged:
+                    guideLines.Add("Ready to Plant");
+                    break;
+                case SoilStatus.Watered:
+                    guideLines.Add("Watered");
+                    break;
+            }
+        }
+
+        // --- Plant Info ---
+        if (cropPlanted != null)
+        {
+            string plantName = cropPlanted.seedData != null ? cropPlanted.seedData.name.Replace(" Seed", "") : "Unknown";
+            plantInfo = plantName;
+
+            if (cropPlanted.cropState == NewCropBehaviour.CropState.Wilted)
+            {
+                plantInfo = "Dead Plant";
+            }
+            else if (soilStatus == SoilStatus.Watered)
+            {
+                int daysLeft = cropPlanted.GetDaysLeftToHarvest();
+                plantInfo += $"\nDays Left to Harvest: {daysLeft}\nGrowing!";
+            }
+            else
+            {
+                if (cropPlanted.cropState != NewCropBehaviour.CropState.Seed)
+                {
+                    int daysLeftToWither = cropPlanted.GetDaysLeftToWither();
+                    plantInfo += $"\nDays Left to Wither: {Mathf.Max(daysLeftToWither, 0)}";
+                }
+                plantInfo += "\nNot Growing!";
+            }
+        }
+
+        // --- Display UI ---
+        string fullGuide = string.Join("\n", guideLines);
+        bool hasGuide = !string.IsNullOrEmpty(fullGuide);
+        bool hasInfo = !string.IsNullOrEmpty(plantInfo);
+
+        if (hasGuide || hasInfo)
+        {
+            PlantStatus.Instance?.ShowStatus(fullGuide, plantInfo);
+        }
+        else
+        {
+            PlantStatus.Instance?.HideStatus();
         }
     }
 
@@ -216,47 +270,14 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         SoilManager.Instance.OnSoilStateChange(id, soilStatus, timeWatered);
     }
 
-    private void UpdatePotGuideText()
-    {
-        if (guideText == null) return;
-
-        if (soilStatus == SoilStatus.Weeds)
-        {
-            guideText.text = "Hand Trowel to Remove Weeds";
-            return;
-        }
-
-        if (cropPlanted != null)
-        {
-            if (cropPlanted.cropState == NewCropBehaviour.CropState.Harvestable)
-            {
-                guideText.text = "Use Glove and E to Harvest";
-                return;
-            }
-            else if (cropPlanted.cropState == NewCropBehaviour.CropState.Wilted)
-            {
-                guideText.text = "Hoe to Remove Plant";
-                return;
-            }
-        }
-
-        switch (soilStatus)
-        {
-            case SoilStatus.Soil:
-                guideText.text = "Hand Trowel to Dig";
-                break;
-            case SoilStatus.Digged:
-                guideText.text = (cropPlanted != null) ? "Needs Water" : "Ready to Plant";
-                break;
-            case SoilStatus.Watered:
-                guideText.text = "Watered";
-                break;
-        }
-    }
-
     public void Select(bool toggle)
     {
         select.SetActive(toggle);
+
+        if (!toggle)
+        {
+            PlantStatus.Instance.HideStatus();
+        }
     }
 
     public void Interact()
@@ -348,7 +369,8 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         cropObject.transform.position = plantPosition.position;
         cropPlanted = cropObject.GetComponent<NewCropBehaviour>();
 
-        UpdatePlantInformation();
+        //UpdatePlantInformation();
+        UpdateSoilStatusIcon();
         return cropPlanted;
     }
 
@@ -395,7 +417,8 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
             }
         }
 
-        UpdatePlantInformation();
+        //UpdatePlantInformation();
+        UpdateSoilStatusIcon();
     }
 
     private void OnDestroy()
