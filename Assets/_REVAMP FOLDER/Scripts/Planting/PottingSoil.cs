@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Cinemachine;
 using TMPro;
 using UnityEngine.UI;
@@ -40,8 +40,6 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
 
     void Start()
     {
-        //renderer = GetComponent<Renderer>();
-
         // Get the camera transform from the assigned Cinemachine Virtual Camera
         if (targetCamera != null)
         {
@@ -85,10 +83,7 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
             statusIcon.sprite = weedIcon;
             statusIcon.enabled = true;
         }
-        else if (
-            cropPlanted != null &&
-            soilStatus != SoilStatus.Watered
-        )
+        else if (cropPlanted != null && soilStatus != SoilStatus.Watered)
         {
             statusIcon.sprite = noWaterIcon;
             statusIcon.enabled = true;
@@ -105,83 +100,96 @@ public class PottingSoil : MonoBehaviour, ITimeTracker
         string plantInfo = "";
 
         // --- Guide Text ---
-        if (soilStatus == SoilStatus.Weeds)
+        if (cropPlanted != null)
         {
-            guideLines.Add("Hand Trowel to Remove Weeds");
-
-            if (cropPlanted != null && cropPlanted.cropState == NewCropBehaviour.CropState.Wilted)
-            {
-                guideLines.Add("Hoe to Remove Plant");
-            }
-        }
-        else if (cropPlanted != null)
-        {
-            // Plant-related guides
             if (cropPlanted.cropState == NewCropBehaviour.CropState.Harvestable)
             {
-                guideLines.Add("Use Glove and F to Harvest");
+                // If the plant is ready to harvest and the soil is in weeds state, show "Remove Weeds First"
+                if (soilStatus == SoilStatus.Weeds)
+                {
+                    plantInfo = $"{cropPlanted.seedData.name.Replace(" Seed", "")}\nReady to Harvest";
+                    guideLines.Add("Remove Weeds First");
+                }
+                else
+                {
+                    // If the plant is ready to harvest, show only relevant information (removed the "Growing" or "Not Growing")
+                    plantInfo = $"{cropPlanted.seedData.name.Replace(" Seed", "")}\nReady to Harvest";
+                    guideLines.Add("Use Glove and press F to harvest");
+
+                    // Also add "Days to Wither" if it's harvestable
+                    int daysLeftToWither = cropPlanted.GetDaysLeftToWither();
+                    plantInfo += $"\nDays Left to Wither: {daysLeftToWither}";
+                }
             }
             else if (cropPlanted.cropState == NewCropBehaviour.CropState.Wilted)
             {
-                guideLines.Add("Hoe to Remove Plant");
+                // If the plant is dead (wilted), show only these two messages
+                plantInfo = "Dead Plant";
+                guideLines.Add("Hoe to Remove");
             }
-
-            if (soilStatus != SoilStatus.Watered)
+            else if (soilStatus == SoilStatus.Weeds)
             {
-                guideLines.Add("Needs Water");
+                // If soil is in weeds state and there's no plant, show "Remove Weed First"
+                guideLines.Add("Remove Weeds First");
+            }
+            else
+            {
+                // Other conditions when the plant is present
+                if (soilStatus == SoilStatus.Watered)
+                {
+                    int daysLeft = cropPlanted.GetDaysLeftToHarvest();
+                    plantInfo = $"{cropPlanted.seedData.name.Replace(" Seed", "")}\nGrowing!\nDays Left to Harvest: {daysLeft}";
+                }
+                else
+                {
+                    if (cropPlanted.cropState != NewCropBehaviour.CropState.Seed)
+                    {
+                        int daysLeftToWither = cropPlanted.GetDaysLeftToWither();
+                        plantInfo = $"{cropPlanted.seedData.name.Replace(" Seed", "")}\nNot Growing!\nDays Left to Wither: {Mathf.Max(daysLeftToWither, 0)}";
+                    }
+                    else
+                    {
+                        plantInfo = $"{cropPlanted.seedData.name.Replace(" Seed", "")}\nNot Growing!";
+                    }
+
+                    // Add "Needs Water" if necessary, but exclude if plant is ready to harvest
+                    if (soilStatus != SoilStatus.Weeds && soilStatus != SoilStatus.Watered && cropPlanted.cropState != NewCropBehaviour.CropState.Harvestable)
+                    {
+                        plantInfo += "\nNeeds Water";
+                    }
+                }
             }
         }
         else
         {
-            // No crop yet
-            switch (soilStatus)
+            // If there's no plant, handle soil status accordingly
+            if (soilStatus == SoilStatus.Soil)
             {
-                case SoilStatus.Soil:
-                    guideLines.Add("Hand Trowel to Dig");
-                    break;
-                case SoilStatus.Digged:
-                    guideLines.Add("Ready to Plant");
-                    break;
-                case SoilStatus.Watered:
-                    guideLines.Add("Watered");
-                    break;
+                guideLines.Add("Hand Trowel to Dig");
             }
-        }
-
-        // --- Plant Info ---
-        if (cropPlanted != null)
-        {
-            string plantName = cropPlanted.seedData != null ? cropPlanted.seedData.name.Replace(" Seed", "") : "Unknown";
-            plantInfo = plantName;
-
-            if (cropPlanted.cropState == NewCropBehaviour.CropState.Wilted)
+            else if (soilStatus == SoilStatus.Digged)
             {
-                plantInfo = "Dead Plant";
+                guideLines.Add("Ready to Plant");
             }
             else if (soilStatus == SoilStatus.Watered)
             {
-                int daysLeft = cropPlanted.GetDaysLeftToHarvest();
-                plantInfo += $"\nDays Left to Harvest: {daysLeft}\nGrowing!";
+                // If soil is watered and there's no plant, show "Watered"
+                guideLines.Add("Watered");
             }
-            else
+            else if (soilStatus == SoilStatus.Weeds)
             {
-                if (cropPlanted.cropState != NewCropBehaviour.CropState.Seed)
-                {
-                    int daysLeftToWither = cropPlanted.GetDaysLeftToWither();
-                    plantInfo += $"\nDays Left to Wither: {Mathf.Max(daysLeftToWither, 0)}";
-                }
-                plantInfo += "\nNot Growing!";
+                // If there's no plant and soil is in Weeds, show "Remove Weeds First"
+                guideLines.Add("Remove Weeds First");
             }
         }
 
-        // --- Display UI ---
-        string fullGuide = string.Join("\n", guideLines);
-        bool hasGuide = !string.IsNullOrEmpty(fullGuide);
-        bool hasInfo = !string.IsNullOrEmpty(plantInfo);
+        // Combine the guide text and plant info into one string
+        string fullText = plantInfo + "\n" + string.Join("\n", guideLines);
 
-        if (hasGuide || hasInfo)
+        // Show or hide the UI based on whether there’s content
+        if (!string.IsNullOrEmpty(fullText))
         {
-            PlantStatus.Instance?.ShowStatus(fullGuide, plantInfo);
+            PlantStatus.Instance?.ShowStatus(fullText); // Show the combined text
         }
         else
         {
