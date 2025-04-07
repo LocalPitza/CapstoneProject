@@ -48,9 +48,14 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     [Header("Hunger Bar")]
     public Slider hungerBar;
     public int hungerCount;
-    public Image hungerIndicator;
+
+    [Header("Warning Indicator")]
+    public Image warningIndicator;
+    public Sprite hungerWarningSprite;
+    public Sprite energyWarningSprite;
     public float blinkInterval = 0.5f;
-    private Coroutine hungerBlinkCoroutine;
+
+    private Coroutine warningBlinkCoroutine;
     private Coroutine energyFlickerCoroutine;
     private Coroutine hungerFlickerCoroutine;
 
@@ -239,7 +244,7 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
             UpdateBarColor(hungerBar, hungerCount, ref hungerFlickerCoroutine);
         }
 
-        UpdateHungerIndicator();
+        UpdateWarningIndicator();
     }
 
     private void UpdateBarColor(Slider bar, int value, ref Coroutine flickerCoroutine)
@@ -298,32 +303,52 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
         return shopListingManager.shopParent.activeSelf;
     }
 
-    private void UpdateHungerIndicator()
+    private void UpdateWarningIndicator()
     {
         if (hungerCount <= 20)
         {
-            if (hungerBlinkCoroutine == null)
-            {
-                hungerIndicator.gameObject.SetActive(true);
-                hungerBlinkCoroutine = StartCoroutine(BlinkHungerIndicator());
-            }
+            SetWarningIndicator(hungerWarningSprite);
+        }
+        else if (staminaCount <= 20)
+        {
+            SetWarningIndicator(energyWarningSprite);
         }
         else
         {
-            if (hungerBlinkCoroutine != null)
-            {
-                StopCoroutine(hungerBlinkCoroutine);
-                hungerBlinkCoroutine = null;
-                hungerIndicator.gameObject.SetActive(false);
-            }
+            ClearWarningIndicator();
         }
     }
 
-    private IEnumerator BlinkHungerIndicator()
+    private void SetWarningIndicator(Sprite warningSprite)
+    {
+        if (warningBlinkCoroutine != null)
+        {
+            StopCoroutine(warningBlinkCoroutine);
+        }
+
+        warningIndicator.sprite = warningSprite;
+        warningIndicator.gameObject.SetActive(true);
+        warningBlinkCoroutine = StartCoroutine(BlinkWarningIndicator());
+
+        // Play warning sound here
+    }
+
+    private void ClearWarningIndicator()
+    {
+        if (warningBlinkCoroutine != null)
+        {
+            StopCoroutine(warningBlinkCoroutine);
+            warningBlinkCoroutine = null;
+        }
+
+        warningIndicator.gameObject.SetActive(false);
+    }
+
+    private IEnumerator BlinkWarningIndicator()
     {
         while (true)
         {
-            hungerIndicator.enabled = !hungerIndicator.enabled;
+            warningIndicator.enabled = !warningIndicator.enabled;
             yield return new WaitForSeconds(blinkInterval);
         }
     }

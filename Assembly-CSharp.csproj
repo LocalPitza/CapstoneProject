@@ -108,6 +108,7 @@
     <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Time\GameTimeStamp.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\SceneTransition\LocationManager.cs" />
+    <Compile Include="Assets\CornejoFolder\Scripts\FaceCamera.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\Dialogue\DialogueManager.cs" />
     <Compile Include="Assets\Scripts\Planting\UI\InventorySlot.cs" />
     <Compile Include="Assets\_REVAMP FOLDER\Scripts\UpgradeManager.cs" />
