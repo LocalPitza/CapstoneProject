@@ -48,6 +48,9 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     [Header("Hunger Bar")]
     public Slider hungerBar;
     public int hungerCount;
+    public Image hungerIndicator;
+    public float blinkInterval = 0.5f;
+    private Coroutine hungerBlinkCoroutine;
     private Coroutine energyFlickerCoroutine;
     private Coroutine hungerFlickerCoroutine;
 
@@ -235,6 +238,8 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
             hungerBar.value = hungerCount;
             UpdateBarColor(hungerBar, hungerCount, ref hungerFlickerCoroutine);
         }
+
+        UpdateHungerIndicator();
     }
 
     private void UpdateBarColor(Slider bar, int value, ref Coroutine flickerCoroutine)
@@ -291,5 +296,35 @@ public class NewUIManager : MonoBehaviour, ITimeTracker
     public bool IsShopOpen()
     {
         return shopListingManager.shopParent.activeSelf;
+    }
+
+    private void UpdateHungerIndicator()
+    {
+        if (hungerCount <= 20)
+        {
+            if (hungerBlinkCoroutine == null)
+            {
+                hungerIndicator.gameObject.SetActive(true);
+                hungerBlinkCoroutine = StartCoroutine(BlinkHungerIndicator());
+            }
+        }
+        else
+        {
+            if (hungerBlinkCoroutine != null)
+            {
+                StopCoroutine(hungerBlinkCoroutine);
+                hungerBlinkCoroutine = null;
+                hungerIndicator.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private IEnumerator BlinkHungerIndicator()
+    {
+        while (true)
+        {
+            hungerIndicator.enabled = !hungerIndicator.enabled;
+            yield return new WaitForSeconds(blinkInterval);
+        }
     }
 }
