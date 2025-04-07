@@ -75,8 +75,8 @@ MonoBehaviour:
   targetCamera: {fileID: 0}
   materialTarget: {fileID: 1574850283875277301}
   statusIcon: {fileID: 7154577790544590042}
-  noWaterIcon: {fileID: 21300000, guid: 3b05fc286fd48d640a349f23b49cb516, type: 3}
-  weedIcon: {fileID: 21300000, guid: ddfd9b3dff12e2444a4d78468e3977b0, type: 3}
+  noWaterIcon: {fileID: 21300000, guid: 7e7c3a5ace8736040bf76430aa6a42f6, type: 3}
+  weedIcon: {fileID: 21300000, guid: 370f8c28f6793cd42b01e4200d6ea576, type: 3}
   id: 0
   soilStatus: 0
   soilMat: {fileID: 2100000, guid: 372bfc922a7202b44bbb8ad0d4395f49, type: 2}
@@ -4075,7 +4075,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5813
+  m_VersionIndex: 5819
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4290,6 +4290,7 @@ GameObject:
   - component: {fileID: 2172332930604715972}
   - component: {fileID: 1405239122225173049}
   - component: {fileID: 7154577790544590042}
+  - component: {fileID: 525239077017490332}
   m_Layer: 5
   m_Name: Plant Icon
   m_TagString: Untagged
@@ -4314,7 +4315,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -0.782}
-  m_SizeDelta: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 1, y: 1.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1405239122225173049
 CanvasRenderer:
@@ -4354,6 +4355,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &525239077017490332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883263474867104844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b1fcd65e41c2e49b986c2c73b464dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatSpeed: 1
+  floatAmount: 0.5
 --- !u!1 &6480179532514731457
 GameObject:
   m_ObjectHideFlags: 0
