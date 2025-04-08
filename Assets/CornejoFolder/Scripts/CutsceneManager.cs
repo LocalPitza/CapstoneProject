@@ -7,10 +7,19 @@ using UnityEngine.SceneManagement;
 public class CutsceneManager : MonoBehaviour
 {
     [System.Serializable]
+    public class PanelSection
+    {
+        public Image image;
+        public AudioClip soundEffect;
+        public float autoRevealDelay = 3f;
+        [Range(0, 1)] public float soundVolume = 0.6f;
+    }
+
+    [System.Serializable]
     public class ComicPanel
     {
         public GameObject panelObject;
-        public List<Image> sections = new List<Image>();
+        public List<PanelSection> sections = new List<PanelSection>();
         [HideInInspector] public int currentSection = 0;
         [HideInInspector] public bool allSectionsShown = false;
     }
@@ -21,6 +30,10 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private float skipHoldDuration = 2f;
     [SerializeField] private string nextSceneName;
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource bgmAudioSource;
+    [SerializeField] private float bgmFadeOutDuration = 1f;
+
     [Header("Skip Indicator")]
     [SerializeField] private GameObject skipIndicator;
     [SerializeField] private Image skipProgressCircle;
@@ -28,13 +41,27 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private float pulseSpeed = 2f;
     [SerializeField] private float minPulseScale = 0.9f;
     [SerializeField] private float maxPulseScale = 1.1f;
+    [Range(0, 1)] [SerializeField] private float inactiveAlpha = 0.2f;
+    [Range(0, 1)] [SerializeField] private float activeAlpha = 1f;
 
     private int currentPanelIndex = 0;
     private bool isTransitioning = false;
     private float holdTime = 0f;
     private bool skipTriggered = false;
     private Vector3 originalClickIconScale;
-    private bool waitingForClick = false;
+    private Coroutine autoRevealCoroutine;
+    private AudioSource sfxAudioSource;
+
+    private void Awake()
+    {
+        sfxAudioSource = gameObject.AddComponent<AudioSource>();
+        sfxAudioSource.playOnAwake = false;
+
+        if (bgmAudioSource == null)
+        {
+            bgmAudioSource = GameObject.Find("BGM")?.GetComponent<AudioSource>();
+        }
+    }
 
     private void Start()
     {
@@ -45,7 +72,6 @@ public class CutsceneManager : MonoBehaviour
 
     private void InitializePanels()
     {
-        // Hide all panels and sections initially
         foreach (var panel in comicPanels)
         {
             panel.panelObject.SetActive(false);
@@ -54,8 +80,8 @@ public class CutsceneManager : MonoBehaviour
             
             foreach (var section in panel.sections)
             {
-                section.gameObject.SetActive(false);
-                SetImageAlpha(section, 0f);
+                section.image.gameObject.SetActive(false);
+                SetImageAlpha(section.image, 0f);
             }
         }
     }
@@ -64,7 +90,10 @@ public class CutsceneManager : MonoBehaviour
     {
         if (skipIndicator != null)
         {
-            skipIndicator.SetActive(false);
+            var canvasGroup = skipIndicator.GetComponent<CanvasGroup>();
+            if (canvasGroup == null) canvasGroup = skipIndicator.AddComponent<CanvasGroup>();
+            
+            canvasGroup.alpha = inactiveAlpha;
             skipProgressCircle.fillAmount = 0f;
             originalClickIconScale = leftClickIcon.transform.localScale;
         }
@@ -74,8 +103,9 @@ public class CutsceneManager : MonoBehaviour
     {
         var currentPanel = comicPanels[currentPanelIndex];
         currentPanel.panelObject.SetActive(true);
-        StartCoroutine(FadePanel(currentPanel.panelObject, 0f, 1f));
-        waitingForClick = true;
+        StartCoroutine(FadePanel(currentPanel.panelObject, 0f, 1f, () => {
+            RevealSection(currentPanel, true);
+        }));
     }
 
     private void Update()
@@ -90,11 +120,8 @@ public class CutsceneManager : MonoBehaviour
             
             if (skipIndicator != null)
             {
-                if (!skipIndicator.activeSelf)
-                {
-                    skipIndicator.SetActive(true);
-                    skipProgressCircle.fillAmount = 0f;
-                }
+                var canvasGroup = skipIndicator.GetComponent<CanvasGroup>();
+                canvasGroup.alpha = Mathf.Lerp(inactiveAlpha, activeAlpha, Mathf.Clamp01(holdTime / 0.5f));
                 
                 float progress = Mathf.Clamp01(holdTime / skipHoldDuration);
                 skipProgressCircle.fillAmount = progress;
@@ -107,62 +134,81 @@ public class CutsceneManager : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            if (holdTime < 0.2f && waitingForClick && !isTransitioning)
+            if (holdTime < 0.2f && !isTransitioning)
             {
-                RevealNextSectionOrPanel();
+                var currentPanel = comicPanels[currentPanelIndex];
+                if (currentPanel.currentSection < currentPanel.sections.Count)
+                {
+                    if (autoRevealCoroutine != null)
+                    {
+                        StopCoroutine(autoRevealCoroutine);
+                        autoRevealCoroutine = null;
+                    }
+                    RevealSection(currentPanel, false);
+                }
+                else if (currentPanel.allSectionsShown)
+                {
+                    AdvancePanel();
+                }
             }
 
             holdTime = 0f;
             if (skipIndicator != null)
             {
-                skipIndicator.SetActive(false);
+                var canvasGroup = skipIndicator.GetComponent<CanvasGroup>();
+                canvasGroup.alpha = inactiveAlpha;
+                skipProgressCircle.fillAmount = 0f;
                 leftClickIcon.transform.localScale = originalClickIconScale;
             }
         }
     }
 
-    private void RevealNextSectionOrPanel()
+    private void RevealSection(ComicPanel panel, bool isAutoReveal)
     {
-        var currentPanel = comicPanels[currentPanelIndex];
-
-        // If not all sections shown, reveal next one
-        if (currentPanel.currentSection < currentPanel.sections.Count)
+        PanelSection section = panel.sections[panel.currentSection];
+        
+        if (section.soundEffect != null)
         {
-            StartCoroutine(RevealSection(currentPanel));
+            sfxAudioSource.PlayOneShot(section.soundEffect, section.soundVolume);
         }
-        // All sections shown, go to next panel
-        else if (!isTransitioning)
+
+        section.image.gameObject.SetActive(true);
+        StartCoroutine(FadeImage(section.image, 0f, 1f, fadeDuration));
+
+        panel.currentSection++;
+        
+        if (panel.currentSection < panel.sections.Count && isAutoReveal)
         {
-            currentPanel.allSectionsShown = true;
-            waitingForClick = false;
+            autoRevealCoroutine = StartCoroutine(AutoRevealNextSection(panel, section.autoRevealDelay));
+        }
+        else if (panel.currentSection >= panel.sections.Count)
+        {
+            panel.allSectionsShown = true;
+        }
+    }
+
+    private IEnumerator AutoRevealNextSection(ComicPanel panel, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        RevealSection(panel, true);
+    }
+
+    private void AdvancePanel()
+    {
+        if (!isTransitioning)
+        {
             StartCoroutine(TransitionToNextPanel());
         }
     }
 
-    private System.Collections.IEnumerator RevealSection(ComicPanel panel)
-    {
-        waitingForClick = false;
-        
-        // Get current section and reveal it
-        Image section = panel.sections[panel.currentSection];
-        section.gameObject.SetActive(true);
-        yield return StartCoroutine(FadeImage(section, 0f, 1f, fadeDuration));
-
-        panel.currentSection++;
-        waitingForClick = true; // Ready for next click
-    }
-
-    private System.Collections.IEnumerator TransitionToNextPanel()
+    private IEnumerator TransitionToNextPanel()
     {
         isTransitioning = true;
 
-        // Fade out current panel
         yield return StartCoroutine(FadePanel(comicPanels[currentPanelIndex].panelObject, 1f, 0f));
 
-        // Hide current panel
         comicPanels[currentPanelIndex].panelObject.SetActive(false);
 
-        // Move to next panel if available
         if (currentPanelIndex < comicPanels.Count - 1)
         {
             currentPanelIndex++;
@@ -170,13 +216,33 @@ public class CutsceneManager : MonoBehaviour
         }
         else
         {
+            yield return StartCoroutine(FadeOutBGM());
             TransitionToNextScene();
         }
 
         isTransitioning = false;
     }
 
-    private System.Collections.IEnumerator FadePanel(GameObject panel, float startAlpha, float endAlpha)
+    private IEnumerator FadeOutBGM()
+    {
+        if (bgmAudioSource != null && bgmAudioSource.isPlaying)
+        {
+            float startVolume = bgmAudioSource.volume;
+            float elapsed = 0f;
+
+            while (elapsed < bgmFadeOutDuration)
+            {
+                elapsed += Time.deltaTime;
+                bgmAudioSource.volume = Mathf.Lerp(startVolume, 0f, elapsed / bgmFadeOutDuration);
+                yield return null;
+            }
+
+            bgmAudioSource.Stop();
+            bgmAudioSource.volume = startVolume; // Reset volume for future use
+        }
+    }
+
+    private IEnumerator FadePanel(GameObject panel, float startAlpha, float endAlpha, System.Action onComplete = null)
     {
         CanvasGroup group = panel.GetComponent<CanvasGroup>();
         if (group == null) group = panel.AddComponent<CanvasGroup>();
@@ -192,9 +258,10 @@ public class CutsceneManager : MonoBehaviour
         }
 
         group.alpha = endAlpha;
+        onComplete?.Invoke();
     }
 
-    private System.Collections.IEnumerator FadeImage(Image image, float startAlpha, float endAlpha, float duration)
+    private IEnumerator FadeImage(Image image, float startAlpha, float endAlpha, float duration)
     {
         float elapsed = 0f;
         SetImageAlpha(image, startAlpha);
@@ -222,12 +289,13 @@ public class CutsceneManager : MonoBehaviour
         {
             skipTriggered = true;
             StopAllCoroutines();
-            StartCoroutine(FadeOutAllPanelsAndTransition());
+            StartCoroutine(FadeOutAndTransition());
         }
     }
 
-    private System.Collections.IEnumerator FadeOutAllPanelsAndTransition()
+    private IEnumerator FadeOutAndTransition()
     {
+        // Fade out all panels
         foreach (var panel in comicPanels)
         {
             if (panel.panelObject.activeSelf)
@@ -236,6 +304,10 @@ public class CutsceneManager : MonoBehaviour
                 panel.panelObject.SetActive(false);
             }
         }
+
+        // Fade out BGM
+        yield return StartCoroutine(FadeOutBGM());
+
         TransitionToNextScene();
     }
 
@@ -249,7 +321,7 @@ public class CutsceneManager : MonoBehaviour
 
     private void HandleSkipIndicatorAnimation()
     {
-        if (skipIndicator != null && skipIndicator.activeSelf)
+        if (skipIndicator != null && skipIndicator.GetComponent<CanvasGroup>().alpha > 0)
         {
             float pulse = Mathf.PingPong(Time.time * pulseSpeed, 1f);
             float scale = Mathf.Lerp(minPulseScale, maxPulseScale, pulse);

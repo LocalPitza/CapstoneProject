@@ -1981,6 +1981,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1831968735}
+    - target: {fileID: 7759101288958431515, guid: c563a24b82ed7a54c87831c436a6a751,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.5294118
+      objectReference: {fileID: 0}
     - target: {fileID: 7831934326544705793, guid: c563a24b82ed7a54c87831c436a6a751,
         type: 3}
       propertyPath: m_AnchorMax.y
