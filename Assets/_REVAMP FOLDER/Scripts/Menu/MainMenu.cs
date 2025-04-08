@@ -15,8 +15,8 @@ public class MainMenu : MonoBehaviour
         {
             // Reset time and pause state
             Time.timeScale = 1f;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
 
             CursorManager.Instance?.ResetUICount();
 
@@ -24,8 +24,10 @@ public class MainMenu : MonoBehaviour
             PlayerPrefs.SetInt("IsNewGame", 1);
             PlayerPrefs.Save();
 
-            string bedroom = SceneTransitionManager.Location.NewBedroom.ToString();
-            loadingManager.LoadScene(bedroom);
+            /*string bedroom = SceneTransitionManager.Location.NewBedroom.ToString();
+            loadingManager.LoadScene(bedroom);*/
+
+            loadingManager.LoadScene("OpeningCutscene");
 
             // Clear other data but keep IsNewGame
             PlayerPrefs.DeleteAll();

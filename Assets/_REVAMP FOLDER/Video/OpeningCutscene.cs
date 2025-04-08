@@ -9,9 +9,36 @@ public class OpeningCutscene : MonoBehaviour
 {
     [SerializeField] LoadingManager loadingManager;
     [SerializeField] Button startGameButton;
-    [SerializeField] private VideoPlayer videoPlayer;
 
     private void Start()
+    {
+        // Enable the start button at the start
+        if (startGameButton != null)
+            startGameButton.gameObject.SetActive(true);
+    }
+
+    public void StartGame()
+    {
+        // Disable the start button so it doesn't obstruct the loading screen
+        if (startGameButton != null)
+            startGameButton.gameObject.SetActive(false);
+
+        // Load the next scene using the loading manager
+        if (loadingManager != null)
+        {
+            string bedroom = SceneTransitionManager.Location.NewBedroom.ToString();
+            loadingManager.LoadScene(bedroom);
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
+
+
+    //[SerializeField] private VideoPlayer videoPlayer;
+
+    /*private void Start()
     {
         // Disable the button at the start
         if (startGameButton != null)
@@ -52,5 +79,5 @@ public class OpeningCutscene : MonoBehaviour
             string bedroom = SceneTransitionManager.Location.NewBedroom.ToString();
             loadingManager.LoadScene(bedroom);
         }
-    }
+    }*/
 }
