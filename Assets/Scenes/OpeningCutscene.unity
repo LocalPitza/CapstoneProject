@@ -1595,7 +1595,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.6
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2842,13 +2842,13 @@ MonoBehaviour:
       autoRevealDelay: 3
       soundVolume: 0.6
     - image: {fileID: 1874556670}
-      soundEffect: {fileID: 0}
+      soundEffect: {fileID: 8300000, guid: 186e858df2ce45848a5f5ae2cd7f61b5, type: 3}
       autoRevealDelay: 3
       soundVolume: 0.6
     - image: {fileID: 1715071902}
-      soundEffect: {fileID: 0}
+      soundEffect: {fileID: 8300000, guid: 9fae9bd9366e5994bb3d039daab7d676, type: 3}
       autoRevealDelay: 3
-      soundVolume: 0.6
+      soundVolume: 0.4
     - image: {fileID: 305292551}
       soundEffect: {fileID: 0}
       autoRevealDelay: 3
@@ -2858,7 +2858,7 @@ MonoBehaviour:
   - panelObject: {fileID: 290206923}
     sections:
     - image: {fileID: 643549873}
-      soundEffect: {fileID: 0}
+      soundEffect: {fileID: 8300000, guid: 127c3c7497262f34c9cc4e2feda1d0f0, type: 3}
       autoRevealDelay: 3
       soundVolume: 0.6
     - image: {fileID: 2122081763}
@@ -2878,25 +2878,25 @@ MonoBehaviour:
   - panelObject: {fileID: 1359036366}
     sections:
     - image: {fileID: 1225820927}
-      soundEffect: {fileID: 0}
+      soundEffect: {fileID: 8300000, guid: e13256a3e3b34224f81d1bcb0a328661, type: 3}
       autoRevealDelay: 3
-      soundVolume: 0
+      soundVolume: 0.6
     - image: {fileID: 101171134}
-      soundEffect: {fileID: 0}
+      soundEffect: {fileID: 8300000, guid: e13256a3e3b34224f81d1bcb0a328661, type: 3}
       autoRevealDelay: 3
-      soundVolume: 0
+      soundVolume: 0.6
     - image: {fileID: 686694437}
       soundEffect: {fileID: 0}
       autoRevealDelay: 3
-      soundVolume: 0
+      soundVolume: 0.6
     - image: {fileID: 941884854}
       soundEffect: {fileID: 0}
       autoRevealDelay: 3
-      soundVolume: 0
+      soundVolume: 0.6
     - image: {fileID: 1941413374}
       soundEffect: {fileID: 0}
       autoRevealDelay: 3
-      soundVolume: 0
+      soundVolume: 0.6
     currentSection: 0
     allSectionsShown: 0
   - panelObject: {fileID: 1734948303}
@@ -2904,23 +2904,23 @@ MonoBehaviour:
     - image: {fileID: 2036146413}
       soundEffect: {fileID: 0}
       autoRevealDelay: 3
-      soundVolume: 0
+      soundVolume: 0.6
     - image: {fileID: 900718306}
       soundEffect: {fileID: 0}
       autoRevealDelay: 3
-      soundVolume: 0
+      soundVolume: 0.6
     - image: {fileID: 1329294898}
       soundEffect: {fileID: 0}
       autoRevealDelay: 3
-      soundVolume: 0
+      soundVolume: 0.6
     - image: {fileID: 1080805441}
       soundEffect: {fileID: 0}
       autoRevealDelay: 3
-      soundVolume: 0
+      soundVolume: 0.6
     - image: {fileID: 546149994}
       soundEffect: {fileID: 0}
       autoRevealDelay: 3
-      soundVolume: 0
+      soundVolume: 0.6
     currentSection: 0
     allSectionsShown: 0
   fadeDuration: 0.5
